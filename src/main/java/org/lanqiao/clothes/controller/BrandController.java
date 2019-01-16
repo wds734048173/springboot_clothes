@@ -2,6 +2,7 @@ package org.lanqiao.clothes.controller;
 
 import org.lanqiao.clothes.pojo.Brand;
 import org.lanqiao.clothes.pojo.Condition;
+import org.lanqiao.clothes.pojo.User;
 import org.lanqiao.clothes.service.IBrandService;
 import org.lanqiao.clothes.utils.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -31,9 +33,12 @@ public class BrandController {
         String name = req.getParameter("brandName");
         int state = Integer.valueOf(req.getParameter("brandState"));
         String pic = req.getParameter("pic");
-        /*HttpSession session = req.getSession();
-        int storeId = Integer.valueOf(session.getAttribute("storeId").toString());*/
-        int storeId = 1;
+
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+
         brand.setName(name);
         brand.setPic(pic);
         brand.setState(state);
@@ -53,6 +58,11 @@ public class BrandController {
             pageSize = Integer.valueOf(req.getParameter("pageSize"));
         }
 
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+
         //查询条件
         String searchBrandName = "";
         if(req.getParameter("searchBrandName") != null){
@@ -65,6 +75,7 @@ public class BrandController {
         Condition condition = new Condition();
         condition.setName(searchBrandName);
         condition.setState(searchBrandState);
+        condition.setStoreId(storeId);
         int totalRecords = brandService.getBrandCount(condition);
         //不同操作，不同的当前页设置
         PageModel pm = new PageModel(pageNum,totalRecords,pageSize);
@@ -103,9 +114,11 @@ public class BrandController {
         String name = req.getParameter("brandName");
         int state = Integer.valueOf(req.getParameter("brandState"));
         String pic = req.getParameter("pic");
-         /*HttpSession session = req.getSession();
-        int storeId = Integer.valueOf(session.getAttribute("storeId").toString());*/
-        int storeId = 1;
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+
         brand.setId(Integer.valueOf(id));
         brand.setName(name);
         brand.setPic(pic);

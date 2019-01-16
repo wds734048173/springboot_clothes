@@ -103,8 +103,14 @@
 </div>
 <div class="top">
     <div class="leftTiyle" id="flTitle">品牌管理</div>
-    <div class="thisUser">当前用户：<%=session.getAttribute("username")%></div>
-    <div style="float: right;"><input style="line-height: normal;margin-top: 37px;" type="button" width="100px" height="50px" id="exit" onclick="exit()" value="退出登录"/></div>
+    <div class="thisUser" th:if="${session.user.storeId == 0}">
+        <span>管理员登录，当前用户：[[${session.user.username}]]</span>
+        <input style="line-height: normal;margin-top: 37px;" type="button" width="100px" height="50px" onclick="exit()" value="退出登录"/>
+    </div>
+    <div class="thisUser" th:if="${session.user.storeId != 0}">
+        <span>卖家登录：当前用户：[[${session.user.username}]]</span>
+        <input style="line-height: normal;margin-top: 37px;" type="button" width="100px" height="50px" onclick="exit()" value="退出登录"/>
+    </div>
 </div>
 <div class="content"></div>
 <div style="text-align:center;"></div>
@@ -114,7 +120,7 @@
         $(".content").load("/manager/brandList");
     })
     function exit() {
-        var url = "/exit";
+        var url = "/manager/exit";
         window.location.href = url;
     }
 </script>

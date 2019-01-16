@@ -21,6 +21,7 @@ public class Brand {
     private int id;
     private String name;
     private int state;
+    private String stateStr;
     private String pic;
     private int storeId;
     private Date ctime;

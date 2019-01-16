@@ -14,7 +14,7 @@ import java.util.List;
  * @Date: 2019/1/11 15:55
  * @Description:
  */
-@Service
+@Service("brandService")
 public class BrandServiceImpl implements IBrandService {
     @Autowired
     BrandMapper brandMapper;
@@ -25,7 +25,16 @@ public class BrandServiceImpl implements IBrandService {
 
     @Override
     public List<Brand> getBrandAll(Condition condition) {
-        return brandMapper.selectBrandAll(condition);
+        List<Brand> brandList = brandMapper.selectBrandAll(condition);
+        for(Brand brand : brandList){
+            int state = brand.getState();
+            if(state == 0){
+                brand.setStateStr("启用");
+            }else if(state == 1){
+                brand.setStateStr("停用");
+            }
+        }
+        return brandList;
     }
 
     @Override

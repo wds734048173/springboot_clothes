@@ -12,8 +12,19 @@
             <if test="name != null &amp;&amp; name != ''">
                 and name like concat ('%', #{name}, '%')
             </if>
-            <if test="state != null">
-                and state=#{state}
+            <choose>
+                <when test="state == 0">
+                    and state=#{state}
+                </when>
+                <when test="state == 1">
+                    and state=#{state}
+                </when>
+                <otherwise>
+                    and (state=0 or state=1)
+                </otherwise>
+            </choose>
+            <if test="storeId != null">
+                and storeId=#{storeId}
             </if>
         </where>
         <if test="currentPage != null">
@@ -29,18 +40,21 @@
           <if test="state != null">
               and state=#{state}
           </if>
+          <if test="storeId != null">
+              and storeId=#{storeId}
+          </if>
       </where>
     </select>
 
-    <delete id="deleteBrandById" parameterType="int">
-        delete from tb_goods_brand where id = #{brandId}
-    </delete>
+    <update id="deleteBrandById" parameterType="int">
+        update tb_goods_brand set state=2 where id = #{brandId}
+    </update>
 
     <update id="updateBrandById" parameterType="org.lanqiao.clothes.pojo.Brand">
         update tb_goods_brand set name=#{name},state=#{state},pic=#{pic},ctime=now(),rtime=now() where id=#{id}
     </update>
 
     <select id="selectBrandById" parameterType="int" resultType="org.lanqiao.clothes.pojo.Brand">
-        select * from tb_goods_brand where id=#{id};
+        select * from tb_goods_brand where id=#{id}
     </select>
 </mapper>

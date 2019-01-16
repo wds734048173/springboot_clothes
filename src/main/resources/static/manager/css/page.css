@@ -35,7 +35,8 @@ body {
 
 .thisUser {
 	float: right;
-	margin-right: 200px;
+	margin-right: 60px;
+	font-size: 25px;
 }
 
 .bigTitle {

@@ -2,6 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.lanqiao.mapper.IUserMapper">
-
+<mapper namespace="org.lanqiao.clothes.mapper.UserMapper">
+    <select id="selectUser" resultType="org.lanqiao.clothes.pojo.User" parameterType="org.lanqiao.clothes.pojo.User">
+        select * from tb_user where username=#{username} and password=#{password}
+    </select>
 </mapper>

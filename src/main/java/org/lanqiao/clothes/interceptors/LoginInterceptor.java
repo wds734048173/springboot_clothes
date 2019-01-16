@@ -18,11 +18,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if(!StringUtils.isEmpty(session.getAttribute("username"))){
+        if(!StringUtils.isEmpty(session.getAttribute("user"))){
             return true;
         }
         request.setAttribute("msg","权限不足，请登录！");
-        request.getRequestDispatcher("/index.html").forward(request,response);
+        request.getRequestDispatcher("/manager/login").forward(request,response);
         return false;
     }
 }
