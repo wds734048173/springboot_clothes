@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @Auther: WDS
  * @Date: 2019/1/12 20:20
- * @Description:
+ * @Description:登录注册管理
  */
 @Controller
 public class LoginController {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.clothes.mapper.StockMapper">
+    <insert id="insertStockList" parameterType="list">
+      <foreach collection="stockList" separator=";" item="stock" index="index" open="" close="">
+        insert into tb_goods_stock (storeId,goodsId,skuId,num) values (${stock.storeId},${stock.goodsId},${stock.skuId},${stock.num})
+      </foreach>
+    </insert>
+
+    <update id="updateUpStockList" parameterType="list">
+        <foreach collection="stockList" separator=";" item="stock" index="index" open="" close="">
+            update tb_goods_stock set num=num+${stock.num} where storeId=${stock.storeId} and goodsId=${stock.goodsId} and skuId=${stock.skuId}
+        </foreach>
+    </update>
+
+    <update id="updateDownStockList" parameterType="list">
+        <foreach collection="stockList" separator=";" item="stock" index="index" open="" close="">
+            update tb_goods_stock set num=num-${stock.num} where storeId=${stock.storeId} and goodsId=${stock.goodsId} and skuId=${stock.skuId}
+        </foreach>
+    </update>
+</mapper>

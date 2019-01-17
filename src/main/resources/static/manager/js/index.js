@@ -11,7 +11,7 @@ function pageClick(k) {
     } else if (text == "尺码管理") {
         url = "/manager/sizeList";
     } else if (text == "分类管理") {
-        url = "/manager/classList";
+        url = "/manager/toGoodsClassList";
     } else if (text == "客户信息管理") {
         url = "/customer.do?method=getCustomerlist";
     } else if (text == "评价信息") {

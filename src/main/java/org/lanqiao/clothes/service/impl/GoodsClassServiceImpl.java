@@ -28,8 +28,8 @@ public class GoodsClassServiceImpl implements IGoodsClassService {
     }
 
     @Override
-    public List<GoodsClass> getGoodsClassList() {
-        return goodsClassMapper.selectGoodsClassAll();
+    public List<GoodsClass> getGoodsClassList(int storeId) {
+        return goodsClassMapper.selectGoodsClassAll(storeId);
     }
 
     @Override

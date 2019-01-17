@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * @Auther: WDS
  * @Date: 2019/1/11 15:56
- * @Description:
+ * @Description:品牌管理
  */
 @Controller
 @EnableAutoConfiguration
@@ -71,6 +71,8 @@ public class BrandController {
         String searchBrandState = "";
         if(req.getParameter("searchBrandState") != null){
             searchBrandState = req.getParameter("searchBrandState");
+        }else{
+            searchBrandState = "-1";
         }
         Condition condition = new Condition();
         condition.setName(searchBrandName);

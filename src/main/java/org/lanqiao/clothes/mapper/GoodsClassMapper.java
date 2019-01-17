@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface GoodsClassMapper {
     //获取分类列表
-    public List<GoodsClass> selectGoodsClassAll();
+    public List<GoodsClass> selectGoodsClassAll(int storeId);
     //修改分类
     public void updateGoodsClass(GoodsClass goodsClass);
     //添加分类

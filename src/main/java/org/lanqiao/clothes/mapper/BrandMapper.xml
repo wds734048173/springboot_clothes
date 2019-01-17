@@ -6,17 +6,17 @@
     <insert id="insertBrand" parameterType="org.lanqiao.clothes.pojo.Brand">
         insert into tb_goods_brand (name,state,pic,storeId,ctime) values (#{name},#{state},#{pic},#{storeId},now())
     </insert>
-    <select id="selectBrandAll" resultType="org.lanqiao.clothes.pojo.Brand">
+    <select id="selectBrandAll" resultType="org.lanqiao.clothes.pojo.Brand" parameterType="org.lanqiao.clothes.pojo.Condition">
         select * from tb_goods_brand
         <where>
             <if test="name != null &amp;&amp; name != ''">
                 and name like concat ('%', #{name}, '%')
             </if>
             <choose>
-                <when test="state == 0">
+                <when test="state==0">
                     and state=#{state}
                 </when>
-                <when test="state == 1">
+                <when test="state==1">
                     and state=#{state}
                 </when>
                 <otherwise>
@@ -33,17 +33,25 @@
     </select>
     <select id="selectBrandCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
       select count(1) from tb_goods_brand
-      <where>
-          <if test="name != null &amp;&amp; name != ''">
-              and name like concat ('%', #{name}, '%')
-          </if>
-          <if test="state != null">
-              and state=#{state}
-          </if>
-          <if test="storeId != null">
-              and storeId=#{storeId}
-          </if>
-      </where>
+        <where>
+            <if test="name != null &amp;&amp; name != ''">
+                and name like concat ('%', #{name}, '%')
+            </if>
+            <choose>
+                <when test="state==0">
+                    and state=#{state}
+                </when>
+                <when test="state==1">
+                    and state=#{state}
+                </when>
+                <otherwise>
+                    and (state=0 or state=1)
+                </otherwise>
+            </choose>
+            <if test="storeId != null">
+                and storeId=#{storeId}
+            </if>
+        </where>
     </select>
 
     <update id="deleteBrandById" parameterType="int">

@@ -10,7 +10,7 @@ public interface IGoodsClassService {
     //删除商品分类
     public void removeGoodClass(int id);
     //获取商品分类列表
-    public List<GoodsClass> getGoodsClassList();
+    public List<GoodsClass> getGoodsClassList(int storeId);
     //修改商品分类
     public void modifyGoodsClass(GoodsClass goodsClass);
 
