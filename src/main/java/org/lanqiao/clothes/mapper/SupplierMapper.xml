@@ -2,12 +2,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.lanqiao.clothes.mapper.BrandMapper">
-    <insert id="insertBrand" parameterType="org.lanqiao.clothes.pojo.Brand">
-        insert into tb_goods_brand (name,state,pic,storeId,ctime) values (#{name},#{state},#{pic},#{storeId},now())
+<mapper namespace="org.lanqiao.clothes.mapper.SupplierMapper">
+    <!--新增-->
+    <insert id="insertSupplier" parameterType="org.lanqiao.clothes.pojo.Supplier">
+        insert into tb_supplier (name,sex,telphone,address,state,storeId,ctime)
+        values (#{name},#{sex},#{telphone},#{address},#{state},#{storeId},now())
     </insert>
-    <select id="selectBrandAll" resultType="org.lanqiao.clothes.pojo.Brand" parameterType="org.lanqiao.clothes.pojo.Condition">
-        select * from tb_goods_brand
+    <!--查询所有的-->
+    <select id="selectSupplierAll" resultType="org.lanqiao.clothes.pojo.Supplier">
+        select * from tb_supplier
         <where>
             <if test="name != null &amp;&amp; name != ''">
                 and name like concat ('%', #{name}, '%')
@@ -31,8 +34,8 @@
             limit #{currentPage}, #{pageSize}
         </if>
     </select>
-    <select id="selectBrandCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
-      select count(1) from tb_goods_brand
+    <select id="selectSupplierCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
+        select count(1) from tb_supplier
         <where>
             <if test="name != null &amp;&amp; name != ''">
                 and name like concat ('%', #{name}, '%')
@@ -53,20 +56,16 @@
             </if>
         </where>
     </select>
-
-    <update id="deleteBrandById" parameterType="int">
-        update tb_goods_brand set state=2 where id = #{brandId}
+    <!--删除-->
+    <delete id="deleteSupplierById" parameterType="int">
+        delete from tb_supplier where id = #{supplierId}
+    </delete>
+    <!--修改-->
+    <update id="updateSupplierById" parameterType="org.lanqiao.clothes.pojo.Supplier">
+        update tb_supplier set name=#{name},sex=#{sex},telphone=#{telphone},address=#{address},state=#{state},storeId=#{storeId},ctime=now(),rtime=now() where id=#{id}
     </update>
-
-    <update id="updateBrandById" parameterType="org.lanqiao.clothes.pojo.Brand">
-        update tb_goods_brand set name=#{name},state=#{state},pic=#{pic},ctime=now(),rtime=now() where id=#{id}
-    </update>
-
-    <select id="selectBrandById" parameterType="int" resultType="org.lanqiao.clothes.pojo.Brand">
-        select * from tb_goods_brand where id=#{id}
-    </select>
-
-    <select id="selectBrandSelectedList" resultType="org.lanqiao.clothes.pojo.Brand" parameterType="int">
-        select id,name from tb_goods_brand where storeId=#{storeId} and state=0
+    <!--id查询-->
+    <select id="selectSupplierById" parameterType="int" resultType="org.lanqiao.clothes.pojo.Supplier">
+        select * from tb_supplier where id=#{id};
     </select>
 </mapper>

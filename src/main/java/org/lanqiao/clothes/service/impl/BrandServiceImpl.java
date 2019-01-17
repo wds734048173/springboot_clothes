@@ -56,4 +56,9 @@ public class BrandServiceImpl implements IBrandService {
     public Brand getBrandById(int id) {
         return brandMapper.selectBrandById(id);
     }
+
+    @Override
+    public List<Brand> getBrandSelectedList(int storeId) {
+        return brandMapper.selectBrandSelectedList(storeId);
+    }
 }

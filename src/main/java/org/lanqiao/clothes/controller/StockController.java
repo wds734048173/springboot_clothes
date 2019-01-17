@@ -1,11 +1,20 @@
 package org.lanqiao.clothes.controller;
 
+import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Stock;
+import org.lanqiao.clothes.pojo.User;
+import org.lanqiao.clothes.service.IStockService;
+import org.lanqiao.clothes.utils.PageModel;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -15,6 +24,9 @@ import java.util.List;
  */
 @Controller
 public class StockController {
+
+    @Autowired
+    IStockService stockService;
 
     @Autowired
     RabbitTemplate rabbitTemplate;
@@ -39,5 +51,49 @@ public class StockController {
         Object o = rabbitTemplate.receiveAndConvert("downStock.queue");
         System.out.println(o.getClass());
         System.out.println(o);
+    }
+
+    @RequestMapping("/manager/stockList")
+    public String colorList(HttpServletRequest req, HttpServletResponse resp, Model model){
+        int pageNum = 1;
+        if(req.getParameter("currentPage") != null){
+            pageNum = Integer.valueOf(req.getParameter("currentPage"));
+        }
+        int pageSize = 5;
+        if(req.getParameter("pageSize") != null){
+            pageSize = Integer.valueOf(req.getParameter("pageSize"));
+        }
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+
+        Condition condition = new Condition();
+        condition.setStoreId(storeId);
+        int totalRecords = stockService.getStockCount(condition);
+        //不同操作，不同的当前页设置
+        PageModel pm = new PageModel(pageNum,totalRecords,pageSize);
+
+        PageModel pageModel = new PageModel(pageNum,totalRecords,pageSize);
+        //分页条件封装
+        condition.setCurrentPage(pageModel.getStartIndex());
+        condition.setPageSize(pageModel.getPageSize());
+        List<Stock> stocksList = stockService.getStockAll(condition);
+        model.addAttribute("stockList",stocksList);
+        model.addAttribute("pm",pageModel);
+        model.addAttribute("condition",condition);
+        model.addAttribute("currentPage",pageNum);
+        return "/manager/stockList";
+    }
+    @RequestMapping("/manager/stockInfo")
+    public String getStockInfo (HttpServletResponse resp, HttpServletRequest req, Model model){
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+        int goodsId = Integer.valueOf(req.getParameter("goodsId"));
+        List<Stock> stockList = stockService.getStockInfo(storeId,goodsId);
+        model.addAttribute("stockList",stockList);
+        return "manager/stockInfo";
     }
 }

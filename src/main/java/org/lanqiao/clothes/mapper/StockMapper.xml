@@ -20,4 +20,21 @@
             update tb_goods_stock set num=num-${stock.num} where storeId=${stock.storeId} and goodsId=${stock.goodsId} and skuId=${stock.skuId}
         </foreach>
     </update>
+
+    <!--总的查询-->
+    <select id="selectStockAll" resultType="org.lanqiao.clothes.pojo.Stock" parameterType="org.lanqiao.clothes.pojo.Condition">
+        SELECT storeId,goodsId,SUM(num) num FROM tb_goods_stock where storeId = #{storeId} group by goodsId
+        <if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectStockCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
+              SELECT COUNT(1) FROM (select goodsId,SUM(num) from tb_goods_stock where storeId = #{storeId} group by goodsId) as stock
+       </select>
+    <!--详细信息-->
+    <select id="selectStockInfo" resultType="org.lanqiao.clothes.pojo.Stock">
+              /*select tgsku.goodsId,tgs.goodsId,tgs.storeId,tgsku.colorId,tgsku.sizeId from tb_goods_sku tgsku ,tb_goods_stock tgs where tgsku.goodsId =  tgs.goodsId and  tgs.storeId=${param1} and  tgs.goodsId=${param2};*/
+              select goodsId,num,skuId from tb_goods_stock where storeId = ${param1} and  goodsId=${param2}
+       </select>
 </mapper>

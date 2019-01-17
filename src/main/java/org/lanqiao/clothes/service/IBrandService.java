@@ -12,4 +12,5 @@ public interface IBrandService {
     public void removeBrandById(int brandId);
     public void modifyBrandById(Brand brand);
     public Brand getBrandById(int id);
+    public List<Brand> getBrandSelectedList(int storeId);
 }

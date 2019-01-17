@@ -1,20 +1,20 @@
 package org.lanqiao.clothes.pojo;
 
 import lombok.*;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.Date;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
 @Builder
-@Configuration
-public class Color {
+public class Supplier {
     private int id;
     private String name;
+    private int sex;
+    private String telphone;
+    private String address;
     private int state;
     private String stateStr;
     private int storeId;

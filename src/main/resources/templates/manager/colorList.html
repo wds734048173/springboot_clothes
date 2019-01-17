@@ -2,69 +2,68 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>尺码列表</title>
+    <title>颜色列表</title>
     <script type="text/javascript">
         $(function () {
             //新增
-            $("#addSize").click(function () {
-                $('#addBrandModel').modal({
+            $("#addColor").click(function () {
+                $('#addColorModel').modal({
                     keyboard: false,
                     show:true
                 })
             })
             //保存
             $("#save").click(function () {
-                var sizeId = $("#sizeId").val();
-                var sizeName = $("#sizeName").val();
-                var  sizeState= $("#sizeState option:selected").val();
-                if(sizeName.length >10){
-                    alert("尺寸名称多于10个字，请重新输入");
+                var colorId = $("#colorId").val();
+                var colorName = $("#colorName").val();
+                var colorState = $("#colorState option:selected").val();
+                if(colorName.length > 10){
+                    alert("颜色名称多于10字，请重新输入");
                     return;
                 }
                 //查询条件
-                var searchSizeState = $("#searchSizeState").val();
-                var searchSizeName = $("#searchSizeName").val();
+                var searchColorState = $("#searchColorState").val();
+                var searchColorName = $("#searchColorName").val();
                 var currentPage = $("#currentPage").val();
-                if(sizeId == null || sizeId == ""){
-                    var url = "/manager/addSize?sizeName="+sizeName+"&sizeState="+sizeState+"&method=add"
-                        +"&currentPage="+currentPage+"&searchSizeName="+searchSizeName+"&searchSizeState="+searchSizeState;
+                if(colorId == null || colorId == ""){
+                    var url = "/manager/addColor?colorName="+colorName+"&colorState="+colorState+"&method=add"
+                        +"&currentPage="+currentPage+"&searchColorState="+searchColorState+"&searchColorName="+searchColorName;
                 }else{
-                    var url = "/manager/updateSizeById?sizeId="+sizeId+"&sizeName="+sizeName+"&sizeState="+sizeState+"&method=update"
-                        +"&currentPage="+currentPage+"&searchSizeName="+searchSizeName+"&searchSizeState="+searchSizeState;
+                    var url = "/manager/updateColorById?colorId="+colorId+"&colorName="+colorName+"&colorState="+colorState+"&method=add"
+                        +"&currentPage="+currentPage+"&searchColorState="+searchColorState+"&searchColorName="+searchColorName;
                 }
                 $(".content").load(url);
                 $(".modal-backdrop").remove();
             })
             //修改
-            $(".updateSize").click(function () {
+            $(".updateColor").click(function () {
                 var id = $(this).parent().parent().children("td:eq(0)").text();
-                alert(id)
-                document.getElementById("gridSystemModalLabel").innerHTML = "修改尺寸信息";
+                document.getElementById("gridSystemModalLabel").innerHTML = "修改颜色信息";
                 $.ajax({
-                    url:"/manager/selectSizeById?sizeId=" + id,
+                    url:"/manager/selectColorById?colorId=" + id,
                     success:function (data) {
-                        var size = eval(data);
-                        $("#sizeId").val(size.id);
-                        $("#sizeName").val(size.name);
-                        $("#sizeState").val(size.state);
+                        var color = eval(data);
+                        $("#colorId").val(color.id);
+                        $("#colorName").val(color.name);
+                        $("#colorState").val(color.state);
                     }
                 })
-                $('#addBrandModel').modal({
+                $('#addColorModel').modal({
                     keyboard: false,
                     show:true
                 })
             })
             //删除
-            $(".deleteSize").click(function () {
+            $(".deleteColor").click(function () {
                 var isDelete = confirm ("确定删除吗？");
                 if(isDelete){
                     var id = $(this).parent().parent().children("td:eq(0)").text();
                     //查询条件
-                    var searchSizeState = $("#searchSizeState").val();
-                    var searchSizeName = $("#searchSizeName").val();
+                    var searchColorState = $("#searchColorState").val();
+                    var searchColorName = $("#searchColorName").val();
                     var currentPage = $("#currentPage").val();
-                    var url = "/manager/deleteSize?sizeId=" + id + "&method=delete"
-                        + "&currentPage="+currentPage+"&searchSizeName="+searchSizeName+"&searchSizeState="+searchSizeState;
+                    var url = "/manager/deleteColor?colorId=" + id + "&method=delete"
+                        + "&currentPage="+currentPage+"&searchColorState="+searchColorState+"&searchColorName="+searchColorName;
                     $(".content").load(url);
                 }else{
                     return;
@@ -74,30 +73,29 @@
 
         //查询的手动提交方式
         function search(currentPage) {
-            var searchSizeState = $("#searchSizeState option:selected").val();
-            var searchSizeName = $("#searchSizeName").val();
+            var searchColorState = $("#searchColorState option:selected").val();
+            var searchColorName = $("#searchColorName").val();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();
             }else{
                 var currentPage = currentPage;
             }
-            var url = "/manager/sizeList?currentPage="+currentPage+"&searchSizeName="+searchSizeName+"&searchSizeState="+searchSizeState;
+            var url = "/manager/colorList?currentPage="+currentPage+"&searchColorState="+searchColorState+"&searchColorName="+searchColorName;
             $(".content").load(url);
         }
     </script>
 </head>
-
 <body>
 <input type="hidden" name="currentPage" id="currentPage" th:value="${currentPage}">
 <div class="modal-body">
     <div class="form-group row">
         <div class="col-xs-3">
-            <label for="searchSizeName" >尺寸名称:</label>
-            <input type="text" class="myinput"  placeholder="" id="searchSizeName" name="searchSizeName" th:value="${condition.name}">
+            <label for="searchColorName" >颜色名称:</label>
+            <input type="text" class="myinput"  placeholder="" id="searchColorName" name="searchColorName" th:value="${condition.name}">
         </div>
         <div class="col-xs-2">
-            <label for="searchSizeState">尺寸状态</label>
-            <select class="myinput" name="searchSizeState" id="searchSizeState">
+            <label for="searchColorState">颜色状态</label>
+            <select class="myinput" name="searchColorState" id="searchColorState">
                 <option value="-1" th:selected="${condition.state=='-1'}">全部</option>
                 <option value="0" th:selected="${condition.state=='0'}">启用</option>
                 <option value="1" th:selected="${condition.state=='1'}">停用</option>
@@ -109,55 +107,56 @@
     </div>
 </div>
 <div class="modal-body">
-    <a class="btn btn-default" href="#" role="button" id="addSize" name="addSize">添加尺寸信息</a>
+    <a class="btn btn-default" href="#" role="button" id="addColor" name="addColor">添加颜色信息</a>
 </div>
 <div class="modal-body">
     <table class="table table-hover table-bordered">
         <thead>
         <tr>
             <th hidden>ID</th>
-            <th>尺寸名称</th>
-            <th>尺寸状态</th>
+            <th>颜色名称</th>
+            <th>颜色状态</th>
             <th>创建时间</th>
             <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="size: ${sizeList}">
-            <td th:text="${size.id}" hidden></td>
-            <td th:text="${size.name}"></td>
-            <td th:text="${size.stateStr}"></td>
-            <td th:text="${size.ctime!=null}?${#dates.format(size.ctime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <tr th:each="color: ${colorList}">
+            <td th:text="${color.id}" hidden></td>
+            <td th:text="${color.name}"></td>
+            <td th:text="${color.stateStr}"></td>
+            <td th:text="${color.ctime!=null}?${#dates.format(color.ctime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
-                <a class="btn btn-default updateSize" href="#" role="button"  name="updateSize">修改</a>
-                <a class="btn btn-default deleteSize" href="#" role="button"  name="deleteSize">删除</a>
+                <!-- <button th:attr="del_uri=@{/brand/}+${brand.id}" class="btn btn-danger deleteBtn">删除</button>
+                 <a th:href="@{/brand/}+${brand.id}">修改</a>-->
+                <a class="btn btn-default updateColor" href="#" role="button"  name="updateColor">修改</a>
+                <a class="btn btn-default deleteColor" href="#" role="button"  name="deleteColor">删除</a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-
 <!--新增模态框插件-->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="addBrandModel">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="addColorModel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">新增尺寸信息</h4>
+                <h4 class="modal-title" id="gridSystemModalLabel">新增颜色信息</h4>
             </div>
             <div class="modal-body">
                 <form method="post" action="" id="addForm">
                     <div class="form-group hidden">
-                        <label for="sizeId" class="control-label">尺寸id:</label>
-                        <input type="text" class="form-control" id="sizeId" name="sizeId" value="">
+                        <label for="colorId" class="control-label">颜色id:</label>
+                        <input type="text" class="form-control" id="colorId" name="colorId" value="">
                     </div>
                     <div class="form-group">
-                        <label for="sizeName" class="control-label">尺寸名称:</label>
-                        <input type="text" class="form-control" id="sizeName" name="sizeName" required>
+                        <label for="colorName" class="control-label">颜色名称:</label>
+                        <input type="text" class="form-control" id="colorName" name="colorName" required>
                     </div>
                     <div class="form-group">
-                        <label for="sizeState" class="control-label">尺寸状态:</label>
-                        <select id="sizeState" name="sizeState" class="form-control">
+                        <label for="colorState" class="control-label">颜色状态:</label>
+                        <select id="colorState" name="colorState" class="form-control">
                             <option value="0">启用</option>
                             <option value="1">停用</option>
                         </select>
@@ -172,7 +171,7 @@
     </div>
 </div>
 <!--分页插件-->
-<center th:if="${sizeList.size() != 0}">
+<center th:if="${colorList.size() != 0}">
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li  th:onclick="search([[${pm.startPage}]])"><a href="javascript:void(0);"><span>首页</span></a></li>

@@ -14,10 +14,10 @@ function pageClick(k) {
         url = "/manager/toGoodsClassList";
     } else if (text == "客户信息管理") {
         url = "/customer.do?method=getCustomerlist";
-    } else if (text == "评价信息") {
-        url = "/comment.do?method=getCommentlist";
-    } else if (text == "信息反馈"){
-        url = "/reply.do?method=getReplylist";
+    } else if (text == "供应商管理") {
+        url = "/manager/supplierList";
+    } else if (text == "库存管理"){
+        url = "/manager/stockList";
     }
     $(".content").load(url);
 }

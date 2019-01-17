@@ -40,12 +40,22 @@ public class SizeServiceImpl implements ISizeService {
     }
 
     @Override
-    public void modifySize(int sizeId) {
-        sizeMapper.updateSize(sizeId);
+    public void modifySize(Size size) {
+        sizeMapper.updateSize(size);
     }
 
     @Override
     public int getSizeCount(Condition condition) {
         return sizeMapper.selectSizeCount(condition);
+    }
+
+    @Override
+    public List<Size> getSizeSelectedList(int storeId) {
+        return sizeMapper.selectSizeSelectedList(storeId);
+    }
+
+    @Override
+    public Size getSizeById(int id) {
+        return sizeMapper.selectSizeById(id);
     }
 }

@@ -1,15 +1,51 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <title>登陆</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>会员卖家登录</title>
+    <link rel="stylesheet" type="text/css" href="/manager/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/manager/css/body.css"/>
+    <script type="text/javascript" src="/manager/js/jquery.js"></script>
+    <script type="text/javascript">
+        function change() {
+            //每次告诉浏览器发送一个新的请求，不适用浏览器的缓存
+            $("#123").attr("src","/imageCodePage?"+Math.random());
+        }
+    </script>
 </head>
 <body>
-<form action="/manager/login" method="post">
-    <input type="text" name="username" required placeholder="请输入用户名">
-    <input type="password" placeholder="请输入密码" required name="password">
-    <span th:text="${msg}"></span>
-    <!--<span style="color: red">${msg}</span>-->
-    <input type="submit" value="登陆">
-</form>
+<div class="container">
+    <section id="content">
+        <form action="/manager/login" method="post">
+            <h1>会员卖家登录</h1>
+            <div>
+                <input type="text" name="username" required placeholder="请输入用户名">
+            </div>
+            <div>
+                <input type="password" placeholder="请输入密码" required name="password">
+            </div>
+            <!--<div>-->
+            <!--<div style="display: inline"><input type="text" placeholder="请输入验证码" id="tager"  style="width: 150px"></div>-->
+            <!--<div style="display: inline"><img th:src="@{/manager/img/icon-6.jpg}" alt="" style="height: 50px;width: 47px"/></div>-->
+            <!--</div>-->
+            <!--class="form-group"-->
+            <div >
+                <input type="text" class="form-control" id="rcode" style="width: 160px;" placeholder="请输入验证码" autocomplete="off" name="rcode" required>
+                <img id="123" src="/imageCodePage" >
+                <a href="javascript:change()" ><font size="1" >看不清</font></a>
+            </div>
+            <div class="">
+                <span th:text="${msg}" style="color: red"></span>
+            </div>
+            <div>
+                <!-- <input type="submit" value="Log in" /> -->
+                <input type="submit" value="登录" class="btn btn-primary" id="js-btn-login" onclick="login()"/>
+                <a href="#">忘记密码?</a>
+                <!-- <a href="#">Register</a> -->
+            </div>
+        </form><!-- form -->
+    </section><!-- content -->
+</div>
+<br><br><br><br>
 </body>
 </html>

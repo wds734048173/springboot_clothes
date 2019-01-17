@@ -1,6 +1,7 @@
 package org.lanqiao.clothes.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Stock;
 
 import java.util.List;
@@ -18,4 +19,11 @@ public interface StockMapper {
     public void updateUpStockList(List<Stock> stockList);
     //批量减少
     public void updateDownStockList(List<Stock> stockList);
+
+    //总的库存报表
+    public List<Stock> selectStockAll(Condition condition);
+
+    public int selectStockCount(Condition condition);
+    //查看详情
+    public List<Stock>  selectStockInfo(int storeId,int goodsId);
 }

@@ -137,4 +137,16 @@ public class BrandController {
         Brand brand = brandService.getBrandById(Integer.valueOf(brandId));
         return brand;
     }
+
+    //通过店铺id查询该店铺可用的所有的品牌id和name
+    @RequestMapping("/manager/brandSelectedList")
+    @ResponseBody
+    public List<Brand> getBrandSelectedList(HttpServletRequest req, HttpServletResponse resp){
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+        List<Brand> brandList = brandService.getBrandSelectedList(storeId);
+        return brandList;
+    }
 }

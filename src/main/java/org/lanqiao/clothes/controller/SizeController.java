@@ -1,5 +1,6 @@
 package org.lanqiao.clothes.controller;
 
+import org.lanqiao.clothes.pojo.Color;
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Size;
 import org.lanqiao.clothes.pojo.User;
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,7 +67,7 @@ public class SizeController {
         }
         PageModel pageModel = new PageModel(pageNum,totalRecords,pageSize);
         //分页封装条件
-        condition.setCurrentPage(pageModel.getStartPage());
+        condition.setCurrentPage(pageModel.getStartIndex());
         condition.setPageSize(pageModel.getPageSize());
         List<Size> sizeList  = sizeService.getSizeAll(condition);
         model.addAttribute("sizeList",sizeList);
@@ -114,7 +116,29 @@ public class SizeController {
         size.setName(name);
         size.setState(state);
         size.setStoreId(storeId);
-        sizeService.modifySize(Integer.valueOf(id));
+        sizeService.modifySize(size);
         return sizeList(req,resp,model);
+    }
+
+
+    //通过店铺id查询该店铺可用的所有的颜色id和name
+    @RequestMapping("/manager/sizeSelectedList")
+    @ResponseBody
+    public List<Size> getSizeSelectedList(HttpServletRequest req, HttpServletResponse resp){
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+        List<Size> sizeList = sizeService.getSizeSelectedList(storeId);
+        return sizeList;
+    }
+
+    @RequestMapping("/manager/selectSizeById")
+    @ResponseBody
+    public Size selectSizeById(HttpServletRequest req, HttpServletResponse resp){
+        int sizeId = Integer.valueOf(req.getParameter("sizeId"));
+        System.out.println("sizeId=================="+sizeId);
+        Size size = sizeService.getSizeById(sizeId);
+        return size;
     }
 }

@@ -15,7 +15,11 @@ public interface ISizeService {
     //删
     public void removeSize(int sizeId);
     //改
-    public void modifySize(int sizeId);
+    public void modifySize(Size size);
     //获取尺码总数
     public int getSizeCount(Condition condition);
+
+    public List<Size> getSizeSelectedList(int storeId);
+
+    public Size getSizeById(int id);
 }

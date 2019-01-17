@@ -40,7 +40,6 @@
                 var id = $(this).parent().parent().children("td:eq(0)").text();
                 document.getElementById("gridSystemModalLabel").innerHTML = "修改品牌信息";
                 $.ajax({
-                    //通过id获取图书分类信息
                     url:"/manager/selectBrandById?brandId=" + id,
                     success:function (data) {
                         var brand = eval(data);
@@ -157,8 +156,8 @@
                     <div class="form-group">
                         <label for="brandState" class="control-label">品牌状态:</label>
                         <select id="brandState" name="brandState" class="form-control">
-                            <option value="0">可用</option>
-                            <option value="1">不可用</option>
+                            <option value="0">启用</option>
+                            <option value="1">停用</option>
                         </select>
                     </div>
                 </form>
