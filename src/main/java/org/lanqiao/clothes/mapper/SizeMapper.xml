@@ -64,7 +64,7 @@
     <update id="updateSize" parameterType="org.lanqiao.clothes.pojo.Size">
         update tb_goods_size set name =#{name},state=#{state},rtime=now() where id=#{id} and storeId=#{storeId}
     </update>
-    <select id="selectSizeSelectedList" resultType="org.lanqiao.clothes.pojo.Brand" parameterType="int">
+    <select id="selectSizeSelectedList" resultType="org.lanqiao.clothes.pojo.Size" parameterType="int">
         select id,name from tb_goods_size where storeId=#{storeId} and state=0
     </select>
 

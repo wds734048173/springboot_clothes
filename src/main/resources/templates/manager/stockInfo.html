@@ -10,15 +10,21 @@
         <thead>
         <tr>
             <th hidden>ID</th>
-            <th>商品id</th>
-            <th>商品SKUid</th>
+            <th hidden>商品id</th>
+            <th hidden>商品SKUid</th>
+            <th>商品名称</th>
+            <th>商品颜色</th>
+            <th>商品尺码</th>
             <th>商品数量</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="stock: ${stockList}">
-            <td th:text="${stock.goodsId}"></td>
-            <td th:text="${stock.skuId}"></td>
+            <td th:text="${stock.goodsId}" hidden></td>
+            <td th:text="${stock.skuId}" hidden></td>
+            <td th:text="${stock.goodsName}"></td>
+            <td th:text="${stock.colorName}"></td>
+            <td th:text="${stock.sizeName}"></td>
             <td th:text="${stock.num}"></td>
         </tr>
         </tbody>

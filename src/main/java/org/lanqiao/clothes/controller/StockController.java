@@ -68,7 +68,13 @@ public class StockController {
         User user  = (User)session.getAttribute("user");
         int storeId = user.getStoreId();
 
+        //查询条件
+        String searchGoodsName = "";
+        if(req.getParameter("searchGoodsName") != null){
+            searchGoodsName = req.getParameter("searchGoodsName");
+        }
         Condition condition = new Condition();
+        condition.setName(searchGoodsName);
         condition.setStoreId(storeId);
         int totalRecords = stockService.getStockCount(condition);
         //不同操作，不同的当前页设置

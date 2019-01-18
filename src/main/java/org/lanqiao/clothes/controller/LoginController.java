@@ -62,7 +62,6 @@ public class LoginController {
         String rcode = req.getParameter("rcode");
         //验证码中的值
         String s = (String) req.getSession().getAttribute("rcodes");
-        System.out.println(rcode+ "--- "+s);
         //验证码的比较
         if (StringUtils.isEmpty(s)||!rcode.equalsIgnoreCase(s)){
             model.addAttribute("msg","验证码错误");

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.clothes.mapper.GoodsMapper">
+    <!--新增-->
+    <insert id="insertGoods" parameterType="org.lanqiao.clothes.pojo.Goods">
+        insert into tb_goods (no,name,pPrice,sPrice,mPrice,class1Id,class2Id,class3Id,brandId,year,season,isshelf,sex,storeId,ctime)
+                            values (#{no},#{name},#{pPrice},#{sPrice},#{mPrice},#{class1Id},#{class2Id},#{class3Id},#{brandId},#{year},#{season},#{isshelf},#{sex},#{storeId},now())
+    </insert>
+    <!--查询所有的-->
+    <select id="selectGoodsAll" resultType="org.lanqiao.clothes.pojo.Goods" parameterType="org.lanqiao.clothes.pojo.Condition">
+        select * from tb_goods
+        <where>
+            <if test="name != null &amp;&amp; name != ''">
+                and name like concat ('%', #{name}, '%')
+            </if>
+        </where>
+        <if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="selectGoodsCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
+        select count(1) from tb_goods
+        <where>
+            <if test="name != null &amp;&amp; name != ''">
+                and name like concat ('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+    <!--删除-->
+    <delete id="deleteGoodsById" parameterType="org.lanqiao.clothes.pojo.Condition">
+        delete from tb_goods where id = #{goodsId}
+    </delete>
+    <!--修改-->
+    <update id="updateGoodsById" parameterType="org.lanqiao.clothes.pojo.Goods">
+        update tb_goods set no=#{no},name=#{name},pPrice=#{pPrice},sPrice=#{sPrice},mPrice=#{mPrice},class1Id=#{class1Id},
+         class2Id=#{class2Id},class3Id=#{class3Id},brandId=#{brandId},year=#{year},season=#{season},isshelf=#{isshelf},
+        sex=#{sex},storeId=#{storeId},ctime=now(),rtime=now() where id=#{id}
+    </update>
+    <!--id查询-->
+    <select id="selectGoodsById" parameterType="int" resultType="org.lanqiao.clothes.pojo.Goods">
+        select * from tb_goods where id=#{id};
+    </select>
+
+    <select id="selectGoodsByIds" resultType="org.lanqiao.clothes.pojo.Goods" parameterType="list">
+        select * from tb_goods where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectSKUByIds" resultType="org.lanqiao.clothes.pojo.GoodsSKU" parameterType="list">
+        select * from tb_goods_sku where id in
+        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

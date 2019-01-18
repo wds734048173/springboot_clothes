@@ -68,7 +68,7 @@
         select * from tb_goods_color where id=#{id};
     </select>
 
-    <select id="selectColorSelectedList" resultType="org.lanqiao.clothes.pojo.Brand" parameterType="int">
+    <select id="selectColorSelectedList" resultType="org.lanqiao.clothes.pojo.Color" parameterType="int">
         select id,name from tb_goods_color where storeId=#{storeId} and state=0
     </select>
 </mapper>

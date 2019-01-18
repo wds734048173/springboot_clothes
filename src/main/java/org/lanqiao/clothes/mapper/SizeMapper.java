@@ -1,14 +1,11 @@
 package org.lanqiao.clothes.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.lanqiao.clothes.pojo.Color;
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Size;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Mapper
-@Component
 public interface SizeMapper {
     //获取列表
     public List<Size> selectSizeAll(Condition condition);

@@ -32,13 +32,11 @@ public class GoodsClassController {
         User user = (User) session.getAttribute("user");
         int storeId = user.getStoreId();
         List<GoodsClass> goodsClassList = goodsClassService.getGoodsClassList(storeId);
-        System.out.println("===============页面数据"+goodsClassList.size());
         return goodsClassList;
     }
 
     @RequestMapping("/manager/toGoodsClassList")
     public String toGoodsClassList(){
-        System.out.println("--------------------页面跳转");
         return "/manager/goodsClassList";
     }
 }

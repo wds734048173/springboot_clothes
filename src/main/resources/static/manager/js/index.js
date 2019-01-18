@@ -16,7 +16,7 @@ function pageClick(k) {
         url = "/customer.do?method=getCustomerlist";
     } else if (text == "供应商管理") {
         url = "/manager/supplierList";
-    } else if (text == "库存管理"){
+    } else if (text == "库存列表"){
         url = "/manager/stockList";
     }
     $(".content").load(url);

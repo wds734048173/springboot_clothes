@@ -24,7 +24,6 @@ public class SupplierController {
     ISupplierService supplierService;
     @RequestMapping("/manager/supplierList")
     public String supplierList(HttpServletRequest req, HttpServletResponse resp, Model model){
-        System.out.println("-------------是否进入");
         int pageNum = 1;
         if(req.getParameter("currentPage") != null){
             pageNum = Integer.valueOf(req.getParameter("currentPage"));
@@ -51,9 +50,7 @@ public class SupplierController {
         condition.setName(searchSupplierName);
         condition.setState(searchSupplierState);
         condition.setStoreId(storeId);
-        System.out.println("========请求参数"+condition.toString());
         int totalRecords = supplierService.getSupplierCount(condition);
-        System.out.println("总数量=============="+totalRecords);
         //不同操作，不同的当前页设置
         PageModel pm = new PageModel(pageNum,totalRecords,pageSize);
         String method = req.getParameter("method");
@@ -70,7 +67,6 @@ public class SupplierController {
         condition.setCurrentPage(pageModel.getStartIndex());
         condition.setPageSize(pageModel.getPageSize());
         List<Supplier> supplierList = supplierService.getSupplierAll(condition);
-        System.out.println("=============获取列表总数量-"+supplierList.size());
         model.addAttribute("supplierList",supplierList);
         model.addAttribute("pm",pageModel);
         model.addAttribute("condition",condition);

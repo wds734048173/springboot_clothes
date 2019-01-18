@@ -1,24 +1,28 @@
 package org.lanqiao.clothes.pojo;
 
 import lombok.*;
-import org.springframework.context.annotation.Configuration;
 
+import java.util.Date;
+
+/**
+ * @Auther: WDS
+ * @Date: 2019/1/18 10:24
+ * @Description:
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
 @Builder
-@Configuration
-public class Stock {
+public class GoodsSKU {
     private int id;
-    private int storeId;
     private int goodsId;
     private String goodsName;
-    private int skuId;
     private int colorId;
-    private int sizeId;
     private String colorName;
+    private int sizeId;
     private String sizeName;
-    private int num;
+    private Date ctime;
+    private Date rtime;
 }

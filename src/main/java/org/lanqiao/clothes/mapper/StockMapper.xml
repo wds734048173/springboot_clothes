@@ -23,14 +23,32 @@
 
     <!--总的查询-->
     <select id="selectStockAll" resultType="org.lanqiao.clothes.pojo.Stock" parameterType="org.lanqiao.clothes.pojo.Condition">
-        SELECT storeId,goodsId,SUM(num) num FROM tb_goods_stock where storeId = #{storeId} group by goodsId
+        SELECT storeId,goodsId,SUM(num) num FROM tb_goods_stock
+        <where>
+            <if test="name != null &amp;&amp; name != ''">
+                and goodsId in (SELECT id FROM tb_goods WHERE storeId = #{storeId} and name like concat ('%', #{name}, '%'))
+            </if>
+            <if test="storeId != null">
+                and storeId=#{storeId}
+            </if>
+        </where>
+        group by goodsId
         <if test="currentPage != null">
             limit #{currentPage}, #{pageSize}
         </if>
     </select>
 
     <select id="selectStockCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
-              SELECT COUNT(1) FROM (select goodsId,SUM(num) from tb_goods_stock where storeId = #{storeId} group by goodsId) as stock
+              SELECT COUNT(1) FROM (select goodsId,SUM(num) from tb_goods_stock
+        <where>
+            <if test="name != null &amp;&amp; name != ''">
+                and goodsId in (SELECT id FROM tb_goods WHERE storeId = #{storeId} and name like concat ('%', #{name}, '%'))
+            </if>
+            <if test="storeId != null">
+                and storeId=#{storeId}
+            </if>
+        </where>
+              group by goodsId) as stock
        </select>
     <!--详细信息-->
     <select id="selectStockInfo" resultType="org.lanqiao.clothes.pojo.Stock">

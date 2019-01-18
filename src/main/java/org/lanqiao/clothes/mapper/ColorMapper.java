@@ -1,15 +1,12 @@
 package org.lanqiao.clothes.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.lanqiao.clothes.pojo.Brand;
 import org.lanqiao.clothes.pojo.Color;
 import org.lanqiao.clothes.pojo.Condition;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Mapper
-@Component
 public interface ColorMapper {
     //新增
     public void insertColor(Color color);
