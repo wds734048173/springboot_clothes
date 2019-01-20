@@ -12,11 +12,19 @@ function pageClick(k) {
         url = "/manager/sizeList";
     } else if (text == "分类管理") {
         url = "/manager/toGoodsClassList";
-    } else if (text == "客户信息管理") {
-        url = "/customer.do?method=getCustomerlist";
+    } else if (text == "商品列表") {
+        url = "/manager/goodsList";
+    } else if (text == "库存列表"){
+        url = "/manager/stockList";
+    } else if (text == "评价管理") {
+        url = "/manager/supplierList";
     } else if (text == "供应商管理") {
         url = "/manager/supplierList";
-    } else if (text == "库存列表"){
+    } else if (text == "客户管理") {
+        url = "/manager/customerList";
+    } else if (text == "采购单列表"){
+        url = "/manager/stockList";
+    } else if (text == "销售单列表"){
         url = "/manager/stockList";
     }
     $(".content").load(url);

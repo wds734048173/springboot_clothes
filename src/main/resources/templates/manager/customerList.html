@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理列表</title>
+    <script type="text/javascript">
+        $(function () {
+            //启用
+            $(".openCustomer").click(function () {
+                var isOpen = confirm ("确定开启吗？");
+                if(isOpen){
+                    var id = $(this).parent().parent().children("td:eq(0)").text();
+                    //查询条件
+                    var searchCustomerName = $("#searchCustomerName").val();
+                    var searchCustomerState = $("#searchCustomerState option:selected").val();
+                    var currentPage = $("#currentPage").val();
+                    var url = "/manager/updateCustomer?customerId=" + id + "&state=0"
+                        + "&currentPage="+currentPage+"&searchCustomerName="+searchCustomerName+"&searchCustomerState="+searchCustomerState;
+                    $(".content").load(url);
+                }else{
+                    return;
+                }
+            })
+            //停用
+            $(".closeCustomer").click(function () {
+                var isClose = confirm ("确定停用吗？");
+                if(isClose){
+                    var id = $(this).parent().parent().children("td:eq(0)").text();
+                    //查询条件
+                    var searchCustomerName = $("#searchCustomerName").val();
+                    var searchCustomerState = $("#searchCustomerState option:selected").val();
+                    var currentPage = $("#currentPage").val();
+                    var url = "/manager/updateCustomer?customerId=" + id + "&state=1"
+                        + "&currentPage="+currentPage+"&searchCustomerName="+searchCustomerName+"&searchCustomerState="+searchCustomerState;
+                    $(".content").load(url);
+                }else{
+                    return;
+                }
+            })
+        })
+        //查询的手动提交方式
+        function search(currentPage) {
+            var searchCustomerName = $("#searchCustomerName").val();
+            var searchCustomerState = $("#searchCustomerState option:selected").val();
+            if(currentPage == null){
+                var currentPage = $("#currentPage").val();
+            }else{
+                var currentPage = currentPage;
+            }
+            var url = "/manager/customerList?currentPage="+currentPage+"&searchCustomerState="+searchCustomerState+"&searchCustomerName="+searchCustomerName;
+            $(".content").load(url);
+        }
+    </script>
+</head>
+<body>
+<input type="hidden" name="currentPage" id="currentPage" th:value="${currentPage}">
+<div class="modal-body">
+    <div class="form-group row">
+        <div class="col-xs-3">
+            <label for="searchCustomerName" >客户名称:</label>
+            <input type="text" class="myinput"  placeholder="" id="searchCustomerName" name="searchCustomerName" th:value="${condition.name}">
+        </div>
+        <div class="col-xs-2">
+            <label for="searchCustomerState">用户状态</label>
+            <select class="myinput" name="searchCustomerState" id="searchCustomerState">
+                <option value="-1" th:selected="${condition.state=='-1'}">全部</option>
+                <option value="0" th:selected="${condition.state=='0'}">启用</option>
+                <option value="1" th:selected="${condition.state=='1'}">停用</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="button" class="btn btn-primary" id="search" value="查询" onclick="search(null)"/>
+    </div>
+</div>
+<div class="modal-body">
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th hidden>客户id</th>
+            <th>用户名</th>
+            <th>真实姓名</th>
+            <th>性别</th>
+            <th>联系电话</th>
+            <th>地址</th>
+            <th>状态</th>
+            <th>出生日期</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer: ${customerList}">
+            <td th:text="${customer.id}" hidden></td>
+            <td th:text="${customer.username}"></td>
+            <td th:text="${customer.realname}"></td>
+            <td th:text="${customer.sexStr}"></td>
+            <td th:text="${customer.phone}"></td>
+            <td th:text="${customer.address}"></td>
+            <td th:text="${customer.stateStr}"></td>
+            <td th:text="${customer.hiredate!=null}?${#dates.format(customer.hiredate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${customer.ctime!=null}?${#dates.format(customer.ctime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td>
+                <a class="btn btn-default openCustomer" href="#" role="button"  name="openCustomer" th:if="${customer.state==1}">启用</a>
+                <a class="btn btn-default closeCustomer" href="#" role="button"  name="closeCustomer" th:if="${customer.state==0}">停用</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!--分页插件-->
+<center th:if="${customerList.size() != 0}">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li th:onclick="search([[${pm.startPage}]])"><a href="javascript:void(0);"><span>首页</span></a></li>
+            <li th:onclick="search([[${pm.prePageNum}]])">
+                <a href="javascript:void(0);" class="page" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(1,pm.totalPageNum)}" th:onclick="search([[${i}]])">
+                <a href="javascript:void(0);">
+                    <span th:if="${i==pm.currentPageNum}" style = 'color:red;'>[[${i}]]</span>
+                    <span th:if="${i!=pm.currentPageNum}">[[${i}]]</span>
+                </a>
+            </li>
+            <li th:onclick="search([[${pm.nextPageNum}]])">
+                <a href="javascript:void(0);" class="page" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <li th:onclick="search([[${pm.endPage}]])"><a href="javascript:void(0);"><span>尾页</span></a></li>
+        </ul>
+    </nav>
+</center>
+</body>
+</html>
