@@ -26,7 +26,7 @@
         *{margin: 0;padding: 0}
         body{font-size: 12px;font-family: "宋体","微软雅黑";}
         ul,li{list-style: none;}
-        .list{width: auto;border-bottom:solid 1px #316a91;margin:40px auto 0 auto;}
+       /* .list{width: auto;border-bottom:solid 1px #316a91;margin:40px auto 0 auto;}*/
         .list ul li{background-color:#467ca2; border:solid 1px #316a91; border-bottom:0;}
         .list ul li a{padding-left: 10px;color: #fff; font-size:24px; display: block; font-weight:bold; height:66px;line-height: 66px;position: relative;
         }
@@ -61,10 +61,11 @@
     <!--实现左侧菜单栏伸缩功能-end-->
 </head>
 <body>
+<span th:text="${session.user.storeId}"></span>
 <div class="left">
     <div class="bigTitle">服装进销存后台管理系统</div>
     <div class="list">
-        <ul class="yiji" style="margin-top: -40px">
+        <ul class="yiji" th:if="${session.user.storeId!=0}">
             <li><a href="#" class="inactive inactives">商品基础信息管理</a>
                 <ul style="display: block;">
                     <li><a onclick="pageClick(this)"><img th:src="@{/manager/img/icon-4.png}" />品牌管理</a></li>
@@ -74,7 +75,7 @@
                 </ul>
             </li>
         </ul>
-        <ul class="erji" style="margin-top: -16px">
+        <ul class="erji" style="margin-top: -16px" th:if="${session.user.storeId!=0}">
             <li><a href="#" class="inactive">商品管理</a>
                 <ul style="display: none">
                     <li><a onclick="pageClick(this)"><img th:src="@{/manager/img/icon-4.png}" />商品列表</a></li>
@@ -83,7 +84,7 @@
                 </ul>
             </li>
         </ul>
-        <ul class="sanji" style="margin-top: -16px">
+        <ul class="sanji" style="margin-top: -16px" th:if="${session.user.storeId!=0}">
             <li><a href="#" class="inactive">订单管理</a>
                 <ul style="display: none">
                     <li><a onclick="pageClick(this)"><img th:src="@{/manager/img/icon-4.png}" />采购单管理</a></li>
@@ -91,20 +92,29 @@
                 </ul>
             </li>
         </ul>
-        <ul class="yiji" style="margin-top: -16px">
+        <ul class="siji" style="margin-top: -16px" th:if="${session.user.storeId!=0}">
             <li><a href="#" class="inactive">信息管理</a>
                 <ul style="display: none">
                     <li><a onclick="pageClick(this)"><img th:src="@{/manager/img/icon-4.png}" />供应商管理</a></li>
-                    <li><a onclick="pageClick(this)"><img th:src="@{/manager/img/icon-4.png}" />客户管理</a></li>
                     <li><a onclick="pageClick(this)"><img th:src="@{/manager/img/icon-4.png}" />个人管理</a></li>
                     <li><a onclick="pageClick(this)"><img th:src="@{/manager/img/icon-4.png}" />店铺管理</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="yiji" th:if="${session.user.storeId==0}">
+            <li><a href="#" class="inactive">信息管理</a>
+                <ul style="display: none">
+                    <li><a onclick="pageClick(this)"><img th:src="@{/manager/img/icon-4.png}" />客户管理</a></li>
+                    <li><a onclick="pageClick(this)"><img th:src="@{/manager/img/icon-4.png}" />个人管理</a></li>
+                    <li><a onclick="pageClick(this)"><img th:src="@{/manager/img/icon-4.png}" />店铺列表</a></li>
                 </ul>
             </li>
         </ul>
     </div>
 </div>
 <div class="top">
-    <div class="leftTiyle" id="flTitle">品牌管理</div>
+    <div class="leftTiyle" id="flTitle"  th:if="${session.user.storeId!=0}">品牌管理</div>
+    <div class="leftTiyle" id="flTitle"  th:if="${session.user.storeId==0}">客户管理</div>
     <div class="thisUser" th:if="${session.user.storeId == 0}">
         <span>管理员登录，当前用户：[[${session.user.username}]]</span>
         <input style="line-height: normal;margin-top: 37px;" type="button" width="100px" height="50px" onclick="exit()" value="退出登录"/>

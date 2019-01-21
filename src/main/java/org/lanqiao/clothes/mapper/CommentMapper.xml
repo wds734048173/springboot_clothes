@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.clothes.mapper.CommentMapper">
+    <select id="selectCommentList" resultType="org.lanqiao.clothes.pojo.Comment" parameterType="org.lanqiao.clothes.pojo.Condition">
+        select * from tb_goods_comment
+        <where>
+            <if test="storeId != null">
+                and storeId=#{storeId}
+            </if>
+            <if test="grade != -1">
+                and grade = #{grade}
+            </if>
+            <if test="name != null &amp;&amp; name != ''">
+                and goodsId in (select id from tb_gooods where name like concat ('%', #{name}, '%'))
+            </if>
+        </where>
+        <if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="selectCommentCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
+        select count(1) from tb_goods_comment
+        <where>
+            <if test="storeId != null">
+                and storeId=#{storeId}
+            </if>
+            <if test="grade != -1">
+                and grade = #{grade}
+            </if>
+            <if test="name != null &amp;&amp; name != ''">
+                and goodsId in (select id from tb_gooods where name like concat ('%', #{name}, '%'))
+            </if>
+        </where>
+    </select>
+</mapper>

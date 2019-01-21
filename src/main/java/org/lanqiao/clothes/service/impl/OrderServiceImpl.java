@@ -82,35 +82,42 @@ public class OrderServiceImpl implements IOrderService {
         List<OrderInfo> orderInfoList = orderMapper.selectOrderInfoList(orderId);
         //获取商品id
         List<Integer> goodsIds = new ArrayList<>();
+        Map<Integer,String> goodsMap = new HashMap<>();
         //获取skuid
         List<Integer> skuIds = new ArrayList<>();
+        Map<Integer,GoodsSKU> skuMap = new HashMap<>();
+        Map<Integer,String> colorMap = new HashMap<>();
+        Map<Integer,String> sizeMap = new HashMap<>();
         for(OrderInfo orderInfo : orderInfoList){
             goodsIds.add(orderInfo.getGoodsId());
             skuIds.add(orderInfo.getSkuId());
         }
         //获取商品信息
-        List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
-        Map<Integer,String> goodsMap = new HashMap<>();
-        for(Goods goods : goodsList){
-            goodsMap.put(goods.getId(),goods.getName());
+        if(goodsIds.size()>0){
+            List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
+
+            for(Goods goods : goodsList){
+                goodsMap.put(goods.getId(),goods.getName());
+            }
         }
-        //获取颜色并做成map
-        List<Color> colorList = colorMapper.selectColorSelectedList(storeId);
-        Map<Integer,String> colorMap = new HashMap<>();
-        for(Color color : colorList){
-            colorMap.put(color.getId(),color.getName());
+
+        if(skuIds.size()>0){
+            List<GoodsSKU> goodsSKUList = goodsMapper.selectSKUByIds(skuIds);
+            for(GoodsSKU goodsSKU : goodsSKUList){
+                skuMap.put(goodsSKU.getId(),goodsSKU);
+            }
+            //获取颜色并做成map
+            List<Color> colorList = colorMapper.selectColorSelectedList(storeId);
+            for(Color color : colorList){
+                colorMap.put(color.getId(),color.getName());
+            }
+            //获取尺码，并做成map
+            List<Size> sizeList = sizeMapper.selectSizeSelectedList(storeId);
+            for(Size size : sizeList){
+                sizeMap.put(size.getId(),size.getName());
+            }
         }
-        //获取尺码，并做成map
-        List<Size> sizeList = sizeMapper.selectSizeSelectedList(storeId);
-        Map<Integer,String> sizeMap = new HashMap<>();
-        for(Size size : sizeList){
-            sizeMap.put(size.getId(),size.getName());
-        }
-        List<GoodsSKU> goodsSKUList = goodsMapper.selectSKUByIds(skuIds);
-        Map<Integer,GoodsSKU> skuMap = new HashMap<>();
-        for(GoodsSKU goodsSKU : goodsSKUList){
-            skuMap.put(goodsSKU.getId(),goodsSKU);
-        }
+
         //配置查询到的数据
         for(OrderInfo orderInfo : orderInfoList){
             int goodsId = orderInfo.getGoodsId();

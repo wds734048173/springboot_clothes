@@ -17,7 +17,7 @@ function pageClick(k) {
     } else if (text == "库存列表"){
         url = "/manager/stockList";
     } else if (text == "评价管理") {
-        url = "/manager/supplierList";
+        url = "/manager/commentList";
     } else if (text == "供应商管理") {
         url = "/manager/supplierList";
     } else if (text == "客户管理") {

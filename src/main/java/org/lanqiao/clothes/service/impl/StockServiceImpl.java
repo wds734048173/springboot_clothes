@@ -40,15 +40,17 @@ public class StockServiceImpl implements IStockService {
             goodsIds.add(goodsId);
         }
         //通过ids获取商品详情
-        List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
-        Map<Integer,String> goodsMap = new HashMap<>();
-        for(Goods goods : goodsList){
-            goodsMap.put(goods.getId(),goods.getName());
-        }
-        for(Stock stock : stockList){
-            int goodsId = stock.getGoodsId();
-            if(goodsMap.containsKey(goodsId)){
-                stock.setGoodsName(goodsMap.get(goodsId));
+        if(goodsIds.size()>0){
+            List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
+            Map<Integer,String> goodsMap = new HashMap<>();
+            for(Goods goods : goodsList){
+                goodsMap.put(goods.getId(),goods.getName());
+            }
+            for(Stock stock : stockList){
+                int goodsId = stock.getGoodsId();
+                if(goodsMap.containsKey(goodsId)){
+                    stock.setGoodsName(goodsMap.get(goodsId));
+                }
             }
         }
         return stockList;
@@ -72,38 +74,32 @@ public class StockServiceImpl implements IStockService {
             int skuId = stock.getSkuId();
             ids.add(skuId);
         }
-        List<GoodsSKU> goodsSKUList = goodsMapper.selectSKUByIds(ids);
-        Map<Integer,GoodsSKU> skuMap = new HashMap<>();
-        for(GoodsSKU goodsSKU : goodsSKUList){
-            skuMap.put(goodsSKU.getId(),goodsSKU);
-        }
-        for(Stock stock : stockList){
-            int skuId = stock.getSkuId();
-            if(skuMap.containsKey(skuId)){
-                stock.setColorId(skuMap.get(skuId).getColorId());
-                stock.setSizeId(skuMap.get(skuId).getSizeId());
+        if(ids.size()>0){
+            List<GoodsSKU> goodsSKUList = goodsMapper.selectSKUByIds(ids);
+            Map<Integer,GoodsSKU> skuMap = new HashMap<>();
+            for(GoodsSKU goodsSKU : goodsSKUList){
+                skuMap.put(goodsSKU.getId(),goodsSKU);
             }
-        }
-        //获取颜色并做成map
-        List<Color> colorList = colorMapper.selectColorSelectedList(storeId);
-        Map<Integer,String> colorMap = new HashMap<>();
-        for(Color color : colorList){
-            colorMap.put(color.getId(),color.getName());
-        }
-        //获取尺码，并做成map
-        List<Size> sizeList = sizeMapper.selectSizeSelectedList(storeId);
-        Map<Integer,String> sizeMap = new HashMap<>();
-        for(Size size : sizeList){
-            sizeMap.put(size.getId(),size.getName());
-        }
-        for(Stock stock : stockList){
-            int colorId = stock.getColorId();
-            int sizeId = stock.getSizeId();
-            if(colorMap.containsKey(colorId)){
-                stock.setColorName(colorMap.get(colorId));
+            //获取颜色并做成map
+            List<Color> colorList = colorMapper.selectColorSelectedList(storeId);
+            Map<Integer,String> colorMap = new HashMap<>();
+            for(Color color : colorList){
+                colorMap.put(color.getId(),color.getName());
             }
-            if(sizeMap.containsKey(sizeId)){
-                stock.setSizeName(sizeMap.get(sizeId));
+            //获取尺码，并做成map
+            List<Size> sizeList = sizeMapper.selectSizeSelectedList(storeId);
+            Map<Integer,String> sizeMap = new HashMap<>();
+            for(Size size : sizeList){
+                sizeMap.put(size.getId(),size.getName());
+            }
+            for(Stock stock : stockList){
+                int skuId = stock.getSkuId();
+                if(skuMap.containsKey(skuId)){
+                    stock.setColorId(skuMap.get(skuId).getColorId());
+                    stock.setColorName(colorMap.get(skuMap.get(skuId).getColorId()));
+                    stock.setSizeId(skuMap.get(skuId).getSizeId());
+                    stock.setSizeName(sizeMap.get(skuMap.get(skuId).getSizeId()));
+                }
             }
         }
         return stockList;

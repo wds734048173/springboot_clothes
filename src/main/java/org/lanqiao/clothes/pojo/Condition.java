@@ -16,6 +16,7 @@ import lombok.*;
 public class Condition {
 
     private String state;
+    private String grade;
     private String name;
     private int storeId;
     private int brandId;

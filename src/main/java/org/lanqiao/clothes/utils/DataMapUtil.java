@@ -14,6 +14,7 @@ public class DataMapUtil {
     private static Map yearMap;
     private static Map preOrderStateMap;
     private static Map orderStateMap;
+    private static Map gradeMap;
 
     //前端销售订单状态
     public static Map getPreOrderStateMap(){
@@ -65,6 +66,15 @@ public class DataMapUtil {
         yearMap.put(2019,"2019年");
         yearMap.put(2020,"2020年");
         return yearMap;
+    }
+
+    //评论等级
+    public static Map getGradeMap(){
+        gradeMap = new HashMap<Integer,String>();
+        gradeMap.put(0,"好评");
+        gradeMap.put(1,"中评");
+        gradeMap.put(2,"差评");
+        return gradeMap;
     }
 
 }
