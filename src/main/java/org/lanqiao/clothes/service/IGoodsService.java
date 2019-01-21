@@ -13,4 +13,5 @@ public interface IGoodsService {
     public int getGoodsCount(Condition condition);
     public Goods getGoodsById(int id);
     /*public List<Goods> getGoodsByIds(List<Integer> ids);*/
+    public void modifyGoodsIsshelf(int storeId,int goodsId,int isshelf);
 }

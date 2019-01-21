@@ -11,4 +11,5 @@ public interface IOrderService {
     public int getOrderCount(Condition condition);
     public Order getOrderById(int orderId);
     public List<OrderInfo> getOrderInfoListById(int orderId,int storeId);
+    public void modifyOrderStateById(int storeId,int orderId,int state);
 }

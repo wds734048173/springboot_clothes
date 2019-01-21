@@ -48,4 +48,8 @@
     <select id="selectSupplierOrderinfoList" resultType="org.lanqiao.clothes.pojo.SupplierOrderInfo">
         select * from tb_supplier_orderinfo where oid = #{supplier_orderId}
     </select>
+
+    <update id="updateSupplierOrderStateById">
+        update tb_supplier_order set state=#{param3} where storeId=#{param1} and id=#{param2}
+    </update>
 </mapper>

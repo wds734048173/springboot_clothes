@@ -7,6 +7,9 @@
     <select id="selectOrderAll" resultType="org.lanqiao.clothes.pojo.Order">
         select * from tb_order
         <where>
+            <if test="no != null &amp;&amp; no != ''">
+                and no like concat ('%', #{no}, '%')
+            </if>
             <choose>
                 <when test="state==0">
                     and state=#{state}
@@ -41,6 +44,9 @@
     <select id="selectOrderCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
         select count(1) from tb_order
         <where>
+            <if test="no != null &amp;&amp; no != ''">
+                and no like concat ('%', #{no}, '%')
+            </if>
             <choose>
                 <when test="state==0">
                     and state=#{state}
@@ -61,7 +67,7 @@
                     and state=#{state}
                 </when>
                 <otherwise>
-                    and (state!=6)
+                    and state!=6
                 </otherwise>
             </choose>
             <if test="storeId != null">
@@ -77,4 +83,7 @@
         select  * from  tb_orderinfo where oId = #{orderId}
     </select>
 
+    <update id="updateOrderStateById">
+        update tb_order set state=#{param3} where storeId=#{param1} and id=#{param2}
+    </update>
 </mapper>

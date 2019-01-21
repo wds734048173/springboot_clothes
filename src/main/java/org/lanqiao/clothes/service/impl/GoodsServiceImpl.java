@@ -44,6 +44,11 @@ public class GoodsServiceImpl implements IGoodsService {
         return goodsMapper.selectGoodsById(id);
     }
 
+    @Override
+    public void modifyGoodsIsshelf(int storeId, int goodsId, int isshelf) {
+        goodsMapper.updateGoodsIsshelf(storeId, goodsId, isshelf);
+    }
+
     /*@Override
     public List<Goods> getGoodsByIds(List<Integer> ids) {
         return goodsMapper.selectGoodsByIds(ids);

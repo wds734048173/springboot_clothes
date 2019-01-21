@@ -115,4 +115,17 @@ public class SupplierOrderController {
         model.addAttribute("supplierOrderInfoList", supplierOrderInfoList);
         return "/manager/supplierOrderInfo";
     }
+
+    @RequestMapping("/manager/updateSupplierOrderState")
+    public String updateSupplierOrderState(HttpServletRequest req, HttpServletResponse resp, Model model){
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+        int state = Integer.valueOf(req.getParameter("state"));
+        int supplierOrderId = Integer.valueOf(req.getParameter("supplierOrderId"));
+        supplierOrderService.modifySupplierOrderStateById(storeId,supplierOrderId,state);
+        return supplierOrderList(req,resp,model);
+    }
+
 }

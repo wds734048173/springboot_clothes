@@ -6,10 +6,10 @@
 <script type="text/javascript" href="../resources/static/manager/css/info.css"></script>
 <script type="text/javascript" >
     $(function () {
+        //查看详细信息
         $(".getOrderInfo").click(function () {
             var id = $(this).parent().parent().children("td:eq(0)").text();
             var url = "/manager/supplierOrderInfo?supplierOrderId=" + id;
-            alert(url);
             $(".content").load(url);
         })
         //新增
@@ -27,6 +27,19 @@
             var supplier_orderTotalMoney = $("#supplier_orderTotalMoney").val();
             var supplier_orderPayMoney = $("#supplier_orderPayMoney").val();
             var supplier_orderState = $("#supplier_orderState option:selected").val();
+        })
+
+        //作废
+        $(".orderCancel").click(function () {
+            var id = $(this).parent().parent().children("td:eq(0)").text();
+            var url = "/manager/updateSupplierOrderState?state=2&supplierOrderId=" + id;
+            $(".content").load(url);
+        })
+        //审核
+        $(".orderConfirm").click(function () {
+            var id = $(this).parent().parent().children("td:eq(0)").text();
+            var url = "/manager/updateSupplierOrderState?state=1&supplierOrderId=" + id;
+            $(".content").load(url);
         })
     });
     //查询的手动提交方式
@@ -53,10 +66,10 @@
             <label for="searchSupplierOrderNo" >订单编号:</label>
             <input type="text" class="myinput"  id="searchSupplierOrderNo" name="searchSupplierOrderNo" th:value="${condition.no}">
         </div>
-        <div class="col-xs-3">
+       <!-- <div class="col-xs-3">
             <label for="searchSupllierId" >供应商ID:</label>
             <input type="text" class="myinput"  id="searchSupllierId" name="searchSupllierId" th:value="${condition.supplierId}">
-        </div>
+        </div>-->
         <div class="col-xs-2">
             <label for="searchSupplierOrderState">订单状态</label>
             <select class="myinput" name="searchSupplierOrderState" id="searchSupplierOrderState">
@@ -71,9 +84,9 @@
         <input type="button" class="btn btn-primary" id="search" value="查询" onclick="search(null)"/>
     </div>
 </div>
-<div class="modal-body">
+<!--<div class="modal-body">
     <a class="btn btn-default" href="#" role="button" id="addSupplier_order" name="addSupplier_order">新增订单信息</a>
-</div>
+</div>-->
 <div class="modal-body">
     <table class="table table-hover table-bordered">
         <thead>
@@ -99,6 +112,8 @@
             <td th:text="${supplierOrder.ctime}"></td>
             <td>
                 <a class="btn btn-default getOrderInfo" href="#" role="button"  name="getOrderInfo">查看详情</a>
+                <a class="btn btn-default orderConfirm" href="#" role="button"  name="orderConfirm" th:if="${supplierOrder.state==0}">审核</a>
+                <a class="btn btn-default orderCancel" href="#" role="button"  name="orderCancel" th:if="${supplierOrder.state==0}">作废</a>
             </td>
         </tr>
         </tbody>

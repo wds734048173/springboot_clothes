@@ -12,4 +12,5 @@ public interface ISupplierOrderService {
     public void addSupplierOrder(SupplierOrder supplierOrder);
     public SupplierOrder getSupplierOrderById(int supplierOrderId);
     public List<SupplierOrderInfo> getSupplierOrderInfoListById(int supplierOrderId,int storeId);
+    public void modifySupplierOrderStateById(int storeId,int supplierOrderId,int state);
 }

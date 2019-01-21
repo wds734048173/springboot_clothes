@@ -19,4 +19,6 @@ public interface SupplierOrderMapper {
     public SupplierOrder selectSupplierOrderById(int supplier_orderId);
 
     public List<SupplierOrderInfo> selectSupplierOrderinfoList(int Supplier_orderId);
+    //修改订单状态
+    public void updateSupplierOrderStateById(int storeId,int supplierOrderId,int state);
 }

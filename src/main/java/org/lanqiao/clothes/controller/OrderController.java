@@ -38,13 +38,19 @@ public class OrderController {
         if(req.getParameter("searchOrderState") != null){
             searchOrderState = req.getParameter("searchOrderState");
         }
+        String searchOrderNo = "";
+        if(req.getParameter("searchOrderNo") != null){
+            searchOrderNo = req.getParameter("searchOrderNo");
+        }
         //获取店铺id
         HttpSession session = req.getSession();
         User user  = (User)session.getAttribute("user");
         int storeId = user.getStoreId();
+
         Condition condition = new Condition();
         condition.setState(searchOrderState);
         condition.setStoreId(storeId);
+        condition.setNo(searchOrderNo);
         int totalRecords = orderService.getOrderCount(condition);
         PageModel pageModel = new PageModel(pageNum,totalRecords,pageSize);
         //分页条件封装
@@ -70,5 +76,17 @@ public class OrderController {
         model.addAttribute("order",order);
         model.addAttribute("orderInfoList",orderInfoList);
         return "/manager/orderInfo";
+    }
+
+    @RequestMapping("/manager/updateOrderState")
+    public String updateOrderState(HttpServletRequest req, HttpServletResponse resp, Model model){
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+        int state = Integer.valueOf(req.getParameter("state"));
+        int orderId = Integer.valueOf(req.getParameter("orderId"));
+        orderService.modifyOrderStateById(storeId,orderId,state);
+        return orderList(req, resp, model);
     }
 }

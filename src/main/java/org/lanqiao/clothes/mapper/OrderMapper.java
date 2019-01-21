@@ -18,4 +18,5 @@ public interface OrderMapper {
     public Order selectOrderById(int orderId);
     //获取订单详情子表信息
     public List<OrderInfo> selectOrderInfoList(int orderId);
+    public void updateOrderStateById(int storeId,int supplierOrderId,int state);
 }

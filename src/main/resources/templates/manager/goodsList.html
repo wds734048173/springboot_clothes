@@ -79,15 +79,30 @@
                 })
             })
             //上下架状态修改
-            $(".deleteColor").click(function () {
-                var isDelete = confirm ("确定删除吗？");
-                if(isDelete){
+            $(".upGoodsIsshelf").click(function () {
+                var isUp = confirm ("确定上架吗？");
+                if(isUp){
                     var id = $(this).parent().parent().children("td:eq(0)").text();
                     //查询条件
                     var searchColorState = $("#searchColorState").val();
                     var searchColorName = $("#searchColorName").val();
                     var currentPage = $("#currentPage").val();
-                    var url = "/manager/deleteColor?colorId=" + id + "&method=delete"
+                    var url = "/manager/updateGoodsIsshelf?goodsId=" + id + "&isshelf=0"
+                        + "&currentPage="+currentPage+"&searchColorState="+searchColorState+"&searchColorName="+searchColorName;
+                    $(".content").load(url);
+                }else{
+                    return;
+                }
+            })
+            $(".downGoodsIsshelf").click(function () {
+                var isDown = confirm ("确定下架吗？");
+                if(isDown){
+                    var id = $(this).parent().parent().children("td:eq(0)").text();
+                    //查询条件
+                    var searchColorState = $("#searchColorState").val();
+                    var searchColorName = $("#searchColorName").val();
+                    var currentPage = $("#currentPage").val();
+                    var url = "/manager/updateGoodsIsshelf?goodsId=" + id + "&isshelf=1"
                         + "&currentPage="+currentPage+"&searchColorState="+searchColorState+"&searchColorName="+searchColorName;
                     $(".content").load(url);
                 }else{
@@ -196,8 +211,9 @@
             <td th:text="${goods.storeId}"></td>
             <td th:text="${goods.ctime!=null}?${#dates.format(goods.ctime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
-                <a class="btn btn-default updateGoods" href="#" role="button"  name="updateGoods">修改</a>
-                <a class="btn btn-default deleteGoods" href="#" role="button"  name="deleteGoods">删除</a>
+                <a class="btn btn-default updateGoods" href="#" role="button"  name="updateGoods" th:if="${goods.isshelf==1}">修改</a>
+                <a class="btn btn-default upGoodsIsshelf" href="#" role="button"  name="upGoodsIsshelf" th:if="${goods.isshelf==1}">上架</a>
+                <a class="btn btn-default downGoodsIsshelf" href="#" role="button"  name="downGoodsIsshelf" th:if="${goods.isshelf==0}">下架</a>
             </td>
         </tr>
         </tbody>

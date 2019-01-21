@@ -86,4 +86,8 @@
             #{item}
         </foreach>
     </select>
+
+    <update id="updateGoodsIsshelf">
+        update tb_goods set isshelf=#{param3} where storeId=#{param1} and id=#{param2}
+    </update>
 </mapper>

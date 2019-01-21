@@ -140,4 +140,9 @@ public class SupplierOrderServiceImpl implements ISupplierOrderService {
         }
         return supplierOrderInfoList;
     }
+
+    @Override
+    public void modifySupplierOrderStateById(int storeId, int supplierOrderId, int state) {
+        supplierOrderMapper.updateSupplierOrderStateById(storeId,supplierOrderId,state);
+    }
 }

@@ -183,4 +183,17 @@ public class GoodsController {
         return goods;
     }
 
+
+    @RequestMapping("/manager/updateGoodsIsshelf")
+    public String updateGoodsIsshelf(HttpServletRequest req, HttpServletResponse resp, Model model){
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+        int goodsId = Integer.valueOf(req.getParameter("goodsId"));
+        int isshelf = Integer.valueOf(req.getParameter("isshelf"));
+        goodsService.modifyGoodsIsshelf(storeId,goodsId,isshelf);
+        return goodsList(req, resp, model);
+    }
+
 }

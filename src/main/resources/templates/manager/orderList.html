@@ -5,21 +5,35 @@
     <title>销售订单列表</title>
     <script type="text/javascript">
         $(function () {
+            //获取订单详情
             $(".getorderinfo").click(function () {
                 var id = $(this).parent().parent().children("td:eq(0)").text();
                 var url = "/manager/orderInfo?orderId=" + id;
+                $(".content").load(url);
+            })
+            //发货
+            $(".orderSend").click(function () {
+                var id = $(this).parent().parent().children("td:eq(0)").text();
+                var url = "/manager/updateOrderState?state=2&orderId=" + id;
+                $(".content").load(url);
+            })
+            //取消订单
+            $(".orderCancel").click(function () {
+                var id = $(this).parent().parent().children("td:eq(0)").text();
+                var url = "/manager/updateOrderState?state=5&orderId=" + id;
                 $(".content").load(url);
             })
         })
         //查询的手动提交方式
         function search(currentPage) {
             var searchOrderState = $("#searchOrderState option:selected").val();
+            var searchOrderNo = $("#searchOrderNo").val();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();
             }else{
                 var currentPage = currentPage;
             }
-            var url = "/manager/orderList?currentPage="+currentPage+"&searchOrderState="+searchOrderState;
+            var url = "/manager/orderList?currentPage="+currentPage+"&searchOrderState="+searchOrderState+"&searchOrderNo="+searchOrderNo;
             $(".content").load(url);
         }
     </script>
@@ -28,6 +42,10 @@
 <input type="hidden" name="currentPage" id="currentPage" th:value="${currentPage}">
 <div class="modal-body">
     <div class="form-group row">
+        <div class="col-xs-3">
+            <label for="searchOrderNo" >订单编号:</label>
+            <input type="text" class="myinput"  id="searchOrderNo" name="searchOrderNo" th:value="${condition.no}">
+        </div>
         <div class="col-xs-2">
             <label for="searchOrderState">销售状态</label>
             <select class="myinput" name="searchOrderState" id="searchOrderState">
@@ -50,6 +68,7 @@
         <thead>
         <tr>
             <th hidden>ID</th>
+            <th>订单编号</th>
             <th>客户名称</th>
             <th>总价</th>
             <th>支付金额</th>
@@ -61,6 +80,7 @@
         <tbody>
         <tr th:each="order: ${orderList}">
             <td th:text="${order.id}" hidden></td>
+            <td th:text="${order.no}"></td>
             <td th:text="${order.customerName}"></td>
             <td th:text="${order.totalMoney}"></td>
             <td th:text="${order.payMoney}"></td>
@@ -68,6 +88,8 @@
             <td th:text="${order.ctime!=null}?${#dates.format(order.ctime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
                 <a class="btn btn-default getorderinfo" href="#" role="button"  name="getorderinfo">查看详情</a>
+                <a class="btn btn-default orderSend" href="#" role="button"  name="orderSend" th:if="${order.state==1}">发货</a>
+                <a class="btn btn-default orderCancel" href="#" role="button"  name="orderCancel" th:if="${order.state==0}">取消订单</a>
             </td>
         </tr>
         </tbody>

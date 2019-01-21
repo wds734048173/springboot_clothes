@@ -131,4 +131,9 @@ public class OrderServiceImpl implements IOrderService {
         }
         return orderInfoList;
     }
+
+    @Override
+    public void modifyOrderStateById(int storeId, int orderId, int state) {
+        orderMapper.updateOrderStateById(storeId,orderId,state);
+    }
 }

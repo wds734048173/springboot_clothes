@@ -27,4 +27,7 @@ public interface GoodsMapper {
 
     //通过skuIds查询sku详细信息
     public List<GoodsSKU> selectSKUByIds(List<Integer> ids);
+
+    //修改商品上下架状态
+    public void updateGoodsIsshelf(int storeId,int goodsId,int isshelf);
 }
