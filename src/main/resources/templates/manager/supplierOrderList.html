@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>采购订单主表</title>
+<script type="text/javascript" href="../resources/static/manager/css/info.css"></script>
+<script type="text/javascript" >
+    $(function () {
+        $(".getOrderInfo").click(function () {
+            var id = $(this).parent().parent().children("td:eq(0)").text();
+            var url = "/manager/supplierOrderInfo?supplierOrderId=" + id;
+            alert(url);
+            $(".content").load(url);
+        })
+        //新增
+        $("#addSupplier_order").click(function () {
+            $('#addSupplier_orderModel').modal({
+                keyboard: false,
+                show:true
+            })
+        })
+        // //保存
+        $("#save").click(function () {
+            var supplier_orderNo = $("#supplier_orderNo").val();
+            var supplier_orderSupplierId = $("#supplier_orderSupplierId").val();
+            var supplier_orderStoreId = $("#supplier_orderStoreId").val();
+            var supplier_orderTotalMoney = $("#supplier_orderTotalMoney").val();
+            var supplier_orderPayMoney = $("#supplier_orderPayMoney").val();
+            var supplier_orderState = $("#supplier_orderState option:selected").val();
+        })
+    });
+    //查询的手动提交方式
+    function search(currentPage) {
+        var searchSupplierOrderState = $("#searchSupplierOrderState option:selected").val();
+        var searchSupplierOrderNo = $("#searchSupplierOrderNo").val();
+        /*var searchSupllierId = $("#searchSupllierId option:selected");*/
+        var searchSupllierId = -1;
+        if(currentPage == null){
+            var currentPage = $("#currentPage").val();
+        }else{
+            var currentPage = currentPage;
+        }
+        var url = "/manager/supplierOrderList?currentPage="+currentPage+"&searchSupplierOrderState="+searchSupplierOrderState+"&searchSupplierOrderNo="+searchSupplierOrderNo+"&searchSupllierId="+searchSupllierId;
+        $(".content").load(url);
+    }
+</script>
+</head>
+<body>
+<input type="hidden" name="currentPage" id="currentPage" th:value="${currentPage}">
+<div class="modal-body">
+    <div class="form-group row">
+        <div class="col-xs-3">
+            <label for="searchSupplierOrderNo" >订单编号:</label>
+            <input type="text" class="myinput"  id="searchSupplierOrderNo" name="searchSupplierOrderNo" th:value="${condition.no}">
+        </div>
+        <div class="col-xs-3">
+            <label for="searchSupllierId" >供应商ID:</label>
+            <input type="text" class="myinput"  id="searchSupllierId" name="searchSupllierId" th:value="${condition.supplierId}">
+        </div>
+        <div class="col-xs-2">
+            <label for="searchSupplierOrderState">订单状态</label>
+            <select class="myinput" name="searchSupplierOrderState" id="searchSupplierOrderState">
+                <option value="-1" th:selected="${condition.state=='-1'}">全部</option>
+                <option value="0" th:selected="${condition.state=='0'}">未审核</option>
+                <option value="1" th:selected="${condition.state=='1'}">已审核</option>
+                <option value="2" th:selected="${condition.state=='2'}">已作废</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="button" class="btn btn-primary" id="search" value="查询" onclick="search(null)"/>
+    </div>
+</div>
+<div class="modal-body">
+    <a class="btn btn-default" href="#" role="button" id="addSupplier_order" name="addSupplier_order">新增订单信息</a>
+</div>
+<div class="modal-body">
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th hidden>ID</th>
+            <th>采购单编号</th>
+            <th>供应商</th>
+            <th>总价</th>
+            <th>实际支付金额</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="supplierOrder: ${supplierOrderList}">
+            <td hidden th:text="${supplierOrder.id}"></td>
+            <td th:text="${supplierOrder.no}"></td>
+            <td th:text="${supplierOrder.supplierName}"></td>
+            <td th:text="${supplierOrder.totalMoney}"></td>
+            <td th:text="${supplierOrder.payMoney}"></td>
+            <td th:text="${supplierOrder.stateStr}"></td>
+            <td th:text="${supplierOrder.ctime}"></td>
+            <td>
+                <a class="btn btn-default getOrderInfo" href="#" role="button"  name="getOrderInfo">查看详情</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!--新增模态框插件-->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="addSupplier_orderModel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">新增采购订单信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="" id="addForm">
+                        <div class="form-group hidden">
+                            <label for="supplier_orderNo" class="control-label">订单编号:</label>
+                            <input type="text" class="form-control" id="supplier_orderNo" name="supplier_orderNo" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier_orderSupplierId" class="control-label">供应商ID:</label>
+                            <input type="text" class="form-control" id="supplier_orderSupplierId" name="supplier_orderSupplierId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier_orderTotalMoney" class="control-label">总金额:</label>
+                            <input type="text" class="form-control" id="supplier_orderTotalMoney" name="supplier_orderTotalMoney" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier_orderPayMoney" class="control-label">实付金额:</label>
+                            <input type="text" class="form-control" id="supplier_orderPayMoney" name="supplier_orderPayMoney" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier_orderState" class="control-label">订单状态:</label>
+                            <select id="supplier_orderState" name="supplier_orderState" class="form-control">
+                                <option value="0">启用</option>
+                                <option value="1">停用</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="save">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<center th:if="${supplierOrderList.size() != 0}">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li  th:onclick="search([[${pm.startPage}]])"><a href="javascript:void(0);"><span>首页</span></a></li>
+            <li  th:onclick="search([[${pm.prePageNum}]])">
+                <a href="javascript:void(0);"  aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(1,1)}" onclick="search([[${i}]])">
+            <li th:each="i : ${#numbers.sequence(1,pm.totalPageNum)}" th:onclick="search([[${i}]])">
+                <a href="javascript:void(0);">
+                    <span th:if="${i==pm.currentPageNum}" style = 'color:red;'>[[${i}]]</span>
+                    <span th:if="${i!=pm.currentPageNum}">[[${i}]]</span>
+                </a>
+            </li>
+            <li th:onclick="search([[${pm.nextPageNum}]])">
+                <a href="#" class="page"  aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <li th:onclick="search([[${pm.endPage}]])"><a href="javascript:void(0);"><span>尾页</span></a></li>
+        </ul>
+    </nav>
+</center>
+</body>
+</html>

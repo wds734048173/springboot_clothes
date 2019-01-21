@@ -21,4 +21,7 @@ public interface SupplierMapper {
     public int selectSupplierCount(Condition condition);
     //根据id查询
     public Supplier selectSupplierById(int id);
+
+    //根据ids查询
+    public List<Supplier> selectSupplierByIds(List<Integer> ids);
 }

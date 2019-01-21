@@ -25,6 +25,8 @@ public class Condition {
     private String goodsNo;
     private String season;
     private int year;
+    private String no;
+    private int supplierId;
 
     private int currentPage;
     private  int pageSize;

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.clothes.mapper.OrderMapper">
+    <!--查询所有的-->
+    <select id="selectOrderAll" resultType="org.lanqiao.clothes.pojo.Order">
+        select * from tb_order
+        <where>
+            <choose>
+                <when test="state==0">
+                    and state=#{state}
+                </when>
+                <when test="state==1">
+                    and state=#{state}
+                </when>
+                <when test="state==2">
+                    and state=#{state}
+                </when>
+                <when test="state==3">
+                    and state=#{state}
+                </when>
+                <when test="state==4">
+                    and state=#{state}
+                </when>
+                <when test="state==5">
+                    and state=#{state}
+                </when>
+                <otherwise>
+                    and (state!=6)
+                </otherwise>
+            </choose>
+            <if test="storeId != null">
+                and storeId=#{storeId}
+            </if>
+        </where>
+        <if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="selectOrderCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
+        select count(1) from tb_order
+        <where>
+            <choose>
+                <when test="state==0">
+                    and state=#{state}
+                </when>
+                <when test="state==1">
+                    and state=#{state}
+                </when>
+                <when test="state==2">
+                    and state=#{state}
+                </when>
+                <when test="state==3">
+                    and state=#{state}
+                </when>
+                <when test="state==4">
+                    and state=#{state}
+                </when>
+                <when test="state==5">
+                    and state=#{state}
+                </when>
+                <otherwise>
+                    and (state!=6)
+                </otherwise>
+            </choose>
+            <if test="storeId != null">
+                and storeId=#{storeId}
+            </if>
+        </where>
+    </select>
+    <select id="selectOrderById" resultType="org.lanqiao.clothes.pojo.Order">
+        select  * from tb_order where id = #{orderId}
+    </select>
+
+    <select id="selectOrderInfoList" resultType="org.lanqiao.clothes.pojo.OrderInfo">
+        select  * from  tb_orderinfo where oId = #{orderId}
+    </select>
+
+</mapper>

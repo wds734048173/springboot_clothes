@@ -49,4 +49,16 @@
     <update id="updateCustomerState">
         update tb_customer set state=${param2} where id=${param1}
     </update>
+
+
+    <select id="selectCustomerByIds" resultType="org.lanqiao.clothes.pojo.Customer" parameterType="list">
+        select * from tb_customer where id in
+        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectCustomerById" resultType="org.lanqiao.clothes.pojo.Customer" parameterType="int">
+        select * from tb_customer where id = #{id}
+    </select>
 </mapper>

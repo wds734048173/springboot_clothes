@@ -68,4 +68,11 @@
     <select id="selectSupplierById" parameterType="int" resultType="org.lanqiao.clothes.pojo.Supplier">
         select * from tb_supplier where id=#{id};
     </select>
+
+    <select id="selectSupplierByIds" resultType="org.lanqiao.clothes.pojo.Supplier" parameterType="list">
+        select * from tb_supplier where id in
+        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

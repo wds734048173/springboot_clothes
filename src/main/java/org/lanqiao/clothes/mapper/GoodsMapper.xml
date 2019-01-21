@@ -15,6 +15,21 @@
             <if test="name != null &amp;&amp; name != ''">
                 and name like concat ('%', #{name}, '%')
             </if>
+            <if test="goodsNo != null &amp;&amp; goodsNo != ''">
+                and no like concat ('%', #{goodsNo}, '%')
+            </if>
+            <if test="storeId != null &amp;&amp; storeId != ''">
+                and storeId = #{storeId}
+            </if>
+            <if test="brandId != -1">
+                and brandId = #{brandId}
+            </if>
+            <if test="year != -1">
+                and year = #{year}
+            </if>
+            <if test="state != -1">
+                and isshelf = #{state}
+            </if>
         </where>
         <if test="currentPage != null">
             limit #{currentPage}, #{pageSize}
@@ -25,6 +40,21 @@
         <where>
             <if test="name != null &amp;&amp; name != ''">
                 and name like concat ('%', #{name}, '%')
+            </if>
+            <if test="goodsNo != null &amp;&amp; goodsNo != ''">
+                and no like concat ('%', #{goodsNo}, '%')
+            </if>
+            <if test="storeId != null &amp;&amp; storeId != ''">
+                and storeId = #{storeId}
+            </if>
+            <if test="brandId != -1">
+                and brandId = #{brandId}
+            </if>
+            <if test="year != -1">
+                and year = #{year}
+            </if>
+            <if test="state != -1">
+                and isshelf = #{state}
             </if>
         </where>
     </select>

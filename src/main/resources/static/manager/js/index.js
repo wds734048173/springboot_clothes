@@ -22,10 +22,10 @@ function pageClick(k) {
         url = "/manager/supplierList";
     } else if (text == "客户管理") {
         url = "/manager/customerList";
-    } else if (text == "采购单列表"){
-        url = "/manager/stockList";
-    } else if (text == "销售单列表"){
-        url = "/manager/stockList";
+    } else if (text == "采购单管理"){
+        url = "/manager/supplierOrderList";
+    } else if (text == "销售单管理"){
+        url = "/manager/orderList";
     }
     $(".content").load(url);
 }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" href="../resources/static/manager/css/info.css"></script>
+</head>
+<body>
+<div class="modal-body">
+    <div class="form-group row">
+        <div class="col-xs-3">
+            <label for="supplierOrderNo">订单编号:</label>
+            <span type="text" id="supplierOrderNo" name="supplierOrderNo" th:text="${supplierOrder.no}"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-xs-3">
+            <label for="supplierId">供应商名称:</label>
+            <span type="text"  id="supplierId" name="supplierId" th:text="${supplierOrder.supplierName}"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-xs-3">
+            <label for="totalMoney">订单总金额:</label>
+            <span type="text"  id="totalMoney" name="totalMoney" th:text="${supplierOrder.totalMoney}"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-xs-3">
+            <label for="payMoney">订单实际支付金额:</label>
+            <span type="text"  id="payMoney" name="payMoney" th:text="${supplierOrder.payMoney}"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-xs-3">
+            <label for="state">订单状态:</label>
+            <span type="text"  id="state" name="state" th:text="${supplierOrder.stateStr}"></span>
+        </div>
+    </div>
+    <div class="form-group" th:switch="${supplierOrder.state}">
+        <div th:case="'0'">
+            <label for="ctime">订单创建时间:</label>
+            <span type="text"  id="ctime" name="ctime" th:text="${#dates.format(supplierOrder.ctime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+        </div>
+        <div th:case="'1'">
+            <label for="ctime">订单创建时间:</label>
+            <span type="text" id="ctime" name="ctime" th:text="${#dates.format(supplierOrder.ctime, 'yyyy-MM-dd HH:mm:ss')}"></span>&nbsp &nbsp------&gt;&nbsp &nbsp
+            <label for="rtime">订单审核时间:</label>
+            <span type="text"  id="rtime" name="rtime" th:text="${#dates.format(supplierOrder.rtime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+        </div>
+        <div th:case="'2'">
+            <label for="ctime">订单创建时间:</label>
+            <span type="text" id="ctime" name="ctime" th:text="${#dates.format(supplierOrder.ctime, 'yyyy-MM-dd HH:mm:ss')}"></span>&nbsp &nbsp------&gt;&nbsp &nbsp
+            <label for="rtime">订单作废时间:</label>
+            <span type="text"  id="rtime" name="rtime" th:text="${#dates.format(supplierOrder.rtime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="modal-body">
+    <table class="table table-hover table-bordered">
+        <thead class="thead">
+            <tr class="tr">
+                <!--<th>ID</th>
+                <th>订单ID</th>-->
+                <th>商品名称</th>
+                <th>商品颜色</th>
+                <th>商品尺码</th>
+                <th>价格</th>
+                <th>数量</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="supplierOrderInfo :${supplierOrderInfoList}" >
+                <!--<td th:text="${supplierOrderInfo.id}"></td>
+                <td th:text="${supplierOrderInfo.oId}"></td>-->
+                <td th:text="${supplierOrderInfo.goodsName}"></td>
+                <td th:text="${supplierOrderInfo.colorName}"></td>
+                <td th:text="${supplierOrderInfo.sizeName}"></td>
+                <td th:text="${supplierOrderInfo.price}"></td>
+                <td th:text="${supplierOrderInfo.num}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

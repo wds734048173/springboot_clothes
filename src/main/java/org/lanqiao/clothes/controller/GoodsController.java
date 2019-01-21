@@ -2,6 +2,7 @@ package org.lanqiao.clothes.controller;
 
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Goods;
+import org.lanqiao.clothes.pojo.User;
 import org.lanqiao.clothes.service.IGoodsService;
 import org.lanqiao.clothes.utils.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -30,14 +32,39 @@ public class GoodsController {
         if(req.getParameter("pageSize") != null){
             pageSize = Integer.valueOf(req.getParameter("pageSize"));
         }
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
 
         //查询条件
         String searchGoodsName = "";
         if(req.getParameter("searchGoodsName") != null){
             searchGoodsName = req.getParameter("searchGoodsName");
         }
+        String searchGoodsNo = "";
+        if(req.getParameter("searchGoodsNo") != null){
+            searchGoodsNo = req.getParameter("searchGoodsNo");
+        }
+        String searchGoodsBrand = "-1";
+        if(req.getParameter("searchGoodsBrand") != null){
+            searchGoodsBrand = req.getParameter("searchGoodsBrand");
+        }
+        String searchGoodsYear = "-1";
+        if(req.getParameter("searchGoodsYear") != null){
+            searchGoodsYear = req.getParameter("searchGoodsYear");
+        }
+        String searchGoodsIsshelf = "-1";
+        if(req.getParameter("searchGoodsIsshelf") != null){
+            searchGoodsIsshelf = req.getParameter("searchGoodsIsshelf");
+        }
         Condition condition = new Condition();
         condition.setName(searchGoodsName);
+        condition.setStoreId(storeId);
+        condition.setState(searchGoodsIsshelf);
+        condition.setYear(Integer.valueOf(searchGoodsYear));
+        condition.setBrandId(Integer.valueOf(searchGoodsBrand));
+        condition.setGoodsNo(searchGoodsNo);
        int totalRecords = goodsService.getGoodsCount(condition);
         //不同操作，不同的当前页设置
         PageModel pm = new PageModel(pageNum,totalRecords,pageSize);

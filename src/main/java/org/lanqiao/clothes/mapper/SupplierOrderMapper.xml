@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.clothes.mapper.SupplierOrderMapper">
+    <select id="getSupplierOrderAll" resultType="org.lanqiao.clothes.pojo.SupplierOrder" parameterType="org.lanqiao.clothes.pojo.Condition">
+        select * from tb_supplier_order
+        <where>
+            <if test="no != null &amp;&amp; no != ''">
+                and no like concat ('%', #{no}, '%')
+            </if>
+            <if test="storeId != null &amp;&amp; storeId != ''">
+                and storeId = #{storeId}
+            </if>
+            <if test="supplierId != -1">
+                and supplierId = #{supplierId}
+            </if>
+            <if test="state != -1">
+                and state = #{state}
+            </if>
+        </where>
+        <if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="selectSupplierOrderCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
+        SELECT COUNT(1) FROM tb_supplier_order
+        <where>
+            <if test="no != null &amp;&amp; no != ''">
+                and no like concat ('%', #{no}, '%')
+            </if>
+            <if test="storeId != null &amp;&amp; storeId != ''">
+                and storeId = #{storeId}
+            </if>
+            <if test="supplierId != -1">
+                and supplierId = #{supplierId}
+            </if>
+            <if test="state != -1">
+                and state = #{state}
+            </if>
+        </where>
+       </select>
+    <insert id="insertSupplierOrder" parameterType="org.lanqiao.clothes.pojo.SupplierOrder">
+        insert into tb_supplier_order (no,supplierId,storeId,totalMonet,payMoney,state,ctime) values (#{no},#{supplierId},#{storeId},#{totalMoney},#{payMoney},#{state},now())
+    </insert>
+    <select id="selectSupplierOrderById" resultType="org.lanqiao.clothes.pojo.SupplierOrder">
+        select * from tb_supplier_order where id = #{supplier_orderId} </select>
+    <select id="selectSupplierOrderinfoList" resultType="org.lanqiao.clothes.pojo.SupplierOrderInfo">
+        select * from tb_supplier_orderinfo where oid = #{supplier_orderId}
+    </select>
+</mapper>
