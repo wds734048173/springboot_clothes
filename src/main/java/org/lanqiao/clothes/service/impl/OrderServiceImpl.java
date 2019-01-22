@@ -24,6 +24,10 @@ public class OrderServiceImpl implements IOrderService {
     ColorMapper colorMapper;
     @Autowired
     SizeMapper sizeMapper;
+    @Autowired
+    AddressMapper addressMapper;
+    @Autowired
+    TerritoryMapper territoryMapper;
 
 
     @Override
@@ -72,8 +76,37 @@ public class OrderServiceImpl implements IOrderService {
         Customer customer = customerMapper.selectCustomerById(customerId);
         order.setCustomerName(customer.getUsername());
         //收货地址信息
-
-
+        int addressId = order.getAddressId();
+        Address address = addressMapper.selectAddressById(addressId);
+        if(address != null){
+            order.setName(address.getName());
+            order.setPhone(address.getPhone());
+            order.setAddress(address.getAddress());
+            List<Integer> addressIds = new ArrayList<>();
+            int provinceId = address.getProvinceId();
+            int cityId = address.getCityId();
+            int areaId = address.getAreaId();
+            addressIds.add(provinceId);
+            addressIds.add(cityId);
+            addressIds.add(areaId);
+            List<Territory> territoryList = territoryMapper.selectTerritoryListByIds(addressIds);
+            Map<Integer,String> territoryMap = new HashMap<>();
+            for(Territory territory : territoryList){
+                territoryMap.put(territory.getId(),territory.getTerritoryname());
+            }
+            if(territoryMap.containsKey(provinceId)){
+                order.setProvinceId(provinceId);
+                order.setProvinceName(territoryMap.get(provinceId));
+            }
+            if(territoryMap.containsKey(cityId)){
+                order.setCityId(cityId);
+                order.setCityName(territoryMap.get(cityId));
+            }
+            if(territoryMap.containsKey(areaId)){
+                order.setAreaId(areaId);
+                order.setAreaName(territoryMap.get(areaId));
+            }
+        }
         return order;
     }
 

@@ -13,6 +13,7 @@ public class Supplier {
     private int id;
     private String name;
     private int sex;
+    private String sexStr;
     private String telphone;
     private String address;
     private int state;

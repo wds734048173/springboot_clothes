@@ -3,22 +3,24 @@ package org.lanqiao.clothes.pojo;
 import lombok.*;
 
 import java.util.Date;
-@NoArgsConstructor
+
+/**
+ * @Auther: WDS
+ * @Date: 2019/1/22 10:21
+ * @Description:
+ */
 @AllArgsConstructor
-@Getter
+@NoArgsConstructor
 @Setter
+@Getter
 @ToString
 @Builder
-public class Order {
+public class Address {
     private int id;
-    private String no;
-    private int customerId;
-    private String customerName;
-    private int totalMoney;
-    private int payMoney;
-    private int addressId;
     private String name;
     private String phone;
+    private int customerId;
+    private String customerName;
     private int provinceId;
     private String provinceName;
     private int cityId;
@@ -26,14 +28,7 @@ public class Order {
     private int areaId;
     private String areaName;
     private String address;
-    private int storeId;
     private int state;
-    private String stateStr;
     private Date ctime;
     private Date rtime;
-    private Date payTime;
-    private Date sendTime;
-    private Date getTime;
-    private Date cancelTime;
-
 }

@@ -16,8 +16,8 @@
                 url:"/manager/goodsClassList",
                 // autoParam:["id", "name=n", "level=lv"],
                 // otherParam:{"otherParam":"zTreeAsyncTest"},
-                dataFilter: filter,
-                dataType: "json"
+                /*dataFilter: filter,
+                dataType: "json"*/
             },
             view: {expandSpeed:"",
                 addHoverDom: addHoverDom,
@@ -32,7 +32,6 @@
                     enable: true,
                     idKey: "id", //设置启用简单数据格式时id对应的属性名称
                     pidKey: "pId", //设置启用简单数据格式时parentId对应的属性名称,ztree根据id及pid层级关系构建树结
-                    rootPID: "0"
                 }
             },
             callback: {
@@ -85,7 +84,7 @@
         };
 
         $(document).ready(function(){
-            $.fn.zTree.init($("#treeDemo"), setting,null);
+            $.fn.zTree.init($("#treeDemo"), setting);
         });
     </script>
     <style type="text/css">

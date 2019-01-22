@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,8 +47,13 @@ public class CommentController {
         if(req.getParameter("searchCommentGrade") != null){
             searchCommentGrade = req.getParameter("searchCommentGrade");
         }
+        String searchCommentState = "-1";
+        if(req.getParameter("searchCommentState") != null){
+            searchCommentState = req.getParameter("searchCommentState");
+        }
         Condition condition = new Condition();
         condition.setName(searchGoodsName);
+        condition.setState(searchCommentState);
         condition.setGrade(searchCommentGrade);
         condition.setStoreId(storeId);
         int totalRecords = commentService.getCommentCount(condition);
@@ -72,6 +78,57 @@ public class CommentController {
         model.addAttribute("condition",condition);
         model.addAttribute("currentPage",pageNum);
         return "/manager/commentList";
+    }
+
+    //通过commentId查询评论信息
+    @RequestMapping("/manager/selectComment")
+    @ResponseBody
+    public Comment selectCommentById(HttpServletRequest req, HttpServletResponse resp){
+        int id = Integer.valueOf(req.getParameter("commentId"));
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+        Comment comment = commentService.getCommentById(storeId,id);
+        return comment;
+    }
+
+    @RequestMapping("/manager/updateCommentById")
+    public String updateCommentById(HttpServletRequest req, HttpServletResponse resp,Model model){
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+        int commentId = Integer.valueOf(req.getParameter("commentId"));
+        int state = Integer.valueOf(req.getParameter("state"));
+        String reply = req.getParameter("reply");
+        Comment comment = Comment.builder().build();
+        comment.setId(commentId);
+        comment.setReply(reply);
+        comment.setStoreId(storeId);
+        comment.setState(state);
+        commentService.modifyCommentById(comment);
+        return commentList(req, resp, model);
+    }
+
+    @RequestMapping("/manager/updateCommentState")
+    public String updateCommentState(HttpServletRequest req, HttpServletResponse resp,Model model){
+        String method = req.getParameter("method");
+        int state = 0;
+        if("hidden".equals(method)){
+            state = 1;
+        }
+        int commentId = Integer.valueOf(req.getParameter("commentId"));
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+        Comment comment = Comment.builder().build();
+        comment.setState(state);
+        comment.setId(commentId);
+        comment.setStoreId(storeId);
+        commentService.modifyCommentState(comment);
+        return commentList(req, resp, model);
     }
 
 }

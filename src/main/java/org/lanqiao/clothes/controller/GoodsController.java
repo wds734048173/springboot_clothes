@@ -108,11 +108,11 @@ public class GoodsController {
         String year = req.getParameter("goodsYear");
         String season = req.getParameter("goodsSeason");
         String sex = req.getParameter("goodsSex");
-//        int storeId = Integer.valueOf(req.getParameter("goodsStoreId"));
-        int storeId = 1;
         int isshelf = Integer.valueOf(req.getParameter("goodsIsshelf"));
-        /*HttpSession session = req.getSession();
-        int storeId = Integer.valueOf(session.getAttribute("storeId").toString());*/
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
         goods.setNo(no);
         goods.setName(name);
         goods.setPPrice(pPrice);

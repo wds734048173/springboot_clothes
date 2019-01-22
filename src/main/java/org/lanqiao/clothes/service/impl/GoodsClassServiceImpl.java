@@ -22,10 +22,10 @@ public class GoodsClassServiceImpl implements IGoodsClassService {
         goodsClassMapper.insertGoodsClass(goodsClass);
     }
 
-    @Override
+    /*@Override
     public void removeGoodClass(int id) {
         goodsClassMapper.deleteGoodsClass(id);
-    }
+    }*/
 
     @Override
     public List<GoodsClass> getGoodsClassList(int storeId) {
@@ -36,4 +36,15 @@ public class GoodsClassServiceImpl implements IGoodsClassService {
     public void modifyGoodsClass(GoodsClass goodsClass) {
         goodsClassMapper.updateGoodsClass(goodsClass);
     }
+
+    @Override
+    public List<GoodsClass> getGoodsClass1List(int storeId) {
+        return goodsClassMapper.selectGoodsClass1List(storeId);
+    }
+
+    @Override
+    public List<GoodsClass> getGoodsClassNextList(int storeId, int goodsClass1Id) {
+        return goodsClassMapper.selectGoodsClassNextList(storeId, goodsClass1Id);
+    }
+
 }

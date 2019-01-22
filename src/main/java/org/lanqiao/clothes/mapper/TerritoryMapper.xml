@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.clothes.mapper.TerritoryMapper">
+    <select id="selectProvinceList" resultType="org.lanqiao.clothes.pojo.Territory">
+        select * from t_s_territory where territoryparentid = 0
+    </select>
+
+    <select id="selectCityList" resultType="org.lanqiao.clothes.pojo.Territory" parameterType="int">
+        select * from t_s_territory where territoryparentid = #{provinceId}
+    </select>
+
+    <select id="selectAreaList" resultType="org.lanqiao.clothes.pojo.Territory" parameterType="int">
+        select * from t_s_territory where territoryparentid = #{cityId}
+    </select>
+    <select id="selectTerritoryListByIds" resultType="org.lanqiao.clothes.pojo.Territory" parameterType="list">
+        select * from t_s_territory where id in
+        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

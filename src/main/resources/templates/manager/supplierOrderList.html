@@ -109,7 +109,7 @@
             <td th:text="${supplierOrder.totalMoney}"></td>
             <td th:text="${supplierOrder.payMoney}"></td>
             <td th:text="${supplierOrder.stateStr}"></td>
-            <td th:text="${supplierOrder.ctime}"></td>
+            <td th:text="${#dates.format(supplierOrder.ctime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
                 <a class="btn btn-default getOrderInfo" href="#" role="button"  name="getOrderInfo">查看详情</a>
                 <a class="btn btn-default orderConfirm" href="#" role="button"  name="orderConfirm" th:if="${supplierOrder.state==0}">审核</a>

@@ -12,6 +12,9 @@
             <if test="grade != -1">
                 and grade = #{grade}
             </if>
+            <if test="state != -1">
+                and state = #{state}
+            </if>
             <if test="name != null &amp;&amp; name != ''">
                 and goodsId in (select id from tb_gooods where name like concat ('%', #{name}, '%'))
             </if>
@@ -29,9 +32,24 @@
             <if test="grade != -1">
                 and grade = #{grade}
             </if>
+            <if test="state != -1">
+                and state = #{state}
+            </if>
             <if test="name != null &amp;&amp; name != ''">
                 and goodsId in (select id from tb_gooods where name like concat ('%', #{name}, '%'))
             </if>
         </where>
     </select>
+
+    <select id="selectCommentById" resultType="org.lanqiao.clothes.pojo.Comment">
+        select * from tb_goods_comment where storeId=#{param1} and id=#{param2};
+    </select>
+
+    <update id="updateCommentById" parameterType="org.lanqiao.clothes.pojo.Comment">
+        update tb_goods_comment set reply=#{reply},state=#{state},rtime=now() where id=#{id} and storeId=#{storeId};
+    </update>
+
+    <update id="updateCommentState" parameterType="org.lanqiao.clothes.pojo.Comment">
+        update tb_goods_comment set state=#{state},rtime=now()  where id=#{id} and storeId=#{storeId};
+    </update>
 </mapper>

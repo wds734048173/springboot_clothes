@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -23,6 +24,7 @@ public class DefaultConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/manager").setViewName("/manager/index");
         registry.addViewController("/manager/").setViewName("/manager/index");
+        registry.addViewController("/manager/toGoodsClassList").setViewName("/manager/goodsClassList");
     }
 
     //拦截器

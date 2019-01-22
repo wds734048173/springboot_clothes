@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>商品信息列表</title>
+    <script type="text/javascript" th:src="@{/manager/js/ajaxfileupload.js}"></script>
     <script type="text/javascript">
         $(function () {
             //新增
@@ -14,7 +15,6 @@
             })
             //保存
             $("#save").click(function () {
-                alert("aaaaaaa")
                 var goodsId = $("#goodsId").val();
                 var goodsNo = $("#goodsNo").val();
                 var goodsName = $("#goodsName").val();
@@ -32,20 +32,43 @@
                 var searchGoodsYear = $("#searchGoodsYear option:selected").val();
                 var searchGoodsIsshelf = $("#searchGoodsIsshelf option:selected").val();
                 var currentPage = $("#currentPage").val();
+               /* var isPhoto = $("#isPhoto").val();*/
                 if(goodsId == null || goodsId == ""){
-                    var url = "/manager/addGoods?goodsNo="+goodsNo+"&goodsName="+goodsName+"&goodspPrice="+goodspPrice+"&goodssPrice="+goodssPrice+
-                        "&goodsmPrice="+goodsmPrice+"&goodsbrandId="+goodsbrandId+"&goodsYear="+goodsYear+"&goodsSeason="+goodsSeason+"&goodsIsshelf="+goodsIsshelf+"&goodsSex="+goodsSex+
-                        "&goodsStoreId="+goodsStoreId+"&method=add"
+                   /* if(isPhoto == 0){
+                        alert("请先上传图片")
+                        return;
+                    }*/
+                    var url = "/manager/addGoods?goodsNo="+goodsNo+"&goodsName="+goodsName+"&goodspPrice="+goodspPrice+"&goodssPrice="+goodssPrice
+                        +"&goodsmPrice="+goodsmPrice+"&goodsYear="+goodsYear+"&goodsSeason="+goodsSeason+"&goodsIsshelf="+goodsIsshelf+"&goodsSex="+goodsSex
+                        +"&method=add"
+                        /*+"&goodsbrandId="+goodsbrandId*/
                         +"&currentPage="+currentPage+"&searchGoodsNo="+searchGoodsNo+"&searchGoodsName="+searchGoodsName+"&searchGoodsBrand="+searchGoodsBrand+"&searchGoodsYear="+searchGoodsYear+"&searchGoodsIsshelf="+searchGoodsIsshelf;
                 }else{
-                    var url = "/manager/updateGoodsById?goodsId="+goodsId+"&goodsName="+goodsName+"&goodspPrice="+goodspPrice+"&goodssPrice="+goodssPrice+
-                        "&goodsmPrice="+goodsmPrice+"&goodsbrandId="+goodsbrandId+"&goodsYear="+goodsYear+"&goodsSeason="+goodsSeason+"&goodsisshelf="+goodsisshelf+"&goodsSex="+goodsSex+
-                        "&goodsStoreId="+goodsStoreId+"&method=update"
+                    var url = "/manager/updateGoodsById?goodsId="+goodsId+"&goodsName="+goodsName+"&goodspPrice="+goodspPrice+"&goodssPrice="+goodssPrice
+                        +"&goodsmPrice="+goodsmPrice+"&goodsYear="+goodsYear+"&goodsSeason="+goodsSeason+"&goodsIsshelf="+goodsIsshelf+"&goodsSex="+goodsSex
+                        +"&method=update"
+                        /*+"&goodsbrandId="+goodsbrandId*/
                         +"&currentPage="+currentPage+"&searchGoodsNo="+searchGoodsNo+"&searchGoodsName="+searchGoodsName+"&searchGoodsBrand="+searchGoodsBrand+"&searchGoodsYear="+searchGoodsYear+"&searchGoodsIsshelf="+searchGoodsIsshelf;
                 }
+                alert(url)
                 $(".content").load(url);
                 $(".modal-backdrop").remove();
             })
+            /*function doUpload() {
+                var formData = new FormData($("#uploadForm")[0]);
+                $.post({
+                    url:'/manager/ajaxUpload.do',
+                    type:'post',
+                    data:formData,
+                    async:false,
+                    cache:false,
+                    contentType:false,
+                    processData:false,
+                    success:function (returndata) {
+                        $("#isPhoto").val(1);
+                    }
+                });
+            }*/
 
             //修改
             $(".updateGoods").click(function () {
@@ -228,55 +251,80 @@
                 <h4 class="modal-title" id="gridSystemModalLabel">新增商品信息</h4>
             </div>
             <div class="modal-body">
-                <form method="post" action="" id="addForm">
-                    <div class="form-group hidden">
-                        <label for="goodsId" class="control-label">商品id:</label>
-                        <input type="text" class="form-control" id="goodsId" name="goodsId" value="">
-                    </div>
-                    <div class="form-group">
-                        <label for="goodsNo" class="control-label">货号:</label>
-                        <input type="text" class="form-control" id="goodsNo" name="goodsNo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="goodsName" class="control-label">商品名称:</label>
-                        <input type="text" class="form-control" id="goodsName" name="goodsName" required>
-                    </div>
+                <div class="form-group hidden">
+                    <label for="goodsId" class="control-label">商品id:</label>
+                    <input type="text" class="form-control" id="goodsId" name="goodsId" value="">
+                </div>
+                <div class="col-xs-4">
+                    <label for="goodsNo" class="control-label">货号:</label>
+                    <input type="text" class="form-control" id="goodsNo" name="goodsNo" required>
+                </div>
+                <div class="col-xs-4">
+                    <label for="goodsName" class="control-label">商品名称:</label>
+                    <input type="text" class="form-control" id="goodsName" name="goodsName" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="goodspPrice" class="control-label">采购价:</label>
-                        <input type="text" class="form-control" id="goodspPrice" name="goodspPrice" required>
-                    </div>
+                <div class="col-xs-4">
+                    <label for="goodspPrice" class="control-label">采购价:</label>
+                    <input type="text" class="form-control" id="goodspPrice" name="goodspPrice" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="goodssPrice" class="control-label">销售价:</label>
-                        <input type="text" class="form-control" id="goodssPrice" name="goodssPrice" required>
-                    </div>
+                <div class="col-xs-4">
+                    <label for="goodssPrice" class="control-label">销售价:</label>
+                    <input type="text" class="form-control" id="goodssPrice" name="goodssPrice" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="goodsmPrice" class="control-label">会员价:</label>
-                        <input type="text" class="form-control" id="goodsmPrice" name="goodsmPrice" required>
-                    </div>
+                <div class="col-xs-4">
+                    <label for="goodsmPrice" class="control-label">会员价:</label>
+                    <input type="text" class="form-control" id="goodsmPrice" name="goodsmPrice" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="goodsYear" class="control-label">上新年份:</label>
-                        <input type="text" class="form-control" id="goodsYear" name="goodsYear" required>
-                    </div>
+                <div class="col-xs-4">
+                    <label for="goodsYear" class="control-label">上新年份:</label>
+                    <input type="text" class="form-control" id="goodsYear" name="goodsYear" required>
+                </div>
+                <div class="col-xs-4">
+                    <label for="goodsBrand" class="control-label">商品品牌:</label>
+                    <select class="form-control" id="goodsBrand" name="goodsBrand">
+                        <option>--请选择--</option>
+                    </select>
+                </div>
+                <div class="col-xs-4">
+                    <label for="goodsSeason" class="control-label">适用季节:</label>
+                    <input type="text" class="form-control" id="goodsSeason" name="goodsSeason" required>
+                </div>
+                <div class="col-xs-4">
+                    <label for="goodsIsshelf" class="control-label">是否上下架:</label>
+                    <select id="goodsIsshelf" name="goodsIsshelf" class="form-control">
+                        <option value="0">上架</option>
+                        <option value="1">下架</option>
+                    </select>
+                </div>
+                <div class="modal-form">
+                    <label for="goodsClass3" class="control-label">商品分类:</label>
+                    <select class="myinput" id="goodsClass1" name="goodsClass1">
+                        <option>--请选择--</option>
+                    </select>
+                    <select class="myinput" id="goodsClass2" name="goodsClass2">
+                        <option>--请选择--</option>
+                    </select>
+                    <select class="myinput" id="goodsClass3" name="goodsClass3">
+                        <option>--请选择--</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label for="goodsSeason" class="control-label">适用季节:</label>
-                        <input type="text" class="form-control" id="goodsSeason" name="goodsSeason" required>
+
+                <div class="col-xs-4">
+                    <label for="goodsSex" class="control-label">适用性别:</label>
+                    <input type="text" class="form-control" id="goodsSex" name="goodsSex" required>
+                </div>
+                <input type="hidden" id="isPhoto" value="0">
+                <form method="post" enctype="multipart/form-data" id="uploadForm">
+                    <div>
+                        <label>商品图片:</label>
+                        <input type="file" required value="" id="photo" name="photo">
                     </div>
-                    <div class="form-group">
-                        <label for="goodsisshelf" class="control-label">是否上下架:</label>
-                        <select id="goodsisshelf" name="goodsisshelf" class="form-control">
-                            <option value="1">上架</option>
-                            <option value="2">下架</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="goodsSex" class="control-label">适用性别:</label>
-                        <input type="text" class="form-control" id="goodsSex" name="goodsSex" required>
-                    </div>
+                    <input type="submit" value="上传图片">
                 </form>
             </div>
             <div class="modal-footer">

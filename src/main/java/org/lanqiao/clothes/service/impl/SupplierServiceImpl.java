@@ -28,6 +28,12 @@ public class SupplierServiceImpl implements ISupplierService {
             }else if(state==1){
                 supplier.setStateStr("停用");
             }
+            int sex = supplier.getSex();
+            if(sex == 0){
+                supplier.setSexStr("女");
+            }else if(sex == 1){
+                supplier.setSexStr("男");
+            }
         }
         return supplierList;
     }

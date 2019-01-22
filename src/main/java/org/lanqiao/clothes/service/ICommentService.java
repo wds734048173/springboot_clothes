@@ -12,4 +12,12 @@ public interface ICommentService {
     //获取评论数量
     public int getCommentCount(Condition condition);
 
+    //通过评论id获取评论详情
+    public Comment getCommentById(int storeId,int commentId);
+
+    //修改评论回复语
+    public void modifyCommentById(Comment comment);
+
+    public void modifyCommentState(Comment comment);
+
  }

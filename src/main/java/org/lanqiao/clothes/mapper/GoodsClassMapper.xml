@@ -12,7 +12,21 @@
     <insert id="insertGoodsClass" parameterType="org.lanqiao.clothes.pojo.GoodsClass">
       insert into tb_goods_class (name,pId,state,storeId,ctime) values (#{name},#{pId},#{state},#{storeId},now())
     </insert>
-    <delete id="deleteGoodsClass">
+    <!--<delete id="deleteGoodsClass">
       delete from tb_goods_class where id=#{id}
-    </delete>
+    </delete>-->
+
+    <select id="selectGoodsClass1List" resultType="org.lanqiao.clothes.pojo.GoodsClass">
+        select * from tb_goods_class where pId = 0 and storeId = #{storeId};
+    </select>
+    <select id="selectGoodsClassNextList" resultType="org.lanqiao.clothes.pojo.GoodsClass">
+        select * from tb_goods_class where pId = #{param2} and storeId = #{param1};
+    </select>
+
+    <select id="selectGoodsClassListByIds" resultType="org.lanqiao.clothes.pojo.GoodsClass" parameterType="list">
+        select * from tb_goods_class where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

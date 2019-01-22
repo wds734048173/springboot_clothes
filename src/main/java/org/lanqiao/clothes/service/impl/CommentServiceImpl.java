@@ -54,6 +54,12 @@ public class CommentServiceImpl implements ICommentService {
             if(gradeMap.containsKey(grade)){
                 comment.setGradeStr(gradeMap.get(grade));
             }
+            int state = comment.getState();
+            if(state == 0){
+                comment.setStateStr("显示");
+            }else if(state == 1){
+                comment.setStateStr("隐藏");
+            }
         }
         //获取商品信息
         if(goodsIds.size()>0){
@@ -119,5 +125,20 @@ public class CommentServiceImpl implements ICommentService {
     @Override
     public int getCommentCount(Condition condition) {
         return commentMapper.selectCommentCount(condition);
+    }
+
+    @Override
+    public Comment getCommentById(int storeId, int commentId) {
+        return commentMapper.selectCommentById(storeId, commentId);
+    }
+
+    @Override
+    public void modifyCommentById(Comment comment) {
+        commentMapper.updateCommentById(comment);
+    }
+
+    @Override
+    public void modifyCommentState(Comment comment) {
+        commentMapper.updateCommentState(comment);
     }
 }

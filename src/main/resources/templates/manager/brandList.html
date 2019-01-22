@@ -113,7 +113,7 @@
         <thead>
             <tr>
                 <th hidden>ID</th>
-                <th>品牌图片</th>
+               <!-- <th>品牌图片</th>-->
                 <th>品牌名称</th>
                 <th>品牌状态</th>
                 <th>创建时间</th>
@@ -123,7 +123,7 @@
         <tbody>
             <tr th:each="brand: ${brandList}">
                 <td th:text="${brand.id}" hidden></td>
-                <td th:text="${brand.pic}"></td>
+               <!-- <td th:text="${brand.pic}"></td>-->
                 <td th:text="${brand.name}"></td>
                 <td th:text="${brand.stateStr}"></td>
                 <td th:text="${brand.ctime!=null}?${#dates.format(brand.ctime, 'yyyy-MM-dd HH:mm:ss')}"></td>

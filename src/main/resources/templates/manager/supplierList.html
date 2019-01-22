@@ -17,7 +17,7 @@
                 var supplierId = $("#supplierId").val();
                 var supplierName = $("#supplierName").val();
                 var supplierState = $("#supplierState option:selected").val();
-                var supplierSex = $("#supplierSex").val();
+                var supplierSex = $("#supplierSex option:selected").val();
                 var supplierTelphone = $("#supplierTelphone").val();
                 var supplierAddress = $("#supplierAddress").val();
                 if(supplierName.length > 10){
@@ -137,7 +137,7 @@
                 <td th:text="${supplier.id}" hidden="hidden"></td>
                 <td th:text="${supplier.name}"></td>
                 <td th:text="${supplier.stateStr}"></td>
-                <td th:text="${supplier.sex}"></td>
+                <td th:text="${supplier.sexStr}"></td>
                 <td th:text="${supplier.telphone}"></td>
                 <td th:text="${supplier.address}"></td>
                 <td th:text="${supplier.ctime!=null}?${#dates.format(supplier.ctime, 'yyyy-MM-dd HH:mm:ss')}"></td>
@@ -170,13 +170,16 @@
                     <div class="form-group">
                         <label for="supplierState" class="control-label">供应商状态:</label>
                         <select id="supplierState" name="supplierState" class="form-control">
-                            <option value="0">可用</option>
-                            <option value="1">不可用</option>
+                            <option value="0">启用</option>
+                            <option value="1">停用</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="supplierSex" class="control-label">供应商性别:</label>
-                        <input type="text" class="form-control" id="supplierSex" name="supplierSex" required>
+                        <select id="supplierSex" name="supplierSex" class="form-control">
+                            <option value="0">女</option>
+                            <option value="1">男</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="supplierTelphone" class="control-label">供应商联系方式:</label>

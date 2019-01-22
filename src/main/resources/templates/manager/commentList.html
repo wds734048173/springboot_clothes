@@ -7,72 +7,88 @@
         $(function () {
             //保存
             $("#save").click(function () {
-                var brandId = $("#brandId").val();
-                var brandName = $("#brandName").val();
-                var brandState = $("#brandState option:selected").val();
-                if(brandName.length > 40){
-                    alert("品牌名称多于40字，请重新输入");
+                var commentId = $("#commentId").val();
+                var reply = $("#reply").val();
+                var state = $("#state option:selected").val();
+                if(reply.length > 200){
+                    alert("回复语多于200字，请重新输入");
                     return;
                 }
                 //查询条件
-                var searchBrandState = $("#searchBrandState").val();
-                var searchBrandName = $("#searchBrandName").val();
+                var searchCommentGrade = $("#searchCommentGrade option:selected").val();
+                var searchCommentState = $("#searchCommentState option:selected").val();
+                var searchGoodsName = $("#searchGoodsName").val();
                 var currentPage = $("#currentPage").val();
-                if(brandId == null || brandId == ""){
-                    var url = "/manager/addBrand?brandName="+brandName+"&brandState="+brandState+"&method=add"
-                        +"&currentPage="+currentPage+"&searchBrandName="+searchBrandName+"&searchBrandState="+searchBrandState;
-                }else{
-                    var url = "/manager/updateBrandById?brandId="+brandId+"&brandName="+brandName+"&brandState="+brandState+"&method=update"
-                        +"&currentPage="+currentPage+"&searchBrandName="+searchBrandName+"&searchBrandState="+searchBrandState;
-                }
+                var url = "/manager/updateCommentById?commentId="+commentId+"&reply="+reply+"&state="+state
+                    +"&currentPage="+currentPage+"&searchCommentGrade="+searchCommentGrade+"&searchGoodsName="+searchGoodsName+"&searchCommentState="+searchCommentState;
                 $(".content").load(url);
                 $(".modal-backdrop").remove();
             })
             //回复
-            $(".updateBrand").click(function () {
+            $(".updateComment").click(function () {
                 var id = $(this).parent().parent().children("td:eq(0)").text();
-                document.getElementById("gridSystemModalLabel").innerHTML = "修改品牌信息";
                 $.ajax({
-                    url:"/manager/selectBrandById?brandId=" + id,
+                    url:"/manager/selectComment?commentId=" + id,
                     success:function (data) {
-                        var brand = eval(data);
-                        $("#brandId").val(brand.id);
-                        $("#brandName").val(brand.name);
-                        $("#brandState").val(brand.state);
+                        var comment = eval(data);
+                        $("#commentId").val(comment.id);
+                        $("#grade").val(comment.grade);
+                        $("#state").val(comment.state);
+                        $("#comment").val(comment.comment);
+                        $("#reply").val(comment.reply);
                     }
                 })
-                $('#addBrandModel').modal({
+                $('#updateCommentModel').modal({
                     keyboard: false,
                     show:true
                 })
             })
-            //删除
-            /*$(".deleteBrand").click(function () {
-                var isDelete = confirm ("确定删除吗？");
-                if(isDelete){
+            //显示
+            $(".showState").click(function () {
+                var isShow = confirm ("确定显示吗？");
+                if(isShow){
                     var id = $(this).parent().parent().children("td:eq(0)").text();
                     //查询条件
-                    var searchBrandState = $("#searchBrandState").val();
-                    var searchBrandName = $("#searchBrandName").val();
+                    var searchCommentGrade = $("#searchCommentGrade option:selected").val();
+                    var searchCommentState = $("#searchCommentState option:selected").val();
+                    var searchGoodsName = $("#searchGoodsName").val();
                     var currentPage = $("#currentPage").val();
-                    var url = "/manager/deleteBrand?brandId=" + id + "&method=delete"
-                        + "&currentPage="+currentPage+"&searchBrandName="+searchBrandName+"&searchBrandState="+searchBrandState;
+                    var url = "/manager/updateCommentState?commentId=" + id + "&method=show"
+                        + "&currentPage="+currentPage+"&searchGoodsName="+searchGoodsName+"&searchCommentGrade="+searchCommentGrade+"&searchCommentState="+searchCommentState;
                     $(".content").load(url);
                 }else{
                     return;
                 }
-            })*/
+            })
+            //隐藏
+            $(".hiddenState").click(function () {
+                var isHidden = confirm ("确定隐藏吗？");
+                if(isHidden){
+                    var id = $(this).parent().parent().children("td:eq(0)").text();
+                    //查询条件
+                    var searchCommentGrade = $("#searchCommentGrade option:selected").val();
+                    var searchCommentState = $("#searchCommentState option:selected").val();
+                    var searchGoodsName = $("#searchGoodsName").val();
+                    var currentPage = $("#currentPage").val();
+                    var url = "/manager/updateCommentState?commentId=" + id + "&method=hidden"
+                        + "&currentPage="+currentPage+"&searchGoodsName="+searchGoodsName+"&searchCommentGrade="+searchCommentGrade+"&searchCommentState="+searchCommentState;
+                    $(".content").load(url);
+                }else{
+                    return;
+                }
+            })
         });
         //查询的手动提交方式
         function search(currentPage) {
             var searchCommentGrade = $("#searchCommentGrade option:selected").val();
+            var searchCommentState = $("#searchCommentState option:selected").val();
             var searchGoodsName = $("#searchGoodsName").val();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();
             }else{
                 var currentPage = currentPage;
             }
-            var url = "/manager/commentList?currentPage="+currentPage+"&searchGoodsName="+searchGoodsName+"&searchCommentGrade="+searchCommentGrade;
+            var url = "/manager/commentList?currentPage="+currentPage+"&searchGoodsName="+searchGoodsName+"&searchCommentGrade="+searchCommentGrade+"&searchCommentState="+searchCommentState;
             $(".content").load(url);
         }
     </script>
@@ -85,13 +101,21 @@
             <label for="searchGoodsName" >商品名称:</label>
             <input type="text" class="myinput"  placeholder="" id="searchGoodsName" name="searchGoodsName" th:value="${condition.name}">
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-3">
             <label for="searchCommentGrade">评论等级</label>
             <select class="myinput" name="searchCommentGrade" id="searchCommentGrade">
+                <option value="-1" th:selected="${condition.grade=='-1'}">全部</option>
+                <option value="0" th:selected="${condition.grade=='0'}">好评</option>
+                <option value="1" th:selected="${condition.grade=='1'}">中评</option>
+                <option value="2" th:selected="${condition.grade=='2'}">差评</option>
+            </select>
+        </div>
+        <div class="col-xs-3">
+            <label for="searchCommentState" class="control-label">状态:</label>
+            <select class="myinput" id="searchCommentState" name="searchCommentState">
                 <option value="-1" th:selected="${condition.state=='-1'}">全部</option>
-                <option value="0" th:selected="${condition.state=='0'}">好评</option>
-                <option value="1" th:selected="${condition.state=='1'}">中评</option>
-                <option value="2" th:selected="${condition.state=='2'}">差评</option>
+                <option value="0" th:selected="${condition.state=='0'}">显示</option>
+                <option value="1" th:selected="${condition.state=='1'}">隐藏</option>
             </select>
         </div>
     </div>
@@ -109,6 +133,7 @@
                 <th>尺码名称</th>
                 <!--<th>订单id</th>-->
                 <th>评论等级</th>
+                <th>状态</th>
                 <th>评论</th>
                 <th>回复</th>
                 <th>客户名称</th>
@@ -124,43 +149,56 @@
                 <td th:text="${comment.sizeName}"></td>
                 <!--<td th:text="${comment.oId}"></td>-->
                 <td th:text="${comment.gradeStr}"></td>
+                <td th:text="${comment.stateStr}"></td>
                 <td th:text="${comment.comment}"></td>
                 <td th:text="${comment.reply}"></td>
                 <td th:text="${comment.customerName}"></td>
                 <td th:text="${comment.ctime!=null}?${#dates.format(comment.ctime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                 <td>
-                    <a class="btn btn-default updateBrand" href="#" role="button"  name="updateBrand">回复</a>
-                    <a class="btn btn-default showState" href="#" role="button"  name="showState" th:if="${comment.state==0}">显示</a>
-                    <a class="btn btn-default hiddenState" href="#" role="button"  name="hiddenState" th:if="${comment.state==1}">隐藏</a>
+                    <a class="btn btn-default updateComment" href="#" role="button"  name="updateComment">回复</a>
+                    <a class="btn btn-default showState" href="#" role="button"  name="showState" th:if="${comment.state==1}">显示</a>
+                    <a class="btn btn-default hiddenState" href="#" role="button"  name="hiddenState" th:if="${comment.state==0}">隐藏</a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 <!--新增模态框插件-->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="addBrandModel">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="updateCommentModel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">新增品牌信息</h4>
+                <h4 class="modal-title" id="gridSystemModalLabel">回复评论信息</h4>
             </div>
             <div class="modal-body">
                 <form method="post" action="" id="addForm">
                     <div class="form-group hidden">
-                        <label for="brandId" class="control-label">品牌id:</label>
-                        <input type="text" class="form-control" id="brandId" name="brandId" value="">
+                        <label for="commentId" class="control-label">评论id:</label>
+                        <input type="text" class="form-control" id="commentId" name="commentId" value="">
                     </div>
                     <div class="form-group">
-                        <label for="brandName" class="control-label">品牌名称:</label>
-                        <input type="text" class="form-control" id="brandName" name="brandName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="brandState" class="control-label">品牌状态:</label>
-                        <select id="brandState" name="brandState" class="form-control">
-                            <option value="0">启用</option>
-                            <option value="1">停用</option>
+                        <label for="grade" class="control-label">评论级别:</label>
+                        <select id="grade" name="grade" class="form-control" disabled>
+                            <option value="0">好评</option>
+                            <option value="1">中评</option>
+                            <option value="2">差评</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="state" class="control-label">状态:</label>
+                        <select id="state" name="state" class="form-control">
+                            <option value="0">显示</option>
+                            <option value="1">隐藏</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment" class="control-label">评语:</label><br>
+                        <textarea id="comment" name="comment" readonly cols="85" rows="3" style="resize:none"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reply" class="control-label">回复语:</label><br>
+                        <textarea id="reply" name="reply" cols="85" rows="3" style="resize:none"></textarea>
                     </div>
                 </form>
             </div>

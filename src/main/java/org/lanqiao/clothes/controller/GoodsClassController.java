@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,12 +33,7 @@ public class GoodsClassController {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         int storeId = user.getStoreId();
-        List<GoodsClass> goodsClassList = goodsClassService.getGoodsClassList(storeId);
+        List<GoodsClass> goodsClassList = goodsClassService.getGoodsClass1List(storeId);
         return goodsClassList;
-    }
-
-    @RequestMapping("/manager/toGoodsClassList")
-    public String toGoodsClassList(){
-        return "/manager/goodsClassList";
     }
 }
