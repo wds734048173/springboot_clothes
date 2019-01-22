@@ -20,4 +20,19 @@ public class UserServiceImpl implements IUserService {
     public User getUser(User user) {
         return userMapper.selectUser(user);
     }
+
+    @Override
+    public void add(User user) {
+
+    }
+
+    @Override
+    public User selectByName(String username) {
+        return null;
+    }
+
+    @Override
+    public void updateStoreId(User user) {
+
+    }
 }

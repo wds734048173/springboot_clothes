@@ -14,7 +14,7 @@ public interface IGoodsClassService {
     //修改商品分类
     public void modifyGoodsClass(GoodsClass goodsClass);
 
-    //获取一级分类
+    //获取tree分类
     public List<GoodsClass> getGoodsClass1List(int storeId);
     //获取下一级分类
     public List<GoodsClass> getGoodsClassNextList(int storeId,int goodsClass1Id);

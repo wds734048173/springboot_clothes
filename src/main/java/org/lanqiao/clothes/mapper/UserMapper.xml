@@ -6,4 +6,13 @@
     <select id="selectUser" resultType="org.lanqiao.clothes.pojo.User" parameterType="org.lanqiao.clothes.pojo.User">
         select * from tb_user where username=#{username} and password=#{password}
     </select>
+    <select id="selectByName" resultType="org.lanqiao.clothes.pojo.User">
+        select * from tb_user where username=#{username}
+    </select>
+    <insert id="insertUser" parameterType="org.lanqiao.clothes.pojo.User">
+        insert into tb_user(username,password,sex,state,storeId,ctime) values (#{username},#{password},#{sex},#{state},#{storeId},#{ctime})
+    </insert>
+    <update id="updateStoreId" parameterType="org.lanqiao.clothes.pojo.User">
+        update tb_user set realname=#{realname},storeId=#{storeId},idCard=#{idCard} where username=#{username}
+    </update>
 </mapper>

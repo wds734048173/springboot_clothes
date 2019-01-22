@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>完善个人与店铺信息</title>
+    <link rel="stylesheet" type="text/css" href="/manager/bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="/manager/js/jquery.js"></script>
+    <script type="text/javascript">
+        <!--入口函数-->
+        $(function () {
+            $('#state').val('1');
+        })
+    </script>
+</head>
+<body>
+        <form class="form-inline" action="/manager/storeinfo" method="post">
+            <h1>完善信息</h1>
+            <div class="form-group">
+                <label for="username">商家账号名称:</label>
+                <input type="text" name="username" id="username" required th:value="${session.user.username}" disabled>
+            </div>
+            <div class="form-group">
+                <label for="realname">真实姓名：</label>
+                <input type="text" name="realname" id="realname" required th:value="${session.user.username}" disabled>
+            </div>
+            <div class="form-group">
+                <label for="idCard">身份账号:</label>
+                <input type="text" name="idCard" id="idCard" required th:value="${session.user.username}" disabled>
+            </div>
+            <div class="form-group">
+                <label for="name">店铺名称:</label>
+                <input type="text" name="name" id="name" required placeholder="请输入店铺名称">
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="bussinessNo">营业执照编号：</label>
+                    <input type="text" name="bussinessNo" id="bussinessNo" required placeholder="请输入营业制造编号">
+                </div>
+                <div class="form-group">
+                    <label for="pic">店招：</label>
+                    <input type="text" name="pic" id="pic" required placeholder="请输入店招">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address">店铺地址：</label>
+                <input type="text" name="address" id="address" required placeholder="请输入店铺地址">
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="telphone">商家电话：</label>
+                    <input type="text" name="telphone" id="telphone" required placeholder="请输入个人电话">
+                </div>
+                <div class="form-group">
+                    <label for="state">状态：</label>
+                    <select class="form-control" id="state" disabled>
+                        <option value="0" >可用</option>
+                        <option value="1" >不可用</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="bussinessPic">营业执照照片：</label>
+                <input type="file"  name="bussinessPic" id="bussinessPic" ><br/><br/>
+            </div>
+            <div>
+                <input type="submit" value="完成" class="btn btn-primary">
+                <input type="submit" value="返回登陆" class="btn btn-primary"  onclick="window.open('/manager/login')"/>
+            </div>
+        </form><!-- form -->
+<br><br><br><br>
+</body>
+</html>

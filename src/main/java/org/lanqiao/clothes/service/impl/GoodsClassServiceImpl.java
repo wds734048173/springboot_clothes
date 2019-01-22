@@ -39,12 +39,24 @@ public class GoodsClassServiceImpl implements IGoodsClassService {
 
     @Override
     public List<GoodsClass> getGoodsClass1List(int storeId) {
-        return goodsClassMapper.selectGoodsClass1List(storeId);
+        //获取一级分类
+        List<GoodsClass> goodsClassList = goodsClassMapper.selectGoodsClass1List(storeId);
+        for(GoodsClass goodsClass : goodsClassList){
+            int id = goodsClass.getId();
+            List<GoodsClass> goodsClassList1 = this.getGoodsClassNextList(storeId,id);
+            goodsClass.setChildren(goodsClassList1);
+        }
+        return goodsClassList;
     }
 
     @Override
     public List<GoodsClass> getGoodsClassNextList(int storeId, int goodsClass1Id) {
-        return goodsClassMapper.selectGoodsClassNextList(storeId, goodsClass1Id);
+        List<GoodsClass> goodsClassList =  goodsClassMapper.selectGoodsClassNextList(storeId, goodsClass1Id);
+        for(GoodsClass goodsClass : goodsClassList){
+            int id = goodsClass.getId();
+            goodsClass.setChildren(getGoodsClassNextList(storeId,id));
+        }
+        return goodsClassList;
     }
 
 }

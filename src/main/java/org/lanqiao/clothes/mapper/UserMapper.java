@@ -11,4 +11,8 @@ import org.lanqiao.clothes.pojo.User;
 @Mapper
 public interface UserMapper {
     public User selectUser(User user);
+    public User selectByName(String username);
+    public void insertUser(User user);
+    //    修改用户信息表中的店铺id和真实姓名和身份证号
+    public void updateStoreId(User user);
 }

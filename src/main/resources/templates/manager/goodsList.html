@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>商品信息列表</title>
-    <script type="text/javascript" th:src="@{/manager/js/ajaxfileupload.js}"></script>
+    <!--<script type="text/javascript" th:src="@{/manager/js/ajaxfileupload.js}"></script>-->
     <script type="text/javascript">
         $(function () {
             //新增
@@ -13,6 +13,10 @@
                     show:true
                 })
             })
+            //获取品牌列表
+            //获取一级分类
+            //获取二级分类
+            //获取三级分类
             //保存
             $("#save").click(function () {
                 var goodsId = $("#goodsId").val();
@@ -165,8 +169,9 @@
         </div>
         <div class="col-xs-4">
             <label for="searchGoodsBrand" >品牌:</label>
-            <select class="myinput" id="searchGoodsBrand" name="searchGoodsBrand">
-                <option value="-1" th:selected="${condition.brandId=='-1'}">全部</option>
+            <select class="myinput" name="searchGoodsBrand" id="searchGoodsBrand">
+                <option value="-1">全部</option>
+                <option th:each="brand:${brandList}" th:text="${brand.name}" th:value="${brand.id}" th:selected="${condition.brandId==brand.id}"></option>
             </select>
         </div>
         <br><br><br>
@@ -193,9 +198,9 @@
         <input type="button" class="btn btn-primary" id="search" value="查询" onclick="search(null)"/>
     </div>
 </div>
-<div class="modal-body">
+<!--<div class="modal-body">
     <a class="btn btn-default" href="#" role="button" id="addGoods" name="addGoods">添加商品信息</a>
-</div>
+</div>-->
 <div class="modal-body">
     <table class="table table-hover table-bordered">
         <thead>
@@ -206,13 +211,13 @@
             <th>采购价</th>
             <th>销售价</th>
             <th>会员价</th>
-            <th>第三级</th>
+            <!--<th>第三级</th>-->
             <th>品牌id</th>
             <th>上新年份</th>
             <th>适用季节</th>
             <th>是否上下架</th>
             <th>适用性别</th>
-            <th>店铺id</th>
+            <!--<th>店铺id</th>-->
             <th>创建时间</th>
             <th>操作</th>
         </tr>
@@ -225,16 +230,16 @@
             <td th:text="${goods.pPrice}"></td>
             <td th:text="${goods.sPrice}"></td>
             <td th:text="${goods.mPrice}"></td>
-            <td th:text="${goods.class3Id}"></td>
-            <td th:text="${goods.brandId}"></td>
+            <!--<td th:text="${goods.class3Id}"></td>-->
+            <td th:text="${goods.brandName}"></td>
             <td th:text="${goods.year}"></td>
             <td th:text="${goods.season}"></td>
-            <td th:text="${goods.isshelf}"></td>
+            <td th:text="${goods.isshelfStr}"></td>
             <td th:text="${goods.sex}"></td>
-            <td th:text="${goods.storeId}"></td>
+            <!--<td th:text="${goods.storeId}"></td>-->
             <td th:text="${goods.ctime!=null}?${#dates.format(goods.ctime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
-                <a class="btn btn-default updateGoods" href="#" role="button"  name="updateGoods" th:if="${goods.isshelf==1}">修改</a>
+                <!--<a class="btn btn-default updateGoods" href="#" role="button"  name="updateGoods" th:if="${goods.isshelf==1}">修改</a>-->
                 <a class="btn btn-default upGoodsIsshelf" href="#" role="button"  name="upGoodsIsshelf" th:if="${goods.isshelf==1}">上架</a>
                 <a class="btn btn-default downGoodsIsshelf" href="#" role="button"  name="downGoodsIsshelf" th:if="${goods.isshelf==0}">下架</a>
             </td>
@@ -255,77 +260,86 @@
                     <label for="goodsId" class="control-label">商品id:</label>
                     <input type="text" class="form-control" id="goodsId" name="goodsId" value="">
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <label for="goodsNo" class="control-label">货号:</label>
                     <input type="text" class="form-control" id="goodsNo" name="goodsNo" required>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <label for="goodsName" class="control-label">商品名称:</label>
                     <input type="text" class="form-control" id="goodsName" name="goodsName" required>
                 </div>
-
-                <div class="col-xs-4">
+                <br><br>
+                <div class="col-xs-6">
                     <label for="goodspPrice" class="control-label">采购价:</label>
                     <input type="text" class="form-control" id="goodspPrice" name="goodspPrice" required>
                 </div>
-
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <label for="goodssPrice" class="control-label">销售价:</label>
                     <input type="text" class="form-control" id="goodssPrice" name="goodssPrice" required>
                 </div>
-
-                <div class="col-xs-4">
+                <br><br>
+                <div class="col-xs-6">
                     <label for="goodsmPrice" class="control-label">会员价:</label>
                     <input type="text" class="form-control" id="goodsmPrice" name="goodsmPrice" required>
                 </div>
-
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <label for="goodsYear" class="control-label">上新年份:</label>
                     <input type="text" class="form-control" id="goodsYear" name="goodsYear" required>
                 </div>
-                <div class="col-xs-4">
+                <br><br>
+                <div class="col-xs-6">
                     <label for="goodsBrand" class="control-label">商品品牌:</label>
                     <select class="form-control" id="goodsBrand" name="goodsBrand">
-                        <option>--请选择--</option>
+                        <option value="-1">--请选择--</option>
+                        <option th:each="brand:${brandList}" th:text="${brand.name}" th:value="${brand.id}" th:selected="${condition.brandId==brand.id}"></option>
                     </select>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <label for="goodsSeason" class="control-label">适用季节:</label>
-                    <input type="text" class="form-control" id="goodsSeason" name="goodsSeason" required>
+                    <select class="form-control" id="goodsSeason" name="goodsSeason">
+                        <option value="-1">--请选择--</option>
+                        <option value="春">春</option>
+                        <option value="夏">夏</option>
+                        <option value="秋">秋</option>
+                        <option value="冬">冬</option>
+                    </select>
                 </div>
-                <div class="col-xs-4">
+                <br><br>
+                <div class="col-xs-6">
                     <label for="goodsIsshelf" class="control-label">是否上下架:</label>
                     <select id="goodsIsshelf" name="goodsIsshelf" class="form-control">
                         <option value="0">上架</option>
                         <option value="1">下架</option>
                     </select>
                 </div>
-                <div class="modal-form">
-                    <label for="goodsClass3" class="control-label">商品分类:</label>
+                <div class="col-xs-6">
+                    <label for="goodsSex" class="control-label">适用性别:</label>
+                    <select id="goodsSex" name="goodsSex" class="form-control">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+                <br><br><br><br><br><br>
+                <div class="modal-form" style="margin-left: 16px;">
+                    <label for="goodsClass3" class="control-label">商品分类:</label>&nbsp;&nbsp;
                     <select class="myinput" id="goodsClass1" name="goodsClass1">
                         <option>--请选择--</option>
-                    </select>
+                    </select>&nbsp;&nbsp;
                     <select class="myinput" id="goodsClass2" name="goodsClass2">
                         <option>--请选择--</option>
-                    </select>
+                    </select>&nbsp;&nbsp;
                     <select class="myinput" id="goodsClass3" name="goodsClass3">
                         <option>--请选择--</option>
-                    </select>
+                    </select>&nbsp;&nbsp;
                 </div>
-
-
-                <div class="col-xs-4">
-                    <label for="goodsSex" class="control-label">适用性别:</label>
-                    <input type="text" class="form-control" id="goodsSex" name="goodsSex" required>
-                </div>
-                <input type="hidden" id="isPhoto" value="0">
+                <!--<input type="hidden" id="isPhoto" value="0">
                 <form method="post" enctype="multipart/form-data" id="uploadForm">
                     <div>
                         <label>商品图片:</label>
                         <input type="file" required value="" id="photo" name="photo">
                     </div>
                     <input type="submit" value="上传图片">
-                </form>
+                </form>-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -361,4 +375,26 @@
     </nav>
 </center>
 </body>
+<script type="text/javascript">
+    //页面加载完成后执行
+    $(document).ready(function () {
+    // window.onload=function (){
+        alert("页面加载完成后执行。。。")
+        //品牌下拉列表
+        $.ajax({
+            //通过id获取商品信息
+            url:"/manager/getBrandSelectedList",
+            success:function (data) {
+                alert("请求获取brandList")
+                var brandList = eval(data);
+                $("#searchGoodsBrand").empty();
+                $("#searchGoodsBrand").append("<option value='-1'>全部</option>");
+                for(var i = 0;i < brandList.size;i++){
+                    $("#searchGoodsBrand").append("<option value='"+brandList[i].id+"'>"+brandList[i].name+"</option>")
+                }
+            }
+        })
+
+    }
+</script>
 </html>

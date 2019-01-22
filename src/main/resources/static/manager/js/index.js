@@ -26,6 +26,8 @@ function pageClick(k) {
         url = "/manager/supplierOrderList";
     } else if (text == "销售单管理"){
         url = "/manager/orderList";
+    } else if (text == "个人管理"){
+        url = "/manager/userInfo";
     }
     $(".content").load(url);
 }

@@ -24,6 +24,7 @@ public class User {
     private String phone;
     private int state;
     private int storeId;
+    private String idCard;
     private Date ctime;
     private Date rtime;
 }

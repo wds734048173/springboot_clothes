@@ -24,6 +24,7 @@ public class DefaultConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/manager").setViewName("/manager/index");
         registry.addViewController("/manager/").setViewName("/manager/index");
+        registry.addViewController("/manager/userregister").setViewName("/manager/userregister");
         registry.addViewController("/manager/toGoodsClassList").setViewName("/manager/goodsClassList");
     }
 

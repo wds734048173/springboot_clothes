@@ -1,8 +1,8 @@
 package org.lanqiao.clothes.controller;
 
-import org.lanqiao.clothes.pojo.Condition;
-import org.lanqiao.clothes.pojo.Goods;
-import org.lanqiao.clothes.pojo.User;
+import org.lanqiao.clothes.pojo.*;
+import org.lanqiao.clothes.service.IBrandService;
+import org.lanqiao.clothes.service.IGoodsClassService;
 import org.lanqiao.clothes.service.IGoodsService;
 import org.lanqiao.clothes.utils.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,10 @@ import java.util.List;
 public class GoodsController {
     @Autowired
     IGoodsService goodsService;
+    @Autowired
+    IBrandService brandService;
+    @Autowired
+    IGoodsClassService goodsClassService;
     @RequestMapping("/manager/goodsList")
     public String goodsList(HttpServletRequest req, HttpServletResponse resp, Model model){
         int pageNum = 1;
@@ -82,7 +86,13 @@ public class GoodsController {
         condition.setCurrentPage(pageModel.getStartIndex());
         condition.setPageSize(pageModel.getPageSize());
         List<Goods> goodsList = goodsService.getGoodsAll(condition);
+
+        //获取品牌查询列表
+        List<Brand> brandList = brandService.getBrandSelectedList(storeId);
+
+        //数据封装
         model.addAttribute("goodsList",goodsList);
+        model.addAttribute("brandList",brandList);
         model.addAttribute("pm",pageModel);
         model.addAttribute("condition",condition);
         model.addAttribute("currentPage",pageNum);
@@ -177,10 +187,26 @@ public class GoodsController {
 
     @RequestMapping("/manager/selectGoodsById")
     @ResponseBody
-    public Goods selectColorById(HttpServletRequest req, HttpServletResponse resp){
+    public Model selectGoodsById(HttpServletRequest req, HttpServletResponse resp,Model model){
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
         String goodsId = req.getParameter("goodsId");
         Goods goods = goodsService.getGoodsById(Integer.valueOf(goodsId));
-        return goods;
+        int goodsClass1Id = goods.getClass1Id();
+        int goodsClass2Id = goods.getClass2Id();
+        //获取分类一列表
+        List<GoodsClass> goodsClass1List = goodsClassService.getGoodsClass1List(storeId);
+        //获取分类二列表
+        List<GoodsClass> goodsClass2List = goodsClassService.getGoodsClassNextList(storeId,goodsClass1Id);
+        //获取分类三列表
+        List<GoodsClass> goodsClass3List = goodsClassService.getGoodsClassNextList(storeId,goodsClass2Id);
+        model.addAttribute("goods",goods);
+        model.addAttribute("goodsClass1List",goodsClass1List);
+        model.addAttribute("goodsClass2List",goodsClass2List);
+        model.addAttribute("goodsClass3List",goodsClass3List);
+        return model;
     }
 
 

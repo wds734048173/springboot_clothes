@@ -15,6 +15,7 @@ public class DataMapUtil {
     private static Map preOrderStateMap;
     private static Map orderStateMap;
     private static Map gradeMap;
+    private static Map isshelfMap;
 
     //前端销售订单状态
     public static Map getPreOrderStateMap(){
@@ -75,6 +76,14 @@ public class DataMapUtil {
         gradeMap.put(1,"中评");
         gradeMap.put(2,"差评");
         return gradeMap;
+    }
+
+    //上下架状态
+    public static Map getIsshelfMap(){
+        isshelfMap = new HashMap<Integer,String>();
+        isshelfMap.put(0,"上架");
+        isshelfMap.put(1,"下架");
+        return isshelfMap;
     }
 
 }

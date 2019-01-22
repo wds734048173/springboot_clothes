@@ -9,4 +9,7 @@ import org.lanqiao.clothes.pojo.User;
  */
 public interface IUserService {
     public User getUser(User user);
+    public void add(User user);
+    public User selectByName(String username);
+    public void updateStoreId(User user);
 }

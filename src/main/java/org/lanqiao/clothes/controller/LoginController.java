@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @Auther: WDS
@@ -82,7 +83,47 @@ public class LoginController {
             }
         }
     }
-
+    //商家注册
+    @RequestMapping("/manager/register")
+    public String register(HttpServletRequest req, HttpServletResponse resp, Model model){
+        //注册页面密码确认
+        String username = req.getParameter("username");
+        User users = userService.selectByName(username);
+//        判断用户名是否存在
+        if (users !=null){
+            model.addAttribute("msg","用户名已存在");
+            return "/manager/userregister";
+        }else {
+            String password1 = req.getParameter("password1");
+            String password2 = req.getParameter("password2");
+            //性别信息转换
+            String sex =req.getParameter("sex");
+            int usersex = 0;
+            if ("女".equals(sex)){
+                usersex=1;
+            }
+            //密码的判断
+            if (StringUtils.isEmpty(password1)||StringUtils.isEmpty(password2)||!password1.equalsIgnoreCase(password2)){
+                model.addAttribute("msg","密码不一致");
+                return "/manager/userRegister";
+            }else {
+                User user = new User();
+                user.setUsername(username);
+                String pwdMD5 = MD5Utils.MD5(password2);
+                user.setPassword(pwdMD5);
+                user.setSex(usersex);
+//                状态默认0
+                user.setState(0);
+//                注册时商店id默认-1
+                user.setStoreId(-1);
+                Date date = new Date();
+                user.setCtime(date);
+                userService.add(user);
+                model.addAttribute("msg","注册成功");
+                return "/manager/login";
+            }
+        }
+    }
     @RequestMapping("/manager/exit")
     public String exit(HttpServletRequest req, HttpServletResponse resp, Model model){
         HttpSession session = req.getSession();

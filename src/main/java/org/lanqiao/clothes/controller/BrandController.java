@@ -142,11 +142,13 @@ public class BrandController {
     @RequestMapping("/manager/brandSelectedList")
     @ResponseBody
     public List<Brand> getBrandSelectedList(HttpServletRequest req, HttpServletResponse resp){
+        System.out.println("请求后端页面==========");
         //获取店铺id
         HttpSession session = req.getSession();
         User user  = (User)session.getAttribute("user");
         int storeId = user.getStoreId();
         List<Brand> brandList = brandService.getBrandSelectedList(storeId);
+        System.out.println(brandList.toString());
         return brandList;
     }
 }
