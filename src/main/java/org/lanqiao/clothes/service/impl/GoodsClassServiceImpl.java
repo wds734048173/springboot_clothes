@@ -28,19 +28,14 @@ public class GoodsClassServiceImpl implements IGoodsClassService {
     }*/
 
     @Override
-    public List<GoodsClass> getGoodsClassList() {
-        return goodsClassMapper.selectGoodsClassAll();
-    }
-
-    @Override
     public void modifyGoodsClass(GoodsClass goodsClass) {
         goodsClassMapper.updateGoodsClass(goodsClass);
     }
 
     @Override
-    public List<GoodsClass> getGoodsClass1List() {
+    public List<GoodsClass> getGoodsClassTree() {
         //获取一级分类
-        List<GoodsClass> goodsClassList = goodsClassMapper.selectGoodsClass1List();
+        List<GoodsClass> goodsClassList = goodsClassMapper.selectGoodsClass0List();
         for(GoodsClass goodsClass : goodsClassList){
             int id = goodsClass.getId();
             List<GoodsClass> goodsClassList1 = this.getGoodsClassNextList(id);
@@ -62,6 +57,16 @@ public class GoodsClassServiceImpl implements IGoodsClassService {
     @Override
     public List<GoodsClass> getNextGoodsClassList(int goodsClass1Id) {
         return goodsClassMapper.selectGoodsClassNextList(goodsClass1Id);
+    }
+
+    @Override
+    public List<GoodsClass> getGoodsClassListByIds(List<Integer> ids) {
+        return goodsClassMapper.selectGoodsClassListByIds(ids);
+    }
+
+    @Override
+    public List<GoodsClass> getGoodsClass1List() {
+        return goodsClassMapper.selectGoodsClass1List();
     }
 
 }

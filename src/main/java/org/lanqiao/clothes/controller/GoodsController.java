@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @EnableAutoConfiguration
@@ -110,14 +113,10 @@ public class GoodsController {
         int pPrice = Integer.valueOf(req.getParameter("goodspPrice"));
         int sPrice = Integer.valueOf(req.getParameter("goodssPrice"));
         int mPrice = Integer.valueOf(req.getParameter("goodsmPrice"));
-//        int class1Id = Integer.valueOf(req.getParameter("goodsclass1Id"));
-//        int class2Id = Integer.valueOf(req.getParameter("goodsclass2Id"));
-//        int class3Id = Integer.valueOf(req.getParameter("goodsclass3Id"));
-//        int brandId = Integer.valueOf(req.getParameter("goodsbrandId"));
-        int class1Id = 1;
-        int class2Id = 2;
-        int class3Id = 3;
-        int brandId = 1;
+        int class1Id = Integer.valueOf(req.getParameter("goodsclass1Id"));
+        int class2Id = Integer.valueOf(req.getParameter("goodsclass2Id"));
+        int class3Id = Integer.valueOf(req.getParameter("goodsclass3Id"));
+        int brandId = Integer.valueOf(req.getParameter("goodsbrandId"));
         String year = req.getParameter("goodsYear");
         String season = req.getParameter("goodsSeason");
         String sex = req.getParameter("goodsSex");
@@ -185,20 +184,32 @@ public class GoodsController {
 
     @RequestMapping("/manager/selectGoodsById")
     @ResponseBody
-    public Model selectGoodsById(HttpServletRequest req, HttpServletResponse resp,Model model){
+    public Goods selectGoodsById(HttpServletRequest req, HttpServletResponse resp){
         String goodsId = req.getParameter("goodsId");
         Goods goods = goodsService.getGoodsById(Integer.valueOf(goodsId));
+        List<Integer> goodsClassIdList = new ArrayList<>();
         int goodsClass1Id = goods.getClass1Id();
         int goodsClass2Id = goods.getClass2Id();
-
-        //获取分类二列表
-        List<GoodsClass> goodsClass2List = goodsClassService.getGoodsClassNextList(goodsClass1Id);
-        //获取分类三列表
-        List<GoodsClass> goodsClass3List = goodsClassService.getGoodsClassNextList(goodsClass2Id);
-        model.addAttribute("goods",goods);
-        model.addAttribute("goodsClass2List",goodsClass2List);
-        model.addAttribute("goodsClass3List",goodsClass3List);
-        return model;
+        int goodsClass3Id = goods.getClass3Id();
+        goodsClassIdList.add(goodsClass1Id);
+        goodsClassIdList.add(goodsClass2Id);
+        goodsClassIdList.add(goodsClass3Id);
+        List<GoodsClass> goodsClassList = goodsClassService.getGoodsClassListByIds(goodsClassIdList);
+        Map<Integer,String> goodsClassMap = new HashMap<>();
+        for(GoodsClass goodsClass : goodsClassList){
+            goodsClassMap.put(goodsClass.getId(),goodsClass.getName());
+        }
+        if(goodsClassMap.containsKey(goodsClass1Id)){
+            goods.setClass1Name(goodsClassMap.get(goodsClass1Id));
+        }
+        if(goodsClassMap.containsKey(goodsClass2Id)){
+            goods.setClass2Name(goodsClassMap.get(goodsClass2Id));
+        }
+        if(goodsClassMap.containsKey(goodsClass3Id)){
+            goods.setClass3Name(goodsClassMap.get(goodsClass3Id));
+        }
+        System.out.println(goods);
+        return goods;
     }
 
 

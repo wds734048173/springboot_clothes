@@ -16,8 +16,11 @@
       delete from tb_goods_class where id=#{id}
     </delete>-->
 
-    <select id="selectGoodsClass1List" resultType="org.lanqiao.clothes.pojo.GoodsClass">
+    <select id="selectGoodsClass0List" resultType="org.lanqiao.clothes.pojo.GoodsClass">
         select * from tb_goods_class where pId = 0
+    </select>
+    <select id="selectGoodsClass1List" resultType="org.lanqiao.clothes.pojo.GoodsClass">
+        select * from tb_goods_class where pId = 1
     </select>
     <select id="selectGoodsClassNextList" resultType="org.lanqiao.clothes.pojo.GoodsClass">
         select * from tb_goods_class where pId = #{param1}

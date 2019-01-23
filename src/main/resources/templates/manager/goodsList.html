@@ -17,7 +17,7 @@
             $('#goodsClass1').change(function () {
                 $('#goodsClass2').children().not(':eq(0)').remove();
                 $('#goodsClass3').children().not(':eq(0)').remove();
-                var goodsClass1Id = $(this).children('option:selected').index();
+                var goodsClass1Id = $(this).children('option:selected').val();
                 $.ajax({
                     //通过id获取商品信息
                     url: "/manager/selectGoodsClassById?goodsClassId=" + goodsClass1Id,
@@ -32,7 +32,7 @@
             //获取三级分类
             $('#goodsClass2').change(function () {
                 $('#goodsClass3').children().not(':eq(0)').remove();
-                var goodsClass2Id = $(this).children('option:selected').index();
+                var goodsClass2Id = $(this).children('option:selected').val();
                 $.ajax({
                     //通过id获取商品信息
                     url: "/manager/selectGoodsClassById?goodsClassId=" + goodsClass2Id,
@@ -162,21 +162,26 @@
                     url:"/manager/selectGoodsById?goodsId=" + id,
                     success:function (data) {
                         var goods = eval(data);
+                        // alert(JSON.stringify(goods));//把object弹出成json格式
                         $("#goodsId").val(goods.id);
                         $("#goodsNo").val(goods.no);
                         $("#goodsName").val(goods.name);
-                        $("#goodspPrice").val(goods.pPrice);
-                        $("#goodssPrice").val(goods.sPrice);
-                        $("#goodsmPrice").val(goods.mPrice);
-                        $("#goodsclass1Id").val(goods.class1Id);
+                        $("#goodspPrice").val(goods.pprice);
+                        $("#goodssPrice").val(goods.sprice);
+                        $("#goodsmPrice").val(goods.mprice);
+                        /*$("#goodsclass1Id").val(goods.class1Id);
                         $("#goodsclass2Id").val(goods.class2Id);
                         $("#goodsclass3Id").val(goods.class3Id);
+                        $("#goodsclass1Id").text(goods.class1Name);
+                        $("#goodsclass2Id").text(goods.class2Name);
+                        $("#goodsclass3Id").text(goods.class3Name);*/
                         $("#goodsBrand").val(goods.brandId);
                         $("#goodsYear").val(goods.year);
                         $("#goodsSeason").val(goods.season);
                         $("#goodsisshelf").val(goods.isshelf);
                         $("#goodsSex").val(goods.sex);
                         $("#goodsStoreId").val(goods.storeId);
+                        $("#goodsClassHidden").style.visibility="hidden";
                     }
                 })
                 $('#addGoodsModel').modal({
@@ -406,19 +411,19 @@
                     </select>
                 </div>
                 <br><br><br><br><br><br>
-                <div class="modal-form" style="margin-left: 16px;">
+                <div class="modal-form" style="margin-left: 16px;visibility: none;" id="goodsClassHidden">
                     <label for="goodsClass3" class="control-label">商品分类:</label>&nbsp;&nbsp;
                     <select class="myinput" id="goodsClass1" name="goodsClass1">
                         <option>--请选择--</option>
-                        <option th:if="${goodsClass1List!=null}" th:each="goodsClass:${goodsClass1List}" th:text="${goodsClass.name}" th:value="${goodsClass.id}"></option>
+                        <!--<option th:if="${goodsClass1List!=null}" th:each="goodsClass:${goodsClass1List}" th:text="${goodsClass.name}" th:value="${goodsClass.id}"></option>-->
                     </select>&nbsp;&nbsp;
                     <select class="myinput" id="goodsClass2" name="goodsClass2">
                         <option>--请选择--</option>
-                        <option th:if="${goodsClass2List!=null}" th:each="goodsClass:${goodsClass2List}" th:text="${goodsClass.name}" th:value="${goodsClass.id}"></option>
+                        <!--<option th:if="${goodsClass2List!=null}" th:each="goodsClass:${goodsClass2List}" th:text="${goodsClass.name}" th:value="${goodsClass.id}"></option>-->
                     </select>&nbsp;&nbsp;
                     <select class="myinput" id="goodsClass3" name="goodsClass3">
                         <option>--请选择--</option>
-                        <option th:if="${goodsClass3List!=null}" th:each="goodsClass:${goodsClass3List}" th:text="${goodsClass.name}" th:value="${goodsClass.id}"></option>
+                        <!--<option th:if="${goodsClass3List!=null}" th:each="goodsClass:${goodsClass3List}" th:text="${goodsClass.name}" th:value="${goodsClass.id}"></option>-->
                     </select>&nbsp;&nbsp;
                 </div>
                 <!--<input type="hidden" id="isPhoto" value="0">

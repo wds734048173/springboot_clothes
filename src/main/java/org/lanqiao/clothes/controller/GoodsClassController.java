@@ -30,10 +30,11 @@ public class GoodsClassController {
     @RequestMapping("/manager/goodsClassList")
     @ResponseBody
     public List<GoodsClass> goodsClassList(HttpServletRequest req, HttpServletResponse resp){
-        List<GoodsClass> goodsClassList = goodsClassService.getGoodsClass1List();
+        List<GoodsClass> goodsClassList = goodsClassService.getGoodsClassTree();
         return goodsClassList;
     }
 
+    //商品列表页面，获取下一级列表
     @RequestMapping("/manager/selectGoodsClassById")
     @ResponseBody
     public List<GoodsClass> selectGoodsClass(HttpServletRequest req, HttpServletResponse resp){
