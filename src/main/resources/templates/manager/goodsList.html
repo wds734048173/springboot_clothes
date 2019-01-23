@@ -147,7 +147,6 @@
                         +"&goodsbrandId="+goodsBrand+"&goodsClass1Id="+goodsClass1+"&goodsClass2Id="+goodsClass2+"&goodsClass3Id="+goodsClass3
                         +"&currentPage="+currentPage+"&searchGoodsNo="+searchGoodsNo+"&searchGoodsName="+searchGoodsName+"&searchGoodsBrand="+searchGoodsBrand+"&searchGoodsYear="+searchGoodsYear+"&searchGoodsIsshelf="+searchGoodsIsshelf;
                 }
-                alert(url)
                 $(".content").load(url);
                 $(".modal-backdrop").remove();
             })
@@ -176,7 +175,7 @@
                     url:"/manager/selectGoodsById?goodsId=" + id,
                     success:function (data) {
                         var goods = eval(data);
-                        alert(JSON.stringify(goods));//把object弹出成json格式
+                        // alert(JSON.stringify(goods));//把object弹出成json格式
                         $("#goodsId").val(goods.id);
                         $("#goodsNo").val(goods.no);
                         $("#goodsName").val(goods.name);
