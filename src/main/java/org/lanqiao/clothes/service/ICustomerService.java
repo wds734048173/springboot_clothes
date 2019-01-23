@@ -9,4 +9,9 @@ public interface ICustomerService {
     public List<Customer> getCustomerAll(Condition condition);
     public int getCustomerCount(Condition condition);
     public void modifyCustomerState(int customerId,int state);
+
+
+    //==============前台操作================
+    public Customer selectOne(Customer customer);
+    public void addCustomer(Customer customer);
 }

@@ -45,4 +45,17 @@ public class CustomerServiceImpl implements ICustomerService {
     public void modifyCustomerState(int customerId, int state) {
         customerMapper.updateCustomerState(customerId, state);
     }
+
+
+    //==============前台操作================
+    @Override
+    public Customer selectOne(Customer customer) {
+        return customerMapper.selectOne(customer);
+    }
+
+    @Override
+    public void addCustomer(Customer customer) {
+        customerMapper.insertCustomer(customer);
+    }
+
 }

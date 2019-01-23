@@ -1,12 +1,11 @@
 package org.lanqiao.clothes.config;
 
 import org.lanqiao.clothes.interceptors.LoginInterceptor;
-import org.lanqiao.clothes.interceptors.UserInterceptor;
+import org.lanqiao.clothes.interceptors.SaleLoginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -25,20 +24,20 @@ public class DefaultConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/manager").setViewName("/manager/index");
         registry.addViewController("/manager/").setViewName("/manager/index");
-       /* registry.addViewController("/manager/userregister").setViewName("/manager/userregister");*/
         registry.addViewController("/manager/toGoodsClassList").setViewName("/manager/goodsClassList");
+        registry.addViewController("/sale").setViewName("/sale/login");
+        registry.addViewController("/manager/userInfo").setViewName("/manager/userInfo");
     }
 
     //拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/manager/*","/manager","/druid/*")
-                .excludePathPatterns("/manager/login","/manager/register");
-        registry.addInterceptor(new UserInterceptor())
-                .addPathPatterns("/manager/*","/manager","/druid/*")
-//                不拦截访问的页面登录、注册、确认注册、添加用户信息
-                .excludePathPatterns("/manager/login","/manager/register","/manager/userRegister","/manager/store","/manager/storeInfo","/manager/exit");
+                .addPathPatterns("/manager/*","/manager")
+                .excludePathPatterns("/manager/login","/manager/register","/druid/*");
+        registry.addInterceptor(new SaleLoginInterceptor())
+                .addPathPatterns("/sale/*")
+                .excludePathPatterns("/sale","/sale/login","/sale/saleLogin","/sale/cusRegister","/sale/cusRegister1","/sale/cusregister");
     }
 
     //日期格式化

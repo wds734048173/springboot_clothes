@@ -4,16 +4,8 @@
     <meta charset="UTF-8">
     <title>个人信息展示</title>
     <script type="text/javascript" src="/static/manager/js/jquery.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var sex1 = $('#sex1').val()
-            if (sex1 == 1) {
-                $('#man').attr("checked","checked")
-            }else {
-                $('#woman').attr("checked","checked")
-            }
-        })
-       function tijiao(){
+  <!--  <script type="text/javascript">
+       function update(){
            $.ajax({
                type: "POST",//方法类型
                dataType: "json",//预期服务器返回的数据类型
@@ -30,44 +22,47 @@
                }
            })
        }
-    </script>
+    </script>-->
 </head>
 <body>
-<form  action="#" method="post" id="form">
-    <input  type="hidden" id="sex1" th:value="${session.user.sex}">
-    <h1>个人信息</h1>
-    <div >
-        <label for="username">账号名称：</label>
-        <input type="text" name="username" id="username" required th:value="${session.user.username}">
+    <div class="modal-body" style="margin-left: 100px;padding-top: 80px; font-size: 20px;">
+        <form  action="/manager/updateUser" method="post" id="form">
+            <input  type="hidden" id="id" name="userId" th:value="${session.user.id}">
+            <div class="form-group row">
+                <label for="username" class="control-label">账号名称：</label>
+                <input type="text" name="username" id="username" required th:value="${session.user.username}" disabled>
+            </div>
+            <br>
+            <div  class="form-group row">
+                <label for="realname" class="control-label">真实姓名：</label>
+                <input type="text" name="realname" id="realname" required th:value="${session.user.realname}">
+            </div>
+            <br>
+            <div>
+                <div class="form-group row">
+                    <label  class="control-label">性&nbsp;别&nbsp;：</label>
+                    <input id="man" type="radio"  name="sex"  value="0" th:checked="${session.user.sex==0}"/>男&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="woman" type="radio"  name="sex"  value="1" th:checked="${session.user.sex==1}"/>女
+                </div>
+                <br>
+                <div  class="form-group row">
+                    <label for="phone" class="control-label">电&nbsp;话&nbsp;：</label>
+                    <input type="text" name="phone" id="phone" required th:value="${session.user.phone}">
+                </div>
+                <br>
+            </div>
+            <div class="form-group row">
+                <label for="idCard" class="control-label">身份证号：</label>
+                <input type="text" name="idCard" id="idCard" required th:value="${session.user.idCard}">
+            </div>
+            <div class="form-group row">
+                <label for="ctime" class="control-label">注册时间：</label>
+                <input type="text" name="ctime" id="ctime" required th:value="${#dates.format(session.user.ctime, 'yyyy-MM-dd HH:mm:ss')}" disabled>
+            </div>
+            <div class="form-group row">
+                <input type="submit" value="修改" class="btn btn-primary"/>
+            </div>
+        </form>
     </div>
-    <br>
-    <div >
-        <label for="name">真实姓名：</label>
-        <input type="text" name="name" id="name" required th:value="${session.user.realname}">
-    </div>
-    <br>
-    <div>
-        <div >
-            性别：<input id="man" type="radio"  name="sex"  value="男"/>男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="woman" type="radio"  name="sex"  value="女"/>女
-        </div>
-        <br>
-        <div>
-            <label for="phone">电话：</label>
-            <input type="text" name="phone" id="phone" required th:value="${session.user.phone}">
-        </div>
-        <br>
-    </div>
-    <div>
-        <label for="idCard">身份证号：</label>
-        <input type="text" name="idCard" id="idCard" required th:value="${session.user.idCard}">
-    </div>
-    <div>
-        <label for="ctime">注册时间：</label>
-        <input type="text" name="ctime" id="ctime" required th:value="${session.user.ctime}">
-    </div>
-    <div>
-        <input type="submit" value="修改" class="btn btn-primary" onclick="tijiao()"/>
-    </div>
-</form><!-- form -->
 </body>
 </html>

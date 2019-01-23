@@ -61,4 +61,13 @@
     <select id="selectCustomerById" resultType="org.lanqiao.clothes.pojo.Customer" parameterType="int">
         select * from tb_customer where id = #{id}
     </select>
+
+    <!--前台操作-->
+    <select id="selectOne" parameterType="org.lanqiao.clothes.pojo.Customer" resultType="org.lanqiao.clothes.pojo.Customer">
+        select * from  tb_customer where username=#{username}
+    </select>
+    <insert id="insertCustomer" parameterType="org.lanqiao.clothes.pojo.Customer">
+        insert into tb_customer(username,password,realname,sex,phone,address,state,hiredate,ctime)
+        values (#{username},#{password},#{realname},#{sex},#{phone},#{address},#{state},#{hiredate},#{ctime})
+    </insert>
 </mapper>

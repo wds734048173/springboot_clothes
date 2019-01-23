@@ -12,4 +12,5 @@ public interface IUserService {
     public void add(User user);
     public User selectByName(String username);
     public void updateStoreId(User user);
+    public void modifyUser(User user);
 }

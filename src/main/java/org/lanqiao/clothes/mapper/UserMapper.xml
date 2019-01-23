@@ -15,4 +15,8 @@
     <update id="updateStoreId" parameterType="org.lanqiao.clothes.pojo.User">
         update tb_user set realname=#{realname},storeId=#{storeId},idCard=#{idCard} where username=#{username}
     </update>
+
+    <update id="updateUser" parameterType="org.lanqiao.clothes.pojo.User">
+        update tb_user set realname=#{realname},idCard=#{idCard},sex=#{sex},phone=#{phone},rtime=now() where id=#{id}
+    </update>
 </mapper>

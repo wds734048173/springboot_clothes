@@ -15,4 +15,6 @@ public interface UserMapper {
     public void insertUser(User user);
     //    修改用户信息表中的店铺id和真实姓名和身份证号
     public void updateStoreId(User user);
+    //修改用户信息
+    public void updateUser(User user);
 }

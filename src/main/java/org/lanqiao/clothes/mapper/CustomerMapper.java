@@ -24,4 +24,10 @@ public interface CustomerMapper {
 
     //通过客户ids获取客户详情
     public Customer selectCustomerById(Integer id);
+
+    //====================前台操作====================
+    //查询一个
+    public Customer  selectOne(Customer customer);
+    //添加
+    public void insertCustomer(Customer customer);
 }

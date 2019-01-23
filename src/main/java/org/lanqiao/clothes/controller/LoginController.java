@@ -79,7 +79,12 @@ public class LoginController {
             } else {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", retUser);
-                return "/manager/index";
+                int storeId = retUser.getStoreId();
+                if(storeId == -1){
+                    return "/manager/storeInfo";
+                }else{
+                    return "/manager/index";
+                }
             }
         }
     }

@@ -24,10 +24,10 @@ public class StoreControllr {
 
     @Autowired
     IStoreService storeService;
-    @RequestMapping("/manager/store")
+    /*@RequestMapping("/manager/store")
     public String fanhuistore(){
         return "/manager/storeInfo";
-    }
+    }*/
     //    完善商家信息
     @RequestMapping("/manager/storeInfo")
     public String addstoreInfo(HttpServletRequest request){

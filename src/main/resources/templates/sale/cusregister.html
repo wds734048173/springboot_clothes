@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://www.diu8diu.com/?reg.html -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>免费注册 - 丢丢定制</title>
+    <meta name="keywords" content="免费注册，会员注册">
+    <meta name="description" content="用户注册页面，会员注册页面">
+    <meta name="runtime" content="0.2109">
+    <meta name="queries" content="29">
+    <meta name="renderer" content="webkit">
+    <link rel="shortcut icon" href="http://www.diu8diu.com/diu-content/uploads/favicon.ico">
+    <link rel="icon" href="http://www.diu8diu.com/diu-content/uploads/favicon.ico">
+    <link rel="stylesheet" th:href="@{/sale/注册页面_files/diu.global.css}">
+    <link rel="stylesheet" th:href="@{/sale/注册页面_files/pc.glyphicon.css}">
+    <link rel="stylesheet" th:href="@{/sale/注册页面_files/diu.main.css}">
+    <link rel="stylesheet" th:href="@{/sale/注册页面_files/diu.shop.css}">
+    <link rel="stylesheet" th:href="@{/sale/注册页面_files/diu.diucmt.css}">
+    <link rel="stylesheet" th:href="@{/sale/注册页面_files/style.css}">
+    <!--<link rel="stylesheet" th:href="@{/manager/bootstrap/css/bootstrap.css}">-->
+    <!--<link rel="stylesheet" th:href="@{/manager/bootstrap/css/bootstrap-datetimepicker.css}">-->
+    <!--<script type="text/javascript" th:src="@{/manager/bootstrap/js/bootstrap.js}"></script>-->
+    <!--<script type="text/javascript" th:src="@{/manager/bootstrap/js/bootstrap-datetimepicker.js}"></script>-->
+    <!--&lt;!&ndash;设置日期&ndash;&gt;-->
+    <!--<script type="text/javascript">-->
+        <!--$(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});-->
+    <!--</script>-->
+    <script th:src="@{/sale/注册页面_files/hm.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/注册页面_files/jquery.js}"></script>
+    <style>html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}</style>
+    <script type="text/javascript" th:src="@{/sale/注册页面_files/diu.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/注册页面_files/com.js}"></script>
+    <script type="text/javascript">DIU.debug = false;DIU.runMode = 0;DIU.cacheOpen = false;DIU.htmlCacheOpen = false;DIU.logined = false;DIU.sitePath = "/";DIU.siteUrl = "http://www.diu8diu.com/";DIU.siteHurl = "http://www.diu8diu.com/?";DIU.siteHtmlFileSuffix = ".html";DIU.ucenterHurl = "http://www.diu8diu.com/diu-ucenter/?";DIU.loginUrl = "http://www.diu8diu.com/?login.html";DIU.logoutUrl = "http://www.diu8diu.com/?logout.html";DIU.regUrl = "http://www.diu8diu.com/?reg.html";DIU.forgetPasswordUrl = "http://www.diu8diu.com/?forget_password.html";DIU.c1t = "http://www.diu8diu.com/?{$urlpath}/type-{$typeid}-order-{$orderby}/";DIU.c2t = "http://www.diu8diu.com/?{$urlpath}/type-{$typeid}-order-{$orderby}/{$page}/";DIU.c3t = "http://www.diu8diu.com/?{$rootpath}/{$urlpath}/type-{$typeid}-order-{$orderby}/";DIU.c4t = "http://www.diu8diu.com/?{$rootpath}/{$urlpath}/type-{$typeid}-order-{$orderby}/{$page}/";DIU.moneySb = "￥";DIU.ctl = "reg";DIU.rootpath = "";DIU.urlpath = "";DIU.page = "0";DIU.typeid = "";DIU.orderby = "";DIU.time = "2019-01-13 16:50:15";DIU.timer = "60615.29";DIU.cookie.cookiePre = "diu";DIU.cookie.cookieDomain = "";DIU.cookie.cookiePath = "/";DIU.gid = "";DIU.pid = "";DIU.shoppingIsNeedLogin = 1;DIU.cartUrl = "http://www.diu8diu.com/?cart.html";</script>
+    <script type="text/javascript" th:src="@{/sale/注册页面_files/tpl.js}"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?ea740f0e930d61d16171ae2047cf55dc";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    <link rel="stylesheet" th:href="@{/sale/注册页面_files/diu.login.css}">
+<link type="text/css" rel="stylesheet" th:href="@{/sale/注册页面_files/layer.min.css}"></head>
+<body>
+<!--头部-->
+<div id="header">
+    <div class="header-line">
+        <div class="wrapper">
+            <div class="logo"><a href="http://www.diu8diu.com/"><img th:src="@{/sale/注册页面_files/logo.png}" style="width: 930px;height: 70px"  alt="丢丢定制" title="丢丢定制"></a></div>
+        </div>
+    </div>
+	    <div class="topdmenu">
+        <div class="wrapper">
+           <div class="main-nav" id="main_nav">
+            </div>
+            <div class="top-cart">
+                <a class="cart" href="http://www.diu8diu.com/?shopping.html"><i class="glyphicon glyphicon-globe"></i>大宗购物</a>
+            </div>
+        </div>
+    </div>
+	<div class="topdmenufoot"></div>
+</div>
+
+<!--主内容区-->
+<div id="mbody">
+    <div class="diu-reg">
+        <div class="diu-reg-main-section">
+            <h1>新用户注册</h1>
+            <form class="form-reg" name="form_reg" action="/sale/cusRegister1" vcode_open="1"  id="form">
+                <dl class="username">
+                    <dt>用户名</dt>
+                    <dd>
+                        <input type="text" class="text text-username" maxlength="20" name="username" placeholder="给自己取一个用户名">
+                    </dd>
+                </dl>
+                <dl class="pssword">
+                    <dt>设置密码</dt>
+                    <dd>
+                        <input type="password" class="text text-pssword" maxlength="32" name="password" placeholder="设置密码">
+                    </dd>
+                </dl>
+                <dl class="repssword">
+                    <dt>请确认密码</dt>
+                    <dd>
+                        <input type="password" class="text text-pssword-re" maxlength="32" name="repassword" placeholder="请再输入一次设置的密码">
+                    </dd>
+                </dl>
+                <dl class="username">
+                    <dt>真实姓名</dt>
+                    <dd>
+                        <input type="text" class="text text-username" maxlength="20" name="realname" placeholder="请输入自己的真实名字">
+                    </dd>
+                </dl>
+                <dl class="username">
+                    <dt>联系电话</dt>
+                    <dd>
+                        <input type="text" class="text text-username" maxlength="20" name="phone" placeholder="请输入联系电话">
+                    </dd>
+                </dl>
+                <dl class="username">
+                    <dt>家庭地址</dt>
+                    <dd>
+                        <input type="text" class="text text-username" maxlength="20" name="address" placeholder="请输入家庭地址">
+                    </dd>
+                </dl>
+                <dl class="username">
+                    <dt>出生日期</dt>
+                    <dd>
+                        <input type="text" class="text text-username form_datetime" value="2012-06-15" readonly maxlength="20" name="hiredate" >
+                    </dd>
+                </dl>
+                <dl class="username">
+                    <dt></dt>
+                    <dd>
+                        <span th:text="${msg}"></span>
+                    </dd>
+                </dl>
+                <dl class="agreement">
+                    <dt></dt>
+                    <dd>阅读并同意
+                        <a href="http://www.diu8diu.com/?agreement.html" target="_blank">《网络服务使用协议》</a>
+                    </dd>
+                </dl>
+                <dl class="button">
+                    <dt></dt>
+                    <dd>
+                        <input type="submit" class="btn btn-large btn-primary btn-login" name="btn_login" id="submit" value="同意协议并提交注册"></dd>
+                    </dd>
+                </dl>
+            </form><script type="text/javascript">$(document).ready(function(){var $form   = $("form[name='form_reg']"),$btnReg     = $form.find("button[name='btn_reg']"),$vcodeValue = $form.find("input[name='verifycode_value']"),$verifycode = $form.find("span[name='reg_verifycode']");DIU.verifyCode({boxer:$verifycode});DIU.verifyCodeValueFocus($vcodeValue,$verifycode);DIU.verifyCodeValueBlur($vcodeValue);DIU.member.regInit({form:$form});$btnReg.click(function(){DIU.member.reg({form:$form,vcode_open:1,vcodeValue:$vcodeValue,verifycode:$verifycode,btnReg:$btnReg});});DIU.enterClick(function(){$btnReg.click();});});</script>
+        </div>
+        <div class="diu-reg-aux-section">
+            <p>已经有帐号？请直接登录</p>
+            <div class="login-btns"><a class="btn" href="/sale">直接登陆</a>
+            </div>
+         </div>
+    </div>
+
+<!--底部-->
+<div id="footer">
+    <div class="footer-section">
+        <div class="wrapper">
+            <div class="col-contact"><h3>DIU8DIU · 丢丢定制平台</h3><p class="text1">打造一个从事个性化定制服务的商业平台，致力于通过互联网为用户提供全面的个性化服饰体验！</p><p class="text2">QQ 客服： 2275370591    13689427<br>客服热线： 400-0156-002 或 18554169888</p></div>
+            <div class="col-cates">
+                <dl class="item1">
+                   <dt>公司信息</dt>
+                   <dd><a href="http://www.diu8diu.com/?about.html" target="_self">公司介绍</a></dd>
+                   
+                   <dd><a href="http://www.diu8diu.com/?partners.html" target="_self">合作伙伴</a></dd>
+                   
+                   <dd><a href="http://www.diu8diu.com/?join/" target="_self">人才招聘</a></dd>
+                   
+                   <dd><a href="http://www.diu8diu.com/?contact.html" target="_self">联系我们</a></dd>
+                </dl>
+                
+                <dl class="item2">
+                   <dt>产品服务</dt>
+                   <dd><a href="http://www.diu8diu.com/?news/" target="_self">新闻中心</a></dd>
+                   <dd><a href="http://www.diu8diu.com/?case/" target="_self">案例展示</a></dd>
+                   <dd><a href="http://www.diu8diu.com/?video/" target="_self">公司视频</a></dd>
+                </dl>
+                <dl class="item3">
+                   <dt>帮助支持</dt>
+                   <dd><a href="http://www.diu8diu.com/?faq/" target="_self">常见问题</a></dd>
+                   <dd><a href="http://www.diu8diu.com/?download/" target="_self">文档下载</a></dd>
+                   <dd><a href="http://www.diu8diu.com/?agreement.html" target="_self">用户协议</a></dd>
+                   <dd><a href="http://www.diu8diu.com/?privacy.html" target="_self">隐私政策</a></dd>
+                </dl>
+
+            </div>
+            <div class="col-qrcode"><img class="img-responsive" src="/sale/注册页面_files/qrcode.jpg" alt="qrcode"><h3>官方微信</h3><p>关注我们 · 更多优惠</p></div>
+        </div>
+    </div>
+    <div class="powered-by">
+        <div class="wrapper">
+            <div class="copyright">Copyright © <a href="http://www.diu8diu.com/" target="_blank">丢丢定制</a> 2016-2017 ALL Rights Reserved <span class="icp"><a href="http://www.miitbeian.gov.cn/" rel="nofollow" target="_blank">鲁ICP备14011980号-1</a></span><i class="stat"></i></div>
+        </div>
+    </div>
+</div>
+<div class="diu-floater" id="diu_floater"><a class="top" href="javascript:;" title="返回顶部" style="display: none;"></a><a class="feedback" href="http://www.diu8diu.com/?form/feedback.html" title="在线反馈"></a><a class="faq" href="http://www.diu8diu.com/?faq/" title="常见问题"></a></div>
+<script type="text/javascript">
+$(document).ready(function(){
+	//网站导航
+	var $mainNav = $("#main_nav"),
+	$mainNavLi   = $("#main_nav li.n1");
+	$mainNavLi.hover(
+		function(){
+			$(this).addClass("hover");
+			$(this).find("div.subnav").show();
+		},
+		function(){
+			$(this).removeClass("hover");
+			$(this).find("div.subnav").hide();
+		}
+	);
+	$("#wxqcode").hover(function(){
+		$("#topweixin").show()
+		},function(){
+		$("#topweixin").hide()
+		})
+	$mainNavLi.each(function(){
+		var url = $(this).attr("url"),
+		href    = window.location.href;
+		if(!DIU.isNull(url)){
+			if(DIU.runMode>0){
+				var len = href.length-url.length;
+				if(href.indexOf(url)>-1 && href.indexOf(url)==len){
+					$(this).addClass("current");
+					return false;
+				};
+			}else{
+				var para = href.split("?")[1] || "";
+				if(DIU.isNull(para)){
+					$mainNav.find("li:first").addClass("current");
+					return false;
+				};
+				if(href.split("?")[1] == url.split("?")[1]){
+					$(this).addClass("current");
+					return false;
+				};
+			};
+		};
+    });
+	//在线客服(mini:迷你模式,list:展开模式)
+	DIU.client.serviceOnline({open:'1',data:'[{"name":"%u670D%u88C5%u5B9A%u5236%u54A8%u8BE2","tel":"","qq":"2275370591","crmqq":"","wangwang":"","skype":"","text":""}]',initType:"mini"});
+	//用户登录状态
+	DIU.member.userStatus({userStatusSection:$("#user_status")});
+	//购物车
+	DIU.shop.cartInit({
+		cartAmountSection:$("span[name='cart_amount']")
+	});
+	//返回顶部
+	var $diuFloater = $("#diu_floater"),
+	$top = $diuFloater.find("a.top").hide();
+	$(window).scroll(function(){
+		var top = parseInt(DIU.documentScrollTop());
+		if(top<20){
+			$top.hide(100);
+		}else{
+			$top.show(100);
+		}
+	});
+	DIU.scrollTop($top);
+	//搜索
+	var $inputKeywords = $("input[name='keywords']"),
+	$searchKeywords    = $("div[name='search_keywords']");
+	if(!DIU.isNull($inputKeywords.val())){$searchKeywords.hide();};
+	$inputKeywords.focus(function(){$searchKeywords.hide();});
+	$inputKeywords.focusout(function(){if(DIU.isNull($inputKeywords.val())){$searchKeywords.show();};});
+});
+</script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	if(DIU.int("1")==0){
+		$("a[name='wxlogin']").remove();
+	};
+	if(DIU.int("0")==0){
+		$("a[name='qqlogin']").remove();
+	};
+});
+</script>
+
+
+<div class="service-online"><a href="javascript:;" class="mini"></a><div class="listpanel" style="display: none;"><div class="heading"><a class="close" href="javascript:;"></a></div><div class="section"><dl><dt>服装定制咨询</dt><dd class="qq"><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2275370591&amp;site=qq&amp;menu=yes" target="_blank"></a></dd></dl></div></div></div></div></body></html>

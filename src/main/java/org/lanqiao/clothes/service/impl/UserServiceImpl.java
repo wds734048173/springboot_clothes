@@ -35,4 +35,9 @@ public class UserServiceImpl implements IUserService {
     public void updateStoreId(User user) {
         userMapper.updateStoreId(user);
     }
+
+    @Override
+    public void modifyUser(User user) {
+        userMapper.updateUser(user);
+    }
 }

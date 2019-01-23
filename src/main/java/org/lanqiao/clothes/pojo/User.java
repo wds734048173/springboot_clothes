@@ -16,6 +16,7 @@ import java.util.Date;
 @Builder
 @ToString
 public class User {
+    private int id;
     private String username;
     private String password;
     private String realname;
