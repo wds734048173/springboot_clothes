@@ -7,7 +7,14 @@
     <insert id="insertGoods" parameterType="org.lanqiao.clothes.pojo.Goods">
         insert into tb_goods (no,name,pPrice,sPrice,mPrice,class1Id,class2Id,class3Id,brandId,year,season,isshelf,sex,storeId,ctime)
                             values (#{no},#{name},#{pPrice},#{sPrice},#{mPrice},#{class1Id},#{class2Id},#{class3Id},#{brandId},#{year},#{season},#{isshelf},#{sex},#{storeId},now())
-    </insert>
+        <selectKey resultType="int" keyColumn="id" keyProperty="id" order="AFTER" >
+            select LAST_INSERT_ID()
+        </selectKey>
+        <!--insert into tb_goods_sku (goodsId,colorId,sizeId,ctime) values
+        <foreach collection="goodsSKUList" item="goodsSKU" separator="," index="index">
+            (#{id},#{goodsSKU.colorId},#{goodsSKU.sizeId},now())
+        </foreach>-->
+</insert>
     <!--查询所有的-->
     <select id="selectGoodsAll" resultType="org.lanqiao.clothes.pojo.Goods" parameterType="org.lanqiao.clothes.pojo.Condition">
         select * from tb_goods
@@ -90,4 +97,11 @@
     <update id="updateGoodsIsshelf">
         update tb_goods set isshelf=#{param3} where storeId=#{param1} and id=#{param2}
     </update>
+
+    <insert id="insertGoodsSKUList" parameterType="list">
+        insert into tb_goods_sku (goodsId,colorId,sizeId,ctime) values
+        <foreach collection="list" item="goodsSKU" separator="," index="index">
+            (#{goodsSKU.goodsId},#{goodsSKU.colorId},#{goodsSKU.sizeId},now())
+        </foreach>
+    </insert>
 </mapper>

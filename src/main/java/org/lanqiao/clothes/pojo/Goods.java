@@ -3,6 +3,7 @@ package org.lanqiao.clothes.pojo;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 //商品基础信息表
 @NoArgsConstructor
@@ -36,4 +37,5 @@ public class Goods {
     private Date ctime;
     private Date rtime;
 
+    private List<GoodsSKU> goodsSKUList;
 }

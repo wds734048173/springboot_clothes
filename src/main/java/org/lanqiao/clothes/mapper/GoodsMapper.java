@@ -30,4 +30,7 @@ public interface GoodsMapper {
 
     //修改商品上下架状态
     public void updateGoodsIsshelf(int storeId,int goodsId,int isshelf);
+
+    //新增商品sku表
+    public void insertGoodsSKUList(List<GoodsSKU> goodsSKUList);
 }

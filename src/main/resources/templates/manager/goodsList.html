@@ -8,6 +8,20 @@
         $(function () {
             //新增
             $("#addGoods").click(function () {
+                $("#goodsId").val("");
+                $("#goodsNo").val("");
+                $("#goodsName").val("");
+                $("#goodspPrice").val("");
+                $("#goodssPrice").val("");
+                $("#goodsmPrice").val("");
+                $("#goodsclass1Id").val("-1");
+                $("#goodsclass2Id").val("-1");
+                $("#goodsclass3Id").val("-1");
+                $("#goodsBrand").val("-1");
+                $("#goodsYear").val("-1");
+                $("#goodsSeason").val("-1");
+                $("#goodsisshelf").val("0");
+                $("#goodsSex").val("-1");
                 $('#addGoodsModel').modal({
                     keyboard: false,
                     show:true
@@ -124,13 +138,13 @@
                     var url = "/manager/addGoods?goodsNo="+goodsNo+"&goodsName="+goodsName+"&goodspPrice="+goodspPrice+"&goodssPrice="+goodssPrice
                         +"&goodsmPrice="+goodsmPrice+"&goodsYear="+goodsYear+"&goodsSeason="+goodsSeason+"&goodsIsshelf="+goodsIsshelf+"&goodsSex="+goodsSex
                         +"&method=add"
-                        +"&goodsbrandId="+goodsBrand+"&goodsClass1Id"+goodsClass1+"&goodsClass2Id"+goodsClass2+"&goodsClass3Id"+goodsClass3
+                        +"&goodsbrandId="+goodsBrand+"&goodsClass1Id="+goodsClass1+"&goodsClass2Id="+goodsClass2+"&goodsClass3Id="+goodsClass3
                         +"&currentPage="+currentPage+"&searchGoodsNo="+searchGoodsNo+"&searchGoodsName="+searchGoodsName+"&searchGoodsBrand="+searchGoodsBrand+"&searchGoodsYear="+searchGoodsYear+"&searchGoodsIsshelf="+searchGoodsIsshelf;
                 }else{
-                    var url = "/manager/updateGoodsById?goodsId="+goodsId+"&goodsName="+goodsName+"&goodspPrice="+goodspPrice+"&goodssPrice="+goodssPrice
+                    var url = "/manager/updateGoodsById?goodsId="+goodsId+"&goodsNo="+goodsNo+"&goodsName="+goodsName+"&goodspPrice="+goodspPrice+"&goodssPrice="+goodssPrice
                         +"&goodsmPrice="+goodsmPrice+"&goodsYear="+goodsYear+"&goodsSeason="+goodsSeason+"&goodsIsshelf="+goodsIsshelf+"&goodsSex="+goodsSex
                         +"&method=update"
-                        +"&goodsbrandId="+goodsBrand+"&goodsClass1Id"+goodsClass1+"&goodsClass2Id"+goodsClass2+"&goodsClass3Id"+goodsClass3
+                        +"&goodsbrandId="+goodsBrand+"&goodsClass1Id="+goodsClass1+"&goodsClass2Id="+goodsClass2+"&goodsClass3Id="+goodsClass3
                         +"&currentPage="+currentPage+"&searchGoodsNo="+searchGoodsNo+"&searchGoodsName="+searchGoodsName+"&searchGoodsBrand="+searchGoodsBrand+"&searchGoodsYear="+searchGoodsYear+"&searchGoodsIsshelf="+searchGoodsIsshelf;
                 }
                 alert(url)
@@ -162,26 +176,67 @@
                     url:"/manager/selectGoodsById?goodsId=" + id,
                     success:function (data) {
                         var goods = eval(data);
-                        // alert(JSON.stringify(goods));//把object弹出成json格式
+                        alert(JSON.stringify(goods));//把object弹出成json格式
                         $("#goodsId").val(goods.id);
                         $("#goodsNo").val(goods.no);
                         $("#goodsName").val(goods.name);
                         $("#goodspPrice").val(goods.pprice);
                         $("#goodssPrice").val(goods.sprice);
                         $("#goodsmPrice").val(goods.mprice);
-                        /*$("#goodsclass1Id").val(goods.class1Id);
-                        $("#goodsclass2Id").val(goods.class2Id);
-                        $("#goodsclass3Id").val(goods.class3Id);
-                        $("#goodsclass1Id").text(goods.class1Name);
-                        $("#goodsclass2Id").text(goods.class2Name);
-                        $("#goodsclass3Id").text(goods.class3Name);*/
+                        var goodsclass1Id = goods.class1Id;
+                        var goodsclass2Id = goods.class2Id;
+                        var goodsclass3Id = goods.class3Id;
+                        $.ajax({
+                            //通过id获取商品信息
+                            url: "/manager/selectGoodsClassById?goodsClassId=1",
+                            success: function (data) {
+                                $('#goodsClass1').children().not(':eq(0)').remove();
+                                var goodsClassList = eval(data);
+                                for (var i = 0; i < goodsClassList.length; i++) {
+
+                                    if(goodsClassList[i].id == goodsclass1Id){
+                                        $('#goodsClass1').append('<option value="'+goodsClassList[i].id+'" selected>'+goodsClassList[i].name+'</option>');
+                                    }else{
+                                        $('#goodsClass1').append('<option value="'+goodsClassList[i].id+'">'+goodsClassList[i].name+'</option>');
+                                    }
+                                }
+                            }
+                        })
+                        $.ajax({
+                            //通过id获取商品信息
+                            url: "/manager/selectGoodsClassById?goodsClassId=" + goodsclass1Id,
+                            success: function (data) {
+                                $('#goodsClass2').children().not(':eq(0)').remove();
+                                var goodsClassList = eval(data);
+                                for (var i = 0; i < goodsClassList.length; i++) {
+                                    if(goodsClassList[i].id == goodsclass2Id){
+                                        $('#goodsClass2').append('<option value="'+goodsClassList[i].id+'" selected>'+goodsClassList[i].name+'</option>');
+                                    }else{
+                                        $('#goodsClass2').append('<option value="'+goodsClassList[i].id+'">'+goodsClassList[i].name+'</option>');
+                                    }
+                                }
+                            }
+                        })
+                        $.ajax({
+                            //通过id获取商品信息
+                            url: "/manager/selectGoodsClassById?goodsClassId=" + goodsclass2Id,
+                            success: function (data) {
+                                $('#goodsClass3').children().not(':eq(0)').remove();
+                                var goodsClassList = eval(data);
+                                for (var i = 0; i < goodsClassList.length; i++) {
+                                    if(goodsClassList[i].id == goodsclass3Id){
+                                        $('#goodsClass3').append('<option value="'+goodsClassList[i].id+'" selected>'+goodsClassList[i].name+'</option>');
+                                    }else{
+                                        $('#goodsClass3').append('<option value="'+goodsClassList[i].id+'">'+goodsClassList[i].name+'</option>');
+                                    }
+                                }
+                            }
+                        })
                         $("#goodsBrand").val(goods.brandId);
                         $("#goodsYear").val(goods.year);
                         $("#goodsSeason").val(goods.season);
                         $("#goodsisshelf").val(goods.isshelf);
                         $("#goodsSex").val(goods.sex);
-                        $("#goodsStoreId").val(goods.storeId);
-                        $("#goodsClassHidden").style.visibility="hidden";
                     }
                 })
                 $('#addGoodsModel').modal({
@@ -370,7 +425,7 @@
                     <label for="goodsBrand" class="control-label">商品品牌:</label>
                     <select class="form-control" id="goodsBrand" name="goodsBrand">
                         <option value="-1">--请选择--</option>
-                        <option th:each="brand:${brandList}" th:text="${brand.name}" th:value="${brand.id}" th:selected="${condition.brandId==brand.id}"></option>
+                        <option th:each="brand:${brandList}" th:text="${brand.name}" th:value="${brand.id}"></option>
                     </select>
                 </div>
                 <br><br>
@@ -411,11 +466,11 @@
                     </select>
                 </div>
                 <br><br><br><br><br><br>
-                <div class="modal-form" style="margin-left: 16px;visibility: none;" id="goodsClassHidden">
+                <div class="modal-form" style="margin-left: 16px;" id="goodsClassHidden">
                     <label for="goodsClass3" class="control-label">商品分类:</label>&nbsp;&nbsp;
                     <select class="myinput" id="goodsClass1" name="goodsClass1">
                         <option>--请选择--</option>
-                        <!--<option th:if="${goodsClass1List!=null}" th:each="goodsClass:${goodsClass1List}" th:text="${goodsClass.name}" th:value="${goodsClass.id}"></option>-->
+                        <option th:if="${goodsClass1List!=null}" th:each="goodsClass:${goodsClass1List}" th:text="${goodsClass.name}" th:value="${goodsClass.id}"></option>
                     </select>&nbsp;&nbsp;
                     <select class="myinput" id="goodsClass2" name="goodsClass2">
                         <option>--请选择--</option>
@@ -426,6 +481,14 @@
                         <!--<option th:if="${goodsClass3List!=null}" th:each="goodsClass:${goodsClass3List}" th:text="${goodsClass.name}" th:value="${goodsClass.id}"></option>-->
                     </select>&nbsp;&nbsp;
                 </div>
+                <!--<div class="modal-form">
+                    <label class="control-label"style="margin-left: 16px;font-size: 16px">颜色:</label>
+                    <input type="checkbox " name="color" th:each="color : ${colorList}" th:value="${color.id}" th:text="${color.name} ">
+                </div>
+                <div class="modal-form">
+                    <label class="control-label"style="margin-left: 16px; font-size: 16px">尺码:</label>
+                    <input type="checkbox" name="size" th:each="size : ${sizeList}" th:value="${size.id}" th:text="${size.name}">
+                </div>-->
                 <!--<input type="hidden" id="isPhoto" value="0">
                 <form method="post" enctype="multipart/form-data" id="uploadForm">
                     <div>
@@ -469,7 +532,7 @@
     </nav>
 </center>
 </body>
-<script type="text/javascript">
+<!--<script type="text/javascript">
     //页面加载完成后执行
     $(document).ready(function () {
     // window.onload=function (){
@@ -488,7 +551,6 @@
                 }
             }
         })
-
-    }
-</script>
+    })
+</script>-->
 </html>

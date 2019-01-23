@@ -5,6 +5,7 @@ import org.lanqiao.clothes.mapper.GoodsMapper;
 import org.lanqiao.clothes.pojo.Brand;
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Goods;
+import org.lanqiao.clothes.pojo.GoodsSKU;
 import org.lanqiao.clothes.service.IGoodsService;
 import org.lanqiao.clothes.utils.DataMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,11 @@ public class GoodsServiceImpl implements IGoodsService {
     @Override
     public void modifyGoodsIsshelf(int storeId, int goodsId, int isshelf) {
         goodsMapper.updateGoodsIsshelf(storeId, goodsId, isshelf);
+    }
+
+    @Override
+    public void addGoodsSKUList(List<GoodsSKU> goodsSKUList) {
+        goodsMapper.insertGoodsSKUList(goodsSKUList);
     }
 
     /*@Override

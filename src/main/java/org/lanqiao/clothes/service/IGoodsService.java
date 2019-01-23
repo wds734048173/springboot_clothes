@@ -2,6 +2,7 @@ package org.lanqiao.clothes.service;
 
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Goods;
+import org.lanqiao.clothes.pojo.GoodsSKU;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface IGoodsService {
     public Goods getGoodsById(int id);
     /*public List<Goods> getGoodsByIds(List<Integer> ids);*/
     public void modifyGoodsIsshelf(int storeId,int goodsId,int isshelf);
+    public void addGoodsSKUList(List<GoodsSKU> goodsSKUList);
 }

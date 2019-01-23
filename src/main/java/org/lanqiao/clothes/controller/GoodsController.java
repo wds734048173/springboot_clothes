@@ -1,13 +1,12 @@
 package org.lanqiao.clothes.controller;
 
 import org.lanqiao.clothes.pojo.*;
-import org.lanqiao.clothes.service.IBrandService;
-import org.lanqiao.clothes.service.IGoodsClassService;
-import org.lanqiao.clothes.service.IGoodsService;
+import org.lanqiao.clothes.service.*;
 import org.lanqiao.clothes.utils.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +28,12 @@ public class GoodsController {
     IBrandService brandService;
     @Autowired
     IGoodsClassService goodsClassService;
+    @Autowired
+    IColorService colorService;
+    @Autowired
+    ISizeService sizeService;
     @RequestMapping("/manager/goodsList")
+    @Transactional
     public String goodsList(HttpServletRequest req, HttpServletResponse resp, Model model){
         int pageNum = 1;
         if(req.getParameter("currentPage") != null){
@@ -92,9 +96,12 @@ public class GoodsController {
 
         //获取品牌查询列表
         List<Brand> brandList = brandService.getBrandSelectedList(storeId);
-        //获取分类一列表
+        //获取一级分类列表
         List<GoodsClass> goodsClass1List = goodsClassService.getGoodsClass1List();
-
+        //通过店铺id获取颜色列表
+        List<Color> colorList = colorService.getColorSelectedList(storeId);
+        //通过店铺id获取尺码列表
+        List<Size> sizeList = sizeService.getSizeSelectedList(storeId);
         //数据封装
         model.addAttribute("goodsList",goodsList);
         model.addAttribute("brandList",brandList);
@@ -102,6 +109,8 @@ public class GoodsController {
         model.addAttribute("pm",pageModel);
         model.addAttribute("condition",condition);
         model.addAttribute("currentPage",pageNum);
+        model.addAttribute("colorList",colorList);
+        model.addAttribute("sizeList",sizeList);
         return "/manager/goodsList";
     }
 
@@ -113,9 +122,9 @@ public class GoodsController {
         int pPrice = Integer.valueOf(req.getParameter("goodspPrice"));
         int sPrice = Integer.valueOf(req.getParameter("goodssPrice"));
         int mPrice = Integer.valueOf(req.getParameter("goodsmPrice"));
-        int class1Id = Integer.valueOf(req.getParameter("goodsclass1Id"));
-        int class2Id = Integer.valueOf(req.getParameter("goodsclass2Id"));
-        int class3Id = Integer.valueOf(req.getParameter("goodsclass3Id"));
+        int class1Id = Integer.valueOf(req.getParameter("goodsClass1Id"));
+        int class2Id = Integer.valueOf(req.getParameter("goodsClass2Id"));
+        int class3Id = Integer.valueOf(req.getParameter("goodsClass3Id"));
         int brandId = Integer.valueOf(req.getParameter("goodsbrandId"));
         String year = req.getParameter("goodsYear");
         String season = req.getParameter("goodsSeason");
@@ -139,7 +148,25 @@ public class GoodsController {
         goods.setSex(sex);
         goods.setStoreId(storeId);
         goods.setIsshelf(isshelf);
+        //获取颜色
+        List<Color> colorList = colorService.getColorSelectedList(storeId);
+        //获取尺码
+        List<Size> sizeList = sizeService.getSizeSelectedList(storeId);
+        List<GoodsSKU> goodsSKUList = new ArrayList<>();
+        for(Color color : colorList){
+            for(Size size : sizeList){
+                int colorId = color.getId();
+                int sizeId = size.getId();
+                GoodsSKU goodsSKU = GoodsSKU.builder().build();
+                goodsSKU.setGoodsId(goods.getId());
+                goodsSKU.setColorId(colorId);
+                goodsSKU.setSizeId(sizeId);
+                goodsSKUList.add(goodsSKU);
+            }
+        }
+//        goods.setGoodsSKUList(goodsSKUList);
         goodsService.addGoods(goods);
+        goodsService.addGoodsSKUList(goodsSKUList);
         return goodsList(req,resp,model);
     }
 
@@ -152,17 +179,19 @@ public class GoodsController {
         int pPrice = Integer.valueOf(req.getParameter("goodspPrice"));
         int sPrice = Integer.valueOf(req.getParameter("goodssPrice"));
         int mPrice = Integer.valueOf(req.getParameter("goodsmPrice"));
-        int class1Id = Integer.valueOf(req.getParameter("goodsclass1Id"));
-        int class2Id = Integer.valueOf(req.getParameter("goodsclass2Id"));
-        int class3Id = Integer.valueOf(req.getParameter("goodsclass3Id"));
+        int class1Id = Integer.valueOf(req.getParameter("goodsClass1Id"));
+        int class2Id = Integer.valueOf(req.getParameter("goodsClass2Id"));
+        int class3Id = Integer.valueOf(req.getParameter("goodsClass3Id"));
         int brandId = Integer.valueOf(req.getParameter("goodsbrandId"));
         String id = req.getParameter("goodsId");
         String year = req.getParameter("goodsYear");
         String season = req.getParameter("goodsSeason");
         String sex = req.getParameter("goodsSex");
         int isshelf = Integer.valueOf(req.getParameter("goodsIsshelf"));
+        //获取店铺id
         HttpSession session = req.getSession();
-        int storeId = Integer.valueOf(session.getAttribute("storeId").toString());
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
         goods.setId(Integer.valueOf(id));
         goods.setNo(no);
         goods.setName(name);
@@ -187,7 +216,7 @@ public class GoodsController {
     public Goods selectGoodsById(HttpServletRequest req, HttpServletResponse resp){
         String goodsId = req.getParameter("goodsId");
         Goods goods = goodsService.getGoodsById(Integer.valueOf(goodsId));
-        List<Integer> goodsClassIdList = new ArrayList<>();
+        /*List<Integer> goodsClassIdList = new ArrayList<>();
         int goodsClass1Id = goods.getClass1Id();
         int goodsClass2Id = goods.getClass2Id();
         int goodsClass3Id = goods.getClass3Id();
@@ -208,7 +237,7 @@ public class GoodsController {
         if(goodsClassMap.containsKey(goodsClass3Id)){
             goods.setClass3Name(goodsClassMap.get(goodsClass3Id));
         }
-        System.out.println(goods);
+        System.out.println(goods);*/
         return goods;
     }
 
