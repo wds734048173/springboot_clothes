@@ -30,7 +30,8 @@ public class StoreControllr {
     }
     //    完善商家信息
     @RequestMapping("/manager/storeInfo")
-    public String addstoreinfo(HttpServletRequest request){
+    public String addstoreInfo(HttpServletRequest request){
+        System.out.println("============进入完成店铺信息方法。。。");
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
 //        店铺名称

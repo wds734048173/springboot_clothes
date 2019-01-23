@@ -28,8 +28,8 @@ public class GoodsClassServiceImpl implements IGoodsClassService {
     }*/
 
     @Override
-    public List<GoodsClass> getGoodsClassList(int storeId) {
-        return goodsClassMapper.selectGoodsClassAll(storeId);
+    public List<GoodsClass> getGoodsClassList() {
+        return goodsClassMapper.selectGoodsClassAll();
     }
 
     @Override
@@ -38,25 +38,30 @@ public class GoodsClassServiceImpl implements IGoodsClassService {
     }
 
     @Override
-    public List<GoodsClass> getGoodsClass1List(int storeId) {
+    public List<GoodsClass> getGoodsClass1List() {
         //获取一级分类
-        List<GoodsClass> goodsClassList = goodsClassMapper.selectGoodsClass1List(storeId);
+        List<GoodsClass> goodsClassList = goodsClassMapper.selectGoodsClass1List();
         for(GoodsClass goodsClass : goodsClassList){
             int id = goodsClass.getId();
-            List<GoodsClass> goodsClassList1 = this.getGoodsClassNextList(storeId,id);
+            List<GoodsClass> goodsClassList1 = this.getGoodsClassNextList(id);
             goodsClass.setChildren(goodsClassList1);
         }
         return goodsClassList;
     }
 
     @Override
-    public List<GoodsClass> getGoodsClassNextList(int storeId, int goodsClass1Id) {
-        List<GoodsClass> goodsClassList =  goodsClassMapper.selectGoodsClassNextList(storeId, goodsClass1Id);
+    public List<GoodsClass> getGoodsClassNextList(int goodsClass1Id) {
+        List<GoodsClass> goodsClassList =  goodsClassMapper.selectGoodsClassNextList(goodsClass1Id);
         for(GoodsClass goodsClass : goodsClassList){
             int id = goodsClass.getId();
-            goodsClass.setChildren(getGoodsClassNextList(storeId,id));
+            goodsClass.setChildren(getGoodsClassNextList(id));
         }
         return goodsClassList;
+    }
+
+    @Override
+    public List<GoodsClass> getNextGoodsClassList(int goodsClass1Id) {
+        return goodsClassMapper.selectGoodsClassNextList(goodsClass1Id);
     }
 
 }

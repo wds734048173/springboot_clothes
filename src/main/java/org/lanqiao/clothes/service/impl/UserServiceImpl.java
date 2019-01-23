@@ -23,16 +23,16 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void add(User user) {
-
+        userMapper.insertUser(user);
     }
 
     @Override
     public User selectByName(String username) {
-        return null;
+        return userMapper.selectByName(username);
     }
 
     @Override
     public void updateStoreId(User user) {
-
+        userMapper.updateStoreId(user);
     }
 }

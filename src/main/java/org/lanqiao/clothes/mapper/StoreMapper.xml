@@ -6,8 +6,8 @@
     <insert id="insertStore" parameterType="org.lanqiao.clothes.pojo.Store">
         insert into tb_store(name,bussinessNo,pic,address,telphone,state,bussinessPic,ctime)
         values (#{name},#{bussinessNo},#{pic},#{address},#{telphone},#{state},#{bussinessPic},#{ctime})
-        <!--<selectKey resultType="int" keyColumn="id" keyProperty="id" order="AFTER" >
+        <selectKey resultType="int" keyColumn="id" keyProperty="id" order="AFTER" >
             select LAST_INSERT_ID()
-        </selectKey>-->
+        </selectKey>
     </insert>
 </mapper>

@@ -30,10 +30,15 @@ public class GoodsClassController {
     @RequestMapping("/manager/goodsClassList")
     @ResponseBody
     public List<GoodsClass> goodsClassList(HttpServletRequest req, HttpServletResponse resp){
-        HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
-        int storeId = user.getStoreId();
-        List<GoodsClass> goodsClassList = goodsClassService.getGoodsClass1List(storeId);
+        List<GoodsClass> goodsClassList = goodsClassService.getGoodsClass1List();
+        return goodsClassList;
+    }
+
+    @RequestMapping("/manager/selectGoodsClassById")
+    @ResponseBody
+    public List<GoodsClass> selectGoodsClass(HttpServletRequest req, HttpServletResponse resp){
+        int goodsClassId = Integer.valueOf(req.getParameter("goodsClassId"));
+        List<GoodsClass> goodsClassList = goodsClassService.getNextGoodsClassList(goodsClassId);
         return goodsClassList;
     }
 }

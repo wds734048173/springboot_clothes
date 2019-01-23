@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface GoodsClassMapper {
     //获取分类列表
-    public List<GoodsClass> selectGoodsClassAll(int storeId);
+    public List<GoodsClass> selectGoodsClassAll();
     //修改分类
     public void updateGoodsClass(GoodsClass goodsClass);
     //添加分类
@@ -21,9 +21,9 @@ public interface GoodsClassMapper {
     //删除分类
 //    public void deleteGoodsClass(int id);
     //获取一级分类
-    public List<GoodsClass> selectGoodsClass1List(int storeId);
+    public List<GoodsClass> selectGoodsClass1List();
     //获取下一级分类
-    public List<GoodsClass> selectGoodsClassNextList(int storeId,int goodsClass2Id);
+    public List<GoodsClass> selectGoodsClassNextList(int goodsClass2Id);
     //通过ids获取分类详情
     public List<GoodsClass> selectGoodsClassListByIds(List<Integer> ids);
 }

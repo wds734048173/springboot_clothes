@@ -1,6 +1,7 @@
 package org.lanqiao.clothes.config;
 
 import org.lanqiao.clothes.interceptors.LoginInterceptor;
+import org.lanqiao.clothes.interceptors.UserInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -24,7 +25,7 @@ public class DefaultConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/manager").setViewName("/manager/index");
         registry.addViewController("/manager/").setViewName("/manager/index");
-        registry.addViewController("/manager/userregister").setViewName("/manager/userregister");
+       /* registry.addViewController("/manager/userregister").setViewName("/manager/userregister");*/
         registry.addViewController("/manager/toGoodsClassList").setViewName("/manager/goodsClassList");
     }
 
@@ -33,7 +34,11 @@ public class DefaultConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/manager/*","/manager","/druid/*")
-                .excludePathPatterns("/manager/login");
+                .excludePathPatterns("/manager/login","/manager/register");
+        registry.addInterceptor(new UserInterceptor())
+                .addPathPatterns("/manager/*","/manager","/druid/*")
+//                不拦截访问的页面登录、注册、确认注册、添加用户信息
+                .excludePathPatterns("/manager/login","/manager/register","/manager/userRegister","/manager/store","/manager/storeInfo","/manager/exit");
     }
 
     //日期格式化

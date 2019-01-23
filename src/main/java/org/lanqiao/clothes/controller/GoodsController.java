@@ -89,10 +89,13 @@ public class GoodsController {
 
         //获取品牌查询列表
         List<Brand> brandList = brandService.getBrandSelectedList(storeId);
+        //获取分类一列表
+        List<GoodsClass> goodsClass1List = goodsClassService.getGoodsClass1List();
 
         //数据封装
         model.addAttribute("goodsList",goodsList);
         model.addAttribute("brandList",brandList);
+        model.addAttribute("goodsClass1List",goodsClass1List);
         model.addAttribute("pm",pageModel);
         model.addAttribute("condition",condition);
         model.addAttribute("currentPage",pageNum);
@@ -150,22 +153,17 @@ public class GoodsController {
         int pPrice = Integer.valueOf(req.getParameter("goodspPrice"));
         int sPrice = Integer.valueOf(req.getParameter("goodssPrice"));
         int mPrice = Integer.valueOf(req.getParameter("goodsmPrice"));
-//        int class1Id = Integer.valueOf(req.getParameter("goodsclass1Id"));
-//        int class2Id = Integer.valueOf(req.getParameter("goodsclass2Id"));
-//        int class3Id = Integer.valueOf(req.getParameter("goodsclass3Id"));
-//        int brandId = Integer.valueOf(req.getParameter("goodsbrandId"));
-        int class1Id = 1;
-        int class2Id = 2;
-        int class3Id = 3;
-        int brandId = 1;
+        int class1Id = Integer.valueOf(req.getParameter("goodsclass1Id"));
+        int class2Id = Integer.valueOf(req.getParameter("goodsclass2Id"));
+        int class3Id = Integer.valueOf(req.getParameter("goodsclass3Id"));
+        int brandId = Integer.valueOf(req.getParameter("goodsbrandId"));
         String id = req.getParameter("goodsId");
         String year = req.getParameter("goodsYear");
         String season = req.getParameter("goodsSeason");
         String sex = req.getParameter("goodsSex");
-        int storeId = Integer.valueOf(req.getParameter("goodsStoreId"));
         int isshelf = Integer.valueOf(req.getParameter("goodsIsshelf"));
-        /*HttpSession session = req.getSession();
-        int storeId = Integer.valueOf(session.getAttribute("storeId").toString());*/
+        HttpSession session = req.getSession();
+        int storeId = Integer.valueOf(session.getAttribute("storeId").toString());
         goods.setId(Integer.valueOf(id));
         goods.setNo(no);
         goods.setName(name);
@@ -188,22 +186,16 @@ public class GoodsController {
     @RequestMapping("/manager/selectGoodsById")
     @ResponseBody
     public Model selectGoodsById(HttpServletRequest req, HttpServletResponse resp,Model model){
-        //获取店铺id
-        HttpSession session = req.getSession();
-        User user  = (User)session.getAttribute("user");
-        int storeId = user.getStoreId();
         String goodsId = req.getParameter("goodsId");
         Goods goods = goodsService.getGoodsById(Integer.valueOf(goodsId));
         int goodsClass1Id = goods.getClass1Id();
         int goodsClass2Id = goods.getClass2Id();
-        //获取分类一列表
-        List<GoodsClass> goodsClass1List = goodsClassService.getGoodsClass1List(storeId);
+
         //获取分类二列表
-        List<GoodsClass> goodsClass2List = goodsClassService.getGoodsClassNextList(storeId,goodsClass1Id);
+        List<GoodsClass> goodsClass2List = goodsClassService.getGoodsClassNextList(goodsClass1Id);
         //获取分类三列表
-        List<GoodsClass> goodsClass3List = goodsClassService.getGoodsClassNextList(storeId,goodsClass2Id);
+        List<GoodsClass> goodsClass3List = goodsClassService.getGoodsClassNextList(goodsClass2Id);
         model.addAttribute("goods",goods);
-        model.addAttribute("goodsClass1List",goodsClass1List);
         model.addAttribute("goodsClass2List",goodsClass2List);
         model.addAttribute("goodsClass3List",goodsClass3List);
         return model;

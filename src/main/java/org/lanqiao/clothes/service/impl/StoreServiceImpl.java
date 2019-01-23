@@ -1,7 +1,9 @@
 package org.lanqiao.clothes.service.impl;
 
+import org.lanqiao.clothes.mapper.StoreMapper;
 import org.lanqiao.clothes.pojo.Store;
 import org.lanqiao.clothes.service.IStoreService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,8 +13,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class StoreServiceImpl implements IStoreService {
+    @Autowired
+    StoreMapper storeMapper;
     @Override
     public void insertStore(Store store) {
-
+        storeMapper.insertStore(store);
     }
 }
