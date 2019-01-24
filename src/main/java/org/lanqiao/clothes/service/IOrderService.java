@@ -12,4 +12,28 @@ public interface IOrderService {
     public Order getOrderById(int orderId);
     public List<OrderInfo> getOrderInfoListById(int orderId,int storeId);
     public void modifyOrderStateById(int storeId,int orderId,int state);
+
+
+    //=================前台操作===============
+    //增加订单
+    public int addOrder(Order order);
+    //查找订单
+    public List<Order> getOrderList(Condition condition);
+    public int selectCount(Condition condition);
+    //付款
+    public void payOrder(int id);
+    //发货
+    public void sendOrder(int id);
+    //收货
+    public void getOrder(int id);
+    //取消订单
+    public void cancelOrder(int id);
+    //删除订单
+    public void deleteOrder(int id);
+    //添加到订单信息表
+    public void addOrderInfo(OrderInfo info);
+    //删除订单信息
+    public void deleteOrderInfo(int oId);
+    //查找订单详情
+    public List<OrderInfo> selectOrderInfo(int oId);
 }

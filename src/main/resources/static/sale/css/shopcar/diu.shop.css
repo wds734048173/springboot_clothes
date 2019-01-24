@@ -1,0 +1,122 @@
+﻿@charset "utf-8";
+/* 
+* 商城主样式
+* Author: ZZQ
+* http://www.diu8diu.com
+*/
+
+/**价格**/
+span.money { font-family:verdana; }
+span.money em{ font-style:normal;}
+span.money b{ font-weight:normal;}
+span.point{ font-family:verdana; }
+span.point em{ font-style:normal; padding:0px 3px;}
+span.point b{ font-weight:normal;}
+
+/**内容部分**/
+#shopbody{}
+#shopbody{ background:#f4f4f4; }
+#shopbody .diu-breadcrumb{ background:#fcfcfc; border-bottom:1px solid #f2f2f2; font-size:12px; padding:10px 0px; text-align:right;}
+#shopbody .diu-breadcrumb h1{ float:left; font-weight:normal; font-size:16px; }
+
+/**二级分类**/
+.diu-shop-subcate{ background:#fcfcfc; border-bottom:1px solid #f2f2f2; }
+.diu-shop-subcate ul{ margin:auto; width:1200px; zoom:1; overflow:auto; padding:10px 0px;}
+.diu-shop-subcate ul li{ float:left; }
+.diu-shop-subcate ul li a{ display:inline-block; font-size:14px; font-weight:bold; margin:0px 20px 0px 0px;}
+.diu-shop-subcate ul li.current a{ color:#ff6700; }
+
+
+/**商品类型筛选**/
+.diu-goods-type-section{ background:#fff; border-bottom:1px solid #eee;}
+.diu-goods-type-section .type-header{ display:none; padding:2px 10px 5px 0px; }
+.diu-goods-type-section .type-section{ padding:3px 0px;}
+.diu-goods-type-section .type-line{ border-top:1px solid #f6f6f6; font-size:14px; zoom:1; overflow:hidden; padding:0px 0px 8px 0; position:relative;}
+.diu-goods-type-section .type-line1{ border-top:0px;}
+.diu-goods-type-section .type-line .type-attr{ color:#424242; float:left; padding:6px 2px 0px 0px; text-align:left; width:70px; }
+.diu-goods-type-section .type-line .type-value{ float:left; width:1080px;}
+.diu-goods-type-section .type-line .type-value ul{ padding:6px 0px 0px 0px;}
+.diu-goods-type-section .type-line .type-value li{ float:left; height:20px; line-height:20px; white-space:nowrap; padding:2px 0px;}
+.diu-goods-type-section .type-line .type-value li a{ display:inline-block; height:20px; line-height:20px; padding:1px 10px;}
+.diu-goods-type-section .type-line .type-value li a.current{ background:#ff6700; color:#fff;}
+.diu-goods-type-section .type-line .type-value li a.current:hover{ text-decoration:none; cursor:default;}
+
+/**排序**/
+.diu-goods-orderby { padding:15px 0px 0px 0px;}
+.diu-goods-orderby .order{}
+.diu-goods-orderby .order a{ background-color:#eee; border:2px solid #eee; color:#333; display:inline-block; font-size:12px; height:20px; line-height:20px; margin-right:1px; padding:0px 12px;}
+.diu-goods-orderby .order a:hover{ border-bottom:2px solid #ff6700;}
+.diu-goods-orderby .order a.current{ background:#ff6700; border-color:#ff6700; color:#fff;}
+
+/**分类页商品商品区**/
+.diu-shop-categoods-section{ margin:auto; width:1200px;}
+.diu-shop-categoods-section .categoods-section{ padding:15px 0px 15px 0px;}
+.diu-shop-categoods-section .categoods-section .pager{ height:50px; margin:20px 0px 0px 0px; padding:40px 0px 40px 0px; text-align:center;}
+
+/*商品列表*/
+ul.diu-goods-list{}
+ul.diu-goods-list li{ background-color:#fff; display:inline-block; float:left; margin:0px 15px 15px 0px; height:340px; width:288px; overflow:hidden; padding:5px 0px 5px 0px; text-align:center;}
+ul.diu-goods-list li.li4,
+ul.diu-goods-list li.li8,
+ul.diu-goods-list li.li12,
+ul.diu-goods-list li.li16,
+ul.diu-goods-list li.li20,
+ul.diu-goods-list li.li24,
+ul.diu-goods-list li.li28,
+ul.diu-goods-list li.li32,
+ul.diu-goods-list li.li26,
+ul.diu-goods-list li.li40{ margin-right:0px;}
+ul.diu-goods-list li:hover{ -webkit-box-shadow:rgba(0,0,0,0.2) 0px 1px 4px; -moz-box-shadow:rgba(0,0,0,0.2) 0px 1px 4px; box-shadow:rgba(0,0,0,0.2) 0px 1px 4px;}
+ul.diu-goods-list li .thumb{ padding:10px 5px 5px 5px; text-align:center; }
+ul.diu-goods-list li .thumb img{ height:230px; width:230px;}
+ul.diu-goods-list li .info{ padding:5px 0px 0px 0px;height:92px;}
+ul.diu-goods-list li .title{ font-weight:normal; font-size:14px; line-height:24px; max-height:48px; overflow:hidden;text-shadow: -1px -1px 1px #aaa,1px 1px 1px #bbb;}
+ul.diu-goods-list li .title a:hover{ color:#e30000; text-decoration:none;}
+ul.diu-goods-list li .subtitle { color:#aaa; font-size:12px; line-height:24px; max-height:48px; padding:0px 10px; overflow:hidden;}
+/*ul.diu-goods-list li .price{ height:24px; line-height:24px; overflow:hidden;}
+ul.diu-goods-list li .price span{ color:#d30000; font-size:13px; font-style:normal;}
+ul.diu-goods-list li .price span em{}
+ul.diu-goods-list li .price span.money{ margin-left:5px;}*/
+ul.diu-goods-list li .price{ height:24px; line-height:24px; overflow:hidden;}
+ul.diu-goods-list li .price span{ color:#d30000; font-size:13px; font-style:normal;}
+ul.diu-goods-list li .price span em{}
+ul.diu-goods-list li .price span.money{ margin-left:55px;font-family:'Trebuchet MS', Helvetica, sans-serif;font-size:28px; }
+ul.diu-goods-list li .price .market_price{color: #666;text-decoration: line-through;float: right;margin-top: 5px;margin-right: 5px;font-family:'Trebuchet MS', Helvetica, sans-serif;font-size:16px;}
+
+/*文章页相关商品列表*/
+.diu-content-related-goods{ border:1px solid #eee; padding:10px 15px;}
+.diu-content-related-goods ul{ font-size:12px; zoom:1; overflow:auto;}
+.diu-content-related-goods ul li{ border-bottom:1px solid #eee; display:block; padding:15px 0px; zoom:1; overflow:auto;}
+.diu-content-related-goods ul li:last-child{ border-bottom:0px;}
+.diu-content-related-goods ul li .thumb{ float:left; margin-right:15px; text-align:center;}
+.diu-content-related-goods ul li .thumb img{ height:120px; width:120px; vertical-align:top; }
+.diu-content-related-goods ul li .info{ zoom:1; overflow:auto;}
+.diu-content-related-goods ul li .title{ color:#222; font-size:16px; font-weight:normal;}
+.diu-content-related-goods ul li .subtitle{ color:#888; max-height:36px; line-height:18px; overflow:hidden; padding:5px 0px 0px 0px; text-overflow:ellipsis;}
+.diu-content-related-goods ul li .price{ padding:3px 0px 0px 0px;}
+.diu-content-related-goods ul li .price span.money{ color:#d30000; font-size:13px;}
+.diu-content-related-goods ul li .price span.point{ color:#d30000; font-size:13px;}
+.diu-content-related-goods ul li .price span.point em{ font-size:12px;}
+
+
+/*标签云*/
+.diu-goods-tags{}
+.diu-goods-tags .section{ margin:0px auto; padding:15px; width:1200px;}
+.diu-goods-tags a{ margin-right:5px;}
+.diu-goods-tags a,
+.diu-goods-tags a:visited{}
+
+/*按钮无效状态*/
+button.disabled,
+button.disabled:hover{ background-color:#e6e6e6; background-image:none; border:1px solid #ddd; color:#bbb; cursor:default; text-shadow:rgba(255,255,255,0.5) 0px 1px 0px;}
+
+
+
+
+
+
+
+
+
+
+

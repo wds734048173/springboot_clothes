@@ -28,6 +28,8 @@ function pageClick(k) {
         url = "/manager/orderList";
     } else if (text == "个人管理"){
         url = "/manager/userInfo";
+    } else if (text == "店铺管理"){
+        url= "/manager/storeUp";
     }
     $(".content").load(url);
 }

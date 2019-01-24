@@ -104,4 +104,8 @@
             (#{goodsSKU.goodsId},#{goodsSKU.colorId},#{goodsSKU.sizeId},now())
         </foreach>
     </insert>
+
+    <select id="selectGoodsSKUList" resultType="org.lanqiao.clothes.pojo.GoodsSKU" parameterType="int">
+        select * from tb_goods_sku where goodsId = #{goodsId};
+    </select>
 </mapper>

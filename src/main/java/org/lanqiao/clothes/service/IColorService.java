@@ -13,4 +13,5 @@ public interface IColorService {
     public void modifyColorById(Color color);
     public Color getColorById(int id);
     public List<Color> getColorSelectedList(int storeId);
+    public List<Color> getColorListByIds(List<Integer> ids);
 }

@@ -2,7 +2,6 @@ package org.lanqiao.clothes.service.impl;
 
 import org.lanqiao.clothes.mapper.SupplierMapper;
 import org.lanqiao.clothes.pojo.Condition;
-import org.lanqiao.clothes.pojo.Size;
 import org.lanqiao.clothes.pojo.Supplier;
 import org.lanqiao.clothes.service.ISupplierService;
 import org.springframework.beans.factory.annotation.Autowired;

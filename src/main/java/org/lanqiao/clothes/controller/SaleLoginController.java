@@ -4,11 +4,12 @@ import org.lanqiao.clothes.pojo.Customer;
 import org.lanqiao.clothes.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -17,9 +18,12 @@ public class SaleLoginController {
     @Autowired
     ICustomerService customerService;
 
+    @Autowired
+    HomeController homeController;
+
 //    前端登录
     @RequestMapping("/sale/saleLogin")
-    public String saleLogin(HttpServletRequest request){
+    public String saleLogin(HttpServletRequest request, HttpServletResponse response, Model model){
         //要验证的验证码
         String rcode = request.getParameter("verifycode_value");
         //验证码中的值
@@ -36,7 +40,7 @@ public class SaleLoginController {
             }else if (password.equals(customer1.getPassword())) {
                 HttpSession session = request.getSession();
                 session.setAttribute("customer",customer1);
-                return "/sale/success";
+                return homeController.homePage(request,response,model);
             }else {
                 request.setAttribute("msg","密码错误");
                 return "/sale/login";
@@ -65,5 +69,12 @@ public class SaleLoginController {
             request.setAttribute("msg","密码不一致");
             return "/sale/cusregister";
         }
+    }
+
+    @RequestMapping("/sale/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "/sale/login";
     }
 }

@@ -1,7 +1,6 @@
 package org.lanqiao.clothes.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.lanqiao.clothes.pojo.Color;
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Customer;
 import org.springframework.stereotype.Component;

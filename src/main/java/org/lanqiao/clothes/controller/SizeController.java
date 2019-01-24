@@ -1,6 +1,5 @@
 package org.lanqiao.clothes.controller;
 
-import org.lanqiao.clothes.pojo.Color;
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Size;
 import org.lanqiao.clothes.pojo.User;

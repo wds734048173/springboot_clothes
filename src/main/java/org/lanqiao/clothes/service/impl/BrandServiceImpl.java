@@ -14,7 +14,7 @@ import java.util.List;
  * @Date: 2019/1/11 15:55
  * @Description:
  */
-@Service("brandService")
+@Service
 public class BrandServiceImpl implements IBrandService {
     @Autowired
     BrandMapper brandMapper;

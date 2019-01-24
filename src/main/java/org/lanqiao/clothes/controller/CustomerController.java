@@ -2,7 +2,6 @@ package org.lanqiao.clothes.controller;
 
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Customer;
-import org.lanqiao.clothes.pojo.User;
 import org.lanqiao.clothes.service.ICustomerService;
 import org.lanqiao.clothes.utils.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller

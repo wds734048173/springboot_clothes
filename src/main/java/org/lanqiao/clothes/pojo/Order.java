@@ -35,5 +35,4 @@ public class Order {
     private Date sendTime;
     private Date getTime;
     private Date cancelTime;
-
 }

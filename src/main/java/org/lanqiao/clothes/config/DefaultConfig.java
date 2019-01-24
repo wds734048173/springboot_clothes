@@ -25,8 +25,10 @@ public class DefaultConfig implements WebMvcConfigurer {
         registry.addViewController("/manager").setViewName("/manager/index");
         registry.addViewController("/manager/").setViewName("/manager/index");
         registry.addViewController("/manager/toGoodsClassList").setViewName("/manager/goodsClassList");
-        registry.addViewController("/sale").setViewName("/sale/login");
         registry.addViewController("/manager/userInfo").setViewName("/manager/userInfo");
+
+//        registry.addViewController("/sale").setViewName("/sale/home");
+        registry.addViewController("/sale/login").setViewName("/sale/login");
     }
 
     //拦截器
@@ -36,8 +38,8 @@ public class DefaultConfig implements WebMvcConfigurer {
                 .addPathPatterns("/manager/*","/manager")
                 .excludePathPatterns("/manager/login","/manager/register","/druid/*");
         registry.addInterceptor(new SaleLoginInterceptor())
-                .addPathPatterns("/sale/*")
-                .excludePathPatterns("/sale","/sale/login","/sale/saleLogin","/sale/cusRegister","/sale/cusRegister1","/sale/cusregister");
+                .addPathPatterns("/sale/addToCar");
+//                .excludePathPatterns("/sale","/sale/login","/sale/saleLogin","/sale/cusRegister","/sale/cusRegister1","/sale/cusregister","/sale/index");
     }
 
     //日期格式化

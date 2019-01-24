@@ -1,6 +1,5 @@
 package org.lanqiao.clothes.controller;
 
-import org.lanqiao.clothes.pojo.Brand;
 import org.lanqiao.clothes.pojo.Comment;
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.User;

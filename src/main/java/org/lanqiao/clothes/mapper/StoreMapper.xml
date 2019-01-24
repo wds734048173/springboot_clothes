@@ -10,4 +10,10 @@
             select LAST_INSERT_ID()
         </selectKey>
     </insert>
+    <update id="updateStore" parameterType="org.lanqiao.clothes.pojo.Store">
+        update tb_store set name=#{name},bussinessNo=#{bussinessNo},address=#{address},telphone=#{telphone},rtime=now() where id=#{id}
+    </update>
+    <select id="selectById" parameterType="_int" resultType="org.lanqiao.clothes.pojo.Store">
+        select * from tb_store where id=#{id}
+    </select>
 </mapper>

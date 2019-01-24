@@ -28,7 +28,16 @@ public class Condition {
     private int year;
     private String no;
     private int supplierId;
+    private int goodsId;
+    private String gradeStr;
+    private int customerId;
+
+
 
     private int currentPage;
     private  int pageSize;
+
+
+
+
 }

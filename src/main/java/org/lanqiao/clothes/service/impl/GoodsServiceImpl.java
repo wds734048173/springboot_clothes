@@ -11,7 +11,6 @@ import org.lanqiao.clothes.utils.DataMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +81,12 @@ public class GoodsServiceImpl implements IGoodsService {
     @Override
     public void addGoodsSKUList(List<GoodsSKU> goodsSKUList) {
         goodsMapper.insertGoodsSKUList(goodsSKUList);
+    }
+
+    @Override
+    public List<GoodsSKU> getGoodsSKUList(int goodsId) {
+        List<GoodsSKU> goodsSKUList = goodsMapper.selectGoodsSKUList(goodsId);
+        return goodsSKUList;
     }
 
     /*@Override

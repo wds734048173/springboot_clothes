@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>修改个人与店铺信息</title>
+    <link rel="stylesheet" type="text/css" href="/manager/bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="/manager/js/jquery.js"></script>
+    <!--<script type="text/javascript">-->
+        <!--&lt;!&ndash;入口函数&ndash;&gt;-->
+        <!--$(function () {-->
+            <!--$('#state').val('1');-->
+        <!--})-->
+    <!--</script>-->
+</head>
+<body>
+<div style="width: 800px;height: auto;margin:auto;padding-top: 80px;">
+    <div>
+        <div>
+            <div class="modal-header">
+                <center><h3 class="modal-title">修改信息</h3></center>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/manager/storeUp1" id="updateForm">
+                    <div class="form-group">
+                        <label for="username" class="control-label">商家账号名称:</label>
+                        <input type="text" class="form-control" id="username" name="username" required th:value="${session.user.username}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">店铺名称:</label>
+                        <input type="text" class="form-control" name="name" id="name" required th:value="${session.store.name}">
+                    </div>
+                    <div class="form-group">
+                        <label for="bussinessNo">营业执照编号：</label>
+                        <input type="text" class="form-control" name="bussinessNo" id="bussinessNo" required th:value="${session.store.bussinessNo}">
+                    </div>
+                    <!--<div class="form-group">
+                        <label for="pic">店招：</label>
+                        <input type="text" class="form-control" name="pic" id="pic" required placeholder="请输入店招">
+                    </div>-->
+                    <div class="form-group">
+                        <label for="address">店铺地址：</label>
+                        <input type="text" class="form-control" name="address" id="address" required th:value="${session.store.address}">
+                    </div>
+                    <div class="form-group">
+                        <label for="telphone">商家联系电话：</label>
+                        <input type="text" class="form-control" name="telphone" id="telphone" required th:value="${session.store.telphone}">
+                    </div>
+                    <!--<div class="form-group">
+                        <label for="state">状态：</label>
+                        <select class="form-control" id="state" disabled>
+                            <option value="0" >可用</option>
+                            <option value="1" >不可用</option>
+                        </select>
+                    </div>-->
+                    <!--<div>
+                        <label for="bussinessPic">营业执照照片：</label>
+                        <input type="file" class="form-control"  name="bussinessPic" id="bussinessPic" ><br/><br/>
+                    </div>-->
+                    <center><input type="submit" value="完成" class="btn btn-primary"></center>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

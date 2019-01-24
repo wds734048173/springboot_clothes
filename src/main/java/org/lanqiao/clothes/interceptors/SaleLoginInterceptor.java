@@ -20,7 +20,7 @@ public class SaleLoginInterceptor implements HandlerInterceptor {
             return true;
         }
         request.setAttribute("msg","权限不足，请登录！");
-        request.getRequestDispatcher("/manager/login").forward(request,response);
+        request.getRequestDispatcher("/sale/login").forward(request,response);
         return false;
     }
 }

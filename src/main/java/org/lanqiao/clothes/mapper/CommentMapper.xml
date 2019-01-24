@@ -52,4 +52,51 @@
     <update id="updateCommentState" parameterType="org.lanqiao.clothes.pojo.Comment">
         update tb_goods_comment set state=#{state},rtime=now()  where id=#{id} and storeId=#{storeId};
     </update>
+
+    <select id="selectAllCommentByGoodsId" resultType="org.lanqiao.clothes.pojo.Comment" parameterType="org.lanqiao.clothes.pojo.Condition">
+        select * from tb_goods_comment
+        <where>
+            <choose>
+                <when test="grade == 0">
+                    and grade=#{grade}
+                </when>
+                <when test="grade == 1">
+                    and grade=#{grade}
+                </when>
+                <when test="grade == 2">
+                    and grade=#{grade}
+                </when>
+                <otherwise>
+                    and (grade=0 or grade=1 or grade=2)
+                </otherwise>
+            </choose>
+            <if test="goodsId!=null">
+                and goodsId = #{goodsId}
+            </if>
+        </where>
+    </select>
+
+    <!--获取一个商品下的评论数量-->
+    <select id="selectAllCountCommentGoodsId" resultType="int">
+        select count(1) from tb_goods_comment
+        <where>
+            <choose>
+                <when test="grade == 0">
+                    and grade=#{grade}
+                </when>
+                <when test="grade == 1">
+                    and grade=#{grade}
+                </when>
+                <when test="grade == 2">
+                    and grade=#{grade}
+                </when>
+                <otherwise>
+                    and (grade=0 or grade=1 or grade=2)
+                </otherwise>
+            </choose>
+            <if test="goodsId!=null">
+                and goodsId = #{goodsId}
+            </if>
+        </where>
+    </select>
 </mapper>

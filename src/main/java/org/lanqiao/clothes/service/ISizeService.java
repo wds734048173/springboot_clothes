@@ -2,7 +2,6 @@ package org.lanqiao.clothes.service;
 
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Size;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -22,4 +21,6 @@ public interface ISizeService {
     public List<Size> getSizeSelectedList(int storeId);
 
     public Size getSizeById(int id);
+
+    public List<Size> getSizeListByIds(List<Integer> ids);
 }

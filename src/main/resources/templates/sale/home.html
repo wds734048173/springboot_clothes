@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="shortcut icon" href="http://www.diu8diu.com/diu-content/uploads/favicon.ico">
+    <link rel="icon" href="http://www.diu8diu.com/diu-content/uploads/favicon.ico">
+    <link rel="stylesheet" th:href="@{/sale/css/home/diu.global.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/home/pc.glyphicon.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/home/diu.main.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/home/diu.shop.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/home/diu.diucmt.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/home/style.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/home/diu.index.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/home/idangerous.swiper2.7.6.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/home/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/home/layer.min.css}">
+    <script type="text/javascript" th:src="@{/sale/js/home/diu.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/js/home/com.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/js/home/tpl.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/js/home/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/js/home/idangerous.swiper2.7.6.min.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/js/home/swiper.animate1.0.2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/js/home/themexSlider.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/js/home/jcslider.js}"></script>
+</head>
+<body>
+    <!--头部-->
+    <div id="header">
+        <div class="toper">
+            <div class="wrapper">
+                <div class="top-nav">
+
+                    <!--<a class="link" href="http://www.diu8diu.com/diu-ucenter/" target="_self">个人中心</a>-->
+
+                    <!--<a class="link" href="http://www.diu8diu.com/diu-ucenter/?ctl=orders" target="_self">我的订单</a>-->
+
+                </div>
+                <div class="account-sign-status">
+                    <span id="welcome">欢迎来到<a href="/sale">我的网站</a>！</span>
+                    <span id="user" class="user-status" th:if="${session.customer==null}"><a href="/sale/login" class="username"  th:text="登录"></a></span>
+                    <span id="user_status" class="user-status" th:if="${session.customer!=null}"><a href="" class="username"  th:text="${session.customer.realname}"></a><a class="logout" href="/sale/logout">退出</a></span>
+                </div>
+                <div class="top-cart">
+                    <a class="cart" href="/sale/shoppingCar" th:if="${session.customer!=null}">
+                        <i class="glyphicon glyphicon-shopping-cart"></i>我的购物车
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="header-line">
+            <div class="wrapper">
+                <div class="logo"><a href=""><img th:src="@{/sale/img/logo.png}" style="width: 930px;height: 70px"  alt="丢丢定制" title="丢丢定制"></a></div>
+            </div>
+        </div>
+        <div class="topdmenu">
+            <div class="wrapper">
+                <div class="main-nav" id="main_nav">
+                    <a href="/sale/index">首页</a>
+                </div>
+                <div class="top-cart">
+
+                </div>
+            </div>
+        </div>
+        <div class="topdmenufoot"></div>
+    </div>
+    <div id="mbody">
+        <div class="swiper-container" id="swiper-container01">
+            <a class="arrow-left" href="javascript:void(0)"></a>
+            <a class="arrow-right" href="javascript:void(0)"></a>
+            <div class="swiper-wrapper" style="width: 9515px; height: 580px; transform: translate3d(-3806px, 0px, 0px); transition-duration: 0.001s;"><div class="swiper-slide slide3 swiper-slide-duplicate" style="width: 1903px; height: 580px;">
+                <div class="inner">
+                    <img th:src="@{/sale/img/home/f3001.png}" class="ani img s30" swiper-animate-effect="fadeIn" swiper-animate-duration="3s" swiper-animate-delay="1s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                    <img th:src="@{/sale/img/home/f3002.png}" class="ani img s31" swiper-animate-effect="bounceInDown" swiper-animate-duration="1s" swiper-animate-delay="1s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                    <img th:src="@{/sale/img/home/f3003.png}" class="ani img s32" swiper-animate-effect="flipInY" swiper-animate-duration="1s" swiper-animate-delay="3s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                    <img th:src="@{/sale/img/home/f3004.png}" class="ani img s33" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s" swiper-animate-delay="3s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                    <div class="targetBtn clearfix ani" swiper-animate-effect="zoomInUp" swiper-animate-duration="1s" swiper-animate-delay="0.5s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                        <a class="a1" href="http://www.diu8diu.com/?shopping.html" target="_blank">了解更多</a>
+                    </div>
+                </div>
+            </div>
+                <div class="swiper-slide slide1" style="width: 1903px; height: 580px;">
+                    <a href="" class="inner">
+                        <img th:src="@{/sale/img/home/f1001.png}" class="ani img s10     " swiper-animate-effect="zoomInDown" swiper-animate-duration="1.5s" swiper-animate-delay="0s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                        <img th:src="@{/sale/img/home/f1002.png}" class="ani img s11     " swiper-animate-effect="bounceInLeft" swiper-animate-duration="1s" swiper-animate-delay="0s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                        <img th:src="@{/sale/img/home/f1003.png}" class="ani img s12     " swiper-animate-effect="flipInY" swiper-animate-duration="1s" swiper-animate-delay="0.8s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                        <img th:src="@{/sale/img/home/f1004.png}" class="ani img s13     " swiper-animate-effect="fadeInUp" swiper-animate-duration="2s" swiper-animate-delay="0.8s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                    </a>
+                </div>
+                <div class="swiper-slide slide2 swiper-slide-visible swiper-slide-active" style="width: 1903px; height: 580px;">
+                    <a href="" class="inner">
+                        <img th:src="@{/sale/img/home/f2001.png}" class="ani img s20  zoomInDown animated" swiper-animate-effect="zoomInDown" swiper-animate-duration="1.5s" swiper-animate-delay="0s" swiper-animate-style-cache=" " style="visibility: visible;animation-duration:1.5s;-webkit-animation-duration:1.5s;animation-delay:0s;-webkit-animation-delay:0s;">
+                        <img th:src="@{/sale/img/home/f2002.png}" class="ani img s21  bounceInDown animated" swiper-animate-effect="bounceInDown" swiper-animate-duration="1s" swiper-animate-delay="1s" swiper-animate-style-cache=" " style="visibility: visible;animation-duration:1s;-webkit-animation-duration:1s;animation-delay:1s;-webkit-animation-delay:1s;">
+                        <img th:src="@{/sale/img/home/f2003.png}" class="ani img s22  flipInY animated" swiper-animate-effect="flipInY" swiper-animate-duration="1s" swiper-animate-delay="3s" swiper-animate-style-cache=" " style="visibility: visible;animation-duration:1s;-webkit-animation-duration:1s;animation-delay:3s;-webkit-animation-delay:3s;">
+                        <img th:src="@{/sale/img/home/f2004.png}" class="ani img s23  fadeInUp animated" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s" swiper-animate-delay="3s" swiper-animate-style-cache=" " style="visibility: visible;animation-duration:2s;-webkit-animation-duration:2s;animation-delay:3s;-webkit-animation-delay:3s;">
+                        <img th:src="@{/sale/img/home/f2005.png}" class="ani img s24  fadeInUp animated" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s" swiper-animate-delay="3s" swiper-animate-style-cache=" " style="visibility: visible;animation-duration:2s;-webkit-animation-duration:2s;animation-delay:3s;-webkit-animation-delay:3s;">
+                    </a>
+                </div>
+                <div class="swiper-slide slide3" style="width: 1903px; height: 580px;">
+                    <div class="inner">
+                        <img th:src="@{/sale/img/home/f3001.png}" class="ani img s30" swiper-animate-effect="fadeIn" swiper-animate-duration="3s" swiper-animate-delay="1s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                        <img th:src="@{/sale/img/home/f3002.png}" class="ani img s31" swiper-animate-effect="bounceInDown" swiper-animate-duration="1s" swiper-animate-delay="1s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                        <img th:src="@{/sale/img/home/f3003.png}" class="ani img s32" swiper-animate-effect="flipInY" swiper-animate-duration="1s" swiper-animate-delay="3s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                        <img th:src="@{/sale/img/home/f3004.png}" class="ani img s33" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s" swiper-animate-delay="3s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                        <div class="targetBtn clearfix ani" swiper-animate-effect="zoomInUp" swiper-animate-duration="1s" swiper-animate-delay="0.5s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                            <a class="a1" href="http://www.diu8diu.com/?shopping.html" target="_blank">了解更多</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide slide1 swiper-slide-duplicate" style="width: 1903px; height: 580px;">
+                    <a href="" class="inner">
+                        <img th:src="@{/sale/img/home/f1001.png}" class="ani img s10" swiper-animate-effect="zoomInDown" swiper-animate-duration="1.5s" swiper-animate-delay="0s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                        <img th:src="@{/sale/img/home/f1002.png}" class="ani img s11" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1s" swiper-animate-delay="0s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                        <img th:src="@{/sale/img/home/f1003.png}" class="ani img s12" swiper-animate-effect="flipInY" swiper-animate-duration="1s" swiper-animate-delay="0.8s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                        <img th:src="@{/sale/img/home/f1004.png}" class="ani img s13" swiper-animate-effect="fadeInUp" swiper-animate-duration="2s" swiper-animate-delay="0.8s" swiper-animate-style-cache=" " style="visibility: hidden;">
+                    </a>
+                </div></div>
+            <div class="pagination"><span class="swiper-pagination-switch"></span><span class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></span><span class="swiper-pagination-switch"></span></div>
+        </div>
+        <div class="idx-bigcart">
+            <div class="wrapper">
+                <div class="section flip-hover pagefl">
+                    <ul>
+                        <li><div><h3 class="carttitle"><a href="/sale/goodsList?classId=2" target="_blank">童装</a></h3>
+                            <p class="cartsubtitle">多功能抗寒</p>
+                            <a href="/sale/goodsList?classId=2" target="_self" class="cart01"></a></div>
+                        </li>
+                        <li><div><h3 class="carttitle"><a href="/sale/goodsList?classId=3" target="_blank">卫衣</a></h3>
+                            <p class="cartsubtitle">舒适潮流</p>
+                            <a href="/sale/goodsList?classId=3" target="_self" class="cart02"></a></div>
+                        </li>
+                        <li><div><h3 class="carttitle"><a href="/sale/goodsList?classId=18" target="_blank">女装</a></h3>
+                            <p class="cartsubtitle">潮流前沿</p>
+                            <a href="/sale/goodsList?classId=18" target="_self" class="cart03"></a></div>
+                        </li>
+                        <li><div><h3 class="carttitle"><a href="/sale/goodsList?classId=19" target="_blank">风衣</a></h3>
+                            <p class="cartsubtitle">舒适时尚</p>
+                            <a href="/sale/goodsList?classId=19" target="_self" class="cart04"></a></div>
+                        </li>
+                        <li><div><h3 class="carttitle"><a href="/sale/goodsList?classId=20" target="_blank">职业装</a></h3>
+                            <p class="cartsubtitle">舒适实用</p>
+                            <a href="/sale/goodsList?classId=20" target="_self" class="cart05"></a></div>
+                        </li>
+                        <li class="li6"><div><h3 class="carttitle"><a href="/sale/goodsList?classId=21" target="_blank">西装</a></h3>
+                            <p class="cartsubtitle">简约时尚</p>
+                            <a href="/sale/goodsList?classId=21" target="_self" class="cart06"></a></div>
+                        </li>
+                        <li><div><h3 class="carttitle"><a href="/sale/goodsList?classId=22" target="_blank">衬衫</a></h3>
+                            <p class="cartsubtitle">舒适简洁</p>
+                            <a href="/sale/goodsList?classId=22" target="_self" class="cart07"></a></div>
+                        </li>
+                        <li><div><h3 class="carttitle"><a href="/sale/goodsList?classId=23" target="_blank">中国传统服饰</a></h3>
+                            <p class="cartsubtitle">品质生活</p>
+                            <a href="/sale/goodsList?classId=23" target="_self" class="cart08"></a></div>
+                        </li>
+                        <li><div><h3 class="carttitle"><a href="/sale/goodsList?classId=24" target="_blank">男式内衣</a></h3>
+                            <p class="cartsubtitle">功能多元化</p>
+                            <a href="/sale/goodsList?classId=24" target="_self" class="cart09"></a></div>
+                        </li>
+                        <li><div><h3 class="carttitle"><a href="/sale/goodsList?classId=25" target="_blank">女式内衣</a></h3>
+                            <p class="cartsubtitle">潮流时尚</p>
+                            <a href="/sale/goodsList?classId=25" target="_self" class="cart10"></a></div>
+                        </li>
+                        <li><div><h3 class="carttitle"><a href="/sale/goodsList?classId=26" target="_blank">保暖内衣</a></h3>
+                            <p class="cartsubtitle">传统文化</p>
+                            <a href="/sale/goodsList?classId=26" target="_self" class="cart11"></a></div>
+                        </li>
+                        <li class="li12"><div><h3 class="carttitle"><a href="/sale/goodsList?classId=27" target="_blank">夹克</a></h3>
+                            <p class="cartsubtitle">优惠礼品多多</p>
+                            <a href="/sale/goodsList?classId=27" target="_self" class="cart12"></a></div>
+                        </li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <div class="padding margtop">
+                    <p class="text-big  text-gray height text-center">我们专注于客户需求，理解客户的需求<span class="text-main">JOIN THE
+		DIU&amp;DIU</span>,为品牌增添新鲜力量</p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="idx-hero-card">
+            <div class="wrapper">
+                <div class="section  pagefl">
+                    <ul>
+                        <li><div><i class="glyphicon glyphicon-headphones"></i><h3><b>随时随地</b></h3><span class="ccsub">24*7 全天客服在线</span></div></li>
+                        <li><div><i class="glyphicon glyphicon-plane"></i><h3><b>极速物流</b></h3><span class="ccsub">顺丰次日达</span></div></li>
+                        <li class="lilast"><div><i class="glyphicon glyphicon-leaf"></i><h3><b>节能环保</b></h3><span class="ccsub">国际标准工艺</span></div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="idx-star-goods" id="diu_star_goods">
+            <div class="wrapper">
+                <div class="header">
+                    <hr>
+                    <h2 class="title">热品推荐</h2>
+                </div>
+                <div class="section">
+                    <div class="section-wrapper">
+                        <ul style="width: 1300px">
+                            <li class="li1" name="goods" th:each="item:${goodsList}">
+                                <div class="thumb divfl">
+                                    <a th:href="'/sale/detalis?goodsId='+${item.id}" title="男款莱卡棉短T白色" target="_blank">
+                                        <img th:src="${item.pic}" th:alt="${item.name}" th:title="${item.name}">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h3 class="title">
+                                        <a th:href="'/sale/detalis?goodsId='+${item.id}" th:title="${item.name}" target="_blank">
+                                            <font style="color:#011737;" th:text="${item.name}"></font>
+                                        </a>
+                                    </h3>
+                                    <p class="subtitle"></p>
+                                    <p class="price">
+                                        <span class="money">
+                                            <em>￥</em>
+                                            <b th:text="${item.mPrice}"></b>
+                                        </span>
+                                        <span class="market_price" th:text="${item.sPrice}"></span>
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--底部-->
+    <div id="footer">
+        <div class="footer-section">
+            <div class="wrapper">
+                <div class="col-contact"><h3>DIU8DIU · 丢丢定制平台</h3><p class="text1">打造一个从事个性化定制服务的商业平台，致力于通过互联网为用户提供全面的个性化服饰体验！</p><p class="text2">QQ 客服： 2275370591    13689427<br>客服热线： 400-0156-002 或 18554169888</p></div>
+                <div class="col-cates">
+                    <dl class="item1">
+                        <dt>公司信息</dt>
+                        <dd><a href="" target="_self">公司介绍</a></dd>
+
+                        <dd><a href="" target="_self">合作伙伴</a></dd>
+
+                        <dd><a href="" target="_self">人才招聘</a></dd>
+
+                        <dd><a href="" target="_self">联系我们</a></dd>
+
+                    </dl>
+                    <dl class="item2">
+                        <dt>产品服务</dt>
+
+                        <dd><a href="" target="_self">新闻中心</a></dd>
+
+                        <dd><a href="" target="_self">案例展示</a></dd>
+
+                        <dd><a href="" target="_self">公司视频</a></dd>
+
+                    </dl>
+
+                    <dl class="item3">
+                        <dt>帮助支持</dt>
+
+                        <dd><a href="" target="_self">常见问题</a></dd>
+
+                        <dd><a href="" target="_self">文档下载</a></dd>
+
+                        <dd><a href="" target="_self">用户协议</a></dd>
+
+                        <dd><a href="" target="_self">隐私政策</a></dd>
+                    </dl>
+                </div>
+                <div class="col-qrcode"><img class="img-responsive" th:src="@{/sale/img/qrcode.jpg}" alt="qrcode">
+                    <h3>官方微信</h3><p>关注我们 · 更多优惠</p>
+                </div>
+            </div>
+        </div>
+        <div class="powered-by">
+            <div class="wrapper">
+                <div class="copyright">
+                    Copyright © <a href="http://www.diu8diu.com/" target="_blank">丢丢定制</a> 2016-2017 ALL Rights Reserved <span class="icp"><a href="http://www.miitbeian.gov.cn/" rel="nofollow" target="_blank">鲁ICP备14011980号-1</a></span><i class="stat"></i></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //幻灯动画
+        var mySwiper = new Swiper ('#swiper-container01', {
+            pagination: '#swiper-container01 > .pagination',
+            paginationClickable :true,
+            autoplay : 10000,
+            speed:1,
+            loop:true,
+            //autoplayDisableOnInteraction : false,
+            //onInit: function(swiper){ //Swiper2.x的初始化是onFirstInit
+            onSwiperCreated: function(swiper){ //Swiper2.x的初始化是onFirstInit
+                swiperAnimateCache(swiper); //隐藏动画元素
+                swiperAnimate(swiper); //初始化完成开始动画
+            },
+            onSlideChangeEnd: function(swiper){
+                swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+            }
+        })
+
+        $('.swiper-container .arrow-left').click(function(e){
+            e.preventDefault()
+            mySwiper.swipePrev()
+        })
+        $('.swiper-container .arrow-right').click(function(e){
+            e.preventDefault()
+            mySwiper.swipeNext()
+        })
+        //中间的动画------
+        //$('#dd01').addClass('animated bounceIn');
+        $(".themex-slider").each(function() {
+            var sliderOptions= {
+                speed:1000,
+                pause: 5000,
+                effect: 'slide'
+            };
+            $(this).themexSlider(sliderOptions);
+        });
+
+        function magic_number(value,param) {
+            var num = $(param);
+            num.animate({count: value}, {
+                duration: 3000,
+                step: function() {
+                    num.text(String(parseInt(this.count)));
+                }
+            });
+        };
+
+        //窗口显示才加载
+        var wrapTop = $(".foot-info").offset().top;
+        $(window).bind("scroll",function() {
+            var s = $(window).scrollTop();
+            if (s > wrapTop - 3800) {
+                //console.log(s);
+                magic_number(23500,'#numscroller1');
+                magic_number(1860,'#numscroller2');
+                magic_number(917,'#numscroller3');
+                magic_number(169,'#numscroller4');
+            };
+        })
+        //------------------
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.printpic1').jcSlider({
+                animationIn: 'fadeIn',
+                animationOut: 'flipOutY'
+            });
+            $('.printpic2').jcSlider({
+                animationIn: 'fadeIn',
+                animationOut: 'flipOutY'
+            });
+            $('.printpic3').jcSlider({
+                animationIn: 'fadeIn',
+                animationOut: 'flipOutY'
+            });
+            $('.printpic4').jcSlider({
+                animationIn: 'fadeIn',
+                animationOut: 'flipOutY'
+            });
+            $('.printpic5').jcSlider({
+                animationIn: 'fadeIn',
+                animationOut: 'flipOutY'
+            });
+            $('.printpic6').jcSlider({
+                animationIn: 'fadeIn',
+                animationOut: 'flipOutY'
+            });
+            $('.printpic7').jcSlider({
+                animationIn: 'fadeIn',
+                animationOut: 'flipOutY'
+            });
+            $('.printpic8').jcSlider({
+                animationIn: 'fadeIn',
+                animationOut: 'flipOutY'
+            });
+            var $diuNotice = $("#diu_notice");
+            if(DIU.trim($diuNotice.html())!=""){
+                var notShow = DIU.int(DIU.cookie.getCookie("ownoticenotshow"));
+                if(notShow==0){
+                    var $dialog = new DIUDialog({
+                        id:'d_diu_notice',
+                        title:"【网站公告】",
+                        content:'<div class="diu-notice-dialog">'+$diuNotice.html()+'<div>',
+                        padding:"0px",
+                        ok:false,
+                        cancel:function(){DIU.cookie.setCookie("ownoticenotshow","1",1000*60*60*24*10);},
+                        cancelValue:"关闭，不再提示！",
+                        close:false
+                    });
+                };
+            }else{
+                $diuNotice.remove();
+            };
+
+
+            //积分价格
+            $(".price").each(function(){
+                var price = DIU.parseMoney($(this).find(".money > b").html());
+                if(!price>0){
+                    $(this).find(".money").hide();
+                    $(this).find(".point > i").hide();
+                };
+            });
+            //新闻
+            var $diuIdxNews = $("#diu_idx_news"),
+                newsNum = $diuIdxNews.find("li[name='item']").length;
+            if(newsNum==0){
+                $diuIdxNews.hide();
+            };
+            var opt = {y:"年前",m:"个月前",w:"周前",d:"天前",h:"小时前",n:"分钟前",s:"秒前"}
+            $("div[name='datetime']").each(function(){
+                var timeText = DIU.timeAgoTip(opt,$(this).attr("datetime"),"2019-01-13 15:08:25");
+                $(this).html(timeText);
+            });
+            //友情链接
+            var $flinks = $("#diu-flinks-section");
+            flinksNum   = $flinks.find("li[name='links']").length;
+            if(flinksNum==0){
+                $flinks.hide();
+            }else{
+                $(function(){
+                    var $grid = $flinks,
+                        $gridul = $grid.find('ul'),
+                        $gridli = $gridul.find('li'),
+                        liLen   = $gridul.find('li').length,
+                        liWidth = $gridul.find('li:eq(0)').outerWidth(true),
+                        ofnum = 0,
+                        viewNum    = 11,
+                        mendianNow = 0;
+                    $gridul.width(liLen*liWidth+105);
+                    if(flinksNum>10){
+                        var slideTimer = setInterval(function(){
+                            if(mendianNow<liLen-viewNum){mendianNow++; $gridul.animate({left:-(liWidth+ofnum)*mendianNow},800);}else{mendianNow = 0; $gridul.animate({left:0},800);}
+                        },5000);
+                    };
+                });
+            };
+        });
+    </script>
+</body>
+</html>

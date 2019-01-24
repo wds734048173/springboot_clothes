@@ -1,7 +1,6 @@
 package org.lanqiao.clothes.service.impl;
 
 import org.lanqiao.clothes.mapper.ColorMapper;
-import org.lanqiao.clothes.pojo.Brand;
 import org.lanqiao.clothes.pojo.Color;
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.service.IColorService;
@@ -57,5 +56,10 @@ public class ColorServiceImpl implements IColorService {
     @Override
     public List<Color> getColorSelectedList(int storeId) {
         return colorMapper.selectColorSelectedList(storeId);
+    }
+
+    @Override
+    public List<Color> getColorListByIds(List<Integer> ids) {
+        return colorMapper.selectColorListByIds(ids);
     }
 }

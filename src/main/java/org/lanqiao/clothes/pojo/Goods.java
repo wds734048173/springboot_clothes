@@ -38,4 +38,6 @@ public class Goods {
     private Date rtime;
 
     private List<GoodsSKU> goodsSKUList;
+
+
 }

@@ -19,4 +19,21 @@ public interface OrderMapper {
     //获取订单详情子表信息
     public List<OrderInfo> selectOrderInfoList(int orderId);
     public void updateOrderStateById(int storeId,int supplierOrderId,int state);
+
+    //=====================前台操作========================
+    //增加订单
+    public int addOrder(Order order);
+    //查找订单
+    public List<Order> orderList(Condition condition);
+    public int selectCount(Condition condition);
+    //更新订单状态
+    public void updateOrderState(int state, int id);
+    //删除订单
+    public void deleteOrder(int id);
+    //添加到订单信息表
+    public void addOrderInfo(OrderInfo info);
+    //删除订单信息
+    public void deleteOrderInfo(int oId);
+    //查找订单详情
+    public List<OrderInfo> selectOrderInfo(int oId);
 }

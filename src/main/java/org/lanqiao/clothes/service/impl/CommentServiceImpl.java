@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service("commentService")
 public class CommentServiceImpl implements ICommentService {
@@ -141,4 +140,36 @@ public class CommentServiceImpl implements ICommentService {
     public void modifyCommentState(Comment comment) {
         commentMapper.updateCommentState(comment);
     }
+
+    //    ==================前台操作================
+    @Override
+    public List<Comment> getAllCommentByGoodsId(Condition condition) {
+        List<Comment> commentList= commentMapper.selectAllCommentByGoodsId(condition);
+        for (Comment comment: commentList){
+            int state = comment.getState();
+            int grade =comment.getGrade();
+            if (state ==0){
+                comment.setStateStr("启动");
+            }else if (state ==1){
+                comment.setStateStr("停用");
+            }
+            switch (grade){
+                case 0:comment.setGradeStr("好评");break;
+                case 1:comment.setGradeStr("中评");break;
+                case 2:comment.setGradeStr("差评");break;
+            }
+        }
+
+        return commentList;
+    }
+
+    @Override
+    public int getAllCountCommentGoodsId(Condition condition) {
+        return commentMapper.selectAllCountCommentGoodsId(condition);
+    }
+
+    /*@Override
+    public Comment getCommentByCommentId(int commentId) {
+        return commentMapper.selectCommentByCommentId(commentId);
+    }*/
 }

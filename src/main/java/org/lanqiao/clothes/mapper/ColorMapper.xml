@@ -71,4 +71,15 @@
     <select id="selectColorSelectedList" resultType="org.lanqiao.clothes.pojo.Color" parameterType="int">
         select id,name from tb_goods_color where storeId=#{storeId} and state=0
     </select>
+
+    <select id="selectColorListByIds" parameterType="list" resultType="org.lanqiao.clothes.pojo.Color">
+        select * from tb_goods_color where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectSkuIdBySizeAndColor" resultType="int">
+        select id from skuInfo where colorId=#{colorId} and sizeId=#{sizeId} and goodsId=#{goodsId}
+    </select>
 </mapper>

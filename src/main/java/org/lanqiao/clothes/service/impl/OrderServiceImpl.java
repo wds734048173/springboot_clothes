@@ -182,4 +182,62 @@ public class OrderServiceImpl implements IOrderService {
     public void modifyOrderStateById(int storeId, int orderId, int state) {
         orderMapper.updateOrderStateById(storeId,orderId,state);
     }
+
+
+
+    //===============前台操作=======================
+    @Override
+    public int addOrder(Order order) {
+        return orderMapper.addOrder(order);
+    }
+
+    @Override
+    public List<Order> getOrderList(Condition condition) {
+        return orderMapper.orderList(condition);
+    }
+
+    @Override
+    public int selectCount(Condition condition) {
+        return orderMapper.selectCount(condition);
+    }
+
+    @Override
+    public void payOrder(int id) {
+        orderMapper.updateOrderState(1,id);
+    }
+
+    @Override
+    public void sendOrder(int id) {
+        orderMapper.updateOrderState(2,id);
+    }
+
+    @Override
+    public void getOrder(int id) {
+        orderMapper.updateOrderState(3,id);
+    }
+
+    @Override
+    public void cancelOrder(int id) {
+        orderMapper.updateOrderState(5,id);
+    }
+
+    @Override
+    public void deleteOrder(int id) {
+        orderMapper.deleteOrder(id);
+    }
+
+    @Override
+    public void addOrderInfo(OrderInfo info) {
+        orderMapper.addOrderInfo(info);
+    }
+
+    @Override
+    public void deleteOrderInfo(int oId) {
+        orderMapper.deleteOrderInfo(oId);
+    }
+
+    @Override
+    public List<OrderInfo> selectOrderInfo(int oId) {
+        return orderMapper.selectOrderInfo(oId);
+    }
 }

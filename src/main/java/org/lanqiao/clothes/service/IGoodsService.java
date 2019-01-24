@@ -16,4 +16,6 @@ public interface IGoodsService {
     /*public List<Goods> getGoodsByIds(List<Integer> ids);*/
     public void modifyGoodsIsshelf(int storeId,int goodsId,int isshelf);
     public void addGoodsSKUList(List<GoodsSKU> goodsSKUList);
+
+    public List<GoodsSKU> getGoodsSKUList(int goodsId);
 }

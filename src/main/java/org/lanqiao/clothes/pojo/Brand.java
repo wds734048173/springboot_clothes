@@ -1,7 +1,6 @@
 package org.lanqiao.clothes.pojo;
 
 import lombok.*;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.Date;
 
@@ -16,7 +15,6 @@ import java.util.Date;
 @Getter
 @ToString
 @Builder
-@Configuration
 public class Brand {
     private int id;
     private String name;

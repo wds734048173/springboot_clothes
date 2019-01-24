@@ -28,4 +28,5 @@ public interface GoodsClassMapper {
     public List<GoodsClass> selectGoodsClassNextList(int pId);
     //通过ids获取分类详情
     public List<GoodsClass> selectGoodsClassListByIds(List<Integer> ids);
+
 }

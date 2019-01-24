@@ -23,4 +23,5 @@ public class Customer {
     private Date hiredate;
     private Date ctime;
     private Date rtime;
+
 }

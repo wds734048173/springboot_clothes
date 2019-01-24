@@ -20,4 +20,12 @@ public interface CommentMapper {
     public void updateCommentById(Comment comment);
     //修改评论状态
     public void updateCommentState(Comment comment);
+
+    //=================前台操作=============
+    //根据商品id查询所有的评价
+    public List<Comment> selectAllCommentByGoodsId(Condition condition);
+    //根据商品id查询评论数量
+    public int selectAllCountCommentGoodsId(Condition condition);
+    //根据评论id查询某条评论
+//    public Comment selectCommentByCommentId(int commentId);
 }

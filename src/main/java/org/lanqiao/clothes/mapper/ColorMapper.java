@@ -22,4 +22,8 @@ public interface ColorMapper {
     public Color selectColorById(int id);
     //获取颜色下拉列表
     public List<Color> selectColorSelectedList(int storeId);
+
+    public List<Color> selectColorListByIds(List<Integer> ids);
+
+    public int selectSkuIdBySizeAndColor(int sizeId,int colorId,int goodsId);
 }

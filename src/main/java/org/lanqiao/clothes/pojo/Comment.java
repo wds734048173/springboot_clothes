@@ -31,4 +31,7 @@ public class Comment {
     private String stateStr;
     private Date ctime;
     private Date rtime;
+
+
+
 }

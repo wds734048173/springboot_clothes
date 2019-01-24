@@ -19,4 +19,14 @@ public class StoreServiceImpl implements IStoreService {
     public void insertStore(Store store) {
         storeMapper.insertStore(store);
     }
+
+    @Override
+    public void updateStore(Store store) {
+        storeMapper.updateStore(store);
+    }
+
+    @Override
+    public Store selectById(int id) {
+        return storeMapper.selectById(id);
+    }
 }

@@ -1,6 +1,8 @@
 package org.lanqiao.clothes.controller;
 
+import org.lanqiao.clothes.pojo.Store;
 import org.lanqiao.clothes.pojo.User;
+import org.lanqiao.clothes.service.IStoreService;
 import org.lanqiao.clothes.service.IUserService;
 import org.lanqiao.clothes.utils.MD5Utils;
 import org.lanqiao.clothes.utils.VerifyCode;
@@ -27,6 +29,9 @@ public class LoginController {
 
     @Autowired
     IUserService userService;
+
+    @Autowired
+    IStoreService storeService;
 
     @RequestMapping("/imageCodePage")
     public void imageCodePage(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -83,6 +88,9 @@ public class LoginController {
                 if(storeId == -1){
                     return "/manager/storeInfo";
                 }else{
+                    Store store = storeService.selectById(storeId);
+                    session.setAttribute("store",store);
+                    System.out.println("登录页面=====" + store);
                     return "/manager/index";
                 }
             }

@@ -21,4 +21,6 @@ public interface SizeMapper {
     public Size selectSizeById(int id);
     //获取尺码下拉列表
     public List<Size> selectSizeSelectedList(int storeId);
+
+    public List<Size> selectSizeListByIds(List<Integer> ids);
 }

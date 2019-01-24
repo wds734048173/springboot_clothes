@@ -20,4 +20,12 @@ public interface ICommentService {
 
     public void modifyCommentState(Comment comment);
 
+    //    ================前台操作================
+    //根据商品id查询所有的评价
+    public List<Comment> getAllCommentByGoodsId(Condition condition);
+    //根据商品id查询评论数量
+    public int getAllCountCommentGoodsId(Condition condition);
+    //根据评论id查询某条评论
+//    public Comment getCommentByCommentId(int commentId);
+
  }

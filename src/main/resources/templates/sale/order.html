@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>立即支付</title>
+    <meta name="runtime" content="0.1992">
+    <meta name="queries" content="31">
+    <meta name="renderer" content="webkit">
+    <link rel="shortcut icon" href="http://www.diu8diu.com/diu-content/uploads/favicon.ico">
+    <link rel="icon" href="http://www.diu8diu.com/diu-content/uploads/favicon.ico">
+    <link rel="stylesheet" th:href="@{/sale/css/shopcar/diu.global.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/shopcar/pc.glyphicon.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/shopcar/diu.main.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/shopcar/diu.shop.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/shopcar/diu.diucmt.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/shopcar/style.css}">
+    <link rel="stylesheet" th:href="@{/sale/css/shopcar/diu.shop.cart.css}">
+    <script type="text/javascript" th:src="@{/sale/js/shopcar/diu.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/js/shopcar/com.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/js/shopcar/tpl.js}"></script>
+    <script type="text/javascript" th:src="@{/sale/js/shopcar/jquery.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+           $("#totalPay").text(totalPay);
+        });
+        function pay() {
+            var url="/sale/payOrder?orderId="+orderId+"&totalPay="+totalPay+"&carIds="+carIds;
+            if (confirm("确认付款吗？")) {
+                window.location.href=url;
+            }else {
+                return;
+            }
+        }
+    </script>
+    <script th:inline="javascript">
+        var carIds=[[${carIds}]];
+        var totalPay=[[${totalPrice}]];
+        var orderId=[[${orderId}]];
+    </script>
+</head>
+<body>
+<!--头部-->
+<div id="header">
+    <div class="toper">
+        <div class="wrapper">
+            <div class="top-nav">
+
+                <!--<a class="link" href="http://www.diu8diu.com/diu-ucenter/" target="_self">个人中心</a>-->
+
+                <!--<a class="link" href="http://www.diu8diu.com/diu-ucenter/?ctl=orders" target="_self">我的订单</a>-->
+
+            </div>
+            <div class="account-sign-status">
+                <span id="welcome">欢迎来到<a href="/sale">我的网站</a>！</span>
+                <span id="user" class="user-status" th:if="${session.customer==null}"><a href="/sale/login" class="username"  th:text="登录"></a></span>
+                <span id="user_status" class="user-status" th:if="${session.customer!=null}"><a href="" class="username"  th:text="${session.customer.realname}"></a><a class="logout" href="/sale/logout">退出</a></span>
+            </div>
+            <div class="top-cart">
+                <a class="cart" href="/sale/shoppingCar" th:if="${session.customer!=null}">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>我的购物车
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="header-line">
+        <div class="wrapper">
+            <div class="logo"><a href=""><img th:src="@{/sale/img/logo.png}" style="width: 930px;height: 70px"  alt="丢丢定制" title="丢丢定制"></a></div>
+        </div>
+    </div>
+    <div class="topdmenu">
+        <div class="wrapper">
+            <div class="main-nav" id="main_nav">
+                <a href="/sale/index">首页</a>
+            </div>
+            <div class="top-cart">
+
+            </div>
+        </div>
+    </div>
+    <div class="topdmenufoot"></div>
+</div>
+    <div class="cart-section">
+        <h1 class="header">现在支付</h1>
+        <h4 style="padding-left: 50px">收货人姓名：</h4><p style="padding-left: 70px">李四</p>
+        <h4 style="padding-left: 50px">详细地址：</h4><p style="padding-left: 70px">空间环境拉上来看</p>
+        <div class="section">
+            <div id="cart_goods">
+                <div class="cart-goods">
+                    <div class="cart-goods-thead" id="cart_goods_thead">
+                        <div class="col col-name" style="padding-left: 20px">
+                            <div class="col-inner">商品</div>
+                        </div>
+                        <div class="col col-amount">
+                            <div class="col-inner">数量</div>
+                        </div>
+                        <div class="col col-price">
+                            <div class="col-inner">价格</div>
+                        </div>
+                        <div class="col col-sum">
+                            <div class="col-inner">小计(元)</div>
+                        </div>
+                    </div>
+                    <div class="cart-goods-tbody" name="cart_goods_list">
+                        <ul class="goods current" name="item" th:each="items:${orderMap}">
+                            <li class="item-goods" th:each="item:${items.value}">
+                                <h3 th:text="${item.storeName}"></h3>
+                                <div class="col col-name">
+                                    <div class="col-inner">
+                                        <div class="item-pic">
+                                            <a href="" target="_blank">
+                                                <img class="thumbnail" th:src="${item.pic}">
+                                            </a>
+                                        </div>
+                                        <div class="item-info">
+                                            <a class="item-title" href="" target="_blank" th:text="${item.goodsName}"></a>
+                                            <div class="item-spec"><b th:text="${item.color}"></b>,<b th:text="${item.size}"></b></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-amount">
+                                    <div class="col-inner">
+                                        <div class="item-amount">
+                                            <input type="text" class="text text-amount" name="amount_input" price="48" suit_id="0" gid="264" pid="2259" z1="" z2="" z3="0" th:value="${item.num}" readonly>
+                                        </div>
+                                        <div class="amount-msg"></div>
+                                    </div>
+                                </div>
+                                <div class="col col-price">
+                                    <div class="col-inner">
+                                        <div class="item-price">
+                                            <div class="price-line">
+                                                <span class="money"><em>￥</em><b th:text="${item.sPrice}"></b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-sum">
+                                    <div class="col-inner">
+                                        <div class="item-sum">
+                                            <div class="price-line">
+                                                <!--<span th:text="${carItems.size()}" hidden="hidden" id="length"></span>-->
+                                                <span class="money"><em>￥</em><b name="item_sum" th:text="${item.price}" class="price"></b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <hr style="background-color: red;height: 2px"/>
+                        </ul>
+                        <div class="cart-action">
+                            <div class="cart-post">
+                                <div style="padding-left:20px">
+                                    <span>运费：</span><em>￥</em><b>10</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合计：<span class="money" style="padding-right:50px "><em  style="font-size: 30px;color: red;">￥</em><b name="cart_price_sum" style="font-size: 30px;color: red;" id="totalPay"></b></span>
+                                </div>
+                            </div>
+                            <div class="cart-button">
+                                <button type="button" class="btn-cart-submit" name="btn_checkout" onclick="pay()">去付款</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--底部-->
+    <div id="footer">
+        <div class="footer-section">
+            <div class="wrapper">
+                <div class="col-contact"><h3>DIU8DIU · 丢丢定制平台</h3><p class="text1">打造一个从事个性化定制服务的商业平台，致力于通过互联网为用户提供全面的个性化服饰体验！</p><p class="text2">QQ 客服： 2275370591    13689427<br>客服热线： 400-0156-002 或 18554169888</p></div>
+                <div class="col-cates">
+                    <dl class="item1">
+                        <dt>公司信息</dt>
+                        <dd><a href="" target="_self">公司介绍</a></dd>
+
+                        <dd><a href="" target="_self">合作伙伴</a></dd>
+
+                        <dd><a href="" target="_self">人才招聘</a></dd>
+
+                        <dd><a href="" target="_self">联系我们</a></dd>
+
+                    </dl>
+                    <dl class="item2">
+                        <dt>产品服务</dt>
+
+                        <dd><a href="" target="_self">新闻中心</a></dd>
+
+                        <dd><a href="" target="_self">案例展示</a></dd>
+
+                        <dd><a href="" target="_self">公司视频</a></dd>
+
+                    </dl>
+
+                    <dl class="item3">
+                        <dt>帮助支持</dt>
+
+                        <dd><a href="" target="_self">常见问题</a></dd>
+
+                        <dd><a href="" target="_self">文档下载</a></dd>
+
+                        <dd><a href="" target="_self">用户协议</a></dd>
+
+                        <dd><a href="" target="_self">隐私政策</a></dd>
+                    </dl>
+                </div>
+                <div class="col-qrcode"><img class="img-responsive" th:src="@{/sale/img/qrcode.jpg}" alt="qrcode">
+                    <h3>官方微信</h3><p>关注我们 · 更多优惠</p>
+                </div>
+            </div>
+        </div>
+        <div class="powered-by">
+            <div class="wrapper">
+                <div class="copyright">
+                    Copyright © <a href="http://www.diu8diu.com/" target="_blank">丢丢定制</a> 2016-2017 ALL Rights Reserved <span class="icp"><a href="http://www.miitbeian.gov.cn/" rel="nofollow" target="_blank">鲁ICP备14011980号-1</a></span><i class="stat"></i></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -33,4 +33,7 @@ public interface GoodsMapper {
 
     //新增商品sku表
     public void insertGoodsSKUList(List<GoodsSKU> goodsSKUList);
+
+    //通过商品id查询商品子表
+    public List<GoodsSKU> selectGoodsSKUList(int goodsIs);
 }

@@ -3,7 +3,6 @@ package org.lanqiao.clothes.pojo;
 import lombok.*;
 import org.springframework.context.annotation.Configuration;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor

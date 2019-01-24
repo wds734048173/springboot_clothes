@@ -86,4 +86,52 @@
     <update id="updateOrderStateById">
         update tb_order set state=#{param3} where storeId=#{param1} and id=#{param2}
     </update>
+
+
+
+    <!--前台操作-->
+    <insert id="addOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_order(customerId,totalMoney,payMoney,addressId,storeId,state,ctime)
+        values (#{customerId},#{totalMoney},#{payMoney},#{addressId},#{storeId},#{state},now())
+    </insert>
+    <insert id="addOrderInfo">
+        insert into tb_orderinfo(oId,goodsId,skuId,price,num)values (#{oId},#{goodsId},#{skuId},#{price},#{num})
+    </insert>
+    <update id="updateOrderState">
+        update tb_order
+        <set>
+            <if test="state!=null">state=#{state},rtime=now()</if>
+            <if test="state==1">,payTime=now()</if>
+            <if test="state==2">,sendTime=now()</if>
+            <if test="state==3">,getTime=now()</if>
+            <if test="state==5">,cancelTime=now()</if>
+        </set>
+        where id=#{id}
+    </update>
+    <update id="deleteOrder">
+      update tb_order set state=6 where id=#{id}
+    </update>
+    <delete id="deleteOrderInfo">
+        delete tb_orderinfo where oId=#{oId}
+    </delete>
+    <select id="orderList" resultType="org.lanqiao.clothes.pojo.Order">
+        select * from tb_order
+        <where>
+            <if test="cutomerId!=null and customerId!=''">
+                customerId=#{customerId}
+            </if>
+            <if test="state!=null and state!=''">
+                state=#{state}
+            </if>
+        </where>
+        <if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="selectCount" resultType="int">
+        select count(1) from tb_order where customerId=#{customerId}
+    </select>
+    <select id="selectOrderInfo" resultType="org.lanqiao.clothes.pojo.OrderInfo">
+        select * from tb_orderinfo where oId=#{oId}
+    </select>
 </mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.clothes.mapper.GoodsListMapper">
+    <select id="selectGoodsListSelectedList" parameterType="org.lanqiao.clothes.pojo.GoodsList" resultType="org.lanqiao.clothes.pojo.GoodsList">
+        select * from tb_goods
+        <where>
+            <if test="goodsClass1Id != null">
+                class1Id = #{goodsClass1Id}
+            </if>
+        </where>
+        <!--<if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>-->
+    </select>
+    <select id="selectGoodsListCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
+              SELECT COUNT(1) FROM tb_goods
+        <where>
+            <if test="goodsClass1Id != null">
+                class1Id = #{goodsClass1Id}
+            </if>
+        </where>
+       </select>
+    <!--获取分类-->
+    <select id="getGoodsClassSelectedList"  resultType="org.lanqiao.clothes.pojo.GoodsClass">
+        select * from tb_goods_class where pid=1
+    </select>
+    <!--获取品牌-->
+    <select id="getBrandListSelectedList" resultType="org.lanqiao.clothes.pojo.Brand">
+        select * from tb_goods_brand
+    </select>
+    <!--根据品牌遍历商品-->
+    <select id="getGoodsListByBrandName" resultType="org.lanqiao.clothes.pojo.Goods">
+        select  goods.name,goods.pPrice,goods.sPrice,goods.mPrice,goods.brandId ,goods.id,goods.pic from tb_goods goods,tb_goods_brand brand  where  goods.brandId = brand.id and brand.id=#{brandId}
+    </select>
+    <!--根据分类遍历商品-->
+    <select id="getGoodsListByClassName" resultType="org.lanqiao.clothes.pojo.Goods">
+        select goods.name,goods.pPrice,goods.sPrice,goods.mPrice,goods.class1Id,goods.pic from tb_goods goods,tb_goods_class class  where  goods.class1Id =class.id and class.id=#{goodsClass1Id}
+    </select>
+</mapper>

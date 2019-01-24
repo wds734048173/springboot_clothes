@@ -58,4 +58,9 @@ public class SizeServiceImpl implements ISizeService {
     public Size getSizeById(int id) {
         return sizeMapper.selectSizeById(id);
     }
+
+    @Override
+    public List<Size> getSizeListByIds(List<Integer> ids) {
+        return sizeMapper.selectSizeListByIds(ids);
+    }
 }

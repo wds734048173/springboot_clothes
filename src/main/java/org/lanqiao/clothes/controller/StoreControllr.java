@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
@@ -30,7 +31,7 @@ public class StoreControllr {
     }*/
     //    完善商家信息
     @RequestMapping("/manager/storeInfo")
-    public String addstoreInfo(HttpServletRequest request){
+    public String addstoreInfo(HttpServletRequest request, HttpServletResponse response){
         System.out.println("============进入完成店铺信息方法。。。");
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
@@ -67,6 +68,34 @@ public class StoreControllr {
         userService.updateStoreId(user);
 //        重新为seeeion中的user赋值
         session.setAttribute("user",user);
+        return "/manager/index";
+    }
+
+    //   修改页面跳转
+    @RequestMapping("/manager/storeUp")
+    public String storeUpdate(){
+        System.out.println("=================店铺修改页面");
+        return "/manager/storeup";
+    }
+    //    修改店铺信息
+    @RequestMapping("/manager/storeUp1")
+    public String storeUpdate1(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        Store store = (Store)session.getAttribute("store");
+//        店铺名称
+        String name = request.getParameter("name");
+//        营业执照编号
+        String bussinessNo = request.getParameter("bussinessNo");
+//         店铺地址
+        String address = request.getParameter("address");
+//        商家联系电话
+        String telphone = request.getParameter("telphone");
+        store.setName(name);
+        store.setBussinessNo(bussinessNo);
+        store.setAddress(address);
+        store.setTelphone(telphone);
+        storeService.updateStore(store);
+        session.setAttribute("store",store);
         return "/manager/index";
     }
 }
