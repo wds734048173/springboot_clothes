@@ -98,10 +98,12 @@ public class SupplierOrderServiceImpl implements ISupplierOrderService {
             skuIds.add(supplierOrderInfo.getSkuId());
         }
         //获取商品信息
-        List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
         Map<Integer,String> goodsMap = new HashMap<>();
-        for(Goods goods : goodsList){
-            goodsMap.put(goods.getId(),goods.getName());
+        if(goodsIds.size()>0){
+            List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
+            for(Goods goods : goodsList){
+                goodsMap.put(goods.getId(),goods.getName());
+            }
         }
         //获取颜色并做成map
         List<Color> colorList = colorMapper.selectColorSelectedList(storeId);
@@ -115,10 +117,12 @@ public class SupplierOrderServiceImpl implements ISupplierOrderService {
         for(Size size : sizeList){
             sizeMap.put(size.getId(),size.getName());
         }
-        List<GoodsSKU> goodsSKUList = goodsMapper.selectSKUByIds(skuIds);
         Map<Integer,GoodsSKU> skuMap = new HashMap<>();
-        for(GoodsSKU goodsSKU : goodsSKUList){
-            skuMap.put(goodsSKU.getId(),goodsSKU);
+        if(skuIds.size()>0){
+            List<GoodsSKU> goodsSKUList = goodsMapper.selectSKUByIds(skuIds);
+            for(GoodsSKU goodsSKU : goodsSKUList){
+                skuMap.put(goodsSKU.getId(),goodsSKU);
+            }
         }
         //配置查询到的数据
         for(SupplierOrderInfo supplierOrderInfo : supplierOrderInfoList){

@@ -75,6 +75,12 @@ public class OrderServiceImpl implements IOrderService {
         int customerId = order.getCustomerId();
         Customer customer = customerMapper.selectCustomerById(customerId);
         order.setCustomerName(customer.getUsername());
+        //状态
+        int state = order.getState();
+        Map<Integer,String> orderStateMap = DataMapUtil.getOrderStateMap();
+        if(orderStateMap.containsKey(state)){
+           order.setStateStr(orderStateMap.get(state));
+        }
         //收货地址信息
         int addressId = order.getAddressId();
         Address address = addressMapper.selectAddressById(addressId);

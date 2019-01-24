@@ -75,14 +75,17 @@ public class SupplierController {
     }
 
     @RequestMapping("manager/addSupplier")
-    public String addColor(HttpServletRequest req, HttpServletResponse resp, Model model){
+    public String addSupplier(HttpServletRequest req, HttpServletResponse resp, Model model){
         Supplier supplier = Supplier.builder().build();
         String name = req.getParameter("supplierName");
         int sex = Integer.valueOf(req.getParameter("supplierSex"));
         String telphone = req.getParameter("supplierTelphone");
         String address = req.getParameter("supplierAddress");
         int state = Integer.valueOf(req.getParameter("supplierState"));
-        int storeId = 1;
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
         supplier.setName(name);
         supplier.setState(state);
         supplier.setStoreId(storeId);
@@ -125,7 +128,7 @@ public class SupplierController {
 
     @RequestMapping("/manager/selectSupplierById")
     @ResponseBody
-    public Supplier selectColorById(HttpServletRequest req, HttpServletResponse resp){
+    public Supplier selectSupplierById(HttpServletRequest req, HttpServletResponse resp){
         String supplierId = req.getParameter("supplierId");
         Supplier supplier = supplierService.getSupplierById(Integer.valueOf(supplierId));
         return supplier;

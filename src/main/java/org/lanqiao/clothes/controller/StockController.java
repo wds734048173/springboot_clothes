@@ -54,7 +54,7 @@ public class StockController {
     }
 
     @RequestMapping("/manager/stockList")
-    public String colorList(HttpServletRequest req, HttpServletResponse resp, Model model){
+    public String stockList(HttpServletRequest req, HttpServletResponse resp, Model model){
         int pageNum = 1;
         if(req.getParameter("currentPage") != null){
             pageNum = Integer.valueOf(req.getParameter("currentPage"));

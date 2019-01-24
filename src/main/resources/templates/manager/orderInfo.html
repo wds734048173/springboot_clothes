@@ -35,7 +35,7 @@
     <div class="form-group row">
         <div class="col-xs-3">
             <label for="state">订单状态:</label>
-            <span type="text"  id="state" name="state" th:text="${order.state}"></span>
+            <span type="text"  id="state" name="state" th:text="${order.stateStr}"></span>
         </div>
     </div>
     <div class="form-group" th:switch="${order.state}">

@@ -1,6 +1,5 @@
 package org.lanqiao.clothes.controller;
 
-import org.lanqiao.clothes.pojo.Brand;
 import org.lanqiao.clothes.pojo.Color;
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.User;
@@ -80,9 +79,10 @@ public class ColorController {
         Color color = Color.builder().build();
         String name = req.getParameter("colorName");
         int state = Integer.valueOf(req.getParameter("colorState"));
-        /*HttpSession session = req.getSession();
-        int storeId = Integer.valueOf(session.getAttribute("storeId").toString());*/
-        int storeId = 1;
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
         color.setName(name);
         color.setState(state);
         color.setStoreId(storeId);
@@ -103,9 +103,10 @@ public class ColorController {
         String id = req.getParameter("colorId");
         String name = req.getParameter("colorName");
         int state = Integer.valueOf(req.getParameter("colorState"));
-        /*HttpSession session = req.getSession();
-        int storeId = Integer.valueOf(session.getAttribute("storeId").toString());*/
-        int storeId = 1;
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
         color.setId(Integer.valueOf(id));
         color.setName(name);
         color.setState(state);

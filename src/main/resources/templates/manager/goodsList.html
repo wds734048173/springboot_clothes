@@ -344,13 +344,14 @@
         <thead>
         <tr>
             <th hidden>ID</th>
+            <th>图片</th>
             <th>货号</th>
             <th>商品名称</th>
             <th>采购价</th>
             <th>销售价</th>
             <th>会员价</th>
             <!--<th>第三级</th>-->
-            <th>品牌id</th>
+            <th>品牌</th>
             <th>上新年份</th>
             <th>适用季节</th>
             <th>是否上下架</th>
@@ -363,6 +364,7 @@
         <tbody>
         <tr th:each="goods: ${goodsList}">
             <td th:text="${goods.id}" hidden></td>
+            <td ><img th:src="${goods.pic}" style="width: 30px;height: 30px;"></td>
             <td th:text="${goods.no}"></td>
             <td th:text="${goods.name}"></td>
             <td th:text="${goods.pPrice}"></td>

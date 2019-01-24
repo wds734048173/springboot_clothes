@@ -148,6 +148,8 @@ public class GoodsController {
         goods.setSex(sex);
         goods.setStoreId(storeId);
         goods.setIsshelf(isshelf);
+//        goods.setGoodsSKUList(goodsSKUList);
+        goodsService.addGoods(goods);
         //获取颜色
         List<Color> colorList = colorService.getColorSelectedList(storeId);
         //获取尺码
@@ -164,8 +166,6 @@ public class GoodsController {
                 goodsSKUList.add(goodsSKU);
             }
         }
-//        goods.setGoodsSKUList(goodsSKUList);
-        goodsService.addGoods(goods);
         goodsService.addGoodsSKUList(goodsSKUList);
         return goodsList(req,resp,model);
     }
