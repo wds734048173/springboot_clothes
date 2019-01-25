@@ -29,7 +29,6 @@ public class ShoppingController {
 ICommentService commentService;
     @RequestMapping("/sale/detalis")
     public String goodsList(HttpServletRequest req, HttpServletResponse resp, Model model){
-        System.out.println("进入前端页面");
         int goodsId = Integer.valueOf(req.getParameter("goodsId"));
         //获取商品的评论信息------------------start
         //获取商品id
@@ -83,5 +82,28 @@ ICommentService commentService;
         //获取商品详情------------end
         return "/sale/detalis";
     }
+    @RequestMapping("/sale/comments")
+    public String getComment(HttpServletRequest req, HttpServletResponse resp, Model model){
+        //获取商品id
+//        int goodsId=1;
+        int goodsId = Integer.valueOf(req.getParameter("goodsId"));
+        System.out.println(goodsId+"---------------------------");
+
+        //根据评价等级查询评价
+        String searchCommentGrade = "-1";
+        if (req.getParameter("searchCommentGrade")!=null){
+            searchCommentGrade = req.getParameter("searchCommentGrade");
+        }
+        Condition condition =new Condition();
+        condition.setGrade(searchCommentGrade);
+        condition.setGoodsId(goodsId);
+        int totalRecords = commentService.getAllCountCommentGoodsId(condition);
+        List<Comment> commentListByGoodsId = commentService.getAllCommentByGoodsId(condition);
+        model.addAttribute("commentListByGoodsId",commentListByGoodsId);
+        model.addAttribute("condition",condition);
+        model.addAttribute("count",totalRecords);
+        return "/sale/comment";
+    }
+
 
 }

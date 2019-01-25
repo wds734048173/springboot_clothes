@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -59,5 +62,23 @@ public class CustomerController {
         int customerId = Integer.valueOf(req.getParameter("customerId"));
         customerService.modifyCustomerState(customerId,state);
         return customerList(req,resp,model);
+    }
+    @RequestMapping("/sale/updateMessage")
+    public String updateMessage(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
+        Customer customer = Customer.builder().build();
+        int id = Integer.valueOf(req.getParameter("customerId"));
+        String realname = req.getParameter("realname");
+        int sex = Integer.valueOf(req.getParameter("sex"));
+        String phone = req.getParameter("phone");
+        String hiredate1 = req.getParameter("hiredate");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date hiredate = sdf.parse(hiredate1);
+        customer.setId(id);
+        customer.setSex(sex);
+        customer.setRealname(realname);
+        customer.setPhone(phone);
+        customer.setHiredate(hiredate);
+        customerService.updateMessage(customer);
+        return "/sale/personalDetalis";
     }
 }

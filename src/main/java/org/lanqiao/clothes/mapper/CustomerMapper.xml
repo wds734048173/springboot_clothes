@@ -69,4 +69,7 @@
     <update id="updatePwdByName" >
         update tb_customer set password=#{password} where username=#{username}
     </update>
+    <update id="updateMessageById" parameterType="org.lanqiao.clothes.pojo.Customer">
+        update tb_customer set realname=#{realname},sex=#{sex},phone=#{phone},hiredate=#{hiredate} where id=#{id}
+    </update>
 </mapper>

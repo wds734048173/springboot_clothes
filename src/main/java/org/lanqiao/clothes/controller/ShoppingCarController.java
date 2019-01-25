@@ -1,9 +1,9 @@
 package org.lanqiao.clothes.controller;
 
-import org.lanqiao.clothes.mapper.ColorMapper;
 import org.lanqiao.clothes.pojo.*;
 import org.lanqiao.clothes.service.IGoodsService;
-import org.lanqiao.clothes.service.impl.ShopCarServiceImpl;
+import org.lanqiao.clothes.service.IGoodsSkuService;
+import org.lanqiao.clothes.service.IShopCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,42 +20,35 @@ import java.util.Map;
 @Controller
 public class ShoppingCarController {
     @Autowired
-    ShopCarServiceImpl shopCarService;
+    IShopCarService shopCarService;
 
     @Autowired
     IGoodsService goodsService;
     @Autowired
-    ColorMapper colorMapper;
+    IGoodsSkuService goodsSkuService;
     //购物车查询
     @RequestMapping("/sale/shoppingCar")
     public String goShopingCar(HttpServletRequest req, HttpServletResponse resp, Model model){
         HttpSession session = req.getSession();
         Customer customer = (Customer) session.getAttribute("customer");
-        System.out.println(customer.getId());
-        List<ShopingCarItem> carItems=shopCarService.selectAllToList(customer.getId());
-        Map<Integer,List<ShopingCarItem>> storeMap = new HashMap<>();
+        List<ShopingCar> carItems=shopCarService.selectAllToList(customer.getId());
+        Map<Integer,List<ShopingCar>> storeMap = new HashMap<>();
         //将购物车按店铺id分类
-        for (ShopingCarItem item:carItems){
+        for (ShopingCar item:carItems){
             int storeId=item.getStoreId();
             if (storeMap.containsKey(storeId)){
                 storeMap.get(storeId).add(item);
             }else {
-                List<ShopingCarItem> items=new ArrayList<>();
+                List<ShopingCar> items=new ArrayList<ShopingCar>();
                 items.add(item);
                 storeMap.put(storeId,items);
             }
         }
-        System.out.println(carItems.size());
         req.setAttribute("carMap",storeMap);
         req.setAttribute("carItems",carItems);
         return "/sale/shoppingcar";
     }
 
-//    //选择变动
-//    @RequestMapping("/sale/checkChange")
-//    public String checkchange(HttpServletRequest req, HttpServletResponse resp, Model model){
-//
-//    }
     //商品数量及价格变更
     @RequestMapping("/sale/itemNumChange")
     public String changeNum(HttpServletRequest req, HttpServletResponse resp, Model model){
@@ -67,8 +60,9 @@ public class ShoppingCarController {
         car.setNum(num);
         car.setPrice(price);
         shopCarService.updateCar(car);
-        List<ShopingCarItem> carItems=shopCarService.selectAllToList(1);
+        List<ShopingCar> carItems=shopCarService.selectAllToList(1);
         req.setAttribute("carItems",carItems);
+        req.setAttribute("items",carItems);
         return "/sale/shoppingcar";
     }
     // 删除指定商品
@@ -86,7 +80,9 @@ public class ShoppingCarController {
        int sizeId=Integer.parseInt(req.getParameter("sizeId"));
         int colorId=Integer.parseInt(req.getParameter("colorId"));
         Goods goods  = goodsService.getGoodsById(goodsId);
-        int skuId=colorMapper.selectSkuIdBySizeAndColor(sizeId,colorId,goodsId);
+        //获取skuid
+        int skuId=goodsSkuService.getSkuIdBySizeAndColor(sizeId,colorId,goodsId);
+        System.out.println("sizeId++++++++"+sizeId);
 //       根据session获取顾客id
         HttpSession session = req.getSession();
         Customer customer = (Customer) session.getAttribute("customer");

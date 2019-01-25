@@ -23,4 +23,7 @@ public interface StoreMapper {
     public int selectStoreCount(Condition condition);
     public void updateStoreStateById(int id,int state);
 
+    //通过店铺ids获取店铺信息
+    public List<Store> selectStoreListByIds(List<Integer> ids);
+
 }

@@ -1,6 +1,7 @@
 package org.lanqiao.clothes.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Order;
 import org.lanqiao.clothes.pojo.OrderInfo;
@@ -36,4 +37,6 @@ public interface OrderMapper {
     public void deleteOrderInfo(int oId);
     //查找订单详情
     public List<OrderInfo> selectOrderInfo(int oId);
+    //查找订单详情
+    public List<Order> getOrderId(@Param(value = "customerId") int id);
 }

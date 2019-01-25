@@ -38,4 +38,11 @@
     <update id="updateStoreStateById">
         update tb_store set state=#{param2} where id=#{param1}
     </update>
+
+    <select id="selectStoreListByIds" parameterType="list" resultType="org.lanqiao.clothes.pojo.Store">
+        select * from tb_store where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

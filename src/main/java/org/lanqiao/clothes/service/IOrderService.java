@@ -36,4 +36,7 @@ public interface IOrderService {
     public void deleteOrderInfo(int oId);
     //查找订单详情
     public List<OrderInfo> selectOrderInfo(int oId);
+    //    前端根据用户查订单
+    public List<OrderInfo> salegetOrderInfoListById(int orderId,int customerId);
+    public List<Order> getOrderId(int id);
 }

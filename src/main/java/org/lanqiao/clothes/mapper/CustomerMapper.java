@@ -37,4 +37,6 @@ public interface CustomerMapper {
     public Customer selectByName(@Param(value="username") String username);
     //    根据name修改密码
     public void updatePwdByName(@Param(value = "password") String password, @Param(value="username") String username);
+    //修改个人信息
+    public void updateMessageById(Customer customer);
 }

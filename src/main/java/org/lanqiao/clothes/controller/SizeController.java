@@ -136,7 +136,6 @@ public class SizeController {
     @ResponseBody
     public Size selectSizeById(HttpServletRequest req, HttpServletResponse resp){
         int sizeId = Integer.valueOf(req.getParameter("sizeId"));
-        System.out.println("sizeId=================="+sizeId);
         Size size = sizeService.getSizeById(sizeId);
         return size;
     }

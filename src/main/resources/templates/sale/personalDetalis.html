@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--个人信息页面-->
+<div class="uc-content-box portal-content-box">
+    <div class="box-bd">
+        <div class="portal-main clearfix">
+            <div class="user-card">
+                <h2 class="username" th:text="${session.customer.getUsername()}"></h2>
+                <p class="tip">你好啊～</p>
+                <img class="avatar" src="./个人中心_files/photo.jpg" width="150" height="150"
+                     alt="th:text='${session.customer.getUsername()}'">
+            </div>
+            <div class="user-actions">
+                <ul class="action-list">
+                    <li>账户安全：<span class="level level-2">普通</span></li>
+                    <li>用户id:<span class="tel" th:value="${session.customer.getId()}"></span></li>
+                    <li><span class="tel"><a class="btn btn-small btn-primary modify">修改信息</a></span> </li><br>
+                    <li><span class="tel save" hidden><a class="btn btn-small btn-primary save">保存信息</a></span></li>
+
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="portal-sub">
+            <ul class=" clearfix">
+                <input type="hidden" id="customerId" th:value="${session.customer.id}">
+                <li>
+                    <span style="font-size: 24px;margin-left: 15%;display: inline-block">真实姓名:</span>
+                    <input style="font-size: 24px;margin-left: 10%;display: inline-block" readOnly="true"  id="realname" disabled  th:value="${session.customer.getRealname()}">
+
+                </li>
+                <li>
+                    <sapn style="font-size: 24px;margin-left: 15%;display: inline-block">性别:</sapn>
+                    <input type="radio" name="sex" style="font-size: 24px;margin-left: 15.4%;display: inline-block"  th:checked="${session.customer.getSex()==0}" disabled  th:value="0"> 男
+                    <input type="radio" name="sex" style="font-size: 24px;margin-left: 15.4%;display: inline-block"  th:checked="${session.customer.getSex()==1}" disabled  th:value="1"> 女
+                </li>
+                <li>
+                    <sapn style="font-size: 24px;margin-left: 15%;display: inline-block">出生日期:</sapn>
+                    <input style="font-size: 24px;margin-left: 10%;display: inline-block"  id="hiredate" disabled  th:value="${session.customer.getHiredate()!=null}?${#dates.format(session.customer.getHiredate(), 'yyyy-MM-dd')}">
+                </li>
+                <li>
+                    <sapn style="font-size: 24px;margin-left: 15%;display: inline-block">绑定手机:</sapn>
+                    <input style="font-size: 24px;margin-left: 10%;display: inline-block" class="disabled" id="phone" disabled th:value="${session.customer.getPhone()}">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

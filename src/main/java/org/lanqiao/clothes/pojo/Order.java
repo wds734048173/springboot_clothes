@@ -3,6 +3,8 @@ package org.lanqiao.clothes.pojo;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -35,4 +37,5 @@ public class Order {
     private Date sendTime;
     private Date getTime;
     private Date cancelTime;
+    private List<OrderInfo> orderInfoList;
 }

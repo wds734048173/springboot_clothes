@@ -26,6 +26,8 @@ public interface CommentMapper {
     public List<Comment> selectAllCommentByGoodsId(Condition condition);
     //根据商品id查询评论数量
     public int selectAllCountCommentGoodsId(Condition condition);
-    //根据评论id查询某条评论
-//    public Comment selectCommentByCommentId(int commentId);
+    //根据用户id查询所有评论
+    public List<Comment> getAllCommentByCustomerId(Condition condition);
+    //根据用户id查询评论数量
+    public int selectAllCountCommentCustomerId(Condition condition);
 }

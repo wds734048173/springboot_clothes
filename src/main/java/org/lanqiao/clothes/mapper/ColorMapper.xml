@@ -69,7 +69,4 @@
         </foreach>
     </select>
 
-    <select id="selectSkuIdBySizeAndColor" resultType="int">
-        select id from skuInfo where colorId=#{colorId} and sizeId=#{sizeId} and goodsId=#{goodsId}
-    </select>
 </mapper>

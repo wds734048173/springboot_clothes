@@ -1,9 +1,6 @@
 package org.lanqiao.clothes.controller;
 
-import org.lanqiao.clothes.pojo.Condition;
-import org.lanqiao.clothes.pojo.Order;
-import org.lanqiao.clothes.pojo.OrderInfo;
-import org.lanqiao.clothes.pojo.User;
+import org.lanqiao.clothes.pojo.*;
 import org.lanqiao.clothes.service.IOrderService;
 import org.lanqiao.clothes.utils.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @EnableAutoConfiguration
@@ -88,5 +87,20 @@ public class OrderController {
         int orderId = Integer.valueOf(req.getParameter("orderId"));
         orderService.modifyOrderStateById(storeId,orderId,state);
         return orderList(req, resp, model);
+    }
+
+    //    查看我的订单
+    @RequestMapping("/sale/selectOrder")
+    public  String selectOrderInfo(Model model,HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("customer");
+//        查询给该用户的所有订单id
+        List<Order> ids = orderService.getOrderId(customer.getId());
+        Map<Integer,List<OrderInfo>> ordermap= new HashMap<>();
+        for (Order id:ids){
+            ordermap.put(id.getId(),orderService.salegetOrderInfoListById(id.getId(),customer.getId()));
+        }
+        model.addAttribute("orderInfoList",ordermap);
+        return "/sale/MyOrder";
     }
 }

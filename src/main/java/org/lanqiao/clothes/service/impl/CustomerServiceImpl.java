@@ -72,5 +72,9 @@ public class CustomerServiceImpl implements ICustomerService {
     public Customer selectByName(String username) {
         return customerMapper.selectByName(username);
     }
+    @Override
+    public void updateMessage(Customer customer) {
+        customerMapper.updateMessageById(customer);
+    }
 
 }

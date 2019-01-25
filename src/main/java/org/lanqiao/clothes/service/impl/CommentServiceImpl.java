@@ -167,9 +167,31 @@ public class CommentServiceImpl implements ICommentService {
     public int getAllCountCommentGoodsId(Condition condition) {
         return commentMapper.selectAllCountCommentGoodsId(condition);
     }
+    @Override
+    public List<Comment> getAllCommentByCustomerId(Condition condition) {
+        List<Comment> commentList = commentMapper.getAllCommentByCustomerId(condition);
+        for (Comment comment: commentList){
+            int state = comment.getState();
+            int grade =comment.getGrade();
+            if (state ==0){
+                comment.setStateStr("启动");
+            }else if (state ==1){
+                comment.setStateStr("停用");
+            }
+            switch (grade){
+                case 0:comment.setGradeStr("好评");break;
+                case 1:comment.setGradeStr("中评");break;
+                case 2:comment.setGradeStr("差评");break;
+            }
+        }
+        return commentList;
+    }
 
-    /*@Override
-    public Comment getCommentByCommentId(int commentId) {
-        return commentMapper.selectCommentByCommentId(commentId);
-    }*/
+    @Override
+    public int getAllCountCommentCustomerId(Condition condition) {
+        return commentMapper.selectAllCountCommentCustomerId(condition);
+    }
+
+
+
 }

@@ -134,7 +134,6 @@ public class OrderServiceImpl implements IOrderService {
         //获取商品信息
         if(goodsIds.size()>0){
             List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
-
             for(Goods goods : goodsList){
                 goodsMap.put(goods.getId(),goods.getName());
             }
@@ -239,5 +238,77 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public List<OrderInfo> selectOrderInfo(int oId) {
         return orderMapper.selectOrderInfo(oId);
+    }
+    //    前端订单信息
+    @Override
+    public List<OrderInfo> salegetOrderInfoListById(int orderId, int customerId) {
+
+        //        获取关联字表信息，一对多
+        List<OrderInfo> orderInfoList = orderMapper.selectOrderInfoList(orderId);
+        //获取商品id
+        List<Integer> goodsIds = new ArrayList<>();
+        Map<Integer,Goods> goodsMap = new HashMap<>();
+        //获取skuid
+        List<Integer> skuIds = new ArrayList<>();
+        Map<Integer,GoodsSKU> skuMap = new HashMap<>();
+        Map<Integer,String> colorMap = new HashMap<>();
+        Map<Integer,String> sizeMap = new HashMap<>();
+//        将orderinfo中的goodsid和skuids放入List
+        for(OrderInfo orderInfo : orderInfoList){
+            goodsIds.add(orderInfo.getGoodsId());
+            skuIds.add(orderInfo.getSkuId());
+        }
+        //获取商品信息
+        if(goodsIds.size()>0){
+//            获取
+            List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
+            for(Goods goods : goodsList){
+                goodsMap.put(goods.getId(),goods);
+            }
+        }
+
+        if(skuIds.size()>0){
+            List<GoodsSKU> goodsSKUList = goodsMapper.selectSKUByIds(skuIds);
+            for(GoodsSKU goodsSKU : goodsSKUList){
+                skuMap.put(goodsSKU.getId(),goodsSKU);
+            }
+            //获取颜色并做成map
+            List<Color> colorList = colorMapper.selectColorSelectedList(customerId);
+            for(Color color : colorList){
+                colorMap.put(color.getId(),color.getName());
+            }
+            //获取尺码，并做成map
+            List<Size> sizeList = sizeMapper.selectSizeSelectedList(customerId);
+            for(Size size : sizeList){
+                sizeMap.put(size.getId(),size.getName());
+            }
+        }
+
+        //配置查询到的数据
+        for(OrderInfo orderInfo : orderInfoList){
+            int goodsId = orderInfo.getGoodsId();
+            if(goodsMap.containsKey(goodsId)){
+//                设置orderinfo中的物品名字
+                orderInfo.setGoodsName(goodsMap.get(goodsId).getName());
+                orderInfo.setGoodsPic(goodsMap.get(goodsId).getPic());
+            }
+            int skuId = orderInfo.getSkuId();
+            if(skuMap.containsKey(skuId)){
+                orderInfo.setColorId(skuMap.get(skuId).getColorId());
+                if(colorMap.containsKey(skuMap.get(skuId).getColorId())){
+                    orderInfo.setColorName(colorMap.get(skuMap.get(skuId).getColorId()));
+                }
+                orderInfo.setSizeId(skuMap.get(skuId).getSizeId());
+                if(sizeMap.containsKey(skuMap.get(skuId).getSizeId())){
+                    orderInfo.setSizeName(sizeMap.get(skuMap.get(skuId).getSizeId()));
+                }
+            }
+        }
+        return orderInfoList;
+
+    }
+    @Override
+    public List<Order> getOrderId(int id) {
+        return orderMapper.getOrderId(id);
     }
 }

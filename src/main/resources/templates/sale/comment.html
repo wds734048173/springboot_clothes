@@ -5,12 +5,13 @@
     <title>Title</title>
 </head>
 <body>
+<!--按钮-->
 <div class="wrapper">
     <span style="font-size: 30px">评价数量(<span id="comment_count" th:text="${count}"></span>)</span>
-    <span  class="commentBtn btn btn-default" type="button"  id="quanbu"  value="全部" onclick="quanbu()"><p value="-1">全部</p></span>
-    <span class="commentBtn btn btn-default" type="button"  id="haoping"  value="好评" onclick="haoping()"><p value="0">好评</p></span>
-    <span  class="commentBtn btn btn-default" type="button"  id="zhongping"  value="中评" onclick="zhongping()"><p value="1">中评</p></span>
-    <span class="commentBtn btn btn-default" type="button"  id="chaping"  value="差评" onclick="chaping()"><p value="2"></p>差评</span>
+    <a  class="commentBtn btn btn-default" type="button"  id="quanbu"  value="-1" onclick="pageClick(this)">全部</a>
+    <a class="commentBtn btn btn-default" type="button"  id="haoping"  value="0" onclick="pageClick(this)">好评</a>
+    <a  class="commentBtn btn btn-default" type="button"  id="zhongping"  value="1" onclick="pageClick(this)">中评</a>
+    <a class="commentBtn btn btn-default" type="button"  id="chaping"  value="2" onclick="pageClick(this)">差评</a>
 </div>
 <hr>
 <!--开始评价管理-->
@@ -20,16 +21,15 @@
         <br>
         <center><span style="font-size: 30px">很抱歉，该商品还没有对应的评价</span></center>
     </div>
-
 </div>
-<div class="appraise " name="appraise" is_tab="true" tab="4" style="display: block;" th:if="${count}!=0">
+<div  is_tab="true" tab="4" style="display: block;" th:if="${count}!=0">
     <div class="section list-section" id="comment_list" th:each="comment:${commentListByGoodsId}">
         <div class="comment-data">
             <div class="avatar"><img name="avatar" src="./商品详情_files/touxiang.jpg" style="max-width:250%; height: 100px">
                 <p class="user" th:text="${comment.customerId}"></p></div>
             <div class="comment-data-content">
-                <div class="cmt-header"><span class="cmt-spec" name="cmt_spec">规格：<b
-                        name="spec_value" th:text="${comment.skuId}"></b></span>
+                <div class="cmt-header">
+                    <span class="cmt-spec" name="cmt_spec">规格：<b name="spec_value" th:text="${comment.skuId}"></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b name="spec_value" th:text="${comment.skuId}"></b></span>
                 </div><br>
                 <div class="cmt-content" th:text="${comment.comment}"></div>
                 <br>
@@ -57,5 +57,7 @@
         </div>
     </div>
 </div>
-<!--评价结束了--></body>
+<!--评价结束了-->
+
+</body>
 </html>

@@ -17,4 +17,5 @@ public interface ICustomerService {
     public List<Customer> selectSaleAll();
     public void updatePwdByName(String password,String username);
     public Customer selectByName(String username);
+    public void updateMessage(Customer customer);
 }

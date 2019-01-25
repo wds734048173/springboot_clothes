@@ -2,6 +2,7 @@ package org.lanqiao.clothes.controller;
 
 import org.lanqiao.clothes.pojo.Comment;
 import org.lanqiao.clothes.pojo.Condition;
+import org.lanqiao.clothes.pojo.Customer;
 import org.lanqiao.clothes.pojo.User;
 import org.lanqiao.clothes.service.ICommentService;
 import org.lanqiao.clothes.utils.PageModel;
@@ -128,6 +129,55 @@ public class CommentController {
         comment.setStoreId(storeId);
         commentService.modifyCommentState(comment);
         return commentList(req, resp, model);
+    }
+    //获取个人评价管理
+    @RequestMapping("/sale/personal")
+    public String myComment(HttpServletRequest req, HttpServletResponse resp, Model model){
+        //       获取用户id
+        HttpSession session = req.getSession();
+        Customer customer =(Customer) session.getAttribute("customer");
+//        int customerId =customer.getId();
+        int customerId = 1;
+
+        //根据评价等级查询评价
+        String searchCommentGrade="-1";
+        if (req.getParameter("searchCommentGrade")!=null){
+            searchCommentGrade = req.getParameter("searchCommentGrade");
+        }
+        //获取商品的评论信息
+        Condition condition = new Condition();
+        condition.setCustomerId(customerId);
+        condition.setGrade(searchCommentGrade);
+        int totalRecords = commentService.getAllCountCommentCustomerId(condition);
+        List<Comment> commentListByCustomerId=commentService.getAllCommentByCustomerId(condition);
+        model.addAttribute("commentListByCustomerId",commentListByCustomerId);
+        model.addAttribute("condition",condition);
+        model.addAttribute("count",totalRecords);
+        return "/sale/personal";
+    }
+    @RequestMapping("/sale/myComment")
+    public String getComment(HttpServletRequest req, HttpServletResponse resp, Model model){
+        //       获取用户id
+        HttpSession session = req.getSession();
+        Customer customer =(Customer) session.getAttribute("customer");
+//        int customerId =customer.getId();
+        int customerId = 1;
+
+        //根据评价等级查询评价
+        String searchCommentGrade="-1";
+        if (req.getParameter("searchCommentGrade")!=null){
+            searchCommentGrade = req.getParameter("searchCommentGrade");
+        }
+        //获取商品的评论信息
+        Condition condition = new Condition();
+        condition.setCustomerId(customerId);
+        condition.setGrade(searchCommentGrade);
+        int totalRecords = commentService.getAllCountCommentCustomerId(condition);
+        List<Comment> commentListByCustomerId=commentService.getAllCommentByCustomerId(condition);
+        model.addAttribute("commentListByCustomerId",commentListByCustomerId);
+        model.addAttribute("condition",condition);
+        model.addAttribute("count",totalRecords);
+        return "/sale/myComment";
     }
 
 }

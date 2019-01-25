@@ -34,6 +34,7 @@ public class DefaultConfig implements WebMvcConfigurer {
         registry.addViewController("/sale/salePwd").setViewName("/sale/salepwd");
         //跳转到注册页面
         registry.addViewController("/sale/cusRegister").setViewName("/sale/cusRegister");
+        registry.addViewController("/sale/personalDetalis").setViewName("/sale/personalDetalis");
     }
 
     //拦截器
@@ -43,7 +44,7 @@ public class DefaultConfig implements WebMvcConfigurer {
                 .addPathPatterns("/manager/*","/manager")
                 .excludePathPatterns("/manager/login","/manager/register","/druid/*");
         registry.addInterceptor(new SaleLoginInterceptor())
-                .addPathPatterns("/sale/addToCar");
+                .addPathPatterns("/sale/addToCar","/sale/personal");
 //                .excludePathPatterns("/sale","/sale/login","/sale/saleLogin","/sale/cusRegister","/sale/cusRegister1","/sale/cusregister","/sale/index");
     }
 

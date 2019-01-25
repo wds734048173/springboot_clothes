@@ -33,6 +33,14 @@ $(function () {
         var color = $('input[name="color"]:checked').val();
         var num = $("#num").val();
         var goodsId = $("#goodsId").val();
+        if(color == null || color == undefined){
+            alert("请选择颜色");
+            return;
+        }
+        if(size==null || size == undefined){
+            alert("请选择尺码");
+            return;
+        }
         var url = "/sale/addToCar?goodsId=" + goodsId+"&sizeId="+size+"&colorId="+color+"&num="+num;
         // $(".content").load(url);
     })
@@ -44,7 +52,15 @@ $(function () {
         var color = $('input[name="color"]:checked').val();
         var num = $("#num").val();
         var goodsId = $("#goodsId").val();
-        var url = "/sale/addToCar?goodsId=" + goodsId+"&sizeId="+size+"&colorId="+color+"&num="+num;
+        if(color == null || color == undefined){
+            alert("请选择颜色");
+            return;
+        }
+        if(size==null || size == undefined){
+            alert("请选择尺码");
+            return;
+        }
+        var url = "/sale/addToCar?goodsId="+goodsId+"&sizeId="+size+"&colorId="+color+"&num="+num;
         window.location.href=url;
     });
 
@@ -61,46 +77,12 @@ $(function () {
         $("#num").val(num);
     })
     })
-function search() {
-    var searchCommentGrade = $("#searchCommentGrade option:selected").val();
-    document.getElementById('commentNavigation').style.display='none';
-    var url = "/sale/comments?searchCommentGrade="+searchCommentGrade;
+function pageClick(k) {
+    var text = $(k).attr("value");
+    var goodsId = $("#goodsId").val();
+    var url = "/sale/comments?searchCommentGrade="+text+"&goodsId="+goodsId;
     $(".appraise").load(url);
 }
-
-function haoping() {
-    var commentBtn = 0;
-    document.getElementById('commentNavigation').style.display='none';
-    var url = "/sale/comments?searchCommentGrade="+commentBtn;
-    // var url = "/sale/comments?searchCommentGrade="+commentBtn+"&goodsId="+id;
-
-    $(".appraise").load(url);
-}
-function zhongping() {
-    var commentBtn = 1;
-    document.getElementById('commentNavigation').style.display='none';
-    var url = "/sale/comments?searchCommentGrade="+commentBtn;
-    // var url = "/sale/comments?searchCommentGrade="+commentBtn+"&goodsId="+id;
-
-    $(".appraise").load(url);
-}
-function chaping() {
-    var commentBtn = 2;
-    document.getElementById('commentNavigation').style.display='none';
-    var url = "/sale/comments?searchCommentGrade="+commentBtn;
-    // var url = "/sale/comments?searchCommentGrade="+commentBtn+"&goodsId="+id;
-
-    $(".appraise").load(url);
-}
-function quanbu() {
-    var commentBtn = -1;
-    document.getElementById('commentNavigation').style.display='none';
-    var url = "/sale/comments?searchCommentGrade="+commentBtn;
-    // var url = "/sale/comments?searchCommentGrade="+commentBtn+"&goodsId="+id;
-
-    $(".appraise").load(url);
-}
-
 
 </script>
 
@@ -275,61 +257,61 @@ function quanbu() {
                 <div class="content"><table width="100%"><tbody><tr class="firstRow"><td valign="top" style="word-break: break-all; border-color: rgb(255, 255, 255);" rowspan="1" colspan="2"><span style="color: rgb(255, 255, 255); font-size: 20px; background-color: rgb(12, 12, 12);"><strong><span style="color: rgb(255, 255, 255); background-color: rgb(12, 12, 12);"> 尺 码 表 </span></strong></span><hr></td><td valign="top" rowspan="3" colspan="1" align="right" style="border-color: rgb(255, 255, 255);" width="300"><p><img src="./商品详情_files/903.jpg" alt="YT02加厚两件套冲锋" title="YT02加厚两件套冲锋"></p><p><br></p></td></tr><tr><td valign="top" style="word-break: break-all; border-color: rgb(255, 255, 255);" width="282"><span style="font-size: 16px;"><strong style="color: rgb(68, 68, 68); font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, 微软雅黑, &#39;Hiragino Sans GB&#39;, tahoma, simsun, 宋体; line-height: 25.2px; text-align: -webkit-center; white-space: normal; background-color: rgb(255, 255, 255);">平铺参考尺寸（单位cm）</strong></span></td><td valign="bottom" style="word-break: break-all; border-color: rgb(255, 255, 255);" align="right"><span style="color: rgb(68, 68, 68); font-family: &#39;Helvetica Neue&#39;, Helvetica, Arial, 微软雅黑, &#39;Hiragino Sans GB&#39;, tahoma, simsun, 宋体; font-size: 12px; line-height: 25.2px; text-align: -webkit-center; background-color: rgb(255, 255, 255);">测量方法不同，允许尺寸误差在2cm左右</span></td></tr><tr><td valign="top" rowspan="1" colspan="2" style="border-color: rgb(255, 255, 255);"><table width="100%" align="center"><tbody><tr class="firstRow"><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);"><span style="font-size: 14px;"><strong>男款</strong></span></td><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);" width="10%"><span style="font-size: 14px;"><strong>M</strong></span></td><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);" width="10%"><span style="font-size: 14px;"><strong>L</strong></span></td><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);" width="10%"><span style="font-size: 14px;"><strong>XL</strong></span></td><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);" width="10%"><span style="font-size: 14px;"><strong>2XL</strong></span></td><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);" width="10%"><span style="font-size: 14px;"><strong>3XL</strong></span></td><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);" width="10%"><br></td></tr><tr><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);" width="20%"><span style="font-size: 14px;"><strong>胸围</strong></span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><span style="font-size: 14px;">120</span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><span style="font-size: 14px;">124</span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><span style="font-size: 14px;">128</span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><span style="font-size: 14px;">132</span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><span style="font-size: 14px;">136</span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><br></td></tr><tr><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);"><span style="font-size: 14px;"><strong>衣长</strong></span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><span style="font-size: 14px;">73</span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><span style="font-size: 14px;">75</span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><span style="font-size: 14px;">78</span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><span style="font-size: 14px;">80</span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><span style="font-size: 14px;">81</span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><br></td></tr><tr><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);"><span style="font-size: 14px;"><strong>连肩袖长</strong></span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;">77</td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;">78</td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;">79</td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;">80</td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;">81</td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><br></td></tr><tr><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);"><span style="font-size: 14px;"><strong style="text-align: -webkit-center; white-space: normal;">参考身高</strong></span></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;">170-175</td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;">175-180</td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;">180-185</td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;">185左右</td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;">190左右</td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><br></td></tr><tr><td align="center" valign="middle" style="border-width: 1px; border-style: solid; background-color: rgb(250, 250, 250);"><br></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><br></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><br></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><br></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><br></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><br></td><td align="center" valign="middle" width="10%" style="border-width: 1px; border-style: solid;"><br></td></tr></tbody></table></td></tr></tbody></table><p><br></p><p><br></p><p><img src="./商品详情_files/1.jpg" alt="YT02加厚两件套冲锋" title="YT02加厚两件套冲锋"></p><p><img src="./商品详情_files/2.jpg" alt="YT02加厚两件套冲锋" title="YT02加厚两件套冲锋"></p><p><img src="./商品详情_files/3.jpg" alt="YT02加厚两件套冲锋" title="YT02加厚两件套冲锋"></p><p><img src="./商品详情_files/4.jpg" alt="YT02加厚两件套冲锋" title="YT02加厚两件套冲锋"></p><p><img src="./商品详情_files/5.jpg" alt="YT02加厚两件套冲锋" title="YT02加厚两件套冲锋"></p></div>
             </div>
 
-            <div id="commentNavigation">
+            <div class="appraise">
+                <!--按钮-->
                 <div class="wrapper">
                     <span style="font-size: 30px">评价数量(<span id="comment_count" th:text="${count}"></span>)</span>
-                    <span  class="commentBtn btn btn-default" type="button"  id="quanbu"  value="全部" onclick="quanbu()"><p value="-1">全部</p></span>
-                    <span class="commentBtn btn btn-default" type="button"  id="haoping"  value="好评" onclick="haoping()"><p value="0">好评</p></span>
-                    <span  class="commentBtn btn btn-default" type="button"  id="zhongping"  value="中评" onclick="zhongping()"><p value="1">中评</p></span>
-                    <span class="commentBtn btn btn-default" type="button"  id="chaping"  value="差评" onclick="chaping()"><p value="2"></p>差评</span>
+                    <a  class="commentBtn btn btn-default" type="button"  id="quanbu"  value="-1" onclick="pageClick(this)">全部</a>
+                    <a class="commentBtn btn btn-default" type="button"  id="haoping"  value="0" onclick="pageClick(this)">好评</a>
+                    <a  class="commentBtn btn btn-default" type="button"  id="zhongping"  value="1" onclick="pageClick(this)">中评</a>
+                    <a class="commentBtn btn btn-default" type="button"  id="chaping"  value="2" onclick="pageClick(this)">差评</a>
                 </div>
                 <hr>
-            </div>
-            <!--开始评价管理-->
-            <div th:if="${count}==0">
-                <input type="hidden" name="currentPage" id="currentPage" th:value="${currentPage}">
-                <div style="height: 100px">
-                    <br>
-                    <center><span style="font-size: 30px">很抱歉，该商品还没有对应的评价</span></center>
+                <!--开始评价管理-->
+                <div th:if="${count}==0">
+                    <input type="hidden" name="currentPage" id="currentPage" th:value="${currentPage}">
+                    <div style="height: 100px">
+                        <br>
+                        <center><span style="font-size: 30px">很抱歉，该商品还没有对应的评价</span></center>
+                    </div>
                 </div>
-
-            </div>
-            <div class="appraise " name="appraise" is_tab="true" tab="4" style="display: block;" th:if="${count}!=0">
-                <div class="section list-section" id="comment_list" th:each="comment:${commentListByGoodsId}">
-                    <div class="comment-data">
-                        <div class="avatar"><img name="avatar" src="./商品详情_files/touxiang.jpg" style="max-width:250%; height: 100px">
-                            <p class="user" th:text="${comment.customerId}"></p></div>
-                        <div class="comment-data-content">
-                            <div class="cmt-header">
-                                <span class="cmt-spec" name="cmt_spec">规格：<b name="spec_value" th:text="${comment.skuId}"></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b name="spec_value" th:text="${comment.skuId}"></b></span>
-                            </div><br>
-                            <div class="cmt-content" th:text="${comment.comment}"></div>
-                            <br>
-                            <div class="cmt-footer"><span class="cmt-type">评分：
+                <div  is_tab="true" tab="4" style="display: block;" th:if="${count}!=0">
+                    <div class="section list-section" id="comment_list" th:each="comment:${commentListByGoodsId}">
+                        <div class="comment-data">
+                            <div class="avatar"><img name="avatar" src="./商品详情_files/touxiang.jpg" style="max-width:250%; height: 100px">
+                                <p class="user" th:text="${comment.customerId}"></p></div>
+                            <div class="comment-data-content">
+                                <div class="cmt-header">
+                                    <span class="cmt-spec" name="cmt_spec">规格：<b name="spec_value" th:text="${comment.skuId}"></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b name="spec_value" th:text="${comment.skuId}"></b></span>
+                                </div><br>
+                                <div class="cmt-content" th:text="${comment.comment}"></div>
+                                <br>
+                                <div class="cmt-footer"><span class="cmt-type">评分：
                                 <b name="cmt_type" cmt_type="10">
                                     <b class="cmt-type-a" th:text="${comment.gradeStr}"></b>
                                 </b>
                             </span><span class="cmt-time">评价时间：<b th:text="${comment.ctime!=null}?${#dates.format(comment.ctime, 'yyyy-MM-dd HH:mm:ss')}"></b></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!--店家回复-->
-                    <div class="comment-data comment-data-reply" name="comment_data_reply" th:if="${comment.reply!=''}">
-                        <div class="avatar">
-                            <img name="avatar" src="./商品详情_files/avatar2.jpg">
-                            <p class="user"></p>
-                        </div>
-                        <div class="comment-data-content">
-                            <div>
-                                <div class="cmt-header">客服回复</div>
-                                <div class="cmt-content" name="reply_content" th:text="${comment.reply}"></div>
+                        <!--店家回复-->
+                        <div class="comment-data comment-data-reply" name="comment_data_reply" th:if="${comment.reply!=''}">
+                            <div class="avatar">
+                                <img name="avatar" src="./商品详情_files/avatar2.jpg">
+                                <p class="user"></p>
+                            </div>
+                            <div class="comment-data-content">
+                                <div>
+                                    <div class="cmt-header">客服回复</div>
+                                    <div class="cmt-content" name="reply_content" th:text="${comment.reply}"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--评价结束了-->
             </div>
-            <!--评价结束了-->
 
         </div>
     </div>

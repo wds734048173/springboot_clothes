@@ -99,4 +99,50 @@
             </if>
         </where>
     </select>
+    <!--获取用户下的所有评论-->
+    <select id="getAllCommentByCustomerId" resultType="org.lanqiao.clothes.pojo.Comment">
+        select * from tb_goods_comment
+        <where>
+            <choose>
+                <when test="grade == 0">
+                    and grade=#{grade}
+                </when>
+                <when test="grade == 1">
+                    and grade=#{grade}
+                </when>
+                <when test="grade == 2">
+                    and grade=#{grade}
+                </when>
+                <otherwise>
+                    and (grade=0 or grade=1 or grade=2)
+                </otherwise>
+            </choose>
+            <if test="customerId!=null">
+                and customerId=#{customerId}
+            </if>
+        </where>
+    </select>
+    <!--获取数量-->
+    <select id="selectAllCountCommentCustomerId" resultType="int">
+        select count(1) from tb_goods_comment
+        <where>
+            <choose>
+                <when test="grade == 0">
+                    and grade=#{grade}
+                </when>
+                <when test="grade == 1">
+                    and grade=#{grade}
+                </when>
+                <when test="grade == 2">
+                    and grade=#{grade}
+                </when>
+                <otherwise>
+                    and (grade=0 or grade=1 or grade=2)
+                </otherwise>
+            </choose>
+            <if test="customerId!=null">
+                and customerId=#{customerId}
+            </if>
+        </where>
+    </select>
 </mapper>

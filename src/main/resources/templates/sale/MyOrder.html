@@ -1,0 +1,252 @@
+<!DOCTYPE html >
+<html lang="zh-CN" xml:lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" async="" src="./个人中心_files/mstr.js"></script>
+    <script type="text/javascript" async="" src="./个人中心_files/jquery.statData.min.js"></script>
+    <script type="text/javascript" async="" src="./个人中心_files/xmst.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>个人中心</title>
+<meta name="viewport" content="width=1226">
+<meta name="description" content="">
+<link rel="stylesheet" href="./个人中心_files/base.min.css">
+<link rel="stylesheet" type="text/css" href="./个人中心_files/main.min.css">
+<script src="./个人中心_files/userInfoJsonP" type="text/javascript" async=""></script>
+<link rel="stylesheet" href="./购物车页面_files/diu.global.css">
+<link rel="stylesheet" href="./购物车页面_files/pc.glyphicon.css">
+<link rel="stylesheet" href="./购物车页面_files/diu.main.css">
+<link rel="stylesheet" href="./购物车页面_files/diu.shop.css">
+<link rel="stylesheet" href="./购物车页面_files/diu.diucmt.css">
+<link rel="stylesheet" href="./购物车页面_files/style.css">
+<script src="./购物车页面_files/hm.js.下载"></script><script type="text/javascript" src="./购物车页面_files/jquery.js.下载"></script>
+<script type="text/javascript" src="./购物车页面_files/diu.js.下载"></script>
+<script type="text/javascript" src="./购物车页面_files/com.js.下载"></script>
+<script type="text/javascript" src="./购物车页面_files/tpl.js.下载"></script></head>
+<link rel="stylesheet" href="./商品详情_files/diu.shop.goods.detail.css">
+<link rel="stylesheet" href="./商品详情_files/diu.global.css">
+<link rel="stylesheet" href="./商品详情_files/pc.glyphicon.css">
+<link rel="stylesheet" href="./商品详情_files/diu.main.css">
+<link rel="stylesheet" href="./商品详情_files/diu.shop.css">
+<link rel="stylesheet" href="./商品详情_files/diu.diucmt.css">
+<link rel="stylesheet" href="./商品详情_files/style.css">
+<script src="./商品详情_files/hm.js"></script><script type="text/javascript" src="./商品详情_files/jquery.js"></script><style>html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}</style>
+<script type="text/javascript" src="./商品详情_files/diu.js"></script>
+<script type="text/javascript" src="./商品详情_files/com.js"></script>
+<script type="text/javascript" src="./商品详情_files/tpl.js"></script>
+</head>
+<body>
+    <!--头部-->
+<div id="header">
+        <div class="toper">
+             <div class="wrapper">
+                <div class="top-nav">
+                    <a class="link" href="/sale/personal" target="_self">个人中心</a>
+                    <a class="link" th:href="@{/sale/MyOrder}" target="_self">我的订单</a>
+                </div>
+                <div class="account-sign-status">
+                    <span id="welcome">欢迎来到<a href="http://www.diu8diu.com/">我的网站</a>！</span>
+                    <span id="user_status" class="user-status"><a href="http://www.diu8diu.com/diu-ucenter/" class="username"><span th:text="${session.customer.username}"></span></a><a class="logout" href="/sale/logout">退出</a></span>
+                </div>
+                <div class="top-cart">
+                    <a class="cart" href="/sale/shoppingCar"><i class="glyphicon glyphicon-shopping-cart"></i>我的购物车（<span class="cart-amount" name="cart_amount">2</span>）</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-line">
+            <div class="wrapper">
+                <div class="logo"><a href="#"><img src="./购物车页面_files/logo.png" style="width: 930px;height: 70px" alt="丢丢定制" title="丢丢定制"></a></div>
+
+            </div>
+        </div>
+            <div class="topdmenu">
+            <div class="wrapper">
+               <div class="main-nav" id="main_nav">
+                </div>
+                <div class="top-cart">
+                </div>
+            </div>
+        </div>
+        <div class="topdmenufoot"></div>
+    </div>
+<!-- 个人中心左侧导航栏 -->
+<div class="page-main user-main">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="uc-box uc-sub-box">
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">订单中心</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                                <li><a th:href="@{/sale/MyOrder}" data-stat-id="4f97622c66b9c2ef" onclick="">我的订单</a></li>
+                                <li><a onclick="pageClick(this)">评价晒单</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">个人中心</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                                <li class="active"><a href="/sale/personal" style="color: black">我的个人中心</a></li>
+                               <!-- <li><a href="#">收货地址</a></li>-->
+                            </ul>
+                        </div>
+                    </div>
+                   <!-- <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">账户管理</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                                <li><a href="#">修改密码</a></li>
+                                <li><a >社区VIP认证</a></li>
+                            </ul>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+            <!-- 右侧个人信息页面 -->
+            <div class="span16">
+                <div class="uc-box uc-main-box">
+                    <div class="uc-content-box order-list-box">
+                        <div class="box-hd">
+                            <h1 class="title">我的订单<small>请谨防钓鱼链接或诈骗电话，<a href="http://www.mi.com/service/buy/antifraud/" target="_blank" data-stat-id="c46a318fa0357711" onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-c46a318fa0357711&#39;, &#39;//www.mi.com/service/buy/antifraud/&#39;, &#39;pcpid&#39;, &#39;&#39;]);">了解更多&gt;</a></small></h1>
+                            <div class="more clearfix">
+                                <!--<ul class="filter-list J_orderType" >-->
+                                    <!--<li class="first active"><a  href=""  onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-80be41c93ffc8141&#39;, &#39">全部有效订单</a></li>-->
+                                    <!--<li><a class="stateId" id="J_unpaidTab" href=""  onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-bbe893417b3501f4&#39;, &#39;">已下单</a></li>-->
+                                    <!--<li><a class="stateId" id="J_sendTab" href=""  onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-cfcc3a2570d33a5b&#39;, &#39;">已支付</a></li>-->
+                                    <!--<li><a class="stateId" id="" href=""  onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-cfcc3a2570d33a5b&#39;, &#39;">已发货</a></li>-->
+                                    <!--<li><a class="stateId" id="" href=""  onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-cfcc3a2570d33a5b&#39;, &#39;">已收货</a></li>-->
+                                <!--</ul>-->
+                                <form id="J_orderSearchForm" class="search-form clearfix" action="http://static.mi.com/order/#" method="get">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box-bd">
+                            <div id="J_orderList">
+                                <ul class="order-list" >
+                                <li class="uc-order-item uc-order-item-shipping" th:each="order:${myOrderList}">
+                                    <div class="order-detail">
+                                <div class="order-summary">
+                                    <div class="order-status">
+                                        <span  th:value="${order.state}" id="spanstate" th:text="${order.stateStr}"></span>
+                                    </div>
+                            </div>
+                                <table class="order-detail-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-main">
+                                            <p class="caption-info">
+                                                <span th:text="${#dates.format(order.ctime, 'yyyy-MM-dd HH:mm:ss')}" ></span>
+                                                <span class="sep">|</span><span th:text="${session.customer.username}"></span><span class="sep">|</span>
+                                                订单号：<a href=""><span th:text="${order.no}"></span></a>
+                                                <span class="sep">|</span>在线支付（支付宝快捷支付）
+                                            </p>
+                                        </th>
+                                        <th class="col-sub">
+                                            <p class="caption-price">实付金额：<span class="num"><span th:text="${order.payMoney}"></span></span>元</p>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="order-items">
+                                                <ul class="goods-list">
+                                                    <li th:each="orderInfo : ${order.orderInfoList}">
+                                                        <div class="figure figure-thumb">
+                                                            <a href="" target="_blank">
+                                                                <img  th:src="${orderInfo.goodsPic}" width="80" height="80" th:alt="${orderInfo.goodsName}">
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <p class="name">
+                                                                <span href="#" target="_blank" th:text="${orderInfo.goodsName}"></span>
+                                                                <span href="#" target="_blank" th:text="${orderInfo.sizeName}"></span>
+                                                                <span href="#" target="_blank" th:text="${orderInfo.colorName}"></span>
+                                                            <p class="price"><span th:text="${orderInfo.price}"></span>元</p>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            </li>
+                            </ul>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--底部-->
+<div id="footer">
+        <div class="footer-section">
+            <div class="wrapper">
+                <div class="col-contact"><h3>DIU8DIU · 丢丢定制平台</h3><p class="text1">打造一个从事个性化定制服务的商业平台，致力于通过互联网为用户提供全面的个性化服饰体验！</p><p class="text2">QQ 客服： 2275370591    13689427<br>客服热线： 400-0156-002 或 18554169888</p></div>
+                <div class="col-cates">
+                    <dl class="item1">
+                       <dt>公司信息</dt>
+                       <dd><a href="http://www.diu8diu.com/?about.html" target="_self">公司介绍</a></dd>
+                       <dd><a href="http://www.diu8diu.com/?partners.html" target="_self">合作伙伴</a></dd>
+                       <dd><a href="http://www.diu8diu.com/?join/" target="_self">人才招聘</a></dd>
+                       <dd><a href="http://www.diu8diu.com/?contact.html" target="_self">联系我们</a></dd>
+                    </dl>
+                    <dl class="item2">
+                       <dt>产品服务</dt>
+                       <dd><a href="http://www.diu8diu.com/?news/" target="_self">新闻中心</a></dd>
+                       <dd><a href="http://www.diu8diu.com/?case/" target="_self">案例展示</a></dd>
+                       <dd><a href="http://www.diu8diu.com/?video/" target="_self">公司视频</a></dd>
+                    </dl>
+                    <dl class="item3">
+                       <dt>帮助支持</dt>
+                       <dd><a href="http://www.diu8diu.com/?faq/" target="_self">常见问题</a></dd>
+                       <dd><a href="http://www.diu8diu.com/?download/" target="_self">文档下载</a></dd>
+                       <dd><a href="http://www.diu8diu.com/?agreement.html" target="_self">用户协议</a></dd>
+                       <dd><a href="http://www.diu8diu.com/?privacy.html" target="_self">隐私政策</a></dd>
+                    </dl>
+                </div>
+                <div class="col-qrcode"><img class="img-responsive" src="../购物车页面_files/qrcode.jpg" alt="qrcode"><h3>官方微信</h3><p>关注我们 · 更多优惠</p></div>
+            </div>
+        </div>
+        <div class="powered-by">
+            <div class="wrapper">
+                <div class="copyright">Copyright © <a href="http://www.diu8diu.com/" target="_blank">丢丢定制</a> 2016-2017 ALL Rights Reserved <span class="icp"><a href="http://www.miitbeian.gov.cn/" rel="nofollow" target="_blank">鲁ICP备14011980号-1</a></span><i class="stat"></i></div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- .modal-globalSites END -->
+
+<script src="../个人中心_files/base.min.js.下载"></script>
+
+
+
+<div id="J_agreeModal" class="modal fade modal-agree in modal-hide"> <div class="modal-hd"> <a class="close J_close" data-dismiss="modal" data-stat-id="a0641baa711604bc" onclick="_msq.push([&#39;trackEvent&#39;, &#39;45a270e10b1f8e93-a0641baa711604bc&#39;, &#39;&#39;, &#39;pcpid&#39;, &#39;&#39;]);"><i class="iconfont"></i></a> <h3>小米商城协议更新</h3> </div> <div class="modal-body"> <div class="desc"></div> <div class="con">  </div>  </div>  <div class="modal-ft"> <div class="actions"> <button class="btn btn-line-gray J_close" data-dismiss="modal">不同意</button> <button class="btn btn-primary J_sure">同意</button> </div> </div></div></body>
+<script>
+    function pageClick(k) {
+        /*$(k).parent().find("div").removeClass("active");
+        $(k).parent().addClass("active");
+        $(k).parent().siblings().removeClass("active");*/
+        var text = $(k).text();
+    var url = "";
+        if (text == "测试") {
+            url = "/sale/jiaozan";
+        } else if (text == "评价晒单") {
+            url = "/sale/myComment";
+        } else if (text == "我的个人中心") {
+            url = "/sale/personalDetalis";
+        }
+    $(".content").load(url);
+}
+</script>
+</html>

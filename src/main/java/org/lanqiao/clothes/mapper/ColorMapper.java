@@ -25,5 +25,4 @@ public interface ColorMapper {
 
     public List<Color> selectColorListByIds(List<Integer> ids);
 
-    public int selectSkuIdBySizeAndColor(int sizeId,int colorId,int goodsId);
 }

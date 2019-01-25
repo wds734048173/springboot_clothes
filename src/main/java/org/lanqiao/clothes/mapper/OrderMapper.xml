@@ -10,29 +10,12 @@
             <if test="no != null &amp;&amp; no != ''">
                 and no like concat ('%', #{no}, '%')
             </if>
-            <choose>
-                <when test="state==0">
-                    and state=#{state}
-                </when>
-                <when test="state==1">
-                    and state=#{state}
-                </when>
-                <when test="state==2">
-                    and state=#{state}
-                </when>
-                <when test="state==3">
-                    and state=#{state}
-                </when>
-                <when test="state==4">
-                    and state=#{state}
-                </when>
-                <when test="state==5">
-                    and state=#{state}
-                </when>
-                <otherwise>
-                    and (state!=6)
-                </otherwise>
-            </choose>
+            <if test="state==-1">
+                and (state!=6)
+            </if>
+            <if test="state!=-1">
+                and state!=#{state}
+            </if>
             <if test="storeId != null">
                 and storeId=#{storeId}
             </if>
@@ -47,29 +30,12 @@
             <if test="no != null &amp;&amp; no != ''">
                 and no like concat ('%', #{no}, '%')
             </if>
-            <choose>
-                <when test="state==0">
-                    and state=#{state}
-                </when>
-                <when test="state==1">
-                    and state=#{state}
-                </when>
-                <when test="state==2">
-                    and state=#{state}
-                </when>
-                <when test="state==3">
-                    and state=#{state}
-                </when>
-                <when test="state==4">
-                    and state=#{state}
-                </when>
-                <when test="state==5">
-                    and state=#{state}
-                </when>
-                <otherwise>
-                    and state!=6
-                </otherwise>
-            </choose>
+            <if test="state==-1">
+                and (state!=6)
+            </if>
+            <if test="state!=-1">
+                and state!=#{state}
+            </if>
             <if test="storeId != null">
                 and storeId=#{storeId}
             </if>
@@ -91,8 +57,8 @@
 
     <!--前台操作-->
     <insert id="addOrder" useGeneratedKeys="true" keyProperty="id">
-        insert into tb_order(customerId,totalMoney,payMoney,addressId,storeId,state,ctime)
-        values (#{customerId},#{totalMoney},#{payMoney},#{addressId},#{storeId},#{state},now())
+        insert into tb_order(no,customerId,totalMoney,payMoney,addressId,storeId,state,ctime)
+        values (#{no},#{customerId},#{totalMoney},#{payMoney},#{addressId},#{storeId},#{state},now())
     </insert>
     <insert id="addOrderInfo">
         insert into tb_orderinfo(oId,goodsId,skuId,price,num)values (#{oId},#{goodsId},#{skuId},#{price},#{num})
@@ -100,13 +66,13 @@
     <update id="updateOrderState">
         update tb_order
         <set>
-            <if test="state!=null">state=#{state},rtime=now()</if>
-            <if test="state==1">,payTime=now()</if>
-            <if test="state==2">,sendTime=now()</if>
-            <if test="state==3">,getTime=now()</if>
-            <if test="state==5">,cancelTime=now()</if>
+            <if test="param1!=null">state=#{param1},rtime=now()</if>
+            <if test="param1==1">,payTime=now()</if>
+            <if test="param1==2">,sendTime=now()</if>
+            <if test="param1==3">,getTime=now()</if>
+            <if test="param1==5">,cancelTime=now()</if>
         </set>
-        where id=#{id}
+        where id=#{param2}
     </update>
     <update id="deleteOrder">
       update tb_order set state=6 where id=#{id}
@@ -133,5 +99,8 @@
     </select>
     <select id="selectOrderInfo" resultType="org.lanqiao.clothes.pojo.OrderInfo">
         select * from tb_orderinfo where oId=#{oId}
+    </select>
+    <select resultType="org.lanqiao.clothes.pojo.Order" id="getOrderId" parameterType="int">
+        select * from tb_order where customerId=#{customerId}
     </select>
 </mapper>

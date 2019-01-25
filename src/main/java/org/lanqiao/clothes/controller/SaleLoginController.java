@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -117,5 +118,12 @@ public class SaleLoginController {
             request.setAttribute("msg","验证码不正确");
             return "/sale/salepwd";
         }
+    }
+    @RequestMapping("/sale/longout")
+    public String longout(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "/sale/login";
+
     }
 }

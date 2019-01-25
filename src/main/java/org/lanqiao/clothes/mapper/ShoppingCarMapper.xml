@@ -12,7 +12,22 @@
     <delete id="deleteShop" parameterType="int">
         delete from tb_shoppingcar where id=#{id}
     </delete>
-    <select id="selectAllToList" parameterType="int" resultType="org.lanqiao.clothes.pojo.ShopingCarItem">
-        select * from shopCarInfo where customerId=#{customerId}
+    <select id="selectAllToList" parameterType="int" resultType="org.lanqiao.clothes.pojo.ShopingCar">
+        select * from tb_shoppingcar where customerId=#{customerId}
     </select>
+
+    <delete id="deleteShoppingCarByIds" parameterType="list">
+        delete from tb_shoppingcar where id in
+        <foreach collection="list" open="(" close=")" separator="," index="index" item="item">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="selectShoppingCar" resultType="org.lanqiao.clothes.pojo.ShopingCar">
+        select * from tb_shoppingcar where customerId = #{param1} and goodsId = #{param2} and skuId = #{param3};
+    </select>
+
+    <update id="updateAddShoppingCar" parameterType="org.lanqiao.clothes.pojo.ShopingCar">
+        update tb_shoppingcar set num=#{num},price=#{price} where goodsId=#{goodsId} and skuId = #{skuId} and customerId = #{customerId}
+    </update>
 </mapper>

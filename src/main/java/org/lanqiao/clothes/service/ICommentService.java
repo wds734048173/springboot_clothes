@@ -25,7 +25,9 @@ public interface ICommentService {
     public List<Comment> getAllCommentByGoodsId(Condition condition);
     //根据商品id查询评论数量
     public int getAllCountCommentGoodsId(Condition condition);
-    //根据评论id查询某条评论
-//    public Comment getCommentByCommentId(int commentId);
+    //根据用户id查询所有评论
+    public List<Comment> getAllCommentByCustomerId(Condition condition);
+    //根据用户id查询商品数量
+    public int getAllCountCommentCustomerId(Condition condition);
 
  }

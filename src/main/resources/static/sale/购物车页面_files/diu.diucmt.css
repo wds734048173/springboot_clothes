@@ -1,0 +1,54 @@
+﻿/*评论*/
+
+/*发布*/
+.diu-diucmt-post{ border-top:1px solid #e2e2e2; margin:10px 0px 0px 0px; padding:20px 0px 10px 0px; }
+.diu-diucmt-post .cmt-avatar{ float:left; margin-right:16px; height:50px; width:50px;}
+.diu-diucmt-post .cmt-avatar img{ border-radius:10%; height:50px; line-height:50px; width:50px; }
+.diu-diucmt-post .cmt-post{ padding-left:66px; padding-right:20px;}
+.diu-diucmt-post .cmt-post textarea.comment-text{ 
+    -webkit-box-shadow:inset 0px 1px 1px rgba(0,0,0,0.075); -moz-box-shadow:inset 0px 1px 1px rgba(0,0,0,0.075); box-shadow:inset 0px 1px 1px rgba(0,0,0,0.075);
+	-webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px;
+	background-color:#fff; border:2px solid #c0d1dd; color:#333; font-size:14px; height:72px; line-height:24px; padding:5px 8px; vertical-align:top; width:100%;
+	}
+.diu-diucmt-post .cmt-post textarea.comment-text:focus{ border-color:#acbfcc; color:#333; }
+.diu-diucmt-post .cmt-btnline{ padding:10px 0px 0px 0px; text-align:right;}
+.diu-diucmt-post .cmt-btnline .btn-diucmt{  background:#094c97; border:none; color:#fff; display:inline-block; font-size:14px; font-weight:normal; height:24px; line-height:24px; padding:4px 28px; width:auto; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px;}
+.diu-diucmt-post .cmt-btnline .btn-diucmt:hover{ background:#142038;}
+/*列表*/
+.diu-diucmt-list-header{ border-bottom:1px solid #eee; font-size:16px; padding:5px 0px;}
+.diu-diucmt-list-header .cmt-count{ float:right; font-size:14px; padding:5px 0px 0px 0px;}
+.diu-diucmt-list-header .cmt-count b{ padding-right:5px;}
+
+.diu-diucmt-list ul li{ border-bottom:1px dashed #ddd; padding:15px 0px; zoom:1; overflow:auto; }
+.diu-diucmt-list .avatar{ float:left; height:50px; width:50px; padding-top:5px;}
+.diu-diucmt-list .avatar img{ border-radius:10%; height:50px; line-height:50px; width:50px; }
+.diu-diucmt-list .cmtinfo{ padding-left:66px; }
+.diu-diucmt-list .cmtinfo .author { color:#999; font-size:12px; height:24px; line-height:24px;}
+.diu-diucmt-list .cmtinfo .author .username{ float:left; font-size:13px; padding-right:10px;  }
+.diu-diucmt-list .cmtinfo .author .posttime{ float:left; padding-right:10px; }
+.diu-diucmt-list .cmtinfo .author .comefrom{ float:left; }
+.diu-diucmt-list .cmtinfo .comment{ color:#333; font-size:14px; padding:5px 0px 5px 0px;}
+.diu-diucmt-list .cmtinfo .comment-footer{ font-size:13px; text-align:right;}
+.diu-diucmt-list .cmtinfo .comment-footer a,
+.diu-diucmt-list .cmtinfo .comment-footer a:visited{ color:#999;}
+.diu-diucmt-list .cmtinfo .comment-footer a:hover{ color:#333;}
+.diu-diucmt-list .cmtinfo .comment-footer a.report{ margin:0px 0px 0px 15px;}
+/*回复*/
+.diu-diucmt-reply-post{ padding-top:10px; zoom:1; overflow:auto;}
+.diu-diucmt-reply-post .reply-textarea{ padding-right:100px;}
+.diu-diucmt-reply-post .reply-textarea input.reply-text{
+	-webkit-box-shadow:inset 0px 1px 1px rgba(0,0,0,0.075); -moz-box-shadow:inset 0px 1px 1px rgba(0,0,0,0.075); box-shadow:inset 0px 1px 1px rgba(0,0,0,0.075);
+	-webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px;
+	background-color:#fff; border:2px solid #c0d1dd; color:#333; font-size:14px; float:left; height:24px; line-height:24px; padding:5px 8px; vertical-align:top; width:100%;
+	}
+.diu-diucmt-reply-post .reply-btnline{ float:left; padding-left:10px;}
+.diu-diucmt-reply-post .btn-reply{ background:#094c97; border:none; color:#fff; display:inline-block; font-size:14px; font-weight:normal; height:24px; line-height:24px; padding:6px 0px; width:auto; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px; width:70px; text-align:center;}
+.diu-diucmt-reply-post .btn-reply:hover{ background:#142038;}
+/*回复列表*/
+.diu-diucmt-reply-list  ul li{ border-top:1px dotted #eee; border-bottom:0px;}
+.diu-diucmt-reply-list  ul li.li1{ border-top:0px; }
+.diu-diucmt-reply-list .avatar{ float:left; height:40px; width:40px; padding-top:5px;}
+.diu-diucmt-reply-list .avatar img{ border-radius:10%; height:40px; line-height:40px; width:40px; }
+.diu-diucmt-reply-list .cmtinfo{ padding-left:56px;}
+
+
