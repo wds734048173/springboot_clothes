@@ -5,6 +5,7 @@ import org.lanqiao.clothes.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,10 +52,10 @@ public class SaleLoginController {
         }
     }
 //    前端登录跳转到注册
-    @RequestMapping("/sale/cusRegister")
+    /*@RequestMapping("/sale/cusRegister")
     public String cusregister(){
         return "/sale/cusregister";
-    }
+    }*/
 //    进行注册,并将前段传过来的数据作为Customer类
     @RequestMapping("/sale/cusRegister1")
     public String cusregister1(Customer customer,HttpServletRequest request){
@@ -76,5 +77,45 @@ public class SaleLoginController {
         HttpSession session = request.getSession();
         session.invalidate();
         return "/sale/login";
+    }
+
+    //    跳转修改页面
+    /*@RequestMapping("/sale/salePwd")
+    public String salePwd(){
+        return "/sale/salepwd";
+    }*/
+    //    前端忘记密码
+    @RequestMapping("/sale/salePwd1")
+    public String salepwd1(HttpServletRequest request,HttpServletResponse response){
+        //要验证的验证码
+        String rcode = request.getParameter("verifycode_value");
+        //验证码中的值
+        String s = (String) request.getSession().getAttribute("rcodes");
+        if (rcode.equalsIgnoreCase(s)){
+            String username = request.getParameter("username");
+            if (StringUtils.isEmpty(username)){
+                request.setAttribute("msg","用户名不能为空");
+                return "/sale/salepwd";
+            }
+            Customer customer = customerService.selectByName(username);
+            if (customer == null){
+                request.setAttribute("msg","用户名不存在");
+                return "/sale/salepwd";
+            }else {
+                String password = request.getParameter("password");
+                String password1 = request.getParameter("password1");
+                if (password.equalsIgnoreCase(password1)){
+                    customerService.updatePwdByName(password,username);
+                    request.setAttribute("msg","修改成功");
+                    return "/sale/login";
+                }else {
+                    request.setAttribute("msg","两次密码不一致");
+                    return "/sale/salepwd";
+                }
+            }
+        }else {
+            request.setAttribute("msg","验证码不正确");
+            return "/sale/salepwd";
+        }
     }
 }

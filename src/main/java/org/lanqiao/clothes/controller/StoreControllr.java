@@ -1,17 +1,21 @@
 package org.lanqiao.clothes.controller;
 
+import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Store;
 import org.lanqiao.clothes.pojo.User;
 import org.lanqiao.clothes.service.IStoreService;
 import org.lanqiao.clothes.service.IUserService;
+import org.lanqiao.clothes.utils.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Auther: WDS
@@ -25,10 +29,7 @@ public class StoreControllr {
 
     @Autowired
     IStoreService storeService;
-    /*@RequestMapping("/manager/store")
-    public String fanhuistore(){
-        return "/manager/storeInfo";
-    }*/
+
     //    完善商家信息
     @RequestMapping("/manager/storeInfo")
     public String addstoreInfo(HttpServletRequest request, HttpServletResponse response){
@@ -72,14 +73,14 @@ public class StoreControllr {
     }
 
     //   修改页面跳转
-    @RequestMapping("/manager/storeUp")
-    public String storeUpdate(){
-        System.out.println("=================店铺修改页面");
-        return "/manager/storeup";
+    @RequestMapping("/manager/store")
+    public String store(){
+        return "/manager/store";
     }
+
     //    修改店铺信息
-    @RequestMapping("/manager/storeUp1")
-    public String storeUpdate1(HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping("/manager/storeUpdate")
+    public String storeUpdate(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         Store store = (Store)session.getAttribute("store");
 //        店铺名称
@@ -97,5 +98,48 @@ public class StoreControllr {
         storeService.updateStore(store);
         session.setAttribute("store",store);
         return "/manager/index";
+    }
+
+
+    @RequestMapping("/manager/storeList")
+    public String storeList(HttpServletRequest req, HttpServletResponse resp, Model model){
+        int pageNum = 1;
+        if(req.getParameter("currentPage") != null){
+            pageNum = Integer.valueOf(req.getParameter("currentPage"));
+        }
+        int pageSize = 5;
+        if(req.getParameter("pageSize") != null){
+            pageSize = Integer.valueOf(req.getParameter("pageSize"));
+        }
+        //查询条件
+        String searchStoreState = "-1";
+        if(req.getParameter("searchStoreState") != null){
+            searchStoreState = req.getParameter("searchStoreState");
+        }
+        Condition condition = new Condition();
+        condition.setState(searchStoreState);
+        int totalRecords = storeService.getStoreCount(condition);
+        PageModel pageModel = new PageModel(pageNum,totalRecords,pageSize);
+        //分页条件封装
+        condition.setCurrentPage(pageModel.getStartIndex());
+        condition.setPageSize(pageModel.getPageSize());
+        List<Store> storeList = storeService.getStoreAll(condition);
+        model.addAttribute("storeList",storeList);
+        model.addAttribute("pm",pageModel);
+        model.addAttribute("condition",condition);
+        model.addAttribute("currentPage",pageNum);
+        return "/manager/storeList";
+    }
+
+
+    @RequestMapping("/manager/updateStoreState")
+    public String updateStoreState(HttpServletRequest req, HttpServletResponse resp, Model model){
+        //获取店铺id
+        HttpSession session = req.getSession();
+        User user  = (User)session.getAttribute("user");
+        int storeId = user.getStoreId();
+        int state = Integer.valueOf(req.getParameter("state"));
+        storeService.modifyStoreStateById(storeId,state);
+        return storeList(req, resp, model);
     }
 }

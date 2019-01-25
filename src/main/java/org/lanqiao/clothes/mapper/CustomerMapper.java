@@ -1,6 +1,7 @@
 package org.lanqiao.clothes.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Customer;
 import org.springframework.stereotype.Component;
@@ -29,4 +30,11 @@ public interface CustomerMapper {
     public Customer  selectOne(Customer customer);
     //添加
     public void insertCustomer(Customer customer);
+
+    //    查询所有
+    public List<Customer> selectSaleAll();
+    //    根据name查询
+    public Customer selectByName(@Param(value="username") String username);
+    //    根据name修改密码
+    public void updatePwdByName(@Param(value = "password") String password, @Param(value="username") String username);
 }

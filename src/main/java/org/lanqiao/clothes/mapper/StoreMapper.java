@@ -2,7 +2,10 @@ package org.lanqiao.clothes.mapper;
 
 
 import org.apache.ibatis.annotations.Mapper;
+import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Store;
+
+import java.util.List;
 
 @Mapper
 public interface StoreMapper {
@@ -12,4 +15,12 @@ public interface StoreMapper {
     public void updateStore(Store store);
     //    按id查询
     public Store selectById(int id);
+
+
+
+    //获取总数
+    public List<Store> selectStoreAll(Condition condition);
+    public int selectStoreCount(Condition condition);
+    public void updateStoreStateById(int id,int state);
+
 }

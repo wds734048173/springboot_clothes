@@ -58,4 +58,19 @@ public class CustomerServiceImpl implements ICustomerService {
         customerMapper.insertCustomer(customer);
     }
 
+    @Override
+    public List<Customer> selectSaleAll() {
+        return customerMapper.selectSaleAll();
+    }
+
+    @Override
+    public void updatePwdByName(String password, String username) {
+        customerMapper.updatePwdByName(password, username);
+    }
+
+    @Override
+    public Customer selectByName(String username) {
+        return customerMapper.selectByName(username);
+    }
+
 }

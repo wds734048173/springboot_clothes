@@ -14,4 +14,7 @@ public interface ICustomerService {
     //==============前台操作================
     public Customer selectOne(Customer customer);
     public void addCustomer(Customer customer);
+    public List<Customer> selectSaleAll();
+    public void updatePwdByName(String password,String username);
+    public Customer selectByName(String username);
 }

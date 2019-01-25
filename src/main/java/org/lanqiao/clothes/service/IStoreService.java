@@ -1,6 +1,9 @@
 package org.lanqiao.clothes.service;
 
+import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Store;
+
+import java.util.List;
 
 /**
  * @Auther: WDS
@@ -11,4 +14,8 @@ public interface IStoreService {
     public void insertStore(Store store);
     public void updateStore(Store store);
     public Store selectById(int id);
+    public List<Store> getStoreAll(Condition condition);
+    public int getStoreCount(Condition condition);
+    public void modifyStoreStateById(int id,int state);
+
 }

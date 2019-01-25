@@ -27,8 +27,13 @@ public class DefaultConfig implements WebMvcConfigurer {
         registry.addViewController("/manager/toGoodsClassList").setViewName("/manager/goodsClassList");
         registry.addViewController("/manager/userInfo").setViewName("/manager/userInfo");
 
-//        registry.addViewController("/sale").setViewName("/sale/home");
+        registry.addViewController("/sale").setViewName("/sale/index");
+        //跳转到登录页面
         registry.addViewController("/sale/login").setViewName("/sale/login");
+        //跳转到修改密码页面
+        registry.addViewController("/sale/salePwd").setViewName("/sale/salepwd");
+        //跳转到注册页面
+        registry.addViewController("/sale/cusRegister").setViewName("/sale/cusRegister");
     }
 
     //拦截器

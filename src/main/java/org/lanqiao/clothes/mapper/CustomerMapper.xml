@@ -70,4 +70,13 @@
         insert into tb_customer(username,password,realname,sex,phone,address,state,hiredate,ctime)
         values (#{username},#{password},#{realname},#{sex},#{phone},#{address},#{state},#{hiredate},#{ctime})
     </insert>
+    <select id="selectSaleAll" resultType="org.lanqiao.clothes.pojo.Customer">
+        select * from tb_customer
+    </select>
+    <select id="selectByName" resultType="org.lanqiao.clothes.pojo.Customer">
+        select * from tb_customer where username=#{username}
+    </select>
+    <update id="updatePwdByName" >
+        update tb_customer set password=#{password} where username=#{username}
+    </update>
 </mapper>

@@ -1,10 +1,13 @@
 package org.lanqiao.clothes.service.impl;
 
 import org.lanqiao.clothes.mapper.StoreMapper;
+import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Store;
 import org.lanqiao.clothes.service.IStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Auther: WDS
@@ -28,5 +31,20 @@ public class StoreServiceImpl implements IStoreService {
     @Override
     public Store selectById(int id) {
         return storeMapper.selectById(id);
+    }
+
+    @Override
+    public List<Store> getStoreAll(Condition condition) {
+        return storeMapper.selectStoreAll(condition);
+    }
+
+    @Override
+    public int getStoreCount(Condition condition) {
+        return storeMapper.selectStoreCount(condition);
+    }
+
+    @Override
+    public void modifyStoreStateById(int id, int state) {
+        storeMapper.updateStoreStateById(id,state);
     }
 }

@@ -20,7 +20,7 @@
                 <center><h3 class="modal-title">修改信息</h3></center>
             </div>
             <div class="modal-body">
-                <form method="post" action="/manager/storeUp1" id="updateForm">
+                <form method="post" action="/manager/storeUpdate" id="updateForm">
                     <div class="form-group">
                         <label for="username" class="control-label">商家账号名称:</label>
                         <input type="text" class="form-control" id="username" name="username" required th:value="${session.user.username}" disabled>

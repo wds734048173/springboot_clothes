@@ -29,7 +29,9 @@ function pageClick(k) {
     } else if (text == "个人管理"){
         url = "/manager/userInfo";
     } else if (text == "店铺管理"){
-        url= "/manager/storeUp";
+        url= "/manager/store";
+    } else if (text == "店铺列表管理"){
+        url= "/manager/storeList";
     }
     $(".content").load(url);
 }

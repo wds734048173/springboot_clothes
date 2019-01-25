@@ -13,7 +13,17 @@
     <update id="updateStore" parameterType="org.lanqiao.clothes.pojo.Store">
         update tb_store set name=#{name},bussinessNo=#{bussinessNo},address=#{address},telphone=#{telphone},rtime=now() where id=#{id}
     </update>
-    <select id="selectById" parameterType="_int" resultType="org.lanqiao.clothes.pojo.Store">
+    <select id="selectById" parameterType="int" resultType="org.lanqiao.clothes.pojo.Store">
         select * from tb_store where id=#{id}
     </select>
+    <select id="selectStoreAll" resultType="org.lanqiao.clothes.pojo.Store" parameterType="org.lanqiao.clothes.pojo.Condition">
+        SELECT * FROM tb_store
+    </select>
+    <select id="selectStoreCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
+        SELECT COUNT(1) FROM tb_store
+
+    </select>
+    <update id="updateStoreStateById">
+        update tb_store set state=#{param2} where id=#{param1}
+    </update>
 </mapper>
