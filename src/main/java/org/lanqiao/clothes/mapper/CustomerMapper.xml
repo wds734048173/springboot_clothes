@@ -10,17 +10,12 @@
             <if test="name != null &amp;&amp; name != ''">
                 and username like concat ('%', #{name}, '%')
             </if>
-            <choose>
-                <when test="state==0">
-                    and state=#{state}
-                </when>
-                <when test="state==1">
-                    and state=#{state}
-                </when>
-                <otherwise>
-                    and (state=0 or state=1)
-                </otherwise>
-            </choose>
+            <if test="state != -1">
+                and state=#{state}
+            </if>
+            <if test="state == -1">
+                and state!=2
+            </if>
         </where>
         <if test="currentPage != null">
             limit #{currentPage}, #{pageSize}
@@ -32,17 +27,12 @@
             <if test="name != null &amp;&amp; name != ''">
                 and username like concat ('%', #{name}, '%')
             </if>
-            <choose>
-                <when test="state==0">
-                    and state=#{state}
-                </when>
-                <when test="state==1">
-                    and state=#{state}
-                </when>
-                <otherwise>
-                    and (state=0 or state=1)
-                </otherwise>
-            </choose>
+            <if test="state != -1">
+                and state=#{state}
+            </if>
+            <if test="state == -1">
+                and state!=2
+            </if>
         </where>
     </select>
 
