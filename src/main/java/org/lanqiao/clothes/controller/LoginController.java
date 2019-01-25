@@ -90,7 +90,6 @@ public class LoginController {
                 }else{
                     Store store = storeService.selectById(storeId);
                     session.setAttribute("store",store);
-                    System.out.println("登录页面=====" + store);
                     return "/manager/index";
                 }
             }

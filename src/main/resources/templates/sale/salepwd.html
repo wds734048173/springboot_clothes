@@ -30,7 +30,13 @@
             $('#submit').click(function () {
                 $('#form').submit();
             })
-        })
+            $('#password').blur(function () {
+                var password = $(this).val().trim();
+                if (!(/^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)\S{6,}$/.test(password))) {
+                    alert("第一位不能为数字,必须包含字母且至少六位");
+                }
+            });
+            })
     </script>
     <link rel="stylesheet" th:href="@{/sale/登陆页面_files/diu.login.css}">
     <link type="text/css" rel="stylesheet" th:href="@{/sale/登陆页面_files/layer.min.css}"></head>
@@ -61,7 +67,7 @@
                 </dl>
                 <dl class="password">
                     <dt>新密码</dt>
-                    <dd><input type="password" class="text text-password" name="password" placeholder="新密码"></dd>
+                    <dd><input type="password" class="text text-password" name="password" id="password" placeholder="新密码"></dd>
                 </dl>
                 <dl class="password1">
                     <dt>再次输入新密码</dt>
@@ -82,7 +88,7 @@
         </div>
         <div class="diu-reg-aux-section">
             <p>已经有帐号？请直接登录</p>
-            <div class="login-btns"><a class="btn" href="/sale/login">直接登陆</a>
+            <div class="login-btns"><a class="btn" href="/sale">直接登陆</a>
             </div>
         </div>
     </div>

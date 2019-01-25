@@ -6,16 +6,20 @@
     <script type="text/javascript">
         $(function () {
             //切换审核
-            $(".storeSend").click(function () {
+            $(".storeSuccess").click(function () {
                 var id = $(this).parent().parent().children("td:eq(0)").text();
                 var url = "/manager/updateStoreState?state=2&storeId=" + id;
+                $(".content").load(url);
+            })
+            $(".storeDefeat").click(function () {
+                var id = $(this).parent().parent().children("td:eq(0)").text();
+                var url = "/manager/updateStoreState?state=1&storeId=" + id;
                 $(".content").load(url);
             })
         })
 
         //查询的手动提交方式
         function search(currentPage) {
-            alert("sssss")
             var searchStoreState = $("#searchStoreState option:selected").val();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();
@@ -34,7 +38,7 @@
         <div class="col-xs-2">
             <label for="searchStoreState">店铺审核状态</label>
             <select class="myinput" name="searchStoreState" id="searchStoreState">
-                <option value="-1" th:selected="${condition.state=='-1'}"><----></option>
+                <option value="-1" th:selected="${condition.state=='-1'}">全部</option>
                 <option value="0" th:selected="${condition.state=='0'}">未审核</option>
                 <option value="1" th:selected="${condition.state=='1'}">审核失败</option>
                 <option value="2" th:selected="${condition.state=='2'}">审核成功</option>
@@ -45,7 +49,7 @@
         <input type="button" class="btn btn-primary" id="search" value="查询" onclick="search(null)"/>
     </div>
 </div>
-<div class="modal-body">
+<div class="modal-body" style="text-align: center;">
     <table class="table table-hover table-bordered">
         <thead>
         <tr>
@@ -66,14 +70,15 @@
             <td th:text="${store.id}" hidden></td>
             <td th:text="${store.name}"></td>
             <td th:text="${store.bussinessNo}"></td>
-            <td th:text="${store.pic}"></td>
+            <td ><img th:src="${store.pic}" style="width: 100px;height: 100px;"></td>
             <td th:text="${store.address}"></td>
             <td th:text="${store.telphone}"></td>
-            <td th:text="${store.state}"></td>
-            <td th:text="${store.bussinessPic}"></td>
+            <td th:text="${store.stateStr}"></td>
+            <td ><img th:src="${store.bussinessPic}" style="width: 100px;height: 100px;"></td>
             <td th:text="${store.ctime!=null}?${#dates.format(store.ctime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
-                <a class="btn btn-default storeSend" href="#" role="button"  name="storeSend" th:if="${store.state==2}">审核</a>
+                <a class="btn btn-default storeSuccess" href="#" role="button"  name="storeSuccess" th:if="${store.state==0}">审核通过</a>
+                <a class="btn btn-default storeDefeat" href="#" role="button"  name="storeDefeat" th:if="${store.state==0}">审核失败</a>
             </td>
         </tr>
         </tbody>

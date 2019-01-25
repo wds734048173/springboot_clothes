@@ -61,8 +61,8 @@
     <!--实现左侧菜单栏伸缩功能-end-->
 </head>
 <body>
-<span th:text="${session.user.storeId}"></span>
-<div class="left">
+<!--<span th:text="${session.user.storeId}"></span>-->
+<div class="left" style="background-color: #313541;">
     <div class="bigTitle">服装进销存后台管理系统</div>
     <div class="list">
         <ul class="yiji" th:if="${session.user.storeId!=0}">
@@ -120,8 +120,8 @@
     </div>
 </div>
 <div class="top">
-    <div class="leftTiyle" id="flTitle"  th:if="${session.user.storeId!=0}">品牌管理</div>
-    <div class="leftTiyle" id="flTitle"  th:if="${session.user.storeId==0}">客户管理</div>
+    <div class="leftTiyle" id="flTitle"  th:if="${session.user.storeId!=0}" th:value="${session.user.storeId}">品牌管理</div>
+    <div class="leftTiyle" id="flTitle"  th:if="${session.user.storeId==0}" th:value="${session.user.storeId}">分类管理</div>
     <div class="thisUser" th:if="${session.user.storeId == 0}">
         <span>管理员登录，当前用户：[[${session.user.username}]]</span>
         <input style="line-height: normal;margin-top: 37px;" type="button" width="100px" height="50px" onclick="exit()" value="退出登录"/>
@@ -135,8 +135,14 @@
 <div style="text-align:center;"></div>
 </body>
 <script type="text/javascript">
+
     $(function(){
-        $(".content").load("/manager/brandList");
+        var mark = $("#flTitle").text();
+        if(mark == "分类管理"){
+            $(".content").load("/manager/toGoodsClassList");
+        } else if (mark == "品牌管理"){
+            $(".content").load("/manager/brandList");
+        }
     })
     function exit() {
         var url = "/manager/exit";

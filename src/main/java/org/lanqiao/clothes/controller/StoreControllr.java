@@ -134,10 +134,7 @@ public class StoreControllr {
 
     @RequestMapping("/manager/updateStoreState")
     public String updateStoreState(HttpServletRequest req, HttpServletResponse resp, Model model){
-        //获取店铺id
-        HttpSession session = req.getSession();
-        User user  = (User)session.getAttribute("user");
-        int storeId = user.getStoreId();
+        int storeId = Integer.valueOf(req.getParameter("storeId"));
         int state = Integer.valueOf(req.getParameter("state"));
         storeService.modifyStoreStateById(storeId,state);
         return storeList(req, resp, model);

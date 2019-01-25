@@ -29,6 +29,7 @@ public class Store {
     private String telphone;
     //    状态（0未审核1审核失败2审核成功）
     private int state;
+    private String stateStr;
     //    营业执照图片
     private String bussinessPic;
     private Date ctime;

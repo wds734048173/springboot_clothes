@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>服装管理系统首页</title>
+    <link type="text/css" rel="stylesheet" href="manager/bootstrap/css/bootstrap.css">
+    <style type="text/css">
+        .image{
+            background-image: url("manager/img/indeximage.jpg");
+            background-size: 100%,100%;
+        }
+    </style>
 </head>
-<body>
-<h1>欢迎进入服装管理系统</h1>
-<a href="/manager">后端页面</a>
-<a href="/sale/index">前端页面</a>
+<body class="image">
+    <div style="width: 815px;margin: 200px auto;color: #1a2a4b"><h1 style="font-size: 80px">欢迎进入服装管理系统</h1></div>
+    <div style="width: 230px"><a class="btn btn-info" href="/sale/index" style="font-size: 65px;position: absolute;left: 405px;top: 450px" >前端页面</a></div>
+    <div style="width: 230px"><a class="btn btn-success"  href="/manager" style="font-size: 65px;position: absolute;right: 405px;top: 450px">后端页面</a></div>
 </body>
 </html>

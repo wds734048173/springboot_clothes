@@ -18,10 +18,22 @@
     </select>
     <select id="selectStoreAll" resultType="org.lanqiao.clothes.pojo.Store" parameterType="org.lanqiao.clothes.pojo.Condition">
         SELECT * FROM tb_store
+        <where>
+            <if test="state!=-1">
+                state = #{state}
+            </if>
+        </where>
+        <if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>
     </select>
     <select id="selectStoreCount" resultType="int" parameterType="org.lanqiao.clothes.pojo.Condition">
         SELECT COUNT(1) FROM tb_store
-
+        <where>
+            <if test="state!=-1">
+                state = #{state}
+            </if>
+        </where>
     </select>
     <update id="updateStoreStateById">
         update tb_store set state=#{param2} where id=#{param1}

@@ -4,10 +4,12 @@ import org.lanqiao.clothes.mapper.StoreMapper;
 import org.lanqiao.clothes.pojo.Condition;
 import org.lanqiao.clothes.pojo.Store;
 import org.lanqiao.clothes.service.IStoreService;
+import org.lanqiao.clothes.utils.DataMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: WDS
@@ -35,7 +37,15 @@ public class StoreServiceImpl implements IStoreService {
 
     @Override
     public List<Store> getStoreAll(Condition condition) {
-        return storeMapper.selectStoreAll(condition);
+        List<Store> storeList = storeMapper.selectStoreAll(condition);
+        Map<Integer,String> storeStateMap = DataMapUtil.getStoreStateMap();
+        for(Store store : storeList){
+            int state = store.getState();
+            if(storeStateMap.containsKey(state)){
+                store.setStateStr(storeStateMap.get(state));
+            }
+        }
+        return storeList;
     }
 
     @Override
