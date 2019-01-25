@@ -85,12 +85,22 @@ public class LoginController {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", retUser);
                 int storeId = retUser.getStoreId();
-                if(storeId == -1){
+                if(storeId == -1){//-1表示未注册店铺
                     return "/manager/storeInfo";
+                }else if(storeId == 0){//管理员店铺id=0，不注册店铺
+                    return "/manager/index";
                 }else{
                     Store store = storeService.selectById(storeId);
-                    session.setAttribute("store",store);
-                    return "/manager/index";
+                    int state = store.getState();
+                    if(state == 1){//审核失败，修改店铺信息
+                        return "/manager/storeInfo";
+                    }else if(state == 0){//待审核
+                        session.setAttribute("store",store);
+                        return "/manager/index";
+                    }else{//其他情况，状态为2，审核通过
+                        session.setAttribute("store",store);
+                        return "/manager/index";
+                    }
                 }
             }
         }
