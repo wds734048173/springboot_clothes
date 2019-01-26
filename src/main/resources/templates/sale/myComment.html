@@ -34,7 +34,7 @@
                     <div class="section list-section" id="comment_list" th:each="comment:${commentListByCustomerId}">
                         <div class="comment-data">
                             <div class="avatar"><img name="avatar" src="./商品详情_files/touxiang.jpg" style="max-width:250%; height: 100px">
-                                <p class="user" th:text="${comment.customerId}"></p></div>
+                                <p class="user" th:text="${session.customer.username}"></p></div>
                             <div class="comment-data-content">
                                 <div class="cmt-header">
                                     <span class="cmt-spec" name="cmt_spec">衣服名称：<b name="spec_value" th:text="${comment.skuId}"></b></span>&nbsp;

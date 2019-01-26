@@ -136,8 +136,8 @@ public class CommentController {
         //       获取用户id
         HttpSession session = req.getSession();
         Customer customer =(Customer) session.getAttribute("customer");
-//        int customerId =customer.getId();
-        int customerId = 1;
+        int customerId =customer.getId();
+//        int customerId = 1;
 
         //根据评价等级查询评价
         String searchCommentGrade="-1";
@@ -160,8 +160,8 @@ public class CommentController {
         //       获取用户id
         HttpSession session = req.getSession();
         Customer customer =(Customer) session.getAttribute("customer");
-//        int customerId =customer.getId();
-        int customerId = 1;
+        int customerId =customer.getId();
+//        int customerId = 1;
 
         //根据评价等级查询评价
         String searchCommentGrade="-1";
