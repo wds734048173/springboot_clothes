@@ -42,14 +42,15 @@ public class StockServiceImpl implements IStockService {
         //通过ids获取商品详情
         if(goodsIds.size()>0){
             List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
-            Map<Integer,String> goodsMap = new HashMap<>();
+            Map<Integer,Goods> goodsMap = new HashMap<>();
             for(Goods goods : goodsList){
-                goodsMap.put(goods.getId(),goods.getName());
+                goodsMap.put(goods.getId(),goods);
             }
             for(Stock stock : stockList){
                 int goodsId = stock.getGoodsId();
                 if(goodsMap.containsKey(goodsId)){
-                    stock.setGoodsName(goodsMap.get(goodsId));
+                    stock.setGoodsName(goodsMap.get(goodsId).getName());
+                    stock.setGoodsPic(goodsMap.get(goodsId).getPic());
                 }
             }
         }
@@ -71,6 +72,7 @@ public class StockServiceImpl implements IStockService {
         List<Integer> ids = new ArrayList<>();
         for(Stock stock : stockList){
             stock.setGoodsName(goods.getName());
+            stock.setGoodsPic(goods.getPic());
             int skuId = stock.getSkuId();
             ids.add(skuId);
         }

@@ -15,6 +15,7 @@ public class Stock {
     private int storeId;
     private int goodsId;
     private String goodsName;
+    private String goodsPic;
     private int skuId;
     private int colorId;
     private int sizeId;

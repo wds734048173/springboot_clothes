@@ -124,10 +124,11 @@
     </div>
 </div>
 <div class="modal-body">
-    <table class="table table-hover table-bordered">
+    <table class="table table-hover table-bordered" style="text-align: center;">
         <thead>
             <tr>
                 <th hidden>ID</th>
+                <th>商品图片</th>
                 <th>商品名称</th>
                 <th>颜色名称</th>
                 <th>尺码名称</th>
@@ -144,6 +145,7 @@
         <tbody>
             <tr th:each="comment: ${commentList}">
                 <td th:text="${comment.id}" hidden></td>
+                <td ><img th:src="${comment.goodsPic}" style="height: 30px;width: 30px;"></td>
                 <td th:text="${comment.goodsName}"></td>
                 <td th:text="${comment.colorName}"></td>
                 <td th:text="${comment.sizeName}"></td>

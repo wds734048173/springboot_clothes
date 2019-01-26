@@ -31,7 +31,7 @@ public class CommentServiceImpl implements ICommentService {
         List<Comment> commentList =  commentMapper.selectCommentList(condition);
         //获取商品ids
         List<Integer> goodsIds = new ArrayList<>();
-        Map<Integer,String> goodsMap = new HashMap<>();
+        Map<Integer,Goods> goodsMap = new HashMap<>();
         //获取skuid
         List<Integer> skuIds = new ArrayList<>();
         Map<Integer,GoodsSKU> skuMap = new HashMap<>();
@@ -64,7 +64,7 @@ public class CommentServiceImpl implements ICommentService {
         if(goodsIds.size()>0){
             List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
             for(Goods goods : goodsList){
-                goodsMap.put(goods.getId(),goods.getName());
+                goodsMap.put(goods.getId(),goods);
             }
         }
 
@@ -100,7 +100,8 @@ public class CommentServiceImpl implements ICommentService {
         for(Comment comment : commentList){
             int goodsId = comment.getGoodsId();
             if(goodsMap.containsKey(goodsId)){
-                comment.setGoodsName(goodsMap.get(goodsId));
+                comment.setGoodsName(goodsMap.get(goodsId).getName());
+                comment.setGoodsPic(goodsMap.get(goodsId).getPic());
             }
             int customerId = comment.getCustomerId();
             if(customerMap.containsKey(customerId)){

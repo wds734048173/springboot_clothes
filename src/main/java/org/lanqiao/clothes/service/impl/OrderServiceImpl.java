@@ -121,7 +121,7 @@ public class OrderServiceImpl implements IOrderService {
         List<OrderInfo> orderInfoList = orderMapper.selectOrderInfoList(orderId);
         //获取商品id
         List<Integer> goodsIds = new ArrayList<>();
-        Map<Integer,String> goodsMap = new HashMap<>();
+        Map<Integer,Goods> goodsMap = new HashMap<>();
         //获取skuid
         List<Integer> skuIds = new ArrayList<>();
         Map<Integer,GoodsSKU> skuMap = new HashMap<>();
@@ -135,7 +135,7 @@ public class OrderServiceImpl implements IOrderService {
         if(goodsIds.size()>0){
             List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
             for(Goods goods : goodsList){
-                goodsMap.put(goods.getId(),goods.getName());
+                goodsMap.put(goods.getId(),goods);
             }
         }
 
@@ -160,7 +160,8 @@ public class OrderServiceImpl implements IOrderService {
         for(OrderInfo orderInfo : orderInfoList){
             int goodsId = orderInfo.getGoodsId();
             if(goodsMap.containsKey(goodsId)){
-                orderInfo.setGoodsName(goodsMap.get(goodsId));
+                orderInfo.setGoodsName(goodsMap.get(goodsId).getName());
+                orderInfo.setGoodsPic(goodsMap.get(goodsId).getPic());
             }
             int skuId = orderInfo.getSkuId();
             if(skuMap.containsKey(skuId)){

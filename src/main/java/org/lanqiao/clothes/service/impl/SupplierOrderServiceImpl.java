@@ -98,11 +98,11 @@ public class SupplierOrderServiceImpl implements ISupplierOrderService {
             skuIds.add(supplierOrderInfo.getSkuId());
         }
         //获取商品信息
-        Map<Integer,String> goodsMap = new HashMap<>();
+        Map<Integer,Goods> goodsMap = new HashMap<>();
         if(goodsIds.size()>0){
             List<Goods> goodsList = goodsMapper.selectGoodsByIds(goodsIds);
             for(Goods goods : goodsList){
-                goodsMap.put(goods.getId(),goods.getName());
+                goodsMap.put(goods.getId(),goods);
             }
         }
         //获取颜色并做成map
@@ -128,7 +128,8 @@ public class SupplierOrderServiceImpl implements ISupplierOrderService {
         for(SupplierOrderInfo supplierOrderInfo : supplierOrderInfoList){
             int goodsId = supplierOrderInfo.getGoodsId();
             if(goodsMap.containsKey(goodsId)){
-                supplierOrderInfo.setGoodsName(goodsMap.get(goodsId));
+                supplierOrderInfo.setGoodsName(goodsMap.get(goodsId).getName());
+                supplierOrderInfo.setGoodsPic(goodsMap.get(goodsId).getPic());
             }
             int skuId = supplierOrderInfo.getSkuId();
             if(skuMap.containsKey(skuId)){

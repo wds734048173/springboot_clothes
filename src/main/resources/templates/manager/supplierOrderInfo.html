@@ -58,11 +58,12 @@
 </div>
 <hr>
 <div class="modal-body">
-    <table class="table table-hover table-bordered">
+    <table class="table table-hover table-bordered" style="text-align: center;">
         <thead class="thead">
             <tr class="tr">
                 <!--<th>ID</th>
                 <th>订单ID</th>-->
+                <th>商品图片</th>
                 <th>商品名称</th>
                 <th>商品颜色</th>
                 <th>商品尺码</th>
@@ -74,6 +75,7 @@
             <tr th:each="supplierOrderInfo :${supplierOrderInfoList}" >
                 <!--<td th:text="${supplierOrderInfo.id}"></td>
                 <td th:text="${supplierOrderInfo.oId}"></td>-->
+                <td ><img th:src="${supplierOrderInfo.goodsPic}" style="height: 30px;width: 30px;"></td>
                 <td th:text="${supplierOrderInfo.goodsName}"></td>
                 <td th:text="${supplierOrderInfo.colorName}"></td>
                 <td th:text="${supplierOrderInfo.sizeName}"></td>
