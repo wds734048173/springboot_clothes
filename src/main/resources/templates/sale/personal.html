@@ -132,7 +132,7 @@
                         <div class="box-bd">
                             <ul class="uc-nav-list">
                                 <!--<li class="active"><a onclick="pageClick(this)">我的个人中心</a></li>-->
-                                <li class="active"><a onclick="pageClick(this)" style="color: black">我的个人中心</a></li>
+                                <li class="active"><a onclick="pageClick(this)" >我的个人中心</a></li>
                                 <!--<li><a href="#">收货地址</a></li>-->
                             </ul>
                         </div>
@@ -162,7 +162,7 @@
                                     <div class="user-card">
                                         <h2 class="username" th:text="${session.customer.getUsername()}"></h2>
                                         <p class="tip">你好啊～</p>
-                                        <img class="avatar" src="./个人中心_files/photo.jpg" width="150" height="150"
+                                        <img class="avatar" src="./商品详情_files/touxiang.jpg"  width="150" height="150"
                                              alt="th:text='${session.customer.getUsername()}'">
                                     </div>
                                     <div class="user-actions">
@@ -307,20 +307,19 @@ _msq.push(['trackPageView']);
 <div id="J_agreeModal" class="modal fade modal-agree in modal-hide"> <div class="modal-hd"> <a class="close J_close" data-dismiss="modal" data-stat-id="a0641baa711604bc" onclick="_msq.push([&#39;trackEvent&#39;, &#39;45a270e10b1f8e93-a0641baa711604bc&#39;, &#39;&#39;, &#39;pcpid&#39;, &#39;&#39;]);"><i class="iconfont"></i></a> <h3>小米商城协议更新</h3> </div> <div class="modal-body"> <div class="desc"></div> <div class="con">  </div>  </div>  <div class="modal-ft"> <div class="actions"> <button class="btn btn-line-gray J_close" data-dismiss="modal">不同意</button> <button class="btn btn-primary J_sure">同意</button> </div> </div></div></body>
 <script>
     function pageClick(k) {
-	/*$(k).parent().find("div").removeClass("active");
-	$(k).parent().addClass("active");
-	$(k).parent().siblings().removeClass("active");*/
-	var text = $(k).text();
-	$("#flTitle").text($(k).text());
-    var url = "";
-    if (text == "测试") {
-        url = "/sale/jiaozan";
-    } else if (text == "评价晒单") {
-        url = "/sale/myComment";
-    } else if (text == "我的个人中心") {
-        url = "/sale/personalDetalis";
+        $(k).parent().addClass("active");
+        $(k).parent().siblings().removeClass("active");
+        $(k).parent().parent().parent().parent().siblings().children().children().children().removeClass("active");
+        var text = $(k).text();
+        $("#flTitle").text($(k).text());
+        var url = "";
+        if (text == "评价晒单") {
+            url = "/sale/myComment";
+        } else if (text == "我的个人中心") {
+            url = "/sale/personalDetalis";
+        }
+        $(".content").load(url);
     }
-    $(".content").load(url);
-}
 </script>
+
 </html>

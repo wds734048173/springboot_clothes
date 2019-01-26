@@ -52,14 +52,20 @@
                      <a class="link" href="/sale/personal" target="_self" style="font-size: 20px">个人中心</a>
                  </div>
                  <div class="top-cart">
-                     <a class="cart" href="/sale/shoppingCar" style="font-size: 20px"><i class="glyphicon glyphicon-shopping-cart" ></i></span></a>
+                     <a class="cart" href="/sale/shoppingCar" style="font-size: 20px">我的购物车</span></a>
                  </div>
             </div>
         </div>
         <div class="header-line">
             <div class="wrapper">
-                <div class="logo"><a href="#"><img src="./购物车页面_files/logo.png" style="width: 930px;height: 70px" alt="丢丢定制" title="丢丢定制"></a></div>
-
+                <div class="logo"><a href="http://www.diu8diu.com/"><img src="./购物车页面_files/logo.png" style="width: 930px;height: 70px" alt="丢丢定制" title="丢丢定制"></a></div>
+                <div class="search">
+                    <div class="search-form">
+                        <div class="search-text"><input type="text" class="text-search" name="keywords" value="" placeholder="搜索"></div>
+                        <button type="button" class="btn-search" name="btn_search" onclick="DIU.search.run(1)">搜索</button>
+                    </div>
+                    <div class="search-keywords" name="search_keywords"></div>
+                </div>
             </div>
         </div>
             <div class="topdmenu">
@@ -85,7 +91,7 @@
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
-                                <li><a th:href="@{/sale/MyOrder}" data-stat-id="4f97622c66b9c2ef" onclick="">我的订单</a></li>
+                                <li class="active"><a th:href="@{/sale/MyOrder}" data-stat-id="4f97622c66b9c2ef" onclick="">我的订单</a></li>
                                 <li><a onclick="pageClick(this)">评价晒单</a></li>
                             </ul>
                         </div>
@@ -96,7 +102,7 @@
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
-                                <li class="active"><a href="/sale/personal" style="color: black">我的个人中心</a></li>
+                                <li ><a href="/sale/personal" style="color: black">我的个人中心</a></li>
                                <!-- <li><a href="#">收货地址</a></li>-->
                             </ul>
                         </div>
@@ -117,81 +123,84 @@
             <!-- 右侧个人信息页面 -->
             <div class="span16">
                 <div class="uc-box uc-main-box">
-                    <div class="uc-content-box order-list-box">
-                        <div class="box-hd">
-                            <h1 class="title">我的订单<small>请谨防钓鱼链接或诈骗电话，<a href="http://www.mi.com/service/buy/antifraud/" target="_blank" data-stat-id="c46a318fa0357711" onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-c46a318fa0357711&#39;, &#39;//www.mi.com/service/buy/antifraud/&#39;, &#39;pcpid&#39;, &#39;&#39;]);">了解更多&gt;</a></small></h1>
-                            <div class="more clearfix">
-                                <!--<ul class="filter-list J_orderType" >-->
+                    <div class="content">
+                        <div class="uc-content-box order-list-box">
+                            <div class="box-hd">
+                                <h1 class="title">我的订单<small>请谨防钓鱼链接或诈骗电话，<a href="http://www.mi.com/service/buy/antifraud/" target="_blank" data-stat-id="c46a318fa0357711" onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-c46a318fa0357711&#39;, &#39;//www.mi.com/service/buy/antifraud/&#39;, &#39;pcpid&#39;, &#39;&#39;]);">了解更多&gt;</a></small></h1>
+                                <div class="more clearfix">
+                                    <!--<ul class="filter-list J_orderType" >-->
                                     <!--<li class="first active"><a  href=""  onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-80be41c93ffc8141&#39;, &#39">全部有效订单</a></li>-->
                                     <!--<li><a class="stateId" id="J_unpaidTab" href=""  onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-bbe893417b3501f4&#39;, &#39;">已下单</a></li>-->
                                     <!--<li><a class="stateId" id="J_sendTab" href=""  onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-cfcc3a2570d33a5b&#39;, &#39;">已支付</a></li>-->
                                     <!--<li><a class="stateId" id="" href=""  onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-cfcc3a2570d33a5b&#39;, &#39;">已发货</a></li>-->
                                     <!--<li><a class="stateId" id="" href=""  onclick="_msq.push([&#39;trackEvent&#39;, &#39;5eab40056fa03ac0-cfcc3a2570d33a5b&#39;, &#39;">已收货</a></li>-->
-                                <!--</ul>-->
-                                <form id="J_orderSearchForm" class="search-form clearfix" action="http://static.mi.com/order/#" method="get">
-                                </form>
+                                    <!--</ul>-->
+                                    <form id="J_orderSearchForm" class="search-form clearfix" action="http://static.mi.com/order/#" method="get">
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="box-bd">
+                                <div id="J_orderList">
+                                    <ul class="order-list" >
+                                        <li class="uc-order-item uc-order-item-shipping" th:each="order:${myOrderList}">
+                                            <div class="order-detail">
+                                                <div class="order-summary">
+                                                    <div class="order-status">
+                                                        <span  th:value="${order.state}" id="spanstate" th:text="${order.stateStr}"></span>
+                                                    </div>
+                                                </div>
+                                                <table class="order-detail-table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="col-main">
+                                                            <p class="caption-info">
+                                                                <span th:text="${#dates.format(order.ctime, 'yyyy-MM-dd HH:mm:ss')}" ></span>
+                                                                <span class="sep">|</span><span th:text="${session.customer.username}"></span><span class="sep">|</span>
+                                                                订单号：<a href=""><span th:text="${order.no}"></span></a>
+                                                                <span class="sep">|</span>在线支付（支付宝快捷支付）
+                                                            </p>
+                                                        </th>
+                                                        <th class="col-sub">
+                                                            <p class="caption-price">实付金额：<span class="num"><span th:text="${order.payMoney}"></span></span>元</p>
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="order-items">
+                                                            <ul class="goods-list" style="font-size: 24px;width: 600px;">
+                                                                <li th:each="orderInfo : ${order.orderInfoList}">
+                                                                    <div class="figure figure-thumb" >
+                                                                        <a href="" target="_blank">
+                                                                            <img  th:src="${orderInfo.goodsPic}" width="80" height="80" th:alt="${orderInfo.goodsName}">
+                                                                        </a>
+                                                                    </div>
+                                                                    <div  style="margin-left: 60px;display: inline-block;">
+                                                                        <p class="name">
+                                                                            <span href="#" target="_blank" th:text="${orderInfo.goodsName}"></span><br><br>
+                                                                        </p>
+                                                                        <p>
+                                                                            <span href="#" target="_blank" th:text="${orderInfo.sizeName}"></span>
+                                                                            <span href="#" target="_blank" th:text="${orderInfo.colorName}"></span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div style="padding-left: 200px; display: inline-block;" >
+                                                                        <div class="price"  ><span th:text="${orderInfo.price}"></span>元</div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <div class="box-bd">
-                            <div id="J_orderList">
-                                <ul class="order-list" >
-                                <li class="uc-order-item uc-order-item-shipping" th:each="order:${myOrderList}">
-                                    <div class="order-detail">
-                                <div class="order-summary">
-                                    <div class="order-status">
-                                        <span  th:value="${order.state}" id="spanstate" th:text="${order.stateStr}"></span>
-                                    </div>
-                            </div>
-                                <table class="order-detail-table">
-                                    <thead>
-                                    <tr>
-                                        <th class="col-main">
-                                            <p class="caption-info">
-                                                <span th:text="${#dates.format(order.ctime, 'yyyy-MM-dd HH:mm:ss')}" ></span>
-                                                <span class="sep">|</span><span th:text="${session.customer.username}"></span><span class="sep">|</span>
-                                                订单号：<a href=""><span th:text="${order.no}"></span></a>
-                                                <span class="sep">|</span>在线支付（支付宝快捷支付）
-                                            </p>
-                                        </th>
-                                        <th class="col-sub">
-                                            <p class="caption-price">实付金额：<span class="num"><span th:text="${order.payMoney}"></span></span>元</p>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="order-items">
-                                                <ul class="goods-list" style="font-size: 24px;width: 600px;">
-                                                    <li th:each="orderInfo : ${order.orderInfoList}">
-                                                        <div class="figure figure-thumb" >
-                                                            <a href="" target="_blank">
-                                                                <img  th:src="${orderInfo.goodsPic}" width="80" height="80" th:alt="${orderInfo.goodsName}">
-                                                            </a>
-                                                        </div>
-                                                        <div  style="margin-left: 60px;display: inline-block;">
-                                                            <p class="name">
-                                                                <span href="#" target="_blank" th:text="${orderInfo.goodsName}"></span><br><br>
-                                                            </p>
-                                                            <p>
-                                                                <span href="#" target="_blank" th:text="${orderInfo.sizeName}"></span>
-                                                                <span href="#" target="_blank" th:text="${orderInfo.colorName}"></span>
-                                                            </p>
-                                                        </div>
-                                                        <div style="padding-left: 200px; display: inline-block;" >
-                                                            <div class="price"  ><span th:text="${orderInfo.price}"></span>元</div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            </li>
-                            </ul>
-                                    </div>
-                            </div>
-                        </div>
+                    </div>
+
                     </div>
                 </div>
             </div>
@@ -243,9 +252,9 @@
 <div id="J_agreeModal" class="modal fade modal-agree in modal-hide"> <div class="modal-hd"> <a class="close J_close" data-dismiss="modal" data-stat-id="a0641baa711604bc" onclick="_msq.push([&#39;trackEvent&#39;, &#39;45a270e10b1f8e93-a0641baa711604bc&#39;, &#39;&#39;, &#39;pcpid&#39;, &#39;&#39;]);"><i class="iconfont"></i></a> <h3>小米商城协议更新</h3> </div> <div class="modal-body"> <div class="desc"></div> <div class="con">  </div>  </div>  <div class="modal-ft"> <div class="actions"> <button class="btn btn-line-gray J_close" data-dismiss="modal">不同意</button> <button class="btn btn-primary J_sure">同意</button> </div> </div></div></body>
 <script>
     function pageClick(k) {
-        /*$(k).parent().find("div").removeClass("active");
+        $(k).parent().find("div").removeClass("active");
         $(k).parent().addClass("active");
-        $(k).parent().siblings().removeClass("active");*/
+        $(k).parent().siblings().removeClass("active");
         var text = $(k).text();
     var url = "";
         if (text == "测试") {

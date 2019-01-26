@@ -122,7 +122,7 @@
                     <ul class="diu-goods-list clearfix" name="goods" id="brandList">
                         <li  gid="229" is_book="0" th:each="item: ${goodsList}">
                             <div class="thumb divfl" name="thumbnail">
-                                <a th:href="'/sale/detalis?goodsId='+${item.id}" target="_blank"><img name="thumbnail" th:src="${item.pic}" alt="點擊查看詳情">
+                                <a th:href="@{'/sale/detalis?goodsId='+${item.id}}" target="_blank"><img name="thumbnail" th:src="${item.pic}" alt="點擊查看詳情">
                                 </a>
                             </div>
                             <div class="info">
