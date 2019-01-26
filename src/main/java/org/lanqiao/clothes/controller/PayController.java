@@ -148,7 +148,7 @@ public class PayController {
             shopCarService.deleteShop(Integer.parseInt(carIds[i]));
         }*/
         req.setAttribute("totalMoney",totalMoney);
-        return "/sale/shoppingcar";
+        return "/sale/MyOrder";
     }
 
 

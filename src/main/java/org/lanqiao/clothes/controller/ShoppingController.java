@@ -51,9 +51,7 @@ ICommentService commentService;
 
         //获取商品详情------------start
         Goods goods = goodsService.getGoodsById(goodsId);
-        System.out.println(goods.toString());
         List<GoodsSKU> goodsSKUList = goodsService.getGoodsSKUList(goodsId);
-
         List<Integer> colorIds = new ArrayList<>();
         List<Integer> sizeIds = new ArrayList<>();
         for(GoodsSKU goodsSKU : goodsSKUList){

@@ -44,7 +44,7 @@ public class DefaultConfig implements WebMvcConfigurer {
                 .addPathPatterns("/manager/*","/manager")
                 .excludePathPatterns("/manager/login","/manager/register","/druid/*");
         registry.addInterceptor(new SaleLoginInterceptor())
-                .addPathPatterns("/sale/addToCar","/sale/personal");
+                .addPathPatterns("/sale/addToCar","/sale/personal","/sale/MyOrder","/sale/shoppingCar");
 //                .excludePathPatterns("/sale","/sale/login","/sale/saleLogin","/sale/cusRegister","/sale/cusRegister1","/sale/cusregister","/sale/index");
     }
 

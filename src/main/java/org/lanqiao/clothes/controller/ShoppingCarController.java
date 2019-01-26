@@ -82,7 +82,6 @@ public class ShoppingCarController {
         Goods goods  = goodsService.getGoodsById(goodsId);
         //获取skuid
         int skuId=goodsSkuService.getSkuIdBySizeAndColor(sizeId,colorId,goodsId);
-        System.out.println("sizeId++++++++"+sizeId);
 //       根据session获取顾客id
         HttpSession session = req.getSession();
         Customer customer = (Customer) session.getAttribute("customer");

@@ -20,6 +20,7 @@
                 and storeId=#{storeId}
             </if>
         </where>
+        order by ctime desc
         <if test="currentPage != null">
             limit #{currentPage}, #{pageSize}
         </if>
@@ -90,6 +91,7 @@
                 state=#{state}
             </if>
         </where>
+        order by ctime desc
         <if test="currentPage != null">
             limit #{currentPage}, #{pageSize}
         </if>
@@ -101,6 +103,6 @@
         select * from tb_orderinfo where oId=#{oId}
     </select>
     <select resultType="org.lanqiao.clothes.pojo.Order" id="getOrderId" parameterType="int">
-        select * from tb_order where customerId=#{customerId}
+        select * from tb_order where customerId=#{customerId} order by ctime desc
     </select>
 </mapper>
