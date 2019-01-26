@@ -29,19 +29,20 @@
     <div id="header">
         <div class="toper">
             <div class="wrapper">
+                <div class="account-sign-status">
+                    <span id="user_status" class="user-status">
+                        <a href="/sale/index" style="font-size: 20px">欢迎来到我的网站</a>
+                        <a  style="font-size: 20px" th:if="${session.customer!=null}" th:text="${session.customer.username}+','+'&nbsp;'"></a>
+                        <a  style="font-size: 20px" href="/sale/login" th:if="${session.customer==null}">请登录</a>
+                        <a  style="font-size: 20px" href="/sale/cusRegister" th:if="${session.customer==null}">注册</a>
+                        &nbsp;&nbsp;<a class="logout" href="/sale/longout" style="font-size: 20px" th:if="${session.customer!=null}">退出</a>
+                    </span>
+                </div>
                 <div class="top-nav">
                     <a class="link" href="/sale/personal" target="_self" style="font-size: 20px">个人中心</a>
-                    <!--<a class="link" href="" target="_self" style="font-size: 20px">我的订单</a>-->
-                </div>
-                <div class="account-sign-status">
-                    <span id="welcome">欢迎来到<a href="/sale/index">我的网站</a>！</span>
-                    <span id="user" class="user-status" th:if="${session.customer==null}"><a href="/sale/login" class="username"  th:text="登录"></a><a href="/sale/cusRegister" class="username"  th:text="注册"></a></span>
-                    <span id="user_status" class="user-status" th:if="${session.customer!=null}"><a href="" class="username"  th:text="${session.customer.realname}"></a><a class="logout" href="/sale/logout">退出</a></span>
                 </div>
                 <div class="top-cart">
-                    <a class="cart" href="/sale/shoppingCar" th:if="${session.customer!=null}">
-                        <i class="glyphicon glyphicon-shopping-cart"></i>我的购物车
-                    </a>
+                    <a class="cart" href="/sale/shoppingCar" style="font-size: 20px">我的购物车</span></a>
                 </div>
             </div>
         </div>

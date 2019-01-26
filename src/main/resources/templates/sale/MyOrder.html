@@ -39,17 +39,21 @@
 <div id="header">
         <div class="toper">
              <div class="wrapper">
-                <div class="top-nav">
-                    <a class="link" href="/sale/personal" target="_self">个人中心</a>
-                    <a class="link" th:href="@{/sale/MyOrder}" target="_self">我的订单</a>
-                </div>
                 <div class="account-sign-status">
-                    <span id="welcome">欢迎来到<a href="http://www.diu8diu.com/">我的网站</a>！</span>
-                    <span id="user_status" class="user-status"><a href="http://www.diu8diu.com/diu-ucenter/" class="username"><span th:text="${session.customer.username}"></span></a><a class="logout" href="/sale/logout">退出</a></span>
+                   <span id="user_status" class="user-status">
+                        <a href="/sale/index" style="font-size: 20px">欢迎来到我的网站</a>
+                        <a  style="font-size: 20px" th:if="${session.customer!=null}" th:text="${session.customer.username}+','+'&nbsp;'"></a>
+                        <a  style="font-size: 20px" href="/sale/login" th:if="${session.customer==null}">请登录</a>
+                        <a  style="font-size: 20px" href="/sale/cusRegister" th:if="${session.customer==null}">注册</a>
+                        &nbsp;&nbsp;<a class="logout" href="/sale/longout" style="font-size: 20px" th:if="${session.customer!=null}">退出</a>
+                    </span>
                 </div>
-                <div class="top-cart">
-                    <a class="cart" href="/sale/shoppingCar"><i class="glyphicon glyphicon-shopping-cart"></i>我的购物车（<span class="cart-amount" name="cart_amount">2</span>）</a>
-                </div>
+                 <div class="top-nav">
+                     <a class="link" href="/sale/personal" target="_self" style="font-size: 20px">个人中心</a>
+                 </div>
+                 <div class="top-cart">
+                     <a class="cart" href="/sale/shoppingCar" style="font-size: 20px"><i class="glyphicon glyphicon-shopping-cart" ></i></span></a>
+                 </div>
             </div>
         </div>
         <div class="header-line">
@@ -61,6 +65,7 @@
             <div class="topdmenu">
             <div class="wrapper">
                <div class="main-nav" id="main_nav">
+                   <a href="/sale/index">首页</a>
                 </div>
                 <div class="top-cart">
                 </div>
