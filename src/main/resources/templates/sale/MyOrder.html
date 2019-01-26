@@ -161,20 +161,24 @@
                                     <tbody>
                                         <tr>
                                             <td class="order-items">
-                                                <ul class="goods-list">
+                                                <ul class="goods-list" style="font-size: 24px;width: 600px;">
                                                     <li th:each="orderInfo : ${order.orderInfoList}">
-                                                        <div class="figure figure-thumb">
+                                                        <div class="figure figure-thumb" >
                                                             <a href="" target="_blank">
                                                                 <img  th:src="${orderInfo.goodsPic}" width="80" height="80" th:alt="${orderInfo.goodsName}">
                                                             </a>
                                                         </div>
-                                                        <div>
+                                                        <div  style="margin-left: 60px;display: inline-block;">
                                                             <p class="name">
-                                                                <span href="#" target="_blank" th:text="${orderInfo.goodsName}"></span>
+                                                                <span href="#" target="_blank" th:text="${orderInfo.goodsName}"></span><br><br>
+                                                            </p>
+                                                            <p>
                                                                 <span href="#" target="_blank" th:text="${orderInfo.sizeName}"></span>
                                                                 <span href="#" target="_blank" th:text="${orderInfo.colorName}"></span>
-                                                            <p class="price"><span th:text="${orderInfo.price}"></span>元</p>
                                                             </p>
+                                                        </div>
+                                                        <div style="padding-left: 200px; display: inline-block;" >
+                                                            <div class="price"  ><span th:text="${orderInfo.price}"></span>元</div>
                                                         </div>
                                                     </li>
                                                 </ul>

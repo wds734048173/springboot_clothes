@@ -270,21 +270,28 @@ public class OrderServiceImpl implements IOrderService {
 
         if(skuIds.size()>0){
             List<GoodsSKU> goodsSKUList = goodsMapper.selectSKUByIds(skuIds);
+            List<Integer> colorIdList = new ArrayList<>();
+            List<Integer> sizeIdList = new ArrayList<>();
             for(GoodsSKU goodsSKU : goodsSKUList){
                 skuMap.put(goodsSKU.getId(),goodsSKU);
+                colorIdList.add(goodsSKU.getColorId());
+                sizeIdList.add(goodsSKU.getSizeId());
             }
             //获取颜色并做成map
-            List<Color> colorList = colorMapper.selectColorSelectedList(customerId);
-            for(Color color : colorList){
-                colorMap.put(color.getId(),color.getName());
+            if(colorIdList.size()>0){
+                List<Color> colorList = colorMapper.selectColorListByIds(colorIdList);
+                for(Color color : colorList){
+                    colorMap.put(color.getId(),color.getName());
+                }
             }
-            //获取尺码，并做成map
-            List<Size> sizeList = sizeMapper.selectSizeSelectedList(customerId);
-            for(Size size : sizeList){
-                sizeMap.put(size.getId(),size.getName());
+            if(sizeIdList.size()>0){
+                //获取尺码，并做成map
+                List<Size> sizeList = sizeMapper.selectSizeListByIds(sizeIdList);
+                for(Size size : sizeList){
+                    sizeMap.put(size.getId(),size.getName());
+                }
             }
         }
-
         //配置查询到的数据
         for(OrderInfo orderInfo : orderInfoList){
             int goodsId = orderInfo.getGoodsId();
@@ -310,6 +317,14 @@ public class OrderServiceImpl implements IOrderService {
     }
     @Override
     public List<Order> getOrderId(int id) {
-        return orderMapper.getOrderId(id);
+        List<Order> orderList =  orderMapper.getOrderId(id);
+        Map<Integer,String> stateMap = DataMapUtil.getOrderStateMap();
+        for(Order order : orderList){
+            int state = order.getState();
+            if(stateMap.containsKey(state)){
+                order.setStateStr(stateMap.get(state));
+            }
+        }
+        return orderList;
     }
 }
