@@ -26,6 +26,9 @@ public class PayController {
     @Autowired
     ShopCarServiceImpl shopCarService;
 
+    @Autowired
+    MyOrderController myOrderController;
+
     @RequestMapping("/sale/pay")
     @Transactional
     public String addToOrder(HttpServletRequest req, HttpServletResponse resp, Model model){
@@ -125,7 +128,7 @@ public class PayController {
         req.setAttribute("carIds",carIds);
         req.setAttribute("totalPrice",totalPrice+10);
         req.setAttribute("orderId",orderId);
-        return "/sale/order";
+        return myOrderController.getMyOrder(req, resp, model);
     }
 
     @RequestMapping("/sale/order")

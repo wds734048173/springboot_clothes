@@ -45,7 +45,9 @@
                     success:function () {
                     }
                 });
-                window.location.reload();
+                var url = "/sale/shoppingCar";
+                window.location.href = url;
+                // window.location.reload();
                 getPrice();
             });
             //减少修改
@@ -59,11 +61,13 @@
                 $(this).next().val(num);
                 $(this).parent().parent().parent().next().children().children().children().children().children().eq(1).text(num*price);
                 $.ajax({
-                    url:"/sale/itemNumChange?num="+num+"&price="+num*price+"&id="+id,
+                    url:"/sale/shoppingCar?num="+num+"&price="+num*price+"&id="+id,
                     success:function () {
                     }
                 });
-                window.location.reload();
+                var url = "/sale/shoppingCar";
+                window.location.href = url;
+                // window.location.reload();
                 getPrice();
             });
             $(".remove").click(function () {
@@ -224,12 +228,12 @@
                                             <div class="col-inner"><input type="checkbox"  checked="" class="xuan" onclick="chackstate()" th:value="${item.id}"></div>
                                         </div>
                                         <div class="item-pic">
-                                            <a href="" target="_blank">
+                                            <a th:href="@{'/sale/detalis?goodsId='+${item.goodsId}}" target="_blank">
                                                 <img class="thumbnail" th:src="${item.pic}">
                                             </a>
                                         </div>
                                         <div class="item-info">
-                                            <a class="item-title" href="" target="_blank" th:text="${item.goodsName}"></a>
+                                            <a class="item-title" th:href="@{'/sale/detalis?goodsId='+${item.goodsId}}" target="_blank" th:text="${item.goodsName}"></a>
                                             <div class="item-spec"><b th:text="${item.colorName}"></b>,<b th:text="${item.sizeName}"></b></div>
                                         </div>
                                     </div>

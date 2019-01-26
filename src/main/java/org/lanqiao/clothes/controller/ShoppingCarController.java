@@ -95,6 +95,6 @@ public class ShoppingCarController {
         shopingCar.setSkuId(skuId);
        //根据商品id查询商品添加到购物车
         shopCarService.addCar(shopingCar);
-       return goShopingCar(req,resp,model);
+        return goShopingCar(req,resp,model);
     }
 }

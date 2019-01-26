@@ -15,18 +15,18 @@
             //保存
             $("#save").click(function () {
                 var supplierId = $("#supplierId").val();
-                var supplierName = $("#supplierName").val();
+                var supplierName = $("#supplierName").val().trim();
                 var supplierState = $("#supplierState option:selected").val();
                 var supplierSex = $("#supplierSex option:selected").val();
-                var supplierTelphone = $("#supplierTelphone").val();
-                var supplierAddress = $("#supplierAddress").val();
+                var supplierTelphone = $("#supplierTelphone").val().trim();
+                var supplierAddress = $("#supplierAddress").val().trim();
                 if(supplierName.length > 10){
                     alert("供应商名称多于10字，请重新输入");
                     return;
                 }
                 //查询条件
                 var searchSupplierState = $("#searchSupplierState").val();
-                var searchSupplierName = $("#searchSupplierName").val();
+                var searchSupplierName = $("#searchSupplierName").val().trim();
                 var currentPage = $("#currentPage").val();
                 if(supplierId == null || supplierId == ""){
                     var url = "/manager/addSupplier?supplierName="+supplierName+"&supplierState="+supplierState+"&supplierSex="+supplierSex
@@ -69,7 +69,7 @@
                     var id = $(this).parent().parent().children("td:eq(0)").text();
                     //查询条件
                     var searchSupplierState = $("#searchSupplierState").val();
-                    var searchSupplierName = $("#searchSupplierName").val();
+                    var searchSupplierName = $("#searchSupplierName").val().trim();
                     var currentPage = $("#currentPage").val();
                     var url = "/manager/deleteSupplier?supplierId=" + id + "&method=delete"
                         + "&currentPage="+currentPage+"&searchSupplierState="+searchSupplierState+"&searchSupplierName="+searchSupplierName;
@@ -83,7 +83,7 @@
         //查询的手动提交方式
         function search(currentPage) {
             var searchSupplierState = $("#searchSupplierState option:selected").val();
-            var searchSupplierName = $("#searchSupplierName").val();
+            var searchSupplierName = $("#searchSupplierName").val().trim();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();
             }else{

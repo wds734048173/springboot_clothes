@@ -45,7 +45,7 @@
     //查询的手动提交方式
     function search(currentPage) {
         var searchSupplierOrderState = $("#searchSupplierOrderState option:selected").val();
-        var searchSupplierOrderNo = $("#searchSupplierOrderNo").val();
+        var searchSupplierOrderNo = $("#searchSupplierOrderNo").val().trim();
         /*var searchSupllierId = $("#searchSupllierId option:selected");*/
         var searchSupllierId = -1;
         if(currentPage == null){

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -18,7 +18,7 @@
             <div class="user-actions">
                 <ul class="action-list">
                     <li>账户安全：<span class="level level-2">普通</span></li>
-                    <li>用户id:<span class="tel" th:value="${session.customer.getId()}"></span></li>
+                    <li>用户编号:<span class="tel" th:text="${session.customer.getId()}"></span></li>
                     <li><span class="tel"><a class="btn btn-small btn-primary modify">修改信息</a></span> </li><br>
                     <li><span class="tel save" hidden><a class="btn btn-small btn-primary save">保存信息</a></span></li>
 
