@@ -11,7 +11,7 @@
                 if(isOpen){
                     var id = $(this).parent().parent().children("td:eq(0)").text();
                     //查询条件
-                    var searchCustomerName = $("#searchCustomerName").val();
+                    var searchCustomerName = $("#searchCustomerName").val().trim();
                     var searchCustomerState = $("#searchCustomerState option:selected").val();
                     var currentPage = $("#currentPage").val();
                     var url = "/manager/updateCustomer?customerId=" + id + "&state=0"
@@ -27,7 +27,7 @@
                 if(isClose){
                     var id = $(this).parent().parent().children("td:eq(0)").text();
                     //查询条件
-                    var searchCustomerName = $("#searchCustomerName").val();
+                    var searchCustomerName = $("#searchCustomerName").val().trim();
                     var searchCustomerState = $("#searchCustomerState option:selected").val();
                     var currentPage = $("#currentPage").val();
                     var url = "/manager/updateCustomer?customerId=" + id + "&state=1"
@@ -40,7 +40,7 @@
         })
         //查询的手动提交方式
         function search(currentPage) {
-            var searchCustomerName = $("#searchCustomerName").val();
+            var searchCustomerName = $("#searchCustomerName").val().trim();
             var searchCustomerState = $("#searchCustomerState option:selected").val();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();

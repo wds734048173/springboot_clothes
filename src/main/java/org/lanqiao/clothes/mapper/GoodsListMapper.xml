@@ -36,6 +36,6 @@
     </select>
     <!--根据分类遍历商品-->
     <select id="getGoodsListByClassName" resultType="org.lanqiao.clothes.pojo.Goods">
-        select goods.name,goods.pPrice,goods.sPrice,goods.mPrice,goods.class1Id,goods.pic from tb_goods goods,tb_goods_class class  where  goods.class1Id =class.id and class.id=#{goodsClass1Id}
+        select goods.id,goods.name,goods.pPrice,goods.sPrice,goods.mPrice,goods.class1Id,goods.pic from tb_goods goods,tb_goods_class class  where  goods.class1Id =class.id and class.id=#{goodsClass1Id}
     </select>
 </mapper>

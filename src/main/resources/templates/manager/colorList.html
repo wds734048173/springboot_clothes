@@ -15,7 +15,7 @@
             //保存
             $("#save").click(function () {
                 var colorId = $("#colorId").val();
-                var colorName = $("#colorName").val();
+                var colorName = $("#colorName").val().trim();
                 var colorState = $("#colorState option:selected").val();
                 if(colorName.length > 10){
                     alert("颜色名称多于10字，请重新输入");
@@ -23,7 +23,7 @@
                 }
                 //查询条件
                 var searchColorState = $("#searchColorState").val();
-                var searchColorName = $("#searchColorName").val();
+                var searchColorName = $("#searchColorName").val().trim();
                 var currentPage = $("#currentPage").val();
                 if(colorId == null || colorId == ""){
                     var url = "/manager/addColor?colorName="+colorName+"&colorState="+colorState+"&method=add"
@@ -74,7 +74,7 @@
         //查询的手动提交方式
         function search(currentPage) {
             var searchColorState = $("#searchColorState option:selected").val();
-            var searchColorName = $("#searchColorName").val();
+            var searchColorName = $("#searchColorName").val().trim();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();
             }else{

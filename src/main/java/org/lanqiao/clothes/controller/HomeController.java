@@ -27,7 +27,6 @@ public class HomeController {
         //获取分类
         List<GoodsClass> goodsClass = goodsClassService.getGoodsClass1List();
 
-
         //获取商品列表
         int pageNum = 1;
         int pageSize = 8;
@@ -42,7 +41,7 @@ public class HomeController {
         condition.setYear(Integer.valueOf(searchGoodsYear));
         condition.setBrandId(Integer.valueOf(searchGoodsBrand));
         condition.setGoodsNo(searchGoodsNo);
-        condition.setStoreId(1);
+//        condition.setStoreId(1);
 
         int totalRecords = goodsService.getGoodsCount(condition);
         PageModel pageModel = new PageModel(pageNum,totalRecords,pageSize);

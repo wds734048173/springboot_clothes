@@ -25,9 +25,9 @@
             <if test="goodsNo != null &amp;&amp; goodsNo != ''">
                 and no like concat ('%', #{goodsNo}, '%')
             </if>
-            <if test="storeId != null &amp;&amp; storeId != ''">
+            <!--<if test="storeId != null &amp;&amp; storeId != ''">
                 and storeId = #{storeId}
-            </if>
+            </if>-->
             <if test="brandId != -1">
                 and brandId = #{brandId}
             </if>

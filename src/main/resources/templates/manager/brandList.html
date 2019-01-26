@@ -14,8 +14,8 @@
             })
             //保存
             $("#save").click(function () {
-                var brandId = $("#brandId").val();
-                var brandName = $("#brandName").val();
+                var brandId = $("#brandId").val().trim();
+                var brandName = $("#brandName").val().trim();
                 var brandState = $("#brandState option:selected").val();
                 if(brandName.length > 40){
                     alert("品牌名称多于40字，请重新输入");
@@ -23,7 +23,7 @@
                 }
                 //查询条件
                 var searchBrandState = $("#searchBrandState").val();
-                var searchBrandName = $("#searchBrandName").val();
+                var searchBrandName = $("#searchBrandName").val().trim();
                 var currentPage = $("#currentPage").val();
                 if(brandId == null || brandId == ""){
                     var url = "/manager/addBrand?brandName="+brandName+"&brandState="+brandState+"&method=add"
@@ -73,7 +73,7 @@
         //查询的手动提交方式
         function search(currentPage) {
             var searchBrandState = $("#searchBrandState option:selected").val();
-            var searchBrandName = $("#searchBrandName").val();
+            var searchBrandName = $("#searchBrandName").val().trim();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();
             }else{

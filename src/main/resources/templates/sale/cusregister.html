@@ -17,13 +17,27 @@
     <link rel="stylesheet" th:href="@{/sale/注册页面_files/diu.shop.css}">
     <link rel="stylesheet" th:href="@{/sale/注册页面_files/diu.diucmt.css}">
     <link rel="stylesheet" th:href="@{/sale/注册页面_files/style.css}">
+    <link rel="stylesheet" th:href="@{/manager/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/manager/bootstrap/css/bootstrap-datetimepicker.css}">
+    <!--<script type="text/javascript" th:src="@{le/注册页面_files/jquery.js}"></script>-->
+    <script type="text/javascript" th:src="@{/manager/js/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/manager/bootstrap/js/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/manager/bootstrap/js/bootstrap-datetimepicker.js}"></script>
+    <script type="text/javascript" th:src="@{/manager/bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js}"></script>
+
     <!--&lt;!&ndash;设置日期&ndash;&gt;-->
-    <!--<script type="text/javascript">-->
-        <!--$(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});-->
-    <!--</script>-->
+    <script type="text/javascript">
+        $(function () {
+            $(".form_datetime").datetimepicker({
+                format: 'yyyy-mm-dd',
+                language:'zh-CN',
+                minView:'month'
+            });
+        })
+    </script>
     <script th:src="@{/sale/注册页面_files/hm.js}"></script>
-    <script type="text/javascript" th:src="@{/sale/注册页面_files/jquery.js}"></script>
-    <style>html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}</style>
+    <!--<script type="text/javascript" th:src="@{/sale/注册页面_files/jquery.js}"></script>-->
+    <!--<style>html, * {-webkit-user-select:text!important; -moz-user-select:text!important;}</style>-->
     <script type="text/javascript">
         $(function () {
             $('#phone1').blur(function (){

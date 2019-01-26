@@ -27,7 +27,7 @@
         //查询的手动提交方式
         function search(currentPage) {
             var searchOrderState = $("#searchOrderState option:selected").val();
-            var searchOrderNo = $("#searchOrderNo").val();
+            var searchOrderNo = $("#searchOrderNo").val().trim();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();
             }else{

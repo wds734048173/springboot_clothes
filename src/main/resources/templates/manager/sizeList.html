@@ -15,15 +15,15 @@
             //保存
             $("#save").click(function () {
                 var sizeId = $("#sizeId").val();
-                var sizeName = $("#sizeName").val();
+                var sizeName = $("#sizeName").val().trim();
                 var  sizeState= $("#sizeState option:selected").val();
                 if(sizeName.length >10){
                     alert("尺寸名称多于10个字，请重新输入");
                     return;
                 }
                 //查询条件
-                var searchSizeState = $("#searchSizeState").val();
-                var searchSizeName = $("#searchSizeName").val();
+                var searchSizeState = $("#searchSizeState option:selected").val();
+                var searchSizeName = $("#searchSizeName").val().trim();
                 var currentPage = $("#currentPage").val();
                 if(sizeId == null || sizeId == ""){
                     var url = "/manager/addSize?sizeName="+sizeName+"&sizeState="+sizeState+"&method=add"
@@ -38,7 +38,6 @@
             //修改
             $(".updateSize").click(function () {
                 var id = $(this).parent().parent().children("td:eq(0)").text();
-                alert(id)
                 document.getElementById("gridSystemModalLabel").innerHTML = "修改尺寸信息";
                 $.ajax({
                     url:"/manager/selectSizeById?sizeId=" + id,
@@ -60,8 +59,8 @@
                 if(isDelete){
                     var id = $(this).parent().parent().children("td:eq(0)").text();
                     //查询条件
-                    var searchSizeState = $("#searchSizeState").val();
-                    var searchSizeName = $("#searchSizeName").val();
+                    var searchSizeState = $("#searchSizeState option:selected").val();
+                    var searchSizeName = $("#searchSizeName").val().trim();
                     var currentPage = $("#currentPage").val();
                     var url = "/manager/deleteSize?sizeId=" + id + "&method=delete"
                         + "&currentPage="+currentPage+"&searchSizeName="+searchSizeName+"&searchSizeState="+searchSizeState;
@@ -75,7 +74,7 @@
         //查询的手动提交方式
         function search(currentPage) {
             var searchSizeState = $("#searchSizeState option:selected").val();
-            var searchSizeName = $("#searchSizeName").val();
+            var searchSizeName = $("#searchSizeName").val().trim();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();
             }else{

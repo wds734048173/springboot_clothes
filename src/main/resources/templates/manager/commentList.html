@@ -8,7 +8,7 @@
             //保存
             $("#save").click(function () {
                 var commentId = $("#commentId").val();
-                var reply = $("#reply").val();
+                var reply = $("#reply").val().trim();
                 var state = $("#state option:selected").val();
                 if(reply.length > 200){
                     alert("回复语多于200字，请重新输入");
@@ -17,7 +17,7 @@
                 //查询条件
                 var searchCommentGrade = $("#searchCommentGrade option:selected").val();
                 var searchCommentState = $("#searchCommentState option:selected").val();
-                var searchGoodsName = $("#searchGoodsName").val();
+                var searchGoodsName = $("#searchGoodsName").val().trim();
                 var currentPage = $("#currentPage").val();
                 var url = "/manager/updateCommentById?commentId="+commentId+"&reply="+reply+"&state="+state
                     +"&currentPage="+currentPage+"&searchCommentGrade="+searchCommentGrade+"&searchGoodsName="+searchGoodsName+"&searchCommentState="+searchCommentState;
@@ -51,7 +51,7 @@
                     //查询条件
                     var searchCommentGrade = $("#searchCommentGrade option:selected").val();
                     var searchCommentState = $("#searchCommentState option:selected").val();
-                    var searchGoodsName = $("#searchGoodsName").val();
+                    var searchGoodsName = $("#searchGoodsName").val().trim();
                     var currentPage = $("#currentPage").val();
                     var url = "/manager/updateCommentState?commentId=" + id + "&method=show"
                         + "&currentPage="+currentPage+"&searchGoodsName="+searchGoodsName+"&searchCommentGrade="+searchCommentGrade+"&searchCommentState="+searchCommentState;
@@ -68,7 +68,7 @@
                     //查询条件
                     var searchCommentGrade = $("#searchCommentGrade option:selected").val();
                     var searchCommentState = $("#searchCommentState option:selected").val();
-                    var searchGoodsName = $("#searchGoodsName").val();
+                    var searchGoodsName = $("#searchGoodsName").val().trim();
                     var currentPage = $("#currentPage").val();
                     var url = "/manager/updateCommentState?commentId=" + id + "&method=hidden"
                         + "&currentPage="+currentPage+"&searchGoodsName="+searchGoodsName+"&searchCommentGrade="+searchCommentGrade+"&searchCommentState="+searchCommentState;
@@ -82,7 +82,7 @@
         function search(currentPage) {
             var searchCommentGrade = $("#searchCommentGrade option:selected").val();
             var searchCommentState = $("#searchCommentState option:selected").val();
-            var searchGoodsName = $("#searchGoodsName").val();
+            var searchGoodsName = $("#searchGoodsName").val().trim();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();
             }else{

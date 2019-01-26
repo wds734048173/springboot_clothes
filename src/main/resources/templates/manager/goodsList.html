@@ -61,11 +61,11 @@
             //保存
             $("#save").click(function () {
                 var goodsId = $("#goodsId").val();
-                var goodsNo = $("#goodsNo").val();
-                var goodsName = $("#goodsName").val();
-                var goodspPrice = $("#goodspPrice").val();
-                var goodssPrice = $("#goodssPrice").val();
-                var goodsmPrice = $("#goodsmPrice").val();
+                var goodsNo = $("#goodsNo").val().trim();
+                var goodsName = $("#goodsName").val().trim();
+                var goodspPrice = $("#goodspPrice").val().trim();
+                var goodssPrice = $("#goodssPrice").val().trim();
+                var goodsmPrice = $("#goodsmPrice").val().trim();
                 var goodsBrand = $("#goodsBrand option:selected").val();
                 var goodsYear = $("#goodsYear option:selected").val();
                 var goodsSeason = $("#goodsSeason option:selected").val();
@@ -123,8 +123,8 @@
                     return;
                 }
                 //查询条件
-                var searchGoodsName = $("#searchGoodsName").val();
-                var searchGoodsNo = $("#searchGoodsNo").val();
+                var searchGoodsName = $("#searchGoodsName").val().trim();
+                var searchGoodsNo = $("#searchGoodsNo").val().trim();
                 var searchGoodsBrand = $("#searchGoodsBrand option:selected").val();
                 var searchGoodsYear = $("#searchGoodsYear option:selected").val();
                 var searchGoodsIsshelf = $("#searchGoodsIsshelf option:selected").val();
@@ -249,11 +249,14 @@
                 if(isUp){
                     var id = $(this).parent().parent().children("td:eq(0)").text();
                     //查询条件
-                    var searchColorState = $("#searchColorState").val();
-                    var searchColorName = $("#searchColorName").val();
+                    var searchGoodsName = $("#searchGoodsName").val().trim();
+                    var searchGoodsNo = $("#searchGoodsNo").val().trim();
+                    var searchGoodsBrand = $("#searchGoodsBrand option:selected").val();
+                    var searchGoodsYear = $("#searchGoodsYear option:selected").val();
+                    var searchGoodsIsshelf = $("#searchGoodsIsshelf option:selected").val();
                     var currentPage = $("#currentPage").val();
                     var url = "/manager/updateGoodsIsshelf?goodsId=" + id + "&isshelf=0"
-                        + "&currentPage="+currentPage+"&searchColorState="+searchColorState+"&searchColorName="+searchColorName;
+                        + "&currentPage="+currentPage+"&searchGoodsName="+searchGoodsName+"&searchGoodsNo="+searchGoodsNo+"&searchGoodsBrand="+searchGoodsBrand+"&searchGoodsYear="+searchGoodsYear+"&searchGoodsIsshelf="+searchGoodsIsshelf;
                     $(".content").load(url);
                 }else{
                     return;
@@ -264,11 +267,14 @@
                 if(isDown){
                     var id = $(this).parent().parent().children("td:eq(0)").text();
                     //查询条件
-                    var searchColorState = $("#searchColorState").val();
-                    var searchColorName = $("#searchColorName").val();
+                    var searchGoodsName = $("#searchGoodsName").val().trim();
+                    var searchGoodsNo = $("#searchGoodsNo").val().trim();
+                    var searchGoodsBrand = $("#searchGoodsBrand option:selected").val();
+                    var searchGoodsYear = $("#searchGoodsYear option:selected").val();
+                    var searchGoodsIsshelf = $("#searchGoodsIsshelf option:selected").val();
                     var currentPage = $("#currentPage").val();
                     var url = "/manager/updateGoodsIsshelf?goodsId=" + id + "&isshelf=1"
-                        + "&currentPage="+currentPage+"&searchColorState="+searchColorState+"&searchColorName="+searchColorName;
+                        + "&currentPage="+currentPage+"&searchGoodsName="+searchGoodsName+"&searchGoodsNo="+searchGoodsNo+"&searchGoodsBrand="+searchGoodsBrand+"&searchGoodsYear="+searchGoodsYear+"&searchGoodsIsshelf="+searchGoodsIsshelf;
                     $(".content").load(url);
                 }else{
                     return;
@@ -278,8 +284,8 @@
 
         //查询的手动提交方式
         function search(currentPage) {
-            var searchGoodsName = $("#searchGoodsName").val();
-            var searchGoodsNo = $("#searchGoodsNo").val();
+            var searchGoodsName = $("#searchGoodsName").val().trim();
+            var searchGoodsNo = $("#searchGoodsNo").val().trim();
             var searchGoodsBrand = $("#searchGoodsBrand option:selected").val();
             var searchGoodsYear = $("#searchGoodsYear option:selected").val();
             var searchGoodsIsshelf = $("#searchGoodsIsshelf option:selected").val();
