@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -66,7 +67,8 @@ public class CustomerController {
     @RequestMapping("/sale/updateMessage")
     public String updateMessage(HttpServletRequest req, HttpServletResponse resp) throws ParseException {
         Customer customer = Customer.builder().build();
-        int id = Integer.valueOf(req.getParameter("customerId"));
+        HttpSession session = req.getSession();
+        int id = ((Customer)session.getAttribute("customer")).getId();
         String realname = req.getParameter("realname");
         int sex = Integer.valueOf(req.getParameter("sex"));
         String phone = req.getParameter("phone");
@@ -79,6 +81,7 @@ public class CustomerController {
         customer.setPhone(phone);
         customer.setHiredate(hiredate);
         customerService.updateMessage(customer);
-        return "/sale/personalDetalis";
+        session.invalidate();
+        return "/sale/login";
     }
 }

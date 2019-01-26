@@ -128,7 +128,7 @@ public class PayController {
         req.setAttribute("carIds",carIds);
         req.setAttribute("totalPrice",totalPrice+10);
         req.setAttribute("orderId",orderId);
-        return myOrderController.getMyOrder(req, resp, model);
+        return "/sale/order";
     }
 
     @RequestMapping("/sale/order")
@@ -151,7 +151,7 @@ public class PayController {
             shopCarService.deleteShop(Integer.parseInt(carIds[i]));
         }*/
         req.setAttribute("totalMoney",totalMoney);
-        return "/sale/MyOrder";
+        return myOrderController.getMyOrder(req, resp, model);
     }
 
 

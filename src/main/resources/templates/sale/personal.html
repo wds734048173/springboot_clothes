@@ -51,9 +51,9 @@
             var hiredate = $("#hiredate").val();
             var sex =  $('input[name="sex"]:checked').val();
             var url="/sale/updateMessage?customerId=" + id+"&phone="+phone+"&realname="+realname+"&hiredate="+hiredate+"&sex="+sex;
-            alert("修改成功")
+            alert("修改成功,请重新登陆");
             $(".content").load(url);
-            $(".modify").show();
+            parent.location.reload();
         })
     })
 </script>

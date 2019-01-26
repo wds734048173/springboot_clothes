@@ -21,19 +21,15 @@
                     <li>用户编号:<span class="tel" th:text="${session.customer.getId()}"></span></li>
                     <li><span class="tel"><a class="btn btn-small btn-primary modify">修改信息</a></span> </li><br>
                     <li><span class="tel save" hidden><a class="btn btn-small btn-primary save">保存信息</a></span></li>
-
-
                 </ul>
             </div>
 
         </div>
         <div class="portal-sub">
             <ul class=" clearfix">
-                <input type="hidden" id="customerId" th:value="${session.customer.id}">
                 <li>
                     <span style="font-size: 24px;margin-left: 15%;display: inline-block">真实姓名:</span>
                     <input style="font-size: 24px;margin-left: 10%;display: inline-block" readOnly="true"  id="realname" disabled  th:value="${session.customer.getRealname()}">
-
                 </li>
                 <li>
                     <sapn style="font-size: 24px;margin-left: 15%;display: inline-block">性别:</sapn>
