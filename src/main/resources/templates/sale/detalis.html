@@ -2,7 +2,7 @@
 <!-- saved from url=(0048)http://www.diu8diu.com/?congfen/229.html?rid=701 -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>YT02加厚两件套冲锋</title>
+<title th:text="${goods.name}"></title>
 <meta name="keywords" content="YT02加厚两件套冲锋">
 <meta name="description" content="YT02加厚两件套冲锋">
 <meta name="runtime" content="0.5508">
@@ -93,13 +93,6 @@ function pageClick(k) {
 <div id="header">
     <div class="toper">
         <div class="wrapper">
-            <div class="top-nav">
-
-                <!--<a class="link" href="http://www.diu8diu.com/diu-ucenter/" target="_self">个人中心</a>-->
-
-                <!--<a class="link" href="http://www.diu8diu.com/diu-ucenter/?ctl=orders" target="_self">我的订单</a>-->
-
-            </div>
             <div class="account-sign-status">
                 <span id="user_status" class="user-status">
                     <a href="/sale/index" style="font-size: 20px">欢迎来到我的网站</a>
@@ -140,24 +133,22 @@ function pageClick(k) {
     <input type="hidden" id="goodsId" th:value="${goods.id}">
     <div class="goods">
         <div class="goods-gallery">
-            <div class="goods-picseo"><img src="./商品详情_files/87.png" alt="YT02加厚两件套冲锋"><img src="./商品详情_files/88.png" alt="YT02加厚两件套冲锋"></div>
+            <div class="goods-picseo"><img src="./商品详情_files/87.png" th:alt="${goods.name}"><img src="./商品详情_files/88.png" th:alt="${goods.name}"></div>
             <div class="gallery-goods" id="gallery">
                 <div class="gallery-view" create="true">
                     <span name="cloudzoom_wrap" class="cloudzoom_wrap">
                         <a class="cloud-zoom" name="cloud_zoom" id="bigimg_view" rel="adjustY:0,adjustX:5" href="javascript:;">
-                            <img alt="87" th:src="${goods.pic}" class="view" ></a>
+                            <img alt="87" th:src="${goods.pic}" class="view" style="width: 500px;height: 500px;"></a>
                         <div class="mousetrap" style="z-index: 999; position: absolute; width: 500px; height: 500px; left: 0px; top: 0px; cursor: pointer;"></div>
                     </span>
                 </div>
             </div>
         </div>
         <div class="goods-property">
-            <h1 class="title" th:text="${goods.name}">YT02加厚两件套冲锋</h1>
+            <h1 class="title" th:text="${goods.name}"></h1>
             <!--<div class="goods-sn" th:text="${goods.no}">商品编码：S0000229</div>-->
-            <div class="goods-product-sn" >商品货号：<span id="goods_product_sn" th:text="${goods.no}">S0000229-1</span></div>
+            <div class="goods-product-sn" >商品货号：<span id="goods_product_sn" th:text="${goods.no}"></span></div>
             <div class="price">
-
-
                 <dl class="my-price" id="my_price" style="display: none;"><dt>我的会员价</dt><dd><span class="money"><em>￥</em><b name="my_price" th:text="${goods.mPrice}">298.00</b></span></dd></dl>
                 <dl id="goods_price"><dt>价格</dt><dd><span class="money"><em>￥</em><b name="price"  th:text="${goods.mPrice}"></b></span></dd></dl>
 
@@ -205,10 +196,6 @@ function pageClick(k) {
                         </li>
                     </ul>
                 </div>
-                <!--<div class="footer"  type="submit" name="footer" style="display: block;"><dl><dt>您已选择</dt><dd name="colorM" id="colorM" class="colorM"  type="submit">红色,M</dd></dl></div>-->
-
-
-
             </div>
 			<input type="hidden" id="diypic" name="diypic" value=""><input type="hidden" id="picids" name="picids" value=""><input type="hidden" id="diynum" name="diynum" value="">
             <div class="amount">
@@ -219,24 +206,8 @@ function pageClick(k) {
             </div>
             <div class="stock-tip"><span name="stock_tip"></span></div>
             <div class="action">
-                <div>
-                    <thead>
-                    <tr>
-                        <th>订单id</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="goods: ${goodsList}">
-                        <td><td th:text="${goods.id}"></td></td>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </div>
-
                 <!--<button type="button" class="btn-buy" id="buyshop" name="btn_buy">立即购买</button>-->
                 <button type="button" class="btn-buy-cart" name="btn_buy_cart" id = "addshop"><i class="glyphicon glyphicon-shopping-cart getorderinfo" ></i>加入购物车</button>
-
-
                 <!--<a href="javascript:;" class="favorite" onclick="DIU.shop.addToFavorite(229)">收藏</a>-->
             </div>
 

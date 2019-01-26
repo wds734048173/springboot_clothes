@@ -65,17 +65,18 @@ ICommentService commentService;
 
         Map<Integer,String> colorMap = new HashMap<>();
         Map<Integer,String> sizeMap= new HashMap<>();
-        List<Color> colorList = colorService.getColorListByIds(colorIds);
-        List<Size> sizeList = sizeService.getSizeListByIds(sizeIds);
-        for(Color color : colorList){
-            colorMap.put(color.getId(),color.getName());
+        if(colorIds.size()>0){
+            List<Color> colorList = colorService.getColorListByIds(colorIds);
+            for(Color color : colorList){
+                colorMap.put(color.getId(),color.getName());
+            }
         }
-        for (Size size : sizeList){
-            sizeMap.put(size.getId(),size.getName());
+        if(sizeIds.size()>0){
+            List<Size> sizeList = sizeService.getSizeListByIds(sizeIds);
+            for (Size size : sizeList){
+                sizeMap.put(size.getId(),size.getName());
+            }
         }
-
-        System.out.println(colorMap.toString());
-        System.out.println(sizeMap.toString());
         model.addAttribute("goods",goods);
         model.addAttribute("sizeMap",sizeMap);
         model.addAttribute("colorMap",colorMap);
